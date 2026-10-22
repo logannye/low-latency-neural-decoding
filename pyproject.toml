@@ -48,6 +48,8 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Repository audit scripts are test references; installed packages still come from setuptools.
+pythonpath = ["."]
 
 [tool.ruff]
 target-version = "py311"
