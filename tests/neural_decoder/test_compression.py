@@ -36,8 +36,9 @@ def test_explicit_quantization_identity_and_causal_replay(tmp_path):
     np.testing.assert_array_equal(full[:25], altered[:25])
     assert full.shape == (50, 7) and np.isfinite(full).all()
     reference = ONNXTCNStream(original, expected_model_identity=identity).predict_chunk(values)
-    canonical = ONNXTCNStream(tmp_path / "quantization-input.onnx",
-                              expected_model_identity=identity).predict_chunk(values)
+    canonical = ONNXTCNStream(
+        tmp_path / "quantization-input.onnx", expected_model_identity=identity
+    ).predict_chunk(values)
     np.testing.assert_allclose(canonical, reference, rtol=3e-5, atol=1e-6)
     assert not np.array_equal(full, reference)
     assert np.max(np.abs(full - reference)) < 0.03

@@ -125,9 +125,12 @@ def run_quality(development_run, index_path, output, root):
                         ).predict_chunk(x)
                         # Attribute approximation to quantization only after verifying the rewrite.
                         np.testing.assert_allclose(original_trace, reference, rtol=3e-5, atol=1e-7)
-                        np.testing.assert_allclose(canonical_trace, original_trace, rtol=3e-5, atol=1e-7)
-                        canonical_error = max(canonical_error,
-                                              float(np.max(np.abs(canonical_trace - original_trace))))
+                        np.testing.assert_allclose(
+                            canonical_trace, original_trace, rtol=3e-5, atol=1e-7
+                        )
+                        canonical_error = max(
+                            canonical_error, float(np.max(np.abs(canonical_trace - original_trace)))
+                        )
                         max_error = max(max_error, float(np.max(np.abs(actual - reference))))
                         path = folder / f"{item['file_id']}.npy"
                         np.save(path, actual, allow_pickle=False)
@@ -146,7 +149,9 @@ def run_quality(development_run, index_path, output, root):
                             "model_sha256": sha256(source / "model.npz"),
                             "float32_graph_sha256": sha256(original),
                             "int8_graph_sha256": sha256(compressed),
-                            "canonical_float32_graph_sha256": sha256(folder / "quantization-input.onnx"),
+                            "canonical_float32_graph_sha256": sha256(
+                                folder / "quantization-input.onnx"
+                            ),
                             "canonical_float32_max_trace_difference": canonical_error,
                             "float32_graph_bytes": original.stat().st_size,
                             "int8_graph_bytes": compressed.stat().st_size,
@@ -271,10 +276,19 @@ def benchmark(quality_run, development_run, index_path, output, root):
                             resets.append(time.perf_counter_ns() - resetting)
                             predictions, stamps = replay_timed(decoder, x, paced=mode == "paced")
                             path = folder / f"{item['file_id']}.npz"
-                            np.savez_compressed(path, sequence_id=np.arange(len(x)), stamps=stamps,
-                                                predictions=predictions)
-                            traces.append({"file_id": item["file_id"], "bins": len(x),
-                                           "trace_sha256": sha256(path)})
+                            np.savez_compressed(
+                                path,
+                                sequence_id=np.arange(len(x)),
+                                stamps=stamps,
+                                predictions=predictions,
+                            )
+                            traces.append(
+                                {
+                                    "file_id": item["file_id"],
+                                    "bins": len(x),
+                                    "trace_sha256": sha256(path),
+                                }
+                            )
                             # Compare measured outputs with a separate reset replay.
                             decoder.reset()
                             np.testing.assert_array_equal(predictions, decoder.predict_chunk(x))
@@ -293,11 +307,19 @@ def benchmark(quality_run, development_run, index_path, output, root):
                             "graph_file_bytes": graphs[precision].stat().st_size,
                             "process_rss_before_bytes": rss_start,
                             "process_rss_after_bytes": process.memory_info().rss,
-                            "cpu_seconds_including_validation_and_harness": (time.process_time_ns() - cpu_start) / 1e9,
-                            "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+                            "cpu_seconds_including_validation_and_harness": (
+                                time.process_time_ns() - cpu_start
+                            )
+                            / 1e9,
+                            "cpu_scope": (
+                                "includes second parity replay and file persistence; "
+                                "not decoder-only CPU"
+                            ),
                         }
                         entry["one_core_cpu_percent_including_validation_and_harness"] = (
-                            100 * entry["cpu_seconds_including_validation_and_harness"] / entry["wall_seconds"]
+                            100
+                            * entry["cpu_seconds_including_validation_and_harness"]
+                            / entry["wall_seconds"]
                         )
                         runs.append(entry)
                         write_json(folder / "summary.json", entry)
