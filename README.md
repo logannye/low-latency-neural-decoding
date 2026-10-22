@@ -1,74 +1,61 @@
-# Computational Experiments
+# Low-Latency Neural Decoding
 
-[![Python tests](https://github.com/logannye/computational-experiments/actions/workflows/test.yml/badge.svg)](https://github.com/logannye/computational-experiments/actions/workflows/test.yml)
-[![Neural decoding](https://github.com/logannye/computational-experiments/actions/workflows/neural.yml/badge.svg)](https://github.com/logannye/computational-experiments/actions/workflows/neural.yml)
+[![Neural decoding](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/neural.yml/badge.svg)](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/neural.yml)
+[![Python tests](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/test.yml/badge.svg)](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/test.yml)
 
-Research and engineering experiments in learning, temporal signals, and efficient
-computation. Each study starts with a concrete question, builds an inspectable
-implementation, and measures it against explicit baselines. Code correctness,
-model quality, and runtime performance have separate evidence.
+Causal movement decoding under recording drift and runtime constraints. This
+project tests how compact neural decoders generalize across recording days, how
+adaptation can help or fail, and how much latency can be removed while preserving
+exactly the same model. Quality, numerical correctness, and runtime have separate
+measurements.
 
-## Experiments
+The primary experiment uses public FALCON H1 recordings: 176 neural channels,
+20 ms bins, seven movement outputs, and one participant. Models consume current
+and past neural observations. Evaluation targets and masks remain in the scorer.
+The repository includes a causal FIR/ridge baseline, a 23,367-parameter TCN,
+controlled adaptation tests, streaming inference, and independent numerical audits.
 
-| Study | Question | Current evidence |
-|---|---|---|
-| [Neural decoding across recording days](neural_experiments/README.md) | Can a compact causal decoder estimate movement on a new recording day without labeled recalibration? | H1 development study: TCN mean R² **0.161**, selected ridge **0.053**, three forward-day folds and three TCN seeds. One day remains unstable. Final days are sealed. |
-| [CNN: Python vs. ARM64 assembly](CNN_EXPERIMENT.md) | What changes when the same small CNN is trained and executed through different implementations? | Historical matched 12-run study: assembly training **1.69× faster**; both implementations observed about **51.99%** mean CIFAR-10 test accuracy on one M4 Max. |
+## Results and evidence
 
-These results belong to different tasks, source states, and measurement protocols.
-The CNN speedup is not a neural-decoder speedup. H1 scores are local development
-results on public calibration recordings, not official FALCON scores or untouched
-final evaluations. Neither study establishes clinical performance or a general
-advantage of one implementation strategy.
+The completed initial development study averages R² **0.1607** for the TCN across
+three seeds and three forward-day folds, versus **0.0526** for selected ridge.
+S2 is a failure case. These development scores were used for selection and are
+not final evidence. Additional experiments and sealed assessments are in progress;
+the report records each completed gate and every negative result.
 
-## Neural decoding
+- [Study report](neural_experiments/REPORT.md), [protocol](neural_experiments/PROTOCOL.md), and [decisions](neural_experiments/NOTEBOOK.md)
+- [Adaptation experiment](neural_experiments/ADAPTATION.md) and [runtime protocol](neural_experiments/RUNTIME_PROTOCOL.md)
+- [Data provenance and use terms](neural_experiments/data/README.md)
+- [Reproduction instructions](neural_experiments/README.md)
 
-The new track uses FALCON H1: 176 neural channels, 20 ms bins, and seven movement
-outputs from one participant. A causal FIR/ridge baseline and a 23,367-parameter
-TCN use current and past observations. Feature-only streaming, file resets,
-source/data manifests, causal intervention tests, and independent numerical audits
-make the pipeline inspectable.
+H1 measurements here are **local evaluations on public calibration recordings**,
+not official FALCON leaderboard scores. Recorded-data replay measures processing
+from counts being available; it does not establish live neural control, acquisition
+latency, cross-participant generalization, implant power savings, or clinical benefit.
 
-The TCN improves the development average, while S2 remains a failure case. The
-[next hypothesis](neural_experiments/NOTEBOOK.md) examines whether a bounded
-normalization correction can reduce prediction bias without removing useful
-movement information. Adaptation, sustained latency/deadline measurements, and
-sealed-day evaluation are future gates. The incremental implementation currently
-has numerical parity evidence, not a measured speedup claim.
+## Quick start
 
-- [Development report and every seed/day result](neural_experiments/REPORT.md)
-- [Protocol and information boundaries](neural_experiments/PROTOCOL.md)
-- [Dataset identities, schema, and use terms](neural_experiments/data/README.md)
-- [Independent ridge review](neural_experiments/BASELINE_REVIEW.md) and [TCN review](neural_experiments/TCN_REVIEW.md)
-- [Setup and reproduction commands](neural_experiments/README.md)
-
-## CNN and assembly
-
-The original image experiment retains its source, native implementation, commands,
-checkpoints, and evidence. Its complete former README is preserved as
-[CNN_EXPERIMENT.md](CNN_EXPERIMENT.md), including architecture, installation,
-training, evaluation, and reproduction instructions. The
-[matched protocol](comparison/PROTOCOL.md) and
-[full results](experiments/baselines/cifar10-matched-cpu-25-v1/README.md) remain at
-their original paths.
-
-## Working locally
-
-Use Python 3.12 and prebuilt scientific dependencies. For the neural track:
+Use Python 3.12 and prebuilt scientific libraries:
 
 ```sh
-python -m pip install --only-binary=:all: -e '.[dev,neural]'
+python -m pip install --only-binary=:all: -e '.[dev,neural,runtime]'
 export PYTHONPATH="$PWD/src"
 python -m pytest -q tests/neural_decoder
 neural-decode --help
 ```
 
-Synthetic tests need no neural-data download. Acquire H1 only through the explicit
-[reproduction steps](neural_experiments/README.md) after reading its data-use terms.
-Raw recordings, prepared sample arrays, model artifacts, and prediction traces
-remain in ignored local caches. The repository contains source, protocols,
-metadata manifests, aggregate results, and independent audit code.
+Synthetic tests require no neural-data download. Follow the separate
+[real-data reproduction steps](neural_experiments/README.md) after reading the
+provider's data-use terms. Raw recordings, prepared arrays, model artifacts,
+prediction traces, and raw timing records remain in ignored local caches. Public
+artifacts contain code, protocols, metadata, aggregate results, and audit logic.
+No Rust or other native extension build is needed for the neural experiment.
 
-The Python distribution keeps its existing `cnn-python-vs-assembly` name to
-preserve installed command compatibility; the repository is now
-`logannye/computational-experiments`.
+## Earlier work
+
+The original CNN/Python/ARM64 experiment remains available in
+[CNN_EXPERIMENT.md](CNN_EXPERIMENT.md). Its source, commands, and
+[matched results](experiments/baselines/cifar10-matched-cpu-25-v1/README.md) are
+preserved. Those measurements belong to that image-classification experiment;
+they do not establish a neural-decoder speedup. The Python package is now named
+`low-latency-neural-decoding`; existing `cnn-*` commands remain available.

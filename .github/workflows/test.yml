@@ -28,7 +28,7 @@ jobs:
           'torch>=2.6,<3' 'torchvision>=0.21,<1'
           --index-url https://download.pytorch.org/whl/cpu
       - name: Install package and test tools
-        run: python -m pip install -e '.[dev,benchmark]'
+        run: python -m pip install --only-binary=:all: -e '.[dev,benchmark,neural,runtime]'
       - name: Lint
         run: ruff check .
       - name: Check formatting

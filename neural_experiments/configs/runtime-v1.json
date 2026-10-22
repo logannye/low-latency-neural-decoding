@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "primary_model": "preselected seed0 development foldC S4 artifact; not best seed",
+  "primary_model_sha256": "8806add2de4321aef787a561f46a46ea3f095ed3d1aa9d20a0bf4a644c1c2a97",
+  "threads": 1,
+  "warmup_bins": 500,
+  "period_ns": 20000000,
+  "parity_rtol": 0.00003,
+  "parity_atol": 0.0000001,
+  "quality_numerical_tolerance": 0.00001,
+  "paced_seconds_per_block": 60,
+  "kernel_iterations": 10000,
+  "fast_orders": [
+    ["torch_window", "numpy_incremental", "onnx_incremental"],
+    ["numpy_incremental", "onnx_incremental", "torch_window"],
+    ["onnx_incremental", "torch_window", "numpy_incremental"]
+  ],
+  "paced_orders": [
+    ["torch_window", "numpy_incremental", "onnx_incremental"],
+    ["onnx_incremental", "numpy_incremental", "torch_window"]
+  ],
+  "data": "all11 S0-S4 development files for fast/parity; first chronological file prefix for paced",
+  "regime": "frozen inference; no adaptation or compression",
+  "claim_scope": "counts-ready replay on named CPU; no acquisition/implant/power/closed-loop claim"
+}

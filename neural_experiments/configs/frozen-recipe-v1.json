@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "selection": "second/final development hypothesis passes predeclared mean+0.005 and no-day-harm>0.01 criteria; no final data used",
+  "regime": "frozen_zero_new_day_calibration",
+  "ridge": {
+    "history": 1,
+    "regularization": 0.1,
+    "fir_taps": 12,
+    "fir_tau_bins": 12
+  },
+  "temporal": {
+    "schema_version": 1,
+    "regime": "frozen_zero_new_day_calibration",
+    "input": "raw counts with training-only channel mean/std",
+    "target": "training-only masked target mean/std; invert before scoring",
+    "architecture": "176->32 k3 d1 ReLU ->32 k3 d2 ReLU ->32 k3 d4 ReLU ->7 linear",
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "epochs": 20,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "optimizer": "Adam",
+    "chunk_scored_bins": 256,
+    "burn_in_bins": 14,
+    "batch_chunks": 16,
+    "threads": 1,
+    "loss": "mean squared standardized target error on supplied training masks after burnin",
+    "checkpoint": "last epoch, fixed in advance; no evaluation-based early stopping",
+    "pilot": "prior fixed-TCN pilot already established local training cost; no new pilot",
+    "channel_dropout": 0.1,
+    "augmentation": "Independent perchunk/perchannel Bernoulli keep probability0.9, constant across time including burn-in; replace standardized missing channel with0, no inverted scaling; seeded Torch RNG during training only",
+    "hypothesis_number": 2,
+    "hypothesis": "Exposure to missing standardized channels may reduce reliance on individual observation channels and improve forward-day performance; unstable channels are a hypothesis, not a demonstrated cause",
+    "baseline_run": "tcn-dev-v1",
+    "decision": {
+      "minimum_seed_average_mean_r2_gain": 0.005,
+      "maximum_seed_average_day_harm": 0.01,
+      "all_seeds_required": [
+        0,
+        1,
+        2
+      ],
+      "all_days_required": [
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "no_best_seed_selection": true,
+      "fallback": "retain original fixed TCN; no further augmentation search"
+    }
+  },
+  "model_set": [
+    "constant",
+    "ridge",
+    "tcn-seed-0",
+    "tcn-seed-1",
+    "tcn-seed-2"
+  ],
+  "adaptation": "not retained; first hypothesis did not support bounded correction rationale",
+  "runtime_seed": 0,
+  "primary_metrics": {
+    "decoding": "mean_of_day_variance_weighted_r2",
+    "runtime": "p99_complete_step_service_ms"
+  },
+  "calibration_stretch": {
+    "separate_regime": true,
+    "budget_seconds_per_file": [
+      0,
+      5,
+      15,
+      30
+    ],
+    "method": "intercept_only_mean_residual_on_scored_prefix",
+    "score_common_suffix_start_bin": 1500,
+    "state": "all preceding neural bins, reset each file"
+  },
+  "early_train_days": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4"
+  ],
+  "early_evaluation_days": [
+    "S5"
+  ],
+  "later_train_days": [
+    "S0",
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "later_evaluation_days": [
+    "S6",
+    "S7",
+    "S8",
+    "S9",
+    "S10",
+    "S11",
+    "S12"
+  ],
+  "no_reselection_after_early_assessment": true
+}

@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "hypothesis": "Source-anchored bounded mean correction can reduce observation-offset bias while limiting movement-mixture harm",
+  "baseline_run": "ridge-dev-v1",
+  "candidate": "ridge-h1-lambda0.1",
+  "regime": "feature_only_causal_predict_then_update",
+  "tau_seconds": 30.0,
+  "bin_seconds": 0.02,
+  "caps_training_sd": [0.25, 0.5, 1.0],
+  "variance": "fixed training variance",
+  "ordinary_ema": "m_next = (1-alpha)*m + alpha*(filtered_counts-training_mean)",
+  "bounded": "same EMA state; prediction subtracts clip(previous_m, -cap*training_sd, cap*training_sd)",
+  "alpha": "1-exp(-bin_seconds/tau_seconds)",
+  "initial_correction": "zero at every provider file or diagnostic window",
+  "conditions": {
+    "real": "complete unmodified development evaluation files",
+    "observation_offset": {
+      "magnitude_training_filtered_sd": 0.5,
+      "intervention": "Add positive 0.5 * training filtered channel SD to every raw channel/bin for the complete file, before causal filtering",
+      "representation": "synthetic nonnegative real-valued counts; not a biological acquisition model",
+      "filter_startup": "zero raw history at file reset; added offset ramps through the existing FIR"
+    },
+    "movement_mixture": {
+      "window_seconds": 60.0,
+      "window_bins": 3000,
+      "target_index": 6,
+      "target_name": "g3",
+      "selection": "Select one contiguous 3000-bin interval per file maximizing signed unmasked mean target[:,6]; ties choose earliest start",
+      "selection_role": "retrospective evaluator-only diagnostic; selection labels never enter the predictor",
+      "length_requirement": "every development evaluation file must have at least 3000 bins or the run fails",
+      "state": "reset at the start of each selected window; retain original rows and mask; no stitching or history pre-roll",
+      "interpretation": "a label-selected movement-mixture stress with fresh-start state, not real cross-session evidence"
+    }
+  },
+  "folds": [
+    {"train": ["S0", "S1"], "evaluate": "S2"},
+    {"train": ["S0", "S1", "S2"], "evaluate": "S3"},
+    {"train": ["S0", "S1", "S2", "S3"], "evaluate": "S4"}
+  ],
+  "decision": {
+    "real_minimum_mean_r2_gain": 0.005,
+    "real_maximum_worst_day_harm": 0.01,
+    "offset_benefit": "positive mean R2 difference versus frozen on offset condition",
+    "mixture_guard": "strictly smaller worst-day R2 harm versus frozen than ordinary EMA; harm floored at zero",
+    "all_criteria_required": true,
+    "tie_break": "largest real mean R2 gain, then smaller cap",
+    "fallback": "retain frozen normalization; no additional parameter search"
+  },
+  "threads": 1,
+  "seed": null,
+  "randomness": "none; fixed weights and deterministic streaming arithmetic",
+  "scoring": "per-condition day grouping/mask; equal-day mean variance-weighted R2; report every output/day, harm count/fraction, worst harm, residual bias decomposition"
+}

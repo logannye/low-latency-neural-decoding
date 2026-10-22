@@ -3,9 +3,9 @@ requires = ["setuptools>=75"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cnn-python-vs-assembly"
+name = "low-latency-neural-decoding"
 version = "0.1.0"
-description = "A controlled comparison of the same CNN in PyTorch and ARM64 assembly."
+description = "Causal neural decoding under recording drift and real-time runtime constraints."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -29,6 +29,11 @@ neural = [
     "h5py>=3.11,<4",
     "pynwb>=2.8,<4",
     "threadpoolctl>=3,<4",
+]
+runtime = [
+    "onnx==1.19.1",
+    "onnxruntime==1.23.2",
+    "psutil>=6,<8",
 ]
 
 [project.scripts]

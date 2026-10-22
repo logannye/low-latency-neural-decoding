@@ -55,6 +55,18 @@ def training_arrays(training, config):
     return transforms, tuple(torch.from_numpy(np.array(v)) for v in (xs, ys, masks))
 
 
+def apply_channel_dropout(features, probability):
+    """Training-only source-mean replacement, held fixed over each chunk's time."""
+    if not np.isfinite(probability) or not 0 <= probability < 1:
+        raise ValueError("channel dropout probability must be finite in [0, 1)")
+    if probability == 0:
+        return features
+    keep = (
+        torch.rand((features.shape[0], 1, features.shape[2]), device=features.device) >= probability
+    )
+    return features * keep
+
+
 def fit_temporal(training, config, seed, epochs):
     torch.manual_seed(seed)
     torch.use_deterministic_algorithms(True)
@@ -72,7 +84,10 @@ def fit_temporal(training, config, seed, epochs):
         for offset in range(0, len(x), config["batch_chunks"]):
             indices = order[offset : offset + config["batch_chunks"]]
             optimizer.zero_grad(set_to_none=True)
-            prediction = model(x[indices])
+            training_features = apply_channel_dropout(
+                x[indices], config.get("channel_dropout", 0.0)
+            )
+            prediction = model(training_features)
             selected = mask[indices]
             error = prediction[selected] - y[indices][selected]
             loss = error.square().mean()

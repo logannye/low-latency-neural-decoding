@@ -89,3 +89,30 @@ README is preserved in CNN_EXPERIMENT.md; the public root README introduces both
 tracks. Raw/prepared data, checkpoints, per-bin predictions, and the private
 planning handoff remain local. Publishing code does not constitute completion
 of adaptation, runtime measurement or sealed assessment.
+
+## 2026-10-22: G3 and final development decision
+
+The repository was renamed to `low-latency-neural-decoding` at the user's request.
+The root README and distribution now focus on neural decoding; historical CNN
+source, commands and evidence are preserved. A new checkout reuses the existing
+read-only H1 cache and Python interpreter; new runs use fresh local directories.
+Only prebuilt ONNX/ORT wheels were added. No local native compilation occurred.
+
+Bounded correction did not pass its locked mixture-harm advantage criterion.
+Ordinary EMA improved real mean R2 from0.052625 to0.142009 and harmed no
+development day, but the diagnostic also harmed no day, leaving no demonstrated
+protective advantage for a bound. Retain frozen normalization; do not turn the
+unmet criterion into a post hoc positive claim. All90traces and45day scores
+passed independent arithmetic/scoring audit.
+
+The second and final hypothesis, training channel dropout p=0.1, improved
+three-seed mean development R2 from0.160722 to0.172153. Seed-average day gains
+were0.010648/0.005737/0.017909, meeting both prespecified retention conditions.
+Some individual seed/day differences are negative. Retain this single new
+configuration with all three seeds. Nine model/18trace independent audits passed.
+The nonlinear family used two configurations total; no further architecture,
+epoch, dropout probability, adaptation time constant or stress setting is searched.
+
+The final recipe, metrics and separate calibration budgets are recorded before
+S5 access. S0-S4 final refits are complete; array release awaits the exact
+committed-source freeze and runtime validation. S5-S12 remain sealed at this entry.

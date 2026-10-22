@@ -35,6 +35,7 @@ def source_identity(root, destination):
             p for p in (root / directory).rglob("*") if p.is_file() and "__pycache__" not in p.parts
         )
     files.extend(p for p in (root / "neural_experiments").glob("*.md"))
+    files.extend(p for p in (root / "neural_experiments").glob("*.py"))
     identities = {}
     for path in sorted(files):
         relative = path.relative_to(root)
@@ -54,7 +55,18 @@ def source_identity(root, destination):
 
 def environment():
     dependencies = {}
-    for name in ("numpy", "scipy", "scikit-learn", "torch", "h5py", "pynwb", "threadpoolctl"):
+    for name in (
+        "numpy",
+        "scipy",
+        "scikit-learn",
+        "torch",
+        "h5py",
+        "pynwb",
+        "threadpoolctl",
+        "onnx",
+        "onnxruntime",
+        "psutil",
+    ):
         try:
             dependencies[name] = importlib.metadata.version(name)
         except importlib.metadata.PackageNotFoundError:

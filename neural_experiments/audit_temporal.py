@@ -75,7 +75,15 @@ def audit(run, index_path):
     verify(run / "source.diff", manifest["source"]["diff_sha256"])
     for relative, expected in manifest["source"]["files"].items():
         verify(run / "source" / relative, expected)
-    config_path = run / "source/neural_experiments/configs/tcn-v1.json"
+    matching_configs = [
+        run / "source" / relative
+        for relative, checksum in manifest["source"]["files"].items()
+        if relative.startswith("neural_experiments/configs/")
+        and checksum == manifest["config_sha256"]
+    ]
+    if len(matching_configs) != 1:
+        raise ValueError("Expected one source-snapshot config matching manifest config hash")
+    config_path = matching_configs[0]
     verify(config_path, manifest["config_sha256"])
     if config != read_json(config_path):
         raise ValueError("Configuration value does not match its hashed bytes")
