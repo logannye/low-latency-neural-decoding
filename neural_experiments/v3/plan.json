@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "study": "causal-recalibration-heldout-sessions-v3",
+  "status": "locked_before_new_session_acquisition_and_assessment",
+  "prior_exposure": "All V2 outcomes from the first six archive-selected sessions per person, capped at 600s, have influenced this follow-up. An exploratory ridge pilot on those exposed windows motivated daily calibration. New assessment session identities and outcomes have not been inspected at lock time. This is held-out SESSION evidence in previously studied people, not untouched-participant confirmation.",
+  "development_index_v2_sha256": "91de850304c4fb96096daa3f9ec19edab0372675c236a899005cf4308ec6c523",
+  "provider": {
+    "doi": "10.5061/dryad.x0k6djj1h",
+    "version_id": 462702,
+    "license": "CC0-1.0"
+  },
+  "participants": [
+    "T2",
+    "T3",
+    "T5",
+    "T6",
+    "T7",
+    "T8",
+    "T9",
+    "T10",
+    "T11"
+  ],
+  "assessment_selection": {
+    "rule": "Select the seventh, eighth, and ninth regular decoding-session MAT members in each pinned participant archive, counting regular session members rather than tar entries; these are disjoint from V2 first six. No replacement for short duration, no labels, nonfinite data, unavailable budgets, poor accuracy, or archive shortage. Archive order is not chronological order; report chronology rather than call every session future-day.",
+    "regular_session_ranks": [
+      7,
+      8,
+      9
+    ],
+    "maximum_compressed_bytes_total": 14000000000,
+    "maximum_retained_raw_bytes_total": 18000000000
+  },
+  "development_selection": "Only the original first six selected sessions; export exactly first min(600s,duration) with no later observation used in development.",
+  "bin_seconds": 0.02,
+  "session_cap_seconds": 600,
+  "calibration_budgets_seconds": [
+    120,
+    300
+  ],
+  "target": "Unchanged V2 unit cursor-to-target direction at second member of each within-block 10ms pair; both source bins must be in same valid go interval. Do not exclude near-target bins or change endpoint to trial-averaged dSNR.",
+  "features": {
+    "tx": "Pairwise sum of tx_4_5 counts, then sqrt.",
+    "sbp": "Pairwise mean of nonnegative finite spike-band power, then log1p; no whole-block/session normalization.",
+    "families": [
+      "tx",
+      "tx_sbp"
+    ],
+    "upstream_feature_causality": "unverified"
+  },
+  "grid": {
+    "tau_seconds": [
+      0.1,
+      0.2,
+      0.4
+    ],
+    "baseline_tau_seconds": [
+      null,
+      30.0
+    ],
+    "ridge_lambda": [
+      0.1,
+      1.0,
+      10.0
+    ]
+  },
+  "preprocessing": {
+    "filter": "Causal exponential low-pass; initialize fast and slow filter to first observed transformed sample at every acquisition-block reset. Optional subtract causal slow baseline from fast signal.",
+    "normalization": "Mean and population standard deviation of filtered features from exact calibration prefix only; floors .1 for sqrt counts and .01 for log1p power.",
+    "normalized_input_clip": 8.0,
+    "output_projection": "Euclidean unit disk; targets have unit norm. No label-dependent transformation in inference."
+  },
+  "ridge": "Minimize mean squared residual plus lambda times squared coefficient norm; free intercept; no optimizer, epochs, random seeds, or stochastic fitting. Cholesky or symmetric solve. Model loads saved numeric coefficients before any assessment.",
+  "training_burn_bins_per_block": 62,
+  "minimum_training_scored_bins": 50,
+  "minimum_evaluation_scored_bins": 50,
+  "selection": {
+    "outer_unit": "participant",
+    "development_window_seconds": [
+      302,
+      600
+    ],
+    "objective": "Equal participant mean of equal development-session variance-weighted R2; all target-person development data excluded from its grid ranking. First valid grid entry wins exact ties. All candidate results retained, without score-based case exclusion.",
+    "selected_arms": [
+      "tx_daily",
+      "tx_sbp_daily",
+      "selected_daily"
+    ],
+    "lock": "Save all nine outer selections for both budgets, their training/development case hashes and full candidate grid results before opening any fresh assessment label file."
+  },
+  "assessment": {
+    "primary_budget_seconds": 120,
+    "primary_window_seconds": [
+      122,
+      600
+    ],
+    "secondary_budget_seconds": 300,
+    "secondary_window_seconds": [
+      302,
+      600
+    ],
+    "common_budget_comparison_window_seconds": [
+      302,
+      600
+    ],
+    "methods": [
+      "zero",
+      "prefix_mean",
+      "v2_ridge_daily",
+      "tx_daily",
+      "tx_sbp_daily",
+      "selected_daily",
+      "stale_mapping"
+    ],
+    "stale_mapping": "Use selected overall configuration fit on the same person's earliest original V2 session prefix. No fresh-session labels for this arm. Report whether assessment day precedes/follows its calibration day. This is a distinct label-budget/task stress test, not a matched daily-calibration accuracy contrast.",
+    "state": "Replay feature-only from recording start, resetting at acquisition block boundaries. Scorer targets and eval masks do not enter decoder. Ignore scoring window until predictions are saved.",
+    "missing": "Retain all 27 selected cases and all unavailable dispositions; no replacement or cohort changes. A budget longer than observed duration is unavailable."
+  },
+  "primary_estimand": "Absolute R2 of source-selected daily120 pipeline, equal day then equal participant. Primary matched paired contrast is selected_daily minus v2_ridge_daily at120 on identical windows.",
+  "uncertainty": {
+    "unit": "participant, after equal day averaging",
+    "bootstrap_draws": 10000,
+    "seed": 20261022,
+    "description": "Percentile intervals for absolute score and paired effects; descriptive small convenience cohort, no population or clinical claim."
+  },
+  "operational_usefulness_gate": {
+    "eligible_people_required": 9,
+    "mean_r2_at_least": 0.1,
+    "absolute_r2_bootstrap_lower_above": 0.0,
+    "positive_r2_people_at_least": 7,
+    "mean_gain_over_zero_and_prefix_mean_at_least": 0.05,
+    "angular_error_degrees_at_most": 80.0,
+    "scope": "Predeclared offline engineering gate, not clinical usefulness; report every component and any failure."
+  },
+  "runtime": {
+    "model": "selected_daily120, first eligible participant in fixed order, first selected session by regular-member rank",
+    "fast_repeats": 3,
+    "paced_blocks": 2,
+    "paced_seconds": 60,
+    "period_ms": 20,
+    "service_p99_target_ms": 2,
+    "report": "Exact export hash, batch/stream parity, complete-step service, scheduling/release completion, deadline misses, numeric state and model bytes; filter time constants and causal response delay separately."
+  },
+  "no_post_assessment_tuning": "One locked assessment run after source selections and source snapshot are saved. Any implementation failure or amendment must retain failed attempt and identify whether outcomes were exposed. No selection or improvement loop using assessment scores."
+}
