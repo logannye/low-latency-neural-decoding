@@ -64,6 +64,21 @@ interval, and the runner makes the fresh decision before loading scorer targets
 or evaluating counterfactual controls. Tests poison unavailable labels and
 exercise stopping, chronology, shortages, coverage, and publication boundaries.
 
+```mermaid
+flowchart TD
+    A[30 s unlabeled warmup] --> B{Historical out-of-session probes pass?}
+    B -->|Yes| C[Reuse historical decoder: zero fresh labels]
+    B -->|No| D[Request next label budget: 30, 60, 120, 240 s]
+    D --> E[Fit on first half; validate later after 2 s purge]
+    E --> F{Coverage and held-out error checks pass?}
+    F -->|Yes| G[Refit selected candidate on requested labels]
+    F -->|No, budget remains| D
+    F -->|No, cap reached| H[Abstain with zero output]
+    C --> I[Shared later evaluation window]
+    G --> I
+    H --> I
+```
+
 ## Source selection and fresh evaluation
 
 Development uses 104 previously exposed session prefixes, each capped at 600

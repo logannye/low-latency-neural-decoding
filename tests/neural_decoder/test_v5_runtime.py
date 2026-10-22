@@ -254,3 +254,101 @@ def test_independent_audit_rejects_rehashed_assessed_trace(tmp_path, monkeypatch
     save_manifest(output, manifest)
     with pytest.raises(ValueError, match="assessed trace identity"):
         audit.audit(output, tmp_path)
+
+
+def publication_fixture(tmp_path, monkeypatch):
+    output, manifest = fixture_run(tmp_path, monkeypatch)
+    manifest["private_note"] = "/Users/private/notes"
+    manifest["raw_samples"] = [[5, 6]]
+    manifest["environment"]["private_path"] = "/Users/private/runtime"
+    manifest["environment"]["threadpools"][0]["filepath"] = "/Users/private/library"
+    manifest["protocol"]["private_path"] = "/Users/private/config"
+    manifest["filter_response"]["raw_samples"] = [[7, 8]]
+    for block in manifest["blocks"]:
+        block["raw_samples"] = [[1, 2]]
+    save_manifest(output, manifest)
+    receipt = audit.audit(output, tmp_path)
+    receipt["private_path"] = "/Users/private/audit"
+    receipt["prediction_replay"]["raw_samples"] = [[3, 4]]
+    receipt["blocks"][0]["service_p99_ms"] += 1e-16
+    path = tmp_path / "runtime-audit.json"
+    write(path, receipt)
+    return output, manifest, path, receipt
+
+
+def test_public_export_strips_unknown_paths_and_samples_and_retains_evidence(tmp_path, monkeypatch):
+    from neural_experiments.v5 import runtime_public
+
+    output, manifest, path, receipt = publication_fixture(tmp_path, monkeypatch)
+    public = runtime_public.export(output, path, tmp_path)
+    text = json.dumps(public)
+    for forbidden in ("/Users/", "_path", "source_snapshots", "raw_samples", "neural_experiments/"):
+        assert forbidden not in text
+    assert public["representative"] == manifest["representative"]
+    assert public["assessment_sha256"] == manifest["assessment_sha256"]
+    assert (
+        public["independent_audit"]["assessment_audit_sha256"]
+        == manifest["assessment_audit_sha256"]
+    )
+    assert (
+        public["independent_audit"]["prediction_replay"]["measured_trace_max_absolute_error"]
+        == receipt["prediction_replay"]["measured_trace_max_absolute_error"]
+    )
+    assert (
+        public["blocks"][0]["service_p99_ms"]
+        != public["independent_audit"]["blocks"][0]["service_p99_ms"]
+    )
+    assert set(public["source_sha256"]) == set(runtime_public.COMPONENTS)
+
+
+@pytest.mark.parametrize(
+    "key",
+    [
+        "status",
+        "manifest_sha256",
+        "summary_sha256",
+        "assessment_sha256",
+        "plan_sha256",
+        "index_sha256",
+        "model_sha256",
+        "feature_sha256",
+        "auditor_source_sha256",
+        "source_sha256",
+    ],
+)
+def test_public_export_requires_exact_passed_runtime_audit(tmp_path, monkeypatch, key):
+    from neural_experiments.v5 import runtime_public
+
+    output, _, path, receipt = publication_fixture(tmp_path, monkeypatch)
+    receipt[key] = "PASS" if key == "status" else "changed"
+    write(path, receipt)
+    with pytest.raises(ValueError, match="audit"):
+        runtime_public.export(output, path, tmp_path)
+
+
+def test_public_export_rejects_failed_quality_audit_even_if_rebound(tmp_path, monkeypatch):
+    from neural_experiments.v5 import runtime_public
+
+    output, manifest, path, receipt = publication_fixture(tmp_path, monkeypatch)
+    quality_path = tmp_path / "assessment-audit.json"
+    quality = audit.read(quality_path)
+    quality["status"] = "FAIL"
+    write(quality_path, quality)
+    manifest["assessment_audit_sha256"] = runtime.digest(quality_path)
+    save_manifest(output, manifest)
+    receipt["assessment_audit_sha256"] = manifest["assessment_audit_sha256"]
+    receipt["manifest_sha256"] = runtime.digest(output / "manifest.json")
+    receipt["summary_sha256"] = runtime.digest(output / "summary.json")
+    write(path, receipt)
+    with pytest.raises(ValueError, match="assessment audit failed"):
+        runtime_public.export(output, path, tmp_path)
+
+
+def test_public_export_rechecks_bound_binary_and_source_files(tmp_path, monkeypatch):
+    from neural_experiments.v5 import runtime_public
+
+    output, manifest, path, _ = publication_fixture(tmp_path, monkeypatch)
+    snapshot = tmp_path / manifest["source_snapshots"]["neural_experiments/v4/model.py"]
+    snapshot.write_text("changed after audit")
+    with pytest.raises(ValueError, match="changed source"):
+        runtime_public.export(output, path, tmp_path)
