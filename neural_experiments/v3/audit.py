@@ -22,9 +22,15 @@ ROOT = Path(__file__).resolve().parents[2]
 PLAN_SHA256 = "6d0f188bba2c9719bbb8dffece385d48a6b70e07b22835ee6413c89eee063392"
 V2_INDEX_SHA256 = "91de850304c4fb96096daa3f9ec19edab0372675c236a899005cf4308ec6c523"
 SOURCE_PINS = {
-    "neural_experiments/v3/model.py": "56f2bfabf8383c65ec621407e9bccd026b295e27912011c4b9cf97173d4fe2c2",
-    "neural_experiments/v3/study.py": "8a193512fd5bc4d3b1447382de5ae9b56f5dc87c51bccdd393ad81f44e336d43",
-    "neural_experiments/v3/data.py": "260442fe492e1c01cf19e888edf18eb625c120cf865dde30c46ec85f3ccaa390",
+    "neural_experiments/v3/model.py": (
+        "56f2bfabf8383c65ec621407e9bccd026b295e27912011c4b9cf97173d4fe2c2"
+    ),
+    "neural_experiments/v3/study.py": (
+        "8a193512fd5bc4d3b1447382de5ae9b56f5dc87c51bccdd393ad81f44e336d43"
+    ),
+    "neural_experiments/v3/data.py": (
+        "260442fe492e1c01cf19e888edf18eb625c120cf865dde30c46ec85f3ccaa390"
+    ),
 }
 
 
@@ -260,6 +266,11 @@ def index_metadata(path, role):
         or index["v2_index_sha256"] != V2_INDEX_SHA256
     ):
         raise ValueError("Development/assessment index role or locked identities mismatch")
+    if index["preparer"] != {
+        "v3_sha256": SOURCE_PINS["neural_experiments/v3/data.py"],
+        "v2_dependency_sha256": "e75e64c08a4e7041f086b52893dcd17212e4e211094b184abae6ea6d23998a11",
+    }:
+        raise ValueError("Prepared arrays use an unpinned importer implementation")
     old_path = Path(index["v2_index_path"])
     verify(old_path, V2_INDEX_SHA256)
     old = read(old_path)
@@ -394,6 +405,41 @@ def labels_for(index_path, row):
     ):
         raise ValueError("Scored labels are not finite unit directions")
     return result
+
+
+def validate_feature_metadata(arrays, row):
+    """Bind batch/index resets to the sequence IDs used by streaming replay."""
+    n, channels = row["n_bins"], row["n_channels"]
+    time, sequence, channel_ids = (
+        arrays["timestamps"],
+        arrays["sequence_id"],
+        arrays["channel_ids"],
+    )
+    if (
+        time.shape != (n,)
+        or time.dtype != np.float64
+        or not np.isfinite(time).all()
+        or np.any(np.diff(time) <= 0)
+        or sequence.shape != (n,)
+        or not np.issubdtype(sequence.dtype, np.integer)
+        or np.any(sequence < 0)
+        or np.any(np.diff(sequence) < 0)
+        or channel_ids.shape != (channels,)
+        or not np.issubdtype(channel_ids.dtype, np.integer)
+        or np.any(np.diff(channel_ids) <= 0)
+    ):
+        raise ValueError("Feature timestamps/sequence/channel metadata invalid")
+    within = np.diff(sequence) == 0
+    if not np.allclose(np.diff(time)[within], 0.02, rtol=0, atol=1e-9):
+        raise ValueError("Feature timestamps omit an unmarked within-block gap")
+    ranges = segment_ranges(row["segments"], n)
+    starts = [a for a, _ in ranges]
+    observed_starts = ([0] + (np.flatnonzero(np.diff(sequence) != 0) + 1).tolist()) if n else []
+    if observed_starts != starts:
+        raise ValueError("Feature sequence resets do not match index block boundaries")
+    for segment in row["segments"]:
+        if not np.all(sequence[segment["start"] : segment["end"]] == segment["sequence_id"]):
+            raise ValueError("Feature sequence reset differs from index acquisition block")
 
 
 def score_reference(y, prediction, mask):
@@ -777,6 +823,7 @@ def audit_run(run, development_index, assessment_index, root=ROOT):
             or np.any(sbp < 0)
         ):
             raise ValueError("Feature arrays have invalid counts/power geometry")
+        validate_feature_metadata(arrays, row)
         return tx, sbp
 
     choices = {

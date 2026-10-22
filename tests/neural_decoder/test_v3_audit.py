@@ -2,6 +2,7 @@
 
 import copy
 import json
+from pathlib import Path
 
 import numpy as np
 import pytest
@@ -227,3 +228,50 @@ def test_changed_hash_or_escaping_path_cannot_pass_identity_check(tmp_path):
     for value in ("../artifact.json", str(path)):
         with pytest.raises(ValueError, match="relative"):
             audit.contained(tmp_path, value)
+
+
+def test_rehashed_replacement_source_does_not_change_frozen_source_authority(tmp_path):
+    sources = []
+    for path in audit.SOURCE_PINS:
+        snapshot = tmp_path / Path(path).name
+        snapshot.write_text("replacement source")
+        sources.append(
+            {"path": path, "snapshot_path": snapshot.name, "sha256": audit.sha256(snapshot)}
+        )
+    with pytest.raises(ValueError, match="pre-assessment frozen"):
+        audit.verify_sources(sources, tmp_path)
+
+
+def test_feature_reset_metadata_must_match_index_and_preserve_gaps():
+    row = {
+        "n_bins": 6,
+        "n_channels": 2,
+        "segments": [
+            {"start": 0, "end": 3, "sequence_id": 0},
+            {"start": 3, "end": 3, "sequence_id": 1},
+            {"start": 3, "end": 6, "sequence_id": 2},
+        ],
+    }
+    arrays = {
+        "timestamps": np.array([0.02, 0.04, 0.06, 1.02, 1.04, 1.06]),
+        "sequence_id": np.array([0, 0, 0, 2, 2, 2]),
+        "channel_ids": np.array([0, 4]),
+    }
+    audit.validate_feature_metadata(arrays, row)
+    wrong_sequence = copy.deepcopy(arrays)
+    wrong_sequence["sequence_id"][3:] = 1
+    with pytest.raises(ValueError, match="reset differs"):
+        audit.validate_feature_metadata(wrong_sequence, row)
+    merged_blocks = copy.deepcopy(arrays)
+    merged_blocks["sequence_id"][:] = 0
+    merged_blocks["timestamps"] = np.arange(1, 7, dtype=float) * 0.02
+    with pytest.raises(ValueError, match="block boundaries"):
+        audit.validate_feature_metadata(merged_blocks, row)
+    wrong_time = copy.deepcopy(arrays)
+    wrong_time["timestamps"][1] += 0.001
+    with pytest.raises(ValueError, match="within-block gap"):
+        audit.validate_feature_metadata(wrong_time, row)
+    wrong_channel = copy.deepcopy(arrays)
+    wrong_channel["channel_ids"] = np.array([4, 0])
+    with pytest.raises(ValueError, match="channel metadata"):
+        audit.validate_feature_metadata(wrong_channel, row)
