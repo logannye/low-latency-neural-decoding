@@ -30,7 +30,7 @@
       "neural_experiments/v5/runtime_public.py": "aaab527062261573e47d67a4eba4dd2ff7abd0c8b7ed60c2f531d038335b0a69",
       "neural_experiments/v5/study.py": "e20790ad84f72f968774256c043a5a0293b9c63e91251bc5a1dfb1508779586b"
     },
-    "note": "Figures received a subsequent label-placement-only edit and visual inspection; no scientific execution source changed."
+    "note": "Figures received subsequent label-placement and SVG-whitespace formatting edits, visual inspection, and final Ruff checks; no scientific execution source changed."
   },
   "execution_source_sha256": {
     "neural_experiments/v5/model.py": "54a28f2f2706c495257344b3a7073d2a14b711586d00472e9dd2dbafa17ccf58",

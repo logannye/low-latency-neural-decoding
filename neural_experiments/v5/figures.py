@@ -33,7 +33,8 @@ def save_figure(fig, stem):
         path = stem.with_suffix(f".{extension}")
         fig.savefig(path, bbox_inches="tight")
         if extension == "svg":
-            path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n")
+            lines = (line.rstrip() for line in path.read_text().splitlines())
+            path.write_text("\n".join(lines) + "\n")
 
 
 def render(study_path, output):
