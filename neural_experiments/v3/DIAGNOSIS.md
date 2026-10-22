@@ -117,7 +117,8 @@ position error with trial-level affine calibration. V2 instead directly fits
 instantaneous 20 ms unit cursor-to-target direction across valid go intervals.
 The analyses therefore do not share an endpoint or evaluation protocol.
 
-The companion raw-data audit reconstructed the exposed labels, masks, and
+The [companion raw-data audit](../results/v3-data-diagnosis.json) reconstructed
+the exposed labels, masks, and
 within-person channel metadata without finding a sign, transpose, interval,
 or channel-order error. The contemporaneous target remains a closed-loop
 intention proxy, not observed limb velocity or independent intention ground

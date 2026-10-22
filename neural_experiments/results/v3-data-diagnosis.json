@@ -1,0 +1,647 @@
+{
+  "schema_version": 1,
+  "status": "read_only_exposed_data_diagnosis_complete",
+  "scope": "No fitting or scoring; raw schema and metadata inventory. Behavioral summaries only within original exposed first600s. No new suffix outcomes evaluated.",
+  "v2_index_sha256": "91de850304c4fb96096daa3f9ec19edab0372675c236a899005cf4308ec6c523",
+  "v2_public_cohort": "neural_experiments/results/v2-cohort.json",
+  "provider": {
+    "doi": "10.5061/dryad.x0k6djj1h",
+    "version_id": 462702,
+    "analysis_code": {
+      "commit": "93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834",
+      "tree": "b29cf4eebfeb1423abf613550f0ec98324f2675d",
+      "files": [
+        {
+          "path": "array_paper/metrics/decoding_snr.py",
+          "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metrics/decoding_snr.py",
+          "sha256": "d64ad6f1355c36dd457323e15a98f8a2b6cd0697847034e2c8308bcffc2cdec3"
+        },
+        {
+          "path": "array_paper/metrics/utils.py",
+          "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metrics/utils.py",
+          "sha256": "297f6b0c055d82473425d1350d27195a7ca8a95e727434aee6d970f26fa95163"
+        },
+        {
+          "path": "array_paper/metadata.py",
+          "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metadata.py",
+          "sha256": "53bf68033f4adc939dd6f27abc63aba71faefe9434418dc0de89eda170c269a7"
+        },
+        {
+          "path": "array_paper/batch_summary/generate_decoding_summary.py",
+          "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/batch_summary/generate_decoding_summary.py",
+          "sha256": "81cce529e43a8694a6e6ca7cbc4187277c44d73f1cbae9182cbaf2650f543c4d"
+        }
+      ]
+    }
+  },
+  "checks": {
+    "raw_target_mask_prefix_parity_sessions": 54,
+    "raw_cursor_target_aligned_time_by_xy_sessions": 54,
+    "consistent_id_array_xy_layout_participants": 9,
+    "raw20ms_count_pairing_exact_representative_sessions": 9,
+    "all_seven_neural_feature_shapes_aligned_representative_sessions": 9,
+    "sbp_finite_nonnegative_representative_exposed_prefixes": 9
+  },
+  "findings": [
+    "No sign/transpose/indexing/block/channel-reassignment error was identified in these checks; this does not certify upstream voltage processing.",
+    "Provider analysis evaluates300ms trial-window mean vectors after nested-CV trial-onset reaction-time offset0..1s and excludes near-target trials; V2 evaluates20ms instantaneous unit direction throughout go periods. Trial-onset reaction time is not a neural-to-target lag shift.",
+    "Provider TX features are centered over each whole block; SBP uses whole-block median and whole-session robust scale. Those normalizers would use future observations if copied into streaming evaluation.",
+    "TX4.5 is highly sparse in the exposed earliest T3/T6 sessions. SBP is available but has markedly different numerical scales across people. This motivates a fixed feature/normalization hypothesis, not a measured causal explanation of V2 failure.",
+    "Target-minus-cursor is a closed-loop intention proxy, not measured limb velocity. Channel IDs are local to each participant. Task coordinate scales differ; uniform scale cancels in a unit vector."
+  ],
+  "prefix_descriptive_by_participant": [
+    {
+      "participant_id": "T2",
+      "tail_after600_bins": 616977,
+      "whole_blocks_starting_after600": 39,
+      "whole_block_after600_bins": 558972,
+      "sessions_with_whole_blocks_after600": 6,
+      "n_sessions_with_positive_tail": 6,
+      "electrode_layout_consistent": true,
+      "earliest_day": 103,
+      "latest_day": 131,
+      "exposed_scored_near_target_fraction": 0.3562256354574313,
+      "exposed_scored_first300ms_fraction": 0.03766371841563553,
+      "representative_neural_session": {
+        "participant_id": "T2",
+        "session_id": "T2_day_103_decoding",
+        "feature_shapes": {
+          "sbp": [
+            347768,
+            96
+          ],
+          "tx_3": [
+            347768,
+            96
+          ],
+          "tx_3_5": [
+            347768,
+            96
+          ],
+          "tx_4": [
+            347768,
+            96
+          ],
+          "tx_4_5": [
+            347768,
+            96
+          ],
+          "tx_5": [
+            347768,
+            96
+          ],
+          "tx_5_5": [
+            347768,
+            96
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 11.529928207397461,
+          "max": 10409.1083984375,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 5760000
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 13.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.8815185763888889,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T3",
+      "tail_after600_bins": 510273,
+      "whole_blocks_starting_after600": 40,
+      "whole_block_after600_bins": 469841,
+      "sessions_with_whole_blocks_after600": 6,
+      "n_sessions_with_positive_tail": 6,
+      "electrode_layout_consistent": true,
+      "earliest_day": 36,
+      "latest_day": 406,
+      "exposed_scored_near_target_fraction": 0.1538268821245146,
+      "exposed_scored_first300ms_fraction": 0.029913566328447952,
+      "representative_neural_session": {
+        "participant_id": "T3",
+        "session_id": "T3_day_36_decoding",
+        "feature_shapes": {
+          "sbp": [
+            155040,
+            96
+          ],
+          "tx_3": [
+            155040,
+            96
+          ],
+          "tx_3_5": [
+            155040,
+            96
+          ],
+          "tx_4": [
+            155040,
+            96
+          ],
+          "tx_4_5": [
+            155040,
+            96
+          ],
+          "tx_5": [
+            155040,
+            96
+          ],
+          "tx_5_5": [
+            155040,
+            96
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 5.439664363861084,
+          "max": 714.4660034179688,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 5760000
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 6.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.999165625,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T5",
+      "tail_after600_bins": 205921,
+      "whole_blocks_starting_after600": 12,
+      "whole_block_after600_bins": 196867,
+      "sessions_with_whole_blocks_after600": 4,
+      "n_sessions_with_positive_tail": 4,
+      "electrode_layout_consistent": true,
+      "earliest_day": 111,
+      "latest_day": 1167,
+      "exposed_scored_near_target_fraction": 0.4752302384463426,
+      "exposed_scored_first300ms_fraction": 0.14980801869730948,
+      "representative_neural_session": {
+        "participant_id": "T5",
+        "session_id": "T5_day_111_decoding",
+        "feature_shapes": {
+          "sbp": [
+            34341,
+            192
+          ],
+          "tx_3": [
+            34341,
+            192
+          ],
+          "tx_3_5": [
+            34341,
+            192
+          ],
+          "tx_4": [
+            34341,
+            192
+          ],
+          "tx_4_5": [
+            34341,
+            192
+          ],
+          "tx_5": [
+            34341,
+            192
+          ],
+          "tx_5_5": [
+            34341,
+            192
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 1.184631969408656e-06,
+          "max": 118895.8984375,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 6593280
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 20.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.887045142933411,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T6",
+      "tail_after600_bins": 0,
+      "whole_blocks_starting_after600": 0,
+      "whole_block_after600_bins": 0,
+      "sessions_with_whole_blocks_after600": 0,
+      "n_sessions_with_positive_tail": 0,
+      "electrode_layout_consistent": true,
+      "earliest_day": 1001,
+      "latest_day": 1020,
+      "exposed_scored_near_target_fraction": 0.5389394133469962,
+      "exposed_scored_first300ms_fraction": 0.18819649032919175,
+      "representative_neural_session": {
+        "participant_id": "T6",
+        "session_id": "T6_day_1001_decoding",
+        "feature_shapes": {
+          "sbp": [
+            22447,
+            96
+          ],
+          "tx_3": [
+            22447,
+            96
+          ],
+          "tx_3_5": [
+            22447,
+            96
+          ],
+          "tx_4": [
+            22447,
+            96
+          ],
+          "tx_4_5": [
+            22447,
+            96
+          ],
+          "tx_5": [
+            22447,
+            96
+          ],
+          "tx_5_5": [
+            22447,
+            96
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 3.846809148788452,
+          "max": 121.91622924804688,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 2154816
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 3.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.9969598332293801,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T7",
+      "tail_after600_bins": 407413,
+      "whole_blocks_starting_after600": 30,
+      "whole_block_after600_bins": 377560,
+      "sessions_with_whole_blocks_after600": 6,
+      "n_sessions_with_positive_tail": 6,
+      "electrode_layout_consistent": true,
+      "earliest_day": 106,
+      "latest_day": 205,
+      "exposed_scored_near_target_fraction": 0.3726469280902379,
+      "exposed_scored_first300ms_fraction": 0.07083027864527712,
+      "representative_neural_session": {
+        "participant_id": "T7",
+        "session_id": "T7_day_106_decoding",
+        "feature_shapes": {
+          "sbp": [
+            220676,
+            192
+          ],
+          "tx_3": [
+            220676,
+            192
+          ],
+          "tx_3_5": [
+            220676,
+            192
+          ],
+          "tx_4": [
+            220676,
+            192
+          ],
+          "tx_4_5": [
+            220676,
+            192
+          ],
+          "tx_5": [
+            220676,
+            192
+          ],
+          "tx_5_5": [
+            220676,
+            192
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 4.504110813140869,
+          "max": 19047.7109375,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 11520000
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 9.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.9702799479166667,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T8",
+      "tail_after600_bins": 763882,
+      "whole_blocks_starting_after600": 60,
+      "whole_block_after600_bins": 726204,
+      "sessions_with_whole_blocks_after600": 6,
+      "n_sessions_with_positive_tail": 6,
+      "electrode_layout_consistent": true,
+      "earliest_day": 100,
+      "latest_day": 1033,
+      "exposed_scored_near_target_fraction": 0.35116543806310996,
+      "exposed_scored_first300ms_fraction": 0.13011397553898907,
+      "representative_neural_session": {
+        "participant_id": "T8",
+        "session_id": "T8_day_100_decoding",
+        "feature_shapes": {
+          "sbp": [
+            459976,
+            192
+          ],
+          "tx_3": [
+            459976,
+            192
+          ],
+          "tx_3_5": [
+            459976,
+            192
+          ],
+          "tx_4": [
+            459976,
+            192
+          ],
+          "tx_4_5": [
+            459976,
+            192
+          ],
+          "tx_5": [
+            459976,
+            192
+          ],
+          "tx_5_5": [
+            459976,
+            192
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 4.8774309158325195,
+          "max": 13979.0048828125,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 11520000
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 7.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.95718359375,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T9",
+      "tail_after600_bins": 278903,
+      "whole_blocks_starting_after600": 25,
+      "whole_block_after600_bins": 247289,
+      "sessions_with_whole_blocks_after600": 6,
+      "n_sessions_with_positive_tail": 6,
+      "electrode_layout_consistent": true,
+      "earliest_day": 105,
+      "latest_day": 133,
+      "exposed_scored_near_target_fraction": 0.31354362371864597,
+      "exposed_scored_first300ms_fraction": 0.07287649559972313,
+      "representative_neural_session": {
+        "participant_id": "T9",
+        "session_id": "T9_day_105_decoding",
+        "feature_shapes": {
+          "sbp": [
+            108532,
+            192
+          ],
+          "tx_3": [
+            108532,
+            192
+          ],
+          "tx_3_5": [
+            108532,
+            192
+          ],
+          "tx_4": [
+            108532,
+            192
+          ],
+          "tx_4_5": [
+            108532,
+            192
+          ],
+          "tx_5": [
+            108532,
+            192
+          ],
+          "tx_5_5": [
+            108532,
+            192
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 4.0790252685546875,
+          "max": 5792.5615234375,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 11520000
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 6.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.9758285590277778,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T10",
+      "tail_after600_bins": 601233,
+      "whole_blocks_starting_after600": 42,
+      "whole_block_after600_bins": 563517,
+      "sessions_with_whole_blocks_after600": 6,
+      "n_sessions_with_positive_tail": 6,
+      "electrode_layout_consistent": true,
+      "earliest_day": 104,
+      "latest_day": 124,
+      "exposed_scored_near_target_fraction": 0.4992210863854997,
+      "exposed_scored_first300ms_fraction": 0.13693528762948728,
+      "representative_neural_session": {
+        "participant_id": "T10",
+        "session_id": "T10_day_104_decoding",
+        "feature_shapes": {
+          "sbp": [
+            83126,
+            96
+          ],
+          "tx_3": [
+            83126,
+            96
+          ],
+          "tx_3_5": [
+            83126,
+            96
+          ],
+          "tx_4": [
+            83126,
+            96
+          ],
+          "tx_4_5": [
+            83126,
+            96
+          ],
+          "tx_5": [
+            83126,
+            96
+          ],
+          "tx_5_5": [
+            83126,
+            96
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 3.831549882888794,
+          "max": 5816.95068359375,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 0,
+          "n_values": 5760000
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 6.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.9045585069444444,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    },
+    {
+      "participant_id": "T11",
+      "tail_after600_bins": 160023,
+      "whole_blocks_starting_after600": 10,
+      "whole_block_after600_bins": 145695,
+      "sessions_with_whole_blocks_after600": 2,
+      "n_sessions_with_positive_tail": 5,
+      "electrode_layout_consistent": true,
+      "earliest_day": 100,
+      "latest_day": 1057,
+      "exposed_scored_near_target_fraction": 0.5064154488091429,
+      "exposed_scored_first300ms_fraction": 0.09605815766007991,
+      "representative_neural_session": {
+        "participant_id": "T11",
+        "session_id": "T11_day_100_decoding",
+        "feature_shapes": {
+          "sbp": [
+            346108,
+            192
+          ],
+          "tx_3": [
+            346108,
+            192
+          ],
+          "tx_3_5": [
+            346108,
+            192
+          ],
+          "tx_4": [
+            346108,
+            192
+          ],
+          "tx_4_5": [
+            346108,
+            192
+          ],
+          "tx_5": [
+            346108,
+            192
+          ],
+          "tx_5_5": [
+            346108,
+            192
+          ]
+        },
+        "all_feature_shapes_aligned": true,
+        "prefix20ms_counts_exact_pair_sum": true,
+        "exposed_sbp": {
+          "min": 0.0,
+          "max": 903934.375,
+          "nonfinite": 0,
+          "negative": 0,
+          "zero": 22944,
+          "n_values": 11520000
+        },
+        "exposed_tx_4_5": {
+          "min": 0.0,
+          "max": 16.0,
+          "nonfinite": 0,
+          "zero_fraction": 0.9597299479166667,
+          "channels_zero_in_prefix": 0
+        }
+      }
+    }
+  ],
+  "unscored_window_metadata_inventory": {
+    "all_retained_tails": {
+      "tail_after600_bins": 3544625,
+      "whole_blocks_starting_after600": 258,
+      "whole_block_after600_bins": 3285945,
+      "sessions_with_whole_blocks_after600": 42,
+      "n_sessions_with_positive_tail": 45,
+      "tail_after600_hours": 19.69236111111111,
+      "whole_block_after600_hours": 18.255249999999997
+    },
+    "fixed600_1200_total_bins": 1177716,
+    "freshness_limit": "All9 participants and all54 session identities plus their first600s (or full shorter session) have already contributed to V2 as training/validation/test depending on outer fold. Remaining blocks are unscored outcome windows from exposed people/sessions, not independent unseen participants or sessions. No complete additional-session files are cached beyond the fixed six per person; compressed prefixes were not retained. Additional members need a new bounded streaming download.",
+    "used_for_v3_primary": false
+  },
+  "no_new_window_scores_or_model_fits": true,
+  "sample_arrays_included": false,
+  "diagnostic_limits": "Near-target and go-onset fractions are descriptive bin-level summaries of previously exposed windows, not the provider trial-selection rule, a performance score, or proof of an error mechanism."
+}
