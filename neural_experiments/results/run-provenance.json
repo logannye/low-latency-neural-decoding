@@ -1,0 +1,1055 @@
+{
+  "hardware": {
+    "cpu": "Apple M4 Max",
+    "os": "macOS 26.2",
+    "ram_bytes": 137438953472
+  },
+  "runs": {
+    "adaptation-dev-v1": {
+      "baseline_manifest_sha256": "3e3bd0e95a4bd7708332dfe2278328a24c68e582c39d629cf8de59a50741f0ff",
+      "baseline_model_identities_sha256": "3c99c709e4d620de9497d583e3890721710f98503287db65dd518a858ae8bdba",
+      "config_sha256": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+      "configuration": {
+        "alpha": "1-exp(-bin_seconds/tau_seconds)",
+        "baseline_run": "ridge-dev-v1",
+        "bin_seconds": 0.02,
+        "bounded": "same EMA state; prediction subtracts clip(previous_m, -cap*training_sd, cap*training_sd)",
+        "candidate": "ridge-h1-lambda0.1",
+        "caps_training_sd": [
+          0.25,
+          0.5,
+          1.0
+        ],
+        "conditions": {
+          "movement_mixture": {
+            "interpretation": "a label-selected movement-mixture stress with fresh-start state, not real cross-session evidence",
+            "length_requirement": "every development evaluation file must have at least 3000 bins or the run fails",
+            "selection": "Select one contiguous 3000-bin interval per file maximizing signed unmasked mean target[:,6]; ties choose earliest start",
+            "selection_role": "retrospective evaluator-only diagnostic; selection labels never enter the predictor",
+            "state": "reset at the start of each selected window; retain original rows and mask; no stitching or history pre-roll",
+            "target_index": 6,
+            "target_name": "g3",
+            "window_bins": 3000,
+            "window_seconds": 60.0
+          },
+          "observation_offset": {
+            "filter_startup": "zero raw history at file reset; added offset ramps through the existing FIR",
+            "intervention": "Add positive 0.5 * training filtered channel SD to every raw channel/bin for the complete file, before causal filtering",
+            "magnitude_training_filtered_sd": 0.5,
+            "representation": "synthetic nonnegative real-valued counts; not a biological acquisition model"
+          },
+          "real": "complete unmodified development evaluation files"
+        },
+        "decision": {
+          "all_criteria_required": true,
+          "fallback": "retain frozen normalization; no additional parameter search",
+          "mixture_guard": "strictly smaller worst-day R2 harm versus frozen than ordinary EMA; harm floored at zero",
+          "offset_benefit": "positive mean R2 difference versus frozen on offset condition",
+          "real_maximum_worst_day_harm": 0.01,
+          "real_minimum_mean_r2_gain": 0.005,
+          "tie_break": "largest real mean R2 gain, then smaller cap"
+        },
+        "folds": [
+          {
+            "evaluate": "S2",
+            "train": [
+              "S0",
+              "S1"
+            ]
+          },
+          {
+            "evaluate": "S3",
+            "train": [
+              "S0",
+              "S1",
+              "S2"
+            ]
+          },
+          {
+            "evaluate": "S4",
+            "train": [
+              "S0",
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        ],
+        "hypothesis": "Source-anchored bounded mean correction can reduce observation-offset bias while limiting movement-mixture harm",
+        "initial_correction": "zero at every provider file or diagnostic window",
+        "ordinary_ema": "m_next = (1-alpha)*m + alpha*(filtered_counts-training_mean)",
+        "randomness": "none; fixed weights and deterministic streaming arithmetic",
+        "regime": "feature_only_causal_predict_then_update",
+        "schema_version": 1,
+        "scoring": "per-condition day grouping/mask; equal-day mean variance-weighted R2; report every output/day, harm count/fraction, worst harm, residual bias decomposition",
+        "seed": null,
+        "tau_seconds": 30.0,
+        "threads": 1,
+        "variance": "fixed training variance"
+      },
+      "diagnostic_windows_sha256": "cd62f839bf7f4588e605934db7d6552e9c8a0cda28b1a000e640150ad2f1b698",
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": null,
+          "onnxruntime": null,
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:16:11.379483+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null
+        }
+      },
+      "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "regime": "feature_only_causal_predict_then_update",
+      "retained_manifest_sha256": "c7a7fb67da010761a469c6f7caeb102211d3886b379c09d74d3a5367a41140eb",
+      "source": {
+        "diff_sha256": "a8579f68f73d339b86fb84b9ed309557db0fe6185325e5835e54b4f46d1ec0a0",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "4f9c019b0a68a51df0d1a2354e9af12e06b123a341198469cec0237f2b3012c2",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/NOTEBOOK.md": "a3f54f74e1faa90dfa39ccef4cecba5b6308afe35dc618029e047390b4e88c9d",
+          "neural_experiments/PROTOCOL.md": "9af9c2c1fde3887ea17b42bec806820c82d5545a0a8bbe30ab43e81a1e223840",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "ba1df4b52ccf8c6160b7cfffb4860d4cbb092e882cb189ed972d99b15ffd9db7",
+          "src/neural_decoder/assessment_data.py": "bfe96280895fecabbb804c31441581a0696173c0f6535033e0c1b30d4d4c9ba7",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "eb19c54c4fe96a76012dd2e45ff354dbfcbea1bb86b31b32d3dcd03aa8bce68b",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_temporal.py": "ec1b068b4eaa2cd0371db3caa5a85b467d45f3a08594963f2db02f3cb9bce970"
+        },
+        "head": "e0415359e08dca70e959059202fc8d46293eea00"
+      },
+      "status": "complete",
+      "summary_sha256": "062638a27f9be2dbb330d1a0932f5d0b673ae8bc8f5f3b000ea292253f5c6efe",
+      "trace_manifest_sha256": "91ff3667e1b7e01f58f4d6969fcc65c3cda09af62f36da2ac469ae1682225cbe"
+    },
+    "compression-quality-v1": {
+      "development_manifest_sha256": "f40d6ab1af75ac84c9397c7813c6e735b8ecf3ad9ee69a0bf1048ab88c567e29",
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": "1.19.1",
+          "onnxruntime": "1.23.2",
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:39:08.988359+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "regime": "frozen inputs with explicitly approximate numerical execution",
+      "retained_manifest_sha256": "1304325b97760065bd0c339b8b417715c1048fa4a8d14553ceb6d327834df783",
+      "runtime_versions": {
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "script_sha256": "7bb96bebb62d2ceacfbca3ed8c1c6789e1a6d37ce6f76b3c8bf17379fd295ef4",
+      "setting": "per-channel QInt8 MatMul, dynamic activations, no reduced range",
+      "source": {
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "77529453616bf79d5bec12c21c53d624c9a8f9e7d2c985cee486e8a04b043534",
+          "neural_experiments/ASSESSMENT_DATA.md": "698e8517ce9806f06714e57c4fc4c3c07855bba517b329442fedc618aee51780",
+          "neural_experiments/AUGMENTATION.md": "e15b5c625f18ec6cba8eded870329aafd0cbd2698f1606da183c20ae8425465c",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/COMPRESSION.md": "aa11996e85305b2c18b7eb9af7f674ad4fba9ecce3e92b4bd75b2a5d23805751",
+          "neural_experiments/NOTEBOOK.md": "0dc2cd72df793716a8bb94095e780eea15313961e1839f99b20e37a9e6ffc6fb",
+          "neural_experiments/PROTOCOL.md": "912964e1c9df787d30888cbdabaca766e52bb4b75011f8d272290945fe7cac84",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/RUNTIME_PROTOCOL.md": "d23c58a9298b44db50541520ed44f77e28a565077673bca5e9f5cc1026afb132",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/SECOND_TASK_PLAN.md": "53c3a958eb3e405a4ad0faf642c4d5fbd4aff137513253efbeb6767fdeca5dc7",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/audit.py": "bfe4bb1df41e2f11341a46d4392cac2e4e6930e27b867ea56007bc36b24a7802",
+          "neural_experiments/audit_assessment.py": "a6fa783440203a384e846871eff127d505b0cd4c69e290e9a56e07a1089c07cb",
+          "neural_experiments/audit_runtime.py": "a44e68b72becee0ae50530199b0874a024f7ae71c1d1f0414043900aba0a73cb",
+          "neural_experiments/audit_temporal.py": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+          "neural_experiments/compression.py": "7bb96bebb62d2ceacfbca3ed8c1c6789e1a6d37ce6f76b3c8bf17379fd295ef4",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/frozen-recipe-v1.json": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+          "neural_experiments/configs/m2-minival-transfer-v1.json": "eb8bfd8c6ba89496783b901c37007a53d9f4973b10c3fef07047f1853e9dee32",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/runtime-v1.json": "2c39551c579c04ef841ba1572b93a2ad2ac0e6dc60f2458a9e7d920f705f164e",
+          "neural_experiments/configs/tcn-dropout-v1.json": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "neural_experiments/replay_demo.py": "18e2e92833b724021a3b662493a235d91da77dc932b2078755d870093b2e45a1",
+          "neural_experiments/report_figures.py": "bc7689f661a791a6e44418a7bc95907076ee1b0d85ce84470ffadfe66993b7cb",
+          "neural_experiments/transfer_m2.py": "bf8149fb598a4e64e508682817f63db2c46c4e482525b0881e48bace61576f7c",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+          "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+          "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/runtime.py": "1717aaa21b9cf767cd3bbd41ba3ea617c765e715abde5f4117d1fbbe95e95b0c",
+          "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+          "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9"
+        },
+        "head": "8290ed6c836cb5f3aa156dcc3232480da93e4017"
+      },
+      "status": "complete",
+      "summary_sha256": "238070b39d90e06cbde3d980d265ce7897bb638105ce114828e120168ece4287"
+    },
+    "compression-runtime-v1": {
+      "comparison": "float32 vs dynamic_int8 explicit state CPU ORT; changed arithmetic",
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": "1.19.1",
+          "onnxruntime": "1.23.2",
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:42:37.359672+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "graph_sha256": {
+        "dynamic_int8": "f7fb579e938c362c23813391d6d7067bb5d42213d16df6c4cc7752dffc859bf9",
+        "float32": "c98141f2ab7f9e81d49b665d1bf452051edc515f494ecac72a12a01c0a71f45f"
+      },
+      "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "model_sha256": "14b6cd3a620dab84e15e942cb307c510114d290a6eb1808e4899980007c9a5a5",
+      "period_ns": 20000000,
+      "quality_summary_sha256": "238070b39d90e06cbde3d980d265ce7897bb638105ce114828e120168ece4287",
+      "retained_manifest_sha256": "8bc696239be59d69c02588b547e2ec715b599719cc629c366a44f478f9b123dd",
+      "runtime_versions": {
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2"
+      },
+      "script_sha256": "7bb96bebb62d2ceacfbca3ed8c1c6789e1a6d37ce6f76b3c8bf17379fd295ef4",
+      "source": {
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "77529453616bf79d5bec12c21c53d624c9a8f9e7d2c985cee486e8a04b043534",
+          "neural_experiments/ASSESSMENT_DATA.md": "698e8517ce9806f06714e57c4fc4c3c07855bba517b329442fedc618aee51780",
+          "neural_experiments/AUGMENTATION.md": "e15b5c625f18ec6cba8eded870329aafd0cbd2698f1606da183c20ae8425465c",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/COMPRESSION.md": "aa11996e85305b2c18b7eb9af7f674ad4fba9ecce3e92b4bd75b2a5d23805751",
+          "neural_experiments/NOTEBOOK.md": "0dc2cd72df793716a8bb94095e780eea15313961e1839f99b20e37a9e6ffc6fb",
+          "neural_experiments/PROTOCOL.md": "912964e1c9df787d30888cbdabaca766e52bb4b75011f8d272290945fe7cac84",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/RUNTIME_PROTOCOL.md": "d23c58a9298b44db50541520ed44f77e28a565077673bca5e9f5cc1026afb132",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/SECOND_TASK_PLAN.md": "b35d8f91811136ad0afc513e6e610c6f23f57eb880dfa70b9b4dc3d8c4f0ab97",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/audit.py": "bfe4bb1df41e2f11341a46d4392cac2e4e6930e27b867ea56007bc36b24a7802",
+          "neural_experiments/audit_assessment.py": "a6fa783440203a384e846871eff127d505b0cd4c69e290e9a56e07a1089c07cb",
+          "neural_experiments/audit_runtime.py": "a44e68b72becee0ae50530199b0874a024f7ae71c1d1f0414043900aba0a73cb",
+          "neural_experiments/audit_temporal.py": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+          "neural_experiments/compression.py": "7bb96bebb62d2ceacfbca3ed8c1c6789e1a6d37ce6f76b3c8bf17379fd295ef4",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/frozen-recipe-v1.json": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+          "neural_experiments/configs/m2-minival-transfer-v1.json": "eb8bfd8c6ba89496783b901c37007a53d9f4973b10c3fef07047f1853e9dee32",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/runtime-v1.json": "2c39551c579c04ef841ba1572b93a2ad2ac0e6dc60f2458a9e7d920f705f164e",
+          "neural_experiments/configs/tcn-dropout-v1.json": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "neural_experiments/replay_demo.py": "17987c8c43b1cd554ffb0e15d6e33032290dafcb646d3042521679158e368032",
+          "neural_experiments/report_figures.py": "bc7689f661a791a6e44418a7bc95907076ee1b0d85ce84470ffadfe66993b7cb",
+          "neural_experiments/transfer_m2.py": "8a1758e7cf635a6ac41d9d0700164af1a80c7dd298b9c4328d42f7e0d61137df",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+          "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+          "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/runtime.py": "1717aaa21b9cf767cd3bbd41ba3ea617c765e715abde5f4117d1fbbe95e95b0c",
+          "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+          "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9"
+        },
+        "head": "8290ed6c836cb5f3aa156dcc3232480da93e4017"
+      },
+      "status": "complete",
+      "summary_sha256": "580a067d49e692035a2092b44a36d8e4bfe2e083b242ef151bbec053b7e22b6c",
+      "warmup_bins": 500
+    },
+    "final-early-models-v1": {
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": "1.19.1",
+          "onnxruntime": "1.23.2",
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:26:19.356607+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "index_sha256": {
+        "development": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2"
+      },
+      "recipe_sha256": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+      "retained_manifest_sha256": "09b56c7d9c005cb2b60596358b68cbafdd89c63dbb7c5149b545ffe511cffb97",
+      "source": {
+        "diff_sha256": "e2bfb1137f079ee64911e298e555ee3a7b60039609fa75d11b1d2eff6349b121",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "77529453616bf79d5bec12c21c53d624c9a8f9e7d2c985cee486e8a04b043534",
+          "neural_experiments/ASSESSMENT_DATA.md": "698e8517ce9806f06714e57c4fc4c3c07855bba517b329442fedc618aee51780",
+          "neural_experiments/AUGMENTATION.md": "e15b5c625f18ec6cba8eded870329aafd0cbd2698f1606da183c20ae8425465c",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/COMPRESSION.md": "aa11996e85305b2c18b7eb9af7f674ad4fba9ecce3e92b4bd75b2a5d23805751",
+          "neural_experiments/NOTEBOOK.md": "a3f54f74e1faa90dfa39ccef4cecba5b6308afe35dc618029e047390b4e88c9d",
+          "neural_experiments/PROTOCOL.md": "9af9c2c1fde3887ea17b42bec806820c82d5545a0a8bbe30ab43e81a1e223840",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/RUNTIME_PROTOCOL.md": "d23c58a9298b44db50541520ed44f77e28a565077673bca5e9f5cc1026afb132",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/audit.py": "bfe4bb1df41e2f11341a46d4392cac2e4e6930e27b867ea56007bc36b24a7802",
+          "neural_experiments/audit_temporal.py": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+          "neural_experiments/compression.py": "a7d82813ecf5498ff6e3d024551d9368aa64c2f0827274795fcfa28dd7ae8636",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/frozen-recipe-v1.json": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/runtime-v1.json": "2c39551c579c04ef841ba1572b93a2ad2ac0e6dc60f2458a9e7d920f705f164e",
+          "neural_experiments/configs/tcn-dropout-v1.json": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+          "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+          "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/runtime.py": "1717aaa21b9cf767cd3bbd41ba3ea617c765e715abde5f4117d1fbbe95e95b0c",
+          "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+          "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9"
+        },
+        "head": "e0415359e08dca70e959059202fc8d46293eea00"
+      },
+      "stage": "early",
+      "status": "complete"
+    },
+    "final-later-models-v1": {
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": "1.19.1",
+          "onnxruntime": "1.23.2",
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:36:31.369938+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "index_sha256": {
+        "development": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+        "early": "b083f74b0ed94200bfb09d974c808c6be476fd5ccf01f5997c29ac052096a71e"
+      },
+      "recipe_sha256": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+      "retained_manifest_sha256": "dfe5cad29c91da18ac2e19bb6bedc2aeda7fa4df6a3aa4ed49638d50336c4b09",
+      "source": {
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "77529453616bf79d5bec12c21c53d624c9a8f9e7d2c985cee486e8a04b043534",
+          "neural_experiments/ASSESSMENT_DATA.md": "698e8517ce9806f06714e57c4fc4c3c07855bba517b329442fedc618aee51780",
+          "neural_experiments/AUGMENTATION.md": "e15b5c625f18ec6cba8eded870329aafd0cbd2698f1606da183c20ae8425465c",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/COMPRESSION.md": "aa11996e85305b2c18b7eb9af7f674ad4fba9ecce3e92b4bd75b2a5d23805751",
+          "neural_experiments/NOTEBOOK.md": "0dc2cd72df793716a8bb94095e780eea15313961e1839f99b20e37a9e6ffc6fb",
+          "neural_experiments/PROTOCOL.md": "912964e1c9df787d30888cbdabaca766e52bb4b75011f8d272290945fe7cac84",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/RUNTIME_PROTOCOL.md": "d23c58a9298b44db50541520ed44f77e28a565077673bca5e9f5cc1026afb132",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/SECOND_TASK_PLAN.md": "53c3a958eb3e405a4ad0faf642c4d5fbd4aff137513253efbeb6767fdeca5dc7",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/audit.py": "bfe4bb1df41e2f11341a46d4392cac2e4e6930e27b867ea56007bc36b24a7802",
+          "neural_experiments/audit_assessment.py": "a6fa783440203a384e846871eff127d505b0cd4c69e290e9a56e07a1089c07cb",
+          "neural_experiments/audit_runtime.py": "2963322497a7cc77f11815338a78db61d823bc42c4a3e0e77d6342be7f6d07a5",
+          "neural_experiments/audit_temporal.py": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+          "neural_experiments/compression.py": "e2626aaa6a5bb18cbc6e554a4f8eeccfee02d0c1976e657ba05a29f7bcd563a5",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/frozen-recipe-v1.json": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+          "neural_experiments/configs/m2-minival-transfer-v1.json": "eb8bfd8c6ba89496783b901c37007a53d9f4973b10c3fef07047f1853e9dee32",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/runtime-v1.json": "2c39551c579c04ef841ba1572b93a2ad2ac0e6dc60f2458a9e7d920f705f164e",
+          "neural_experiments/configs/tcn-dropout-v1.json": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "neural_experiments/report_figures.py": "8958f1006484f4b730f1e1da09227e4e3af5f648c055c3b39308f88e020169bf",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+          "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+          "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/runtime.py": "1717aaa21b9cf767cd3bbd41ba3ea617c765e715abde5f4117d1fbbe95e95b0c",
+          "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+          "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9"
+        },
+        "head": "4f30a3dc076c93292408ce663776cf8e131a9ce4"
+      },
+      "stage": "later",
+      "status": "complete"
+    },
+    "m2-minival-transfer-v1": {
+      "config_sha256": "eb8bfd8c6ba89496783b901c37007a53d9f4973b10c3fef07047f1853e9dee32",
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": null,
+          "onnxruntime": null,
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:48:26.170267+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "input_index_sha256": "df4a1cc908f434477d32dbea4f75840ffafa34499360254198a61ee09671eac3",
+      "retained_manifest_sha256": "39369cd07d3273805ed85d58c9ae21e75fc7ded45eb5f6984ca794fa97553507",
+      "scope": "Local minival-only numerical/implementation transfer and sparse-training forward-day quality; no official result, H1-weight transfer, or cross-participant generalization claim.",
+      "source": {
+        "diff_sha256": "6f07d4f09f7bc212b5a8abc4efe8f5fbc28d3cdcdbbf80b9e27f49b1d806164b",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "77529453616bf79d5bec12c21c53d624c9a8f9e7d2c985cee486e8a04b043534",
+          "neural_experiments/ASSESSMENT_DATA.md": "698e8517ce9806f06714e57c4fc4c3c07855bba517b329442fedc618aee51780",
+          "neural_experiments/AUGMENTATION.md": "e15b5c625f18ec6cba8eded870329aafd0cbd2698f1606da183c20ae8425465c",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/COMPRESSION.md": "aa11996e85305b2c18b7eb9af7f674ad4fba9ecce3e92b4bd75b2a5d23805751",
+          "neural_experiments/FINAL_REPORT.md": "2b0e1863c69d3a8e322a8e751358ad6b62f1b02c50f8716c3ebbf4400192cea7",
+          "neural_experiments/INTERVIEW_NARRATIVE.md": "addbec6c88cb0133e54d80991e33b8ae9deb00872175e2fa7bee0563adf3a248",
+          "neural_experiments/NOTEBOOK.md": "0dc2cd72df793716a8bb94095e780eea15313961e1839f99b20e37a9e6ffc6fb",
+          "neural_experiments/PROTOCOL.md": "912964e1c9df787d30888cbdabaca766e52bb4b75011f8d272290945fe7cac84",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/RUNTIME_PROTOCOL.md": "d23c58a9298b44db50541520ed44f77e28a565077673bca5e9f5cc1026afb132",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/SECOND_TASK_PLAN.md": "b35d8f91811136ad0afc513e6e610c6f23f57eb880dfa70b9b4dc3d8c4f0ab97",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/audit.py": "bfe4bb1df41e2f11341a46d4392cac2e4e6930e27b867ea56007bc36b24a7802",
+          "neural_experiments/audit_assessment.py": "a6fa783440203a384e846871eff127d505b0cd4c69e290e9a56e07a1089c07cb",
+          "neural_experiments/audit_runtime.py": "a44e68b72becee0ae50530199b0874a024f7ae71c1d1f0414043900aba0a73cb",
+          "neural_experiments/audit_temporal.py": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+          "neural_experiments/compression.py": "7bb96bebb62d2ceacfbca3ed8c1c6789e1a6d37ce6f76b3c8bf17379fd295ef4",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/frozen-recipe-v1.json": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+          "neural_experiments/configs/m2-minival-transfer-v1.json": "eb8bfd8c6ba89496783b901c37007a53d9f4973b10c3fef07047f1853e9dee32",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/runtime-v1.json": "2c39551c579c04ef841ba1572b93a2ad2ac0e6dc60f2458a9e7d920f705f164e",
+          "neural_experiments/configs/tcn-dropout-v1.json": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "neural_experiments/replay_demo.py": "17987c8c43b1cd554ffb0e15d6e33032290dafcb646d3042521679158e368032",
+          "neural_experiments/report_figures.py": "bc7689f661a791a6e44418a7bc95907076ee1b0d85ce84470ffadfe66993b7cb",
+          "neural_experiments/transfer_m2.py": "8a1758e7cf635a6ac41d9d0700164af1a80c7dd298b9c4328d42f7e0d61137df",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+          "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+          "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/runtime.py": "1717aaa21b9cf767cd3bbd41ba3ea617c765e715abde5f4117d1fbbe95e95b0c",
+          "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+          "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9"
+        },
+        "head": "d80e4d0d1b8d505121eeba63f62f177176abe999"
+      },
+      "status": "complete",
+      "summary_sha256": "57d30723c95ff7b58b9cf94fce099d9ccb3e15a179269923709faebd80f3a4b3"
+    },
+    "ridge-dev-v1": {
+      "config_sha256": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+      "configuration": {
+        "fir_taps": 12,
+        "fir_tau_bins": 12,
+        "folds": [
+          {
+            "evaluate": "S2",
+            "train": [
+              "S0",
+              "S1"
+            ]
+          },
+          {
+            "evaluate": "S3",
+            "train": [
+              "S0",
+              "S1",
+              "S2"
+            ]
+          },
+          {
+            "evaluate": "S4",
+            "train": [
+              "S0",
+              "S1",
+              "S2",
+              "S3"
+            ]
+          }
+        ],
+        "history_bins": [
+          1,
+          5
+        ],
+        "regime": "frozen_zero_new_day_calibration",
+        "regularization": [
+          0.001,
+          0.01,
+          0.1
+        ],
+        "schema_version": 1,
+        "seed": 0,
+        "selection": "largest mean of three development-day variance-weighted R2 scores; ties shorter history then larger regularization",
+        "threads": 1
+      },
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T15:32:26.781151+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null
+        }
+      },
+      "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "regime": "frozen_zero_new_day_calibration",
+      "retained_manifest_sha256": "3e3bd0e95a4bd7708332dfe2278328a24c68e582c39d629cf8de59a50741f0ff",
+      "source": {
+        "diff_sha256": "759e8fbf3de6a441f19ac0d517ef688882c06526246516bb8302a22a8787b00b",
+        "files": {
+          "neural_experiments/HANDOFF.md": "ee0794308b2f8ac8b9d190ce71f4990c2b39953de7f69534b0bf90afd40d0b8f",
+          "neural_experiments/NOTEBOOK.md": "12085f5ebb15901eb35fc327a57200ba27ed7fc7b8df12cff3172615d4801001",
+          "neural_experiments/PROTOCOL.md": "22642b3f9e231606417ee08d534d769e8c5aeed2c75d7398b5ff4b4e43517934",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "pyproject.toml": "08a9cc130362743424a0e33cd69a1cd2e7ae13dc308351507b25fcdbb492442b",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/artifacts.py": "a02f8f38e60dd1f257ee24b4f5751fce1a779f65b4be416b9c8c00fae9d36b91",
+          "src/neural_decoder/cli.py": "a68f0dc8a0124738828c8d1a4ca65050de528af24b21b09125b68e7f811c5f87",
+          "src/neural_decoder/data.py": "bae70a1f0036d3ec13d9c68828fb9d3939cb799d9e0edc60a15ee9745d1eb95d",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "23ef2c79f251fd419db876912cdc7b87ce911cc9a2f7474a7e2ac05dcc962d78",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/replay.py": "5da14b5de3da4659d76ae03e894bbe5273a2ef521b672c10af4196db99db2f72",
+          "src/neural_decoder/splits.py": "38df0451eec46ad2da7694d6d48b7e9a1f2d2c481ceff0f613b5a3c4dbb75429",
+          "src/neural_decoder/temporal.py": "48811f3c5c2aedc9218834bae367aa66cc3ed0e989445d10e2924ff468f6542c",
+          "src/neural_decoder/train.py": "b8fea726e451d651cc29648b00aa7bf045e21f1f3602fd3c7bc2ce8cda53af91"
+        },
+        "head": "6f0cfd932b41503fed3899211491bacfbfba95e7"
+      },
+      "status": "complete",
+      "summary_sha256": "2a05de0120f9074a2f9c98e26425d2196bcc8fa3d5ef43629186cb393c15f5e9"
+    },
+    "runtime-v1": {
+      "boundary": "counts ready to prediction and all frozen-decoder state work complete",
+      "config_sha256": "2c39551c579c04ef841ba1572b93a2ad2ac0e6dc60f2458a9e7d920f705f164e",
+      "configuration": {
+        "claim_scope": "counts-ready replay on named CPU; no acquisition/implant/power/closed-loop claim",
+        "data": "all11 S0-S4 development files for fast/parity; first chronological file prefix for paced",
+        "fast_orders": [
+          [
+            "torch_window",
+            "numpy_incremental",
+            "onnx_incremental"
+          ],
+          [
+            "numpy_incremental",
+            "onnx_incremental",
+            "torch_window"
+          ],
+          [
+            "onnx_incremental",
+            "torch_window",
+            "numpy_incremental"
+          ]
+        ],
+        "kernel_iterations": 10000,
+        "paced_orders": [
+          [
+            "torch_window",
+            "numpy_incremental",
+            "onnx_incremental"
+          ],
+          [
+            "onnx_incremental",
+            "numpy_incremental",
+            "torch_window"
+          ]
+        ],
+        "paced_seconds_per_block": 60,
+        "parity_atol": 1e-07,
+        "parity_rtol": 3e-05,
+        "period_ns": 20000000,
+        "primary_model": "preselected seed0 development foldC S4 artifact; not best seed",
+        "primary_model_sha256": "8806add2de4321aef787a561f46a46ea3f095ed3d1aa9d20a0bf4a644c1c2a97",
+        "quality_numerical_tolerance": 1e-05,
+        "regime": "frozen inference; no adaptation or compression",
+        "schema_version": 1,
+        "threads": 1,
+        "warmup_bins": 500
+      },
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": "1.19.1",
+          "onnxruntime": "1.23.2",
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:28:40.800825+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "model_sha256": "8806add2de4321aef787a561f46a46ea3f095ed3d1aa9d20a0bf4a644c1c2a97",
+      "onnx_sha256": "2ec362facf908cf4fc546b81e91d3eacc422d8a9f69f1ba3dd511d93b66fc4c8",
+      "parity_status": "passed",
+      "retained_manifest_sha256": "716514c535499b1225ecd2579fb43455c84d7987b7f7f938695f15cf7674dfb6",
+      "runtime_dependencies": {
+        "onnx": "1.19.1",
+        "onnxruntime": "1.23.2",
+        "psutil": "7.2.2"
+      },
+      "source": {
+        "diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "77529453616bf79d5bec12c21c53d624c9a8f9e7d2c985cee486e8a04b043534",
+          "neural_experiments/ASSESSMENT_DATA.md": "698e8517ce9806f06714e57c4fc4c3c07855bba517b329442fedc618aee51780",
+          "neural_experiments/AUGMENTATION.md": "e15b5c625f18ec6cba8eded870329aafd0cbd2698f1606da183c20ae8425465c",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/COMPRESSION.md": "aa11996e85305b2c18b7eb9af7f674ad4fba9ecce3e92b4bd75b2a5d23805751",
+          "neural_experiments/NOTEBOOK.md": "0dc2cd72df793716a8bb94095e780eea15313961e1839f99b20e37a9e6ffc6fb",
+          "neural_experiments/PROTOCOL.md": "912964e1c9df787d30888cbdabaca766e52bb4b75011f8d272290945fe7cac84",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/RUNTIME_PROTOCOL.md": "d23c58a9298b44db50541520ed44f77e28a565077673bca5e9f5cc1026afb132",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/audit.py": "bfe4bb1df41e2f11341a46d4392cac2e4e6930e27b867ea56007bc36b24a7802",
+          "neural_experiments/audit_assessment.py": "a6fa783440203a384e846871eff127d505b0cd4c69e290e9a56e07a1089c07cb",
+          "neural_experiments/audit_temporal.py": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+          "neural_experiments/compression.py": "e2626aaa6a5bb18cbc6e554a4f8eeccfee02d0c1976e657ba05a29f7bcd563a5",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/frozen-recipe-v1.json": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/runtime-v1.json": "2c39551c579c04ef841ba1572b93a2ad2ac0e6dc60f2458a9e7d920f705f164e",
+          "neural_experiments/configs/tcn-dropout-v1.json": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+          "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+          "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/runtime.py": "1717aaa21b9cf767cd3bbd41ba3ea617c765e715abde5f4117d1fbbe95e95b0c",
+          "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+          "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9"
+        },
+        "head": "8d7220e500ee543b1a8cf19f697848a292f761f4"
+      },
+      "status": "complete",
+      "summary_sha256": "6faa01e5bbfc925ed2144e561de2f719aa84cbf21e6ba10e64abeb14139580ee"
+    },
+    "tcn-dev-v1": {
+      "config_sha256": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+      "configuration": {
+        "architecture": "176->32 k3 d1 ReLU ->32 k3 d2 ReLU ->32 k3 d4 ReLU ->7 linear",
+        "batch_chunks": 16,
+        "burn_in_bins": 14,
+        "checkpoint": "last epoch, fixed in advance; no evaluation-based early stopping",
+        "chunk_scored_bins": 256,
+        "epochs": 20,
+        "input": "raw counts with training-only channel mean/std",
+        "learning_rate": 0.001,
+        "loss": "mean squared standardized target error on supplied training masks after burnin",
+        "optimizer": "Adam",
+        "pilot": "seed0 foldA one epoch timing only, no development prediction or score",
+        "regime": "frozen_zero_new_day_calibration",
+        "schema_version": 1,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "target": "training-only masked target mean/std; invert before scoring",
+        "threads": 1,
+        "weight_decay": 0.0
+      },
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T15:38:07.708362+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null
+        }
+      },
+      "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "pilot": false,
+      "retained_manifest_sha256": "af69ee7f0520d04f308cff7c662e1a877aa78172b5cc2bcd20652b4845e25cfb",
+      "source": {
+        "diff_sha256": "759e8fbf3de6a441f19ac0d517ef688882c06526246516bb8302a22a8787b00b",
+        "files": {
+          "neural_experiments/HANDOFF.md": "ee0794308b2f8ac8b9d190ce71f4990c2b39953de7f69534b0bf90afd40d0b8f",
+          "neural_experiments/NOTEBOOK.md": "12085f5ebb15901eb35fc327a57200ba27ed7fc7b8df12cff3172615d4801001",
+          "neural_experiments/PROTOCOL.md": "c8fd04a05bcc9fe16e5ca0a7ee43fdcb2cded3da426f8a14f3a56e5987943948",
+          "neural_experiments/SCORING.md": "6807cfc726c0bb37b34704b2808dda0de8aadd81d7318281118f91c78e533756",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "pyproject.toml": "08a9cc130362743424a0e33cd69a1cd2e7ae13dc308351507b25fcdbb492442b",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/artifacts.py": "a02f8f38e60dd1f257ee24b4f5751fce1a779f65b4be416b9c8c00fae9d36b91",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "23ef2c79f251fd419db876912cdc7b87ce911cc9a2f7474a7e2ac05dcc962d78",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_temporal.py": "ec1b068b4eaa2cd0371db3caa5a85b467d45f3a08594963f2db02f3cb9bce970"
+        },
+        "head": "6f0cfd932b41503fed3899211491bacfbfba95e7"
+      },
+      "status": "complete",
+      "summary_sha256": "5ad4261cad36da3db10a10d62fffca3458b17031a529d4c8fa1068c4cea95c76"
+    },
+    "tcn-dropout-dev-v1": {
+      "baseline_manifest_sha256": "af69ee7f0520d04f308cff7c662e1a877aa78172b5cc2bcd20652b4845e25cfb",
+      "baseline_summary_sha256": "5ad4261cad36da3db10a10d62fffca3458b17031a529d4c8fa1068c4cea95c76",
+      "comparison_sha256": "68772b1e7dd05673c7bc5390c8e1c26b24881d449bda051e8688eac71a3cb38d",
+      "config_sha256": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+      "configuration": {
+        "architecture": "176->32 k3 d1 ReLU ->32 k3 d2 ReLU ->32 k3 d4 ReLU ->7 linear",
+        "augmentation": "Independent perchunk/perchannel Bernoulli keep probability0.9, constant across time including burn-in; replace standardized missing channel with0, no inverted scaling; seeded Torch RNG during training only",
+        "baseline_run": "tcn-dev-v1",
+        "batch_chunks": 16,
+        "burn_in_bins": 14,
+        "channel_dropout": 0.1,
+        "checkpoint": "last epoch, fixed in advance; no evaluation-based early stopping",
+        "chunk_scored_bins": 256,
+        "decision": {
+          "all_days_required": [
+            "S2",
+            "S3",
+            "S4"
+          ],
+          "all_seeds_required": [
+            0,
+            1,
+            2
+          ],
+          "fallback": "retain original fixed TCN; no further augmentation search",
+          "maximum_seed_average_day_harm": 0.01,
+          "minimum_seed_average_mean_r2_gain": 0.005,
+          "no_best_seed_selection": true
+        },
+        "epochs": 20,
+        "hypothesis": "Exposure to missing standardized channels may reduce reliance on individual observation channels and improve forward-day performance; unstable channels are a hypothesis, not a demonstrated cause",
+        "hypothesis_number": 2,
+        "input": "raw counts with training-only channel mean/std",
+        "learning_rate": 0.001,
+        "loss": "mean squared standardized target error on supplied training masks after burnin",
+        "optimizer": "Adam",
+        "pilot": "prior fixed-TCN pilot already established local training cost; no new pilot",
+        "regime": "frozen_zero_new_day_calibration",
+        "schema_version": 1,
+        "seeds": [
+          0,
+          1,
+          2
+        ],
+        "target": "training-only masked target mean/std; invert before scoring",
+        "threads": 1,
+        "weight_decay": 0.0
+      },
+      "environment": {
+        "dependencies": {
+          "h5py": "3.16.0",
+          "numpy": "2.5.2",
+          "onnx": null,
+          "onnxruntime": null,
+          "psutil": "7.2.2",
+          "pynwb": "3.1.3",
+          "scikit-learn": "1.9.1",
+          "scipy": "1.18.1",
+          "threadpoolctl": "3.7.0",
+          "torch": "2.14.1"
+        },
+        "machine": "arm64",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "python": "3.12.13",
+        "started_utc": "2026-10-22T16:23:22.903366+00:00",
+        "thread_environment": {
+          "MKL_NUM_THREADS": null,
+          "OMP_NUM_THREADS": null,
+          "OPENBLAS_NUM_THREADS": null,
+          "VECLIB_MAXIMUM_THREADS": null
+        }
+      },
+      "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "pilot": false,
+      "retained_manifest_sha256": "f40d6ab1af75ac84c9397c7813c6e735b8ecf3ad9ee69a0bf1048ab88c567e29",
+      "source": {
+        "diff_sha256": "e2bfb1137f079ee64911e298e555ee3a7b60039609fa75d11b1d2eff6349b121",
+        "files": {
+          "neural_experiments/ADAPTATION.md": "77529453616bf79d5bec12c21c53d624c9a8f9e7d2c985cee486e8a04b043534",
+          "neural_experiments/ASSESSMENT_DATA.md": "698e8517ce9806f06714e57c4fc4c3c07855bba517b329442fedc618aee51780",
+          "neural_experiments/AUGMENTATION.md": "a893a324cba3f0cdadb0261bfab2db35a34e456c407e30e4288b423d1f93a31e",
+          "neural_experiments/BASELINE_REVIEW.md": "a20ba8535a210afd4c074eab68aefa32c08572310524e91320974787e360908c",
+          "neural_experiments/NOTEBOOK.md": "a3f54f74e1faa90dfa39ccef4cecba5b6308afe35dc618029e047390b4e88c9d",
+          "neural_experiments/PROTOCOL.md": "9af9c2c1fde3887ea17b42bec806820c82d5545a0a8bbe30ab43e81a1e223840",
+          "neural_experiments/README.md": "f76ce756ee065ad4acb4342983aa623bd3c61966041d08add76a6f1fbb5725fc",
+          "neural_experiments/REPORT.md": "0fc0d3187fd2741430e1fa6614c353ac14fea4c2b7a0c307d18a2dc39e28b19b",
+          "neural_experiments/RUNTIME_PROTOCOL.md": "d23c58a9298b44db50541520ed44f77e28a565077673bca5e9f5cc1026afb132",
+          "neural_experiments/SCORING.md": "a0a0dc5a5d1b4ade31ba9120d468a63cc9d7a0227452b9450cb916628a1c4f97",
+          "neural_experiments/TCN.md": "d7b7e55b688f3a3ec02b3e0e7cf15ee04370ce13cc04d33886c4c98d8b7cd99d",
+          "neural_experiments/TCN_REVIEW.md": "0174c6b91ef52b300389d79c8748cb349de826304e0dae30927a9d3d8d5e6a5d",
+          "neural_experiments/audit.py": "bfe4bb1df41e2f11341a46d4392cac2e4e6930e27b867ea56007bc36b24a7802",
+          "neural_experiments/audit_temporal.py": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+          "neural_experiments/compression.py": "946006287628a5fc49cd9f1cd11ec1e0713155308b038e15c3381dc7cb347edc",
+          "neural_experiments/configs/adaptation-v1.json": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+          "neural_experiments/configs/ridge-v1.json": "ed0ec771fee147ebc151dc3dcbf5fccb2d95679d8643253987f9062a888c9fc9",
+          "neural_experiments/configs/runtime-v1.json": "77b3edd7cf82389bd986d630b999ca60314ebb61a7484fe0cc55750ab3aad8f5",
+          "neural_experiments/configs/tcn-dropout-v1.json": "6caf7e5ed464875df3347b6c5d606957d12e66c5056473be0fc96a25c4e98734",
+          "neural_experiments/configs/tcn-v1.json": "88c918e528dd4fc8b907ff213a93fe65bc2fdf3a4c49ec1cf2acc43478ca70b2",
+          "pyproject.toml": "8bd7f7adbd5c126b985b04da93ab4d04980c92971cde0e2a7b4611a770cb9039",
+          "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+          "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+          "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+          "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+          "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+          "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+          "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+          "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+          "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+          "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+          "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+          "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+          "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+          "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+          "src/neural_decoder/runtime.py": "954154d34e5562c81e532f5a4855d58f17a63dd41588ecfb06fbf0ab9e09e705",
+          "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+          "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+          "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+          "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+          "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+          "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9"
+        },
+        "head": "e0415359e08dca70e959059202fc8d46293eea00"
+      },
+      "status": "complete",
+      "summary_sha256": "7f1700fd2b7ca510b84b97f619553c9e53a0a0911460bb0d50cfd74ce2613ba8"
+    }
+  },
+  "scope": "Aggregate evidence and reproducibility identities; sample arrays, trained artifacts and raw timing traces retained locally."
+}

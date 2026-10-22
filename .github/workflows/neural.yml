@@ -30,7 +30,7 @@ jobs:
           --index-url https://download.pytorch.org/whl/cpu
       - name: Install Python package and neural dependencies
         run: >-
-          python -m pip install --only-binary=:all: -e '.[dev,neural]'
+          python -m pip install --only-binary=:all: -e '.[dev,neural,runtime]'
       - name: Check neural code
         run: |
           ruff check src/neural_decoder tests/neural_decoder neural_experiments

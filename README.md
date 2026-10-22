@@ -1,74 +1,70 @@
-# Computational Experiments
+# Low-Latency Neural Decoding
 
-[![Python tests](https://github.com/logannye/computational-experiments/actions/workflows/test.yml/badge.svg)](https://github.com/logannye/computational-experiments/actions/workflows/test.yml)
-[![Neural decoding](https://github.com/logannye/computational-experiments/actions/workflows/neural.yml/badge.svg)](https://github.com/logannye/computational-experiments/actions/workflows/neural.yml)
+[![Neural decoding](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/neural.yml/badge.svg)](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/neural.yml)
+[![Python tests](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/test.yml/badge.svg)](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/test.yml)
 
-Research and engineering experiments in learning, temporal signals, and efficient
-computation. Each study starts with a concrete question, builds an inspectable
-implementation, and measures it against explicit baselines. Code correctness,
-model quality, and runtime performance have separate evidence.
+Compact causal movement decoders, tested under recording drift and runtime
+constraints. The project connects model quality, controlled adaptation experiments,
+and efficient streaming execution through explicit data boundaries and independent
+audits.
 
-## Experiments
+**Held-out H1 result:** the selected 23,367-parameter TCN averaged **0.178 R²** on
+seven later recording days, versus **0.034** for causal ridge, with no new-day
+labels. All three seeds beat ridge on every later day. **Systems result:**
+incremental NumPy achieved **0.034 ms median fast-replay p99**, about **3.13× lower**
+than PyTorch. Its paced p99 was **0.428–0.538 ms**, with no observed deadline miss
+in two 60-second blocks on an M4 Max.
 
-| Study | Question | Current evidence |
-|---|---|---|
-| [Neural decoding across recording days](neural_experiments/README.md) | Can a compact causal decoder estimate movement on a new recording day without labeled recalibration? | H1 development study: TCN mean R² **0.161**, selected ridge **0.053**, three forward-day folds and three TCN seeds. One day remains unstable. Final days are sealed. |
-| [CNN: Python vs. ARM64 assembly](CNN_EXPERIMENT.md) | What changes when the same small CNN is trained and executed through different implementations? | Historical matched 12-run study: assembly training **1.69× faster**; both implementations observed about **51.99%** mean CIFAR-10 test accuracy on one M4 Max. |
+![Held-out neural decoding results](neural_experiments/figures/held-out-quality.png)
 
-These results belong to different tasks, source states, and measurement protocols.
-The CNN speedup is not a neural-decoder speedup. H1 scores are local development
-results on public calibration recordings, not official FALCON scores or untouched
-final evaluations. Neither study establishes clinical performance or a general
-advantage of one implementation strategy.
+These are local evaluations on public FALCON calibration recordings from **one
+participant**, not official FALCON leaderboard scores. Timing uses separately
+pinned development weights; final quality uses frozen refits. Recorded replay
+measures processing from counts being available, not acquisition latency or live
+neural control. ONNX recorded one deadline miss; all implementations and repeats
+are reported.
 
-## Neural decoding
+## What is here
 
-The new track uses FALCON H1: 176 neural channels, 20 ms bins, and seven movement
-outputs from one participant. A causal FIR/ridge baseline and a 23,367-parameter
-TCN use current and past observations. Feature-only streaming, file resets,
-source/data manifests, causal intervention tests, and independent numerical audits
-make the pipeline inspectable.
+- Causal FIR/ridge and a small TCN, with three-seed forward-day development and frozen S5/S6–S12 assessments.
+- Two bounded research experiments: mean correction did not support its proposed protective bound; fixed training channel dropout passed its keep rule.
+- Same-weight PyTorch, incremental NumPy, and ONNX inference; full-step fast/paced measurements, kernel diagnostics, and portable stream checkpoints.
+- A separate 0/5/15/30-second supervised calibration curve, explicit int8 quality/runtime tradeoff, and a small second-task transfer check.
+- Hash-checked source/data/model identities, independent arithmetic/scoring/timing audits, synthetic tests, and a private recorded-replay demo generator.
 
-The TCN improves the development average, while S2 remains a failure case. The
-[next hypothesis](neural_experiments/NOTEBOOK.md) examines whether a bounded
-normalization correction can reduce prediction bias without removing useful
-movement information. Adaptation, sustained latency/deadline measurements, and
-sealed-day evaluation are future gates. The incremental implementation currently
-has numerical parity evidence, not a measured speedup claim.
+Read the **[final report](neural_experiments/FINAL_REPORT.md)** for every final
+day/seed, weak outputs, negative results and limitations. The
+[protocol](neural_experiments/PROTOCOL.md),
+[decision notebook](neural_experiments/NOTEBOOK.md),
+[aggregate evidence](neural_experiments/results), and
+[one-page narrative](neural_experiments/INTERVIEW_NARRATIVE.md) explain how the
+claims were obtained.
 
-- [Development report and every seed/day result](neural_experiments/REPORT.md)
-- [Protocol and information boundaries](neural_experiments/PROTOCOL.md)
-- [Dataset identities, schema, and use terms](neural_experiments/data/README.md)
-- [Independent ridge review](neural_experiments/BASELINE_REVIEW.md) and [TCN review](neural_experiments/TCN_REVIEW.md)
-- [Setup and reproduction commands](neural_experiments/README.md)
+## Quick start
 
-## CNN and assembly
-
-The original image experiment retains its source, native implementation, commands,
-checkpoints, and evidence. Its complete former README is preserved as
-[CNN_EXPERIMENT.md](CNN_EXPERIMENT.md), including architecture, installation,
-training, evaluation, and reproduction instructions. The
-[matched protocol](comparison/PROTOCOL.md) and
-[full results](experiments/baselines/cifar10-matched-cpu-25-v1/README.md) remain at
-their original paths.
-
-## Working locally
-
-Use Python 3.12 and prebuilt scientific dependencies. For the neural track:
+Use Python 3.12 and prebuilt scientific libraries:
 
 ```sh
-python -m pip install --only-binary=:all: -e '.[dev,neural]'
+python -m pip install --only-binary=:all: -e '.[dev,neural,runtime]'
 export PYTHONPATH="$PWD/src"
 python -m pytest -q tests/neural_decoder
 neural-decode --help
+python neural_experiments/replay_demo.py --smoke --output work/replay-smoke.html
 ```
 
-Synthetic tests need no neural-data download. Acquire H1 only through the explicit
-[reproduction steps](neural_experiments/README.md) after reading its data-use terms.
-Raw recordings, prepared sample arrays, model artifacts, and prediction traces
-remain in ignored local caches. The repository contains source, protocols,
-metadata manifests, aggregate results, and independent audit code.
+Synthetic tests and the smoke replay require no neural-data download. Follow the
+[reproduction guide](neural_experiments/README.md) after reading the
+[provider's data-use terms](neural_experiments/data/README.md). Public artifacts
+contain code, protocols, metadata and aggregate results. Raw recordings, prepared
+arrays, trained artifacts and sample-level predictions stay in ignored local
+caches. No native extension or Rust build is required. The int8 experiment reduced graph
+size by 61.47% and fast p99 about 2.15×, but paced rankings varied. The sparse M2
+check failed on accuracy; its complete negative result is retained in the report.
 
-The Python distribution keeps its existing `cnn-python-vs-assembly` name to
-preserve installed command compatibility; the repository is now
-`logannye/computational-experiments`.
+## Earlier work
+
+The original image-classification experiment is preserved in
+[CNN_EXPERIMENT.md](CNN_EXPERIMENT.md), with its source, `cnn-*` commands, and
+[matched Python/ARM64 results](experiments/baselines/cifar10-matched-cpu-25-v1/README.md).
+Those measurements belong to the CNN experiment. The repository and Python
+package now use `low-latency-neural-decoding` as their primary identity.

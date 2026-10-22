@@ -1,5 +1,7 @@
 # FALCON H1 data identity and schema audit
 
+**Current state, October 22, 2026:** The frozen S5 and S6–S12 assessments and independent audits are complete. This document preserves the initial ingestion audit; its sealed/not-yet-inspected statements below describe that earlier boundary. Final exports used the separate hash-gated release. See the [final report](../FINAL_REPORT.md), [aggregate results](../results/), and [completed reproduction guide](../README.md).
+
 This directory contains metadata and hashes for the local H1 study. Neural recordings,
 behavior arrays, prepared examples and prediction traces stay in the ignored cache.
 The dataset is one participant, so none of this evidence establishes cross-participant

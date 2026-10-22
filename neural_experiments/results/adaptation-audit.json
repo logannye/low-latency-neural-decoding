@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "traces_checked": 90,
+  "day_scores_checked": 45,
+  "max_absolute_prediction_difference": 3.8163916471489756e-17,
+  "summary_sha256": "062638a27f9be2dbb330d1a0932f5d0b673ae8bc8f5f3b000ea292253f5c6efe",
+  "audit_source_sha256": "9f47a5c39ba1da841c86cd947b6159450eed769e4f64804c0806a96fd1ebc411",
+  "sealed_arrays_opened": false,
+  "reference": "scipy lfilter delayed EMA and batch affine predictions; sklearn float64 scoring"
+}

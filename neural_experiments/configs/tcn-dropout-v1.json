@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "regime": "frozen_zero_new_day_calibration",
+  "input": "raw counts with training-only channel mean/std",
+  "target": "training-only masked target mean/std; invert before scoring",
+  "architecture": "176->32 k3 d1 ReLU ->32 k3 d2 ReLU ->32 k3 d4 ReLU ->7 linear",
+  "seeds": [0, 1, 2],
+  "epochs": 20,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0,
+  "optimizer": "Adam",
+  "chunk_scored_bins": 256,
+  "burn_in_bins": 14,
+  "batch_chunks": 16,
+  "threads": 1,
+  "loss": "mean squared standardized target error on supplied training masks after burnin",
+  "checkpoint": "last epoch, fixed in advance; no evaluation-based early stopping",
+  "pilot": "prior fixed-TCN pilot already established local training cost; no new pilot",
+  "channel_dropout": 0.1,
+  "augmentation": "Independent perchunk/perchannel Bernoulli keep probability0.9, constant across time including burn-in; replace standardized missing channel with0, no inverted scaling; seeded Torch RNG during training only",
+  "hypothesis_number": 2,
+  "hypothesis": "Exposure to missing standardized channels may reduce reliance on individual observation channels and improve forward-day performance; unstable channels are a hypothesis, not a demonstrated cause",
+  "baseline_run": "tcn-dev-v1",
+  "decision": {
+    "minimum_seed_average_mean_r2_gain": 0.005,
+    "maximum_seed_average_day_harm": 0.01,
+    "all_seeds_required": [0, 1, 2],
+    "all_days_required": ["S2", "S3", "S4"],
+    "no_best_seed_selection": true,
+    "fallback": "retain original fixed TCN; no further augmentation search"
+  }
+}

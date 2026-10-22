@@ -1,0 +1,235 @@
+{
+  "status": "passed",
+  "audited_utc": "2026-10-22T16:25:03.847901+00:00",
+  "run_manifest_sha256": "f40d6ab1af75ac84c9397c7813c6e735b8ecf3ad9ee69a0bf1048ab88c567e29",
+  "summary_sha256": "7f1700fd2b7ca510b84b97f619553c9e53a0a0911460bb0d50cfd74ce2613ba8",
+  "audit_source_sha256": "64d984320ab5ecf523673614ff8340a6d352349d9888162a2b6f8c29c4c8112c",
+  "source_snapshot_files_checked": 42,
+  "prepared_development_files_checked": 11,
+  "models_checked": 9,
+  "prediction_traces_checked": 18,
+  "max_absolute_prediction_difference": 3.3527612686157227e-08,
+  "reference": "independent functional whole-file Torch convolutions from numeric NPZ",
+  "torch_version": "2.14.1",
+  "sklearn_version": "1.9.1",
+  "scoring_dtype": "float64, retaining original float32 predictions",
+  "seeds": [
+    {
+      "seed": 0,
+      "day_r2_mean": 0.18790288156780896,
+      "day_r2_population_std": 0.17771301080040014,
+      "days": [
+        {
+          "day": "S2",
+          "r2": -0.06340683273948491,
+          "r2_per_output": [
+            -0.14953364927660417,
+            -0.5361183400337224,
+            0.03554638939479493,
+            -0.029700935284211916,
+            0.11281172981956022,
+            0.05536133887764472,
+            -0.39328215449284154
+          ],
+          "full_file_torch_r2": -0.06340695417449319,
+          "r2_trace_difference": 1.214350082712201e-07,
+          "scored_bins": 22790,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S2_set_1": 1.5832483768463135e-08,
+            "S2_set_2": 1.7695128917694092e-08
+          }
+        },
+        {
+          "day": "S3",
+          "r2": 0.3112249436802121,
+          "r2_per_output": [
+            0.16443634255825168,
+            0.1627565387608788,
+            0.1513492044612056,
+            -0.1537745880856336,
+            0.37771277305748774,
+            0.36458570785567845,
+            0.3693168330241443
+          ],
+          "full_file_torch_r2": 0.3112249446487366,
+          "r2_trace_difference": -9.685245383472818e-10,
+          "scored_bins": 21746,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S3_set_1": 1.6763806343078613e-08,
+            "S3_set_2": 2.60770320892334e-08
+          }
+        },
+        {
+          "day": "S4",
+          "r2": 0.3158905337626997,
+          "r2_per_output": [
+            0.12076275674758463,
+            0.12355863920380972,
+            0.049029796913433454,
+            0.34729010706243446,
+            0.3939406381790489,
+            0.2794264458580836,
+            0.2833492361638056
+          ],
+          "full_file_torch_r2": 0.3158905358015756,
+          "r2_trace_difference": -2.03887590144447e-09,
+          "scored_bins": 23368,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S4_set_1": 3.3527612686157227e-08,
+            "S4_set_2": 2.2584572434425354e-08
+          }
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "day_r2_mean": 0.1394665652815076,
+      "day_r2_population_std": 0.1670105890935607,
+      "days": [
+        {
+          "day": "S2",
+          "r2": -0.09545863560694913,
+          "r2_per_output": [
+            -0.0469324326629168,
+            -0.5005919630596734,
+            -0.2626936562815765,
+            -0.2749948460273677,
+            0.11281906334002634,
+            0.15076259688286842,
+            -0.5149033118048556
+          ],
+          "full_file_torch_r2": -0.09545855906915808,
+          "r2_trace_difference": -7.653779104943581e-08,
+          "scored_bins": 22790,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S2_set_1": 2.0489096641540527e-08,
+            "S2_set_2": 2.0489096641540527e-08
+          }
+        },
+        {
+          "day": "S3",
+          "r2": 0.23580056438286556,
+          "r2_per_output": [
+            0.1634230086015115,
+            0.1641877487812331,
+            0.07402910459674894,
+            -0.32272570597407,
+            0.3071233544173311,
+            0.24317774315275065,
+            0.37255649659781664
+          ],
+          "full_file_torch_r2": 0.23580054503048192,
+          "r2_trace_difference": 1.9352383640036663e-08,
+          "scored_bins": 21746,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S3_set_1": 1.862645149230957e-08,
+            "S3_set_2": 1.862645149230957e-08
+          }
+        },
+        {
+          "day": "S4",
+          "r2": 0.2780577670686064,
+          "r2_per_output": [
+            0.1212535258434887,
+            0.18130134589960956,
+            0.10257809495454384,
+            0.25505455543354594,
+            0.35697705711477146,
+            0.25071397573538245,
+            0.2500006836731625
+          ],
+          "full_file_torch_r2": 0.278057714050127,
+          "r2_trace_difference": 5.3018479384547845e-08,
+          "scored_bins": 23368,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S4_set_1": 1.862645149230957e-08,
+            "S4_set_2": 2.2351741790771484e-08
+          }
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "day_r2_mean": 0.18908855572819505,
+      "day_r2_population_std": 0.1278760035783486,
+      "days": [
+        {
+          "day": "S2",
+          "r2": 0.013870172946415422,
+          "r2_per_output": [
+            -0.0847026985750361,
+            -0.49482711457301365,
+            -0.09951639540706392,
+            -0.13457483915644808,
+            0.049879033225480596,
+            0.16335029166431836,
+            -0.11863390084071224
+          ],
+          "full_file_torch_r2": 0.013870141475152213,
+          "r2_trace_difference": 3.147126320830751e-08,
+          "scored_bins": 22790,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S2_set_1": 1.862645149230957e-08,
+            "S2_set_2": 1.5832483768463135e-08
+          }
+        },
+        {
+          "day": "S3",
+          "r2": 0.2379382684298913,
+          "r2_per_output": [
+            0.1901899772308222,
+            0.17112782007523164,
+            0.1008932883785777,
+            -0.30919663105255335,
+            0.3484427357597767,
+            0.31216791782326536,
+            0.2495921680957256
+          ],
+          "full_file_torch_r2": 0.23793824409529424,
+          "r2_trace_difference": 2.4334597059638696e-08,
+          "scored_bins": 21746,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S3_set_1": 1.862645149230957e-08,
+            "S3_set_2": 2.421438694000244e-08
+          }
+        },
+        {
+          "day": "S4",
+          "r2": 0.31545722580827845,
+          "r2_per_output": [
+            0.11205447522068757,
+            0.17907359097991482,
+            0.13657683223771722,
+            0.29635329431305646,
+            0.3818137683967038,
+            0.2683888159907407,
+            0.3245690431788856
+          ],
+          "full_file_torch_r2": 0.31545723597596403,
+          "r2_trace_difference": -1.016768558237402e-08,
+          "scored_bins": 23368,
+          "parameter_count": 23367,
+          "trace_max_absolute_difference": {
+            "S4_set_1": 1.5366822481155396e-08,
+            "S4_set_2": 1.862645149230957e-08
+          }
+        }
+      ]
+    }
+  ],
+  "sealed_arrays_opened": false,
+  "limitations": [
+    "Verifies inference arithmetic and recorded scores; does not rerun model training.",
+    "Normalization independently reproduced from authorized training files only.",
+    "Development days informed this study; no untouched final assessment is implied.",
+    "No kernel speedup, step latency, tail latency, memory, or G4 claim is validated."
+  ]
+}

@@ -1,0 +1,741 @@
+{
+  "runs": [
+    {
+      "mode": "fast",
+      "repeat": 0,
+      "precision": "float32",
+      "summary": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.0405,
+          "p95_ms": 0.0495,
+          "p99_ms": 0.054709,
+          "max_ms": 0.26525
+        },
+        "prediction_service": {
+          "p50_ms": 0.0405,
+          "p95_ms": 0.0495,
+          "p99_ms": 0.054709,
+          "max_ms": 0.26525
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.0405,
+          "p95_ms": 0.0495,
+          "p99_ms": 0.054709,
+          "max_ms": 0.26525
+        },
+        "release_to_completion": {
+          "p50_ms": 0.0405,
+          "p95_ms": 0.0495,
+          "p99_ms": 0.054709,
+          "max_ms": 0.26525
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 9.196499208
+      },
+      "wall_seconds": 9.752469667233527,
+      "constructor_ns": 2890833,
+      "cold_reset_ns": 7250,
+      "file_reset_ns": [
+        6375,
+        8666,
+        4875,
+        9500,
+        8250,
+        7625,
+        6834,
+        5583,
+        4291,
+        7292,
+        12291
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 10819,
+          "trace_sha256": "271171e1557900214dae21b7202a3ae44553c9aadfb7d1f942c42f4d66ce1f97"
+        },
+        {
+          "file_id": "S0_set_2",
+          "bins": 6456,
+          "trace_sha256": "3657db8ca5fc090e5898b4a3d72820f03f2b77ee7c8c42553869309e5cf8f665"
+        },
+        {
+          "file_id": "S1_set_1",
+          "bins": 12233,
+          "trace_sha256": "c0220bb1796c4318db94c646e63a1487c507fb78a1966b9b465206070fcad1b9"
+        },
+        {
+          "file_id": "S1_set_2",
+          "bins": 6786,
+          "trace_sha256": "4a96867e98d4b91b74ec90e85d289fa5015c7307a783231a084a89f0b35e0807"
+        },
+        {
+          "file_id": "S1_set_3",
+          "bins": 6505,
+          "trace_sha256": "2d007023b7e98ee7c4785d5bdb948154ba0244627488d91de6f69dbfa7f100ec"
+        },
+        {
+          "file_id": "S2_set_1",
+          "bins": 11646,
+          "trace_sha256": "707cb20c26fa24c25e91176a6b07ad8c51954d2c0a3fa0934d3c274f3ec4b0e1"
+        },
+        {
+          "file_id": "S2_set_2",
+          "bins": 11732,
+          "trace_sha256": "e8e592b1063f753b073c91a7c8dd3ca89e90c78f698c4a07ed8d295a54340f5e"
+        },
+        {
+          "file_id": "S3_set_1",
+          "bins": 10071,
+          "trace_sha256": "f3c0473da7cf8f8524a018601bd85cccfe2c01b1e9967c13c7893e8b4eea0a03"
+        },
+        {
+          "file_id": "S3_set_2",
+          "bins": 12267,
+          "trace_sha256": "fccaed6d02d0fcdc28ba5dcf2d59283045d8901867b9df87acca10b51e0687f9"
+        },
+        {
+          "file_id": "S4_set_1",
+          "bins": 11951,
+          "trace_sha256": "8b2ba86ec185c504b9055b5ac60bdf74ee6ce6bd43ad8008103f30be4dbbbdd0"
+        },
+        {
+          "file_id": "S4_set_2",
+          "bins": 12022,
+          "trace_sha256": "f7d91c15cf1a284f0822a88176de3d02f627c9fff8d2f478db068c7c7b89c66f"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 102884,
+      "process_rss_before_bytes": 421183488,
+      "process_rss_after_bytes": 438059008,
+      "cpu_seconds_including_validation_and_harness": 9.74811,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 99.95529678755963
+    },
+    {
+      "mode": "fast",
+      "repeat": 0,
+      "precision": "dynamic_int8",
+      "summary": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.019125,
+          "p95_ms": 0.023875,
+          "p99_ms": 0.025292,
+          "max_ms": 0.074375
+        },
+        "prediction_service": {
+          "p50_ms": 0.019125,
+          "p95_ms": 0.023875,
+          "p99_ms": 0.025292,
+          "max_ms": 0.074375
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.019125,
+          "p95_ms": 0.023875,
+          "p99_ms": 0.025292,
+          "max_ms": 0.074375
+        },
+        "release_to_completion": {
+          "p50_ms": 0.019125,
+          "p95_ms": 0.023875,
+          "p99_ms": 0.025292,
+          "max_ms": 0.074375
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 4.343772334
+      },
+      "wall_seconds": 4.606010999996215,
+      "constructor_ns": 2232667,
+      "cold_reset_ns": 1792,
+      "file_reset_ns": [
+        3291,
+        5125,
+        4833,
+        9000,
+        5375,
+        5250,
+        5834,
+        5458,
+        6416,
+        6333,
+        6334
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 10819,
+          "trace_sha256": "b0dc3779ffd6a3c2da9cbf4d5f2a69e50f33c2628ec92d9964903cdbb9d664e4"
+        },
+        {
+          "file_id": "S0_set_2",
+          "bins": 6456,
+          "trace_sha256": "c23eca714ef2896779fd57e78e06621c6c3a58ea996681ebdd49ab7eca6b434c"
+        },
+        {
+          "file_id": "S1_set_1",
+          "bins": 12233,
+          "trace_sha256": "dea82d96a1128e4abd41d2ec39ba1ad189d720de3fc325c67c4db12b662989fc"
+        },
+        {
+          "file_id": "S1_set_2",
+          "bins": 6786,
+          "trace_sha256": "78a1f50d5f7e41677d31850c89b2a1a54365858ba70f7212db9522acb0408a85"
+        },
+        {
+          "file_id": "S1_set_3",
+          "bins": 6505,
+          "trace_sha256": "2b756eeddfbbb261719e222d7943a9251b03919ab017d8c490b855ff90473ca5"
+        },
+        {
+          "file_id": "S2_set_1",
+          "bins": 11646,
+          "trace_sha256": "218c04a401d574ae9a289445bfb9847a3990090ede411984f822cee535875360"
+        },
+        {
+          "file_id": "S2_set_2",
+          "bins": 11732,
+          "trace_sha256": "bbac6ea49ddd4a84bb7b6c3aed6f2b9af7c1997378b5bbc48f58477c2e78d9d4"
+        },
+        {
+          "file_id": "S3_set_1",
+          "bins": 10071,
+          "trace_sha256": "c4a2f621f3805e6180b6bbbd004bdde686d306b7118c81bdc1d6a854d1b48be0"
+        },
+        {
+          "file_id": "S3_set_2",
+          "bins": 12267,
+          "trace_sha256": "54ad9ca243d14f4759424f8db1d7fb9e75a96b2d26ccca8714b9527564b85593"
+        },
+        {
+          "file_id": "S4_set_1",
+          "bins": 11951,
+          "trace_sha256": "685d67d39dff03e7ef1bbcdcdd88620086072ad582ca505d40917135dc9b38bb"
+        },
+        {
+          "file_id": "S4_set_2",
+          "bins": 12022,
+          "trace_sha256": "130a3ce3a282187c25ab4216ede105f8aa95a48fd28ead3f7fc8c4380cd5faaf"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 39641,
+      "process_rss_before_bytes": 438648832,
+      "process_rss_after_bytes": 443629568,
+      "cpu_seconds_including_validation_and_harness": 4.605294,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 99.98443338506539
+    },
+    {
+      "mode": "fast",
+      "repeat": 1,
+      "precision": "dynamic_int8",
+      "summary": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.019208,
+          "p95_ms": 0.023958,
+          "p99_ms": 0.025333,
+          "max_ms": 0.165417
+        },
+        "prediction_service": {
+          "p50_ms": 0.019208,
+          "p95_ms": 0.023958,
+          "p99_ms": 0.025333,
+          "max_ms": 0.165417
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.019208,
+          "p95_ms": 0.023958,
+          "p99_ms": 0.025333,
+          "max_ms": 0.165417
+        },
+        "release_to_completion": {
+          "p50_ms": 0.019208,
+          "p95_ms": 0.023958,
+          "p99_ms": 0.025333,
+          "max_ms": 0.165417
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 4.396029709
+      },
+      "wall_seconds": 4.661104083992541,
+      "constructor_ns": 2335125,
+      "cold_reset_ns": 2000,
+      "file_reset_ns": [
+        3708,
+        5625,
+        6000,
+        6542,
+        5625,
+        6041,
+        7083,
+        5917,
+        6041,
+        7542,
+        5625
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 10819,
+          "trace_sha256": "aa98a77d16a0ad88887ee172377bcd8ced0bf4d8a325012aec03c1323fe65e5a"
+        },
+        {
+          "file_id": "S0_set_2",
+          "bins": 6456,
+          "trace_sha256": "9f695d02ecac852e42c68e040f0621365ad9abb2a734a37f6ca1b66d2d4da5e9"
+        },
+        {
+          "file_id": "S1_set_1",
+          "bins": 12233,
+          "trace_sha256": "89f7e45a24e5c51a35504e3d33e83f5b4f0dc96d72c4a4dbd1766cb3d72b310d"
+        },
+        {
+          "file_id": "S1_set_2",
+          "bins": 6786,
+          "trace_sha256": "5a073418bd29760e89343488652715d795fa19d05f0736877c480ea6c5c6b49e"
+        },
+        {
+          "file_id": "S1_set_3",
+          "bins": 6505,
+          "trace_sha256": "7e1429930cb87e98a8759e90a37c0dd205e95ec214dd93642d6dad2193464ae6"
+        },
+        {
+          "file_id": "S2_set_1",
+          "bins": 11646,
+          "trace_sha256": "92de59ad118072a4d073875145f828030e044ef479b77d48904d5f8222f02cf4"
+        },
+        {
+          "file_id": "S2_set_2",
+          "bins": 11732,
+          "trace_sha256": "c26a4e975c407dcc3755048fae4129384c38e155473b34be401dcb6f92dc730c"
+        },
+        {
+          "file_id": "S3_set_1",
+          "bins": 10071,
+          "trace_sha256": "23bde89e643e0296c6995d0750f15a0ce8b2e82516ebc640625a8909000e4a4e"
+        },
+        {
+          "file_id": "S3_set_2",
+          "bins": 12267,
+          "trace_sha256": "3ee2439f6340ef6d3791c582b9c5a4cdf108ad9aff1834bb69d167dec1485289"
+        },
+        {
+          "file_id": "S4_set_1",
+          "bins": 11951,
+          "trace_sha256": "726df59865546d425592c8253de5203ad70a9211ef85f0264432a745a7dca348"
+        },
+        {
+          "file_id": "S4_set_2",
+          "bins": 12022,
+          "trace_sha256": "ac829765d6de73c6d4c9a18dfafeb9511b59190792c0831a9a1d39a15f5de9e8"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 39641,
+      "process_rss_before_bytes": 443711488,
+      "process_rss_after_bytes": 446021632,
+      "cpu_seconds_including_validation_and_harness": 4.660182,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 99.9802174768912
+    },
+    {
+      "mode": "fast",
+      "repeat": 1,
+      "precision": "float32",
+      "summary": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.042375,
+          "p95_ms": 0.049,
+          "p99_ms": 0.05433933000000019,
+          "max_ms": 0.563875
+        },
+        "prediction_service": {
+          "p50_ms": 0.042375,
+          "p95_ms": 0.049,
+          "p99_ms": 0.05433933000000019,
+          "max_ms": 0.563875
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.042375,
+          "p95_ms": 0.049,
+          "p99_ms": 0.05433933000000019,
+          "max_ms": 0.563875
+        },
+        "release_to_completion": {
+          "p50_ms": 0.042375,
+          "p95_ms": 0.049,
+          "p99_ms": 0.05433933000000019,
+          "max_ms": 0.563875
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 9.279381917
+      },
+      "wall_seconds": 9.826102000195533,
+      "constructor_ns": 1749583,
+      "cold_reset_ns": 1959,
+      "file_reset_ns": [
+        3209,
+        5458,
+        5667,
+        5542,
+        5834,
+        5000,
+        6792,
+        5542,
+        5209,
+        5833,
+        5958
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 10819,
+          "trace_sha256": "ade9b72485f2ba02608537b9ea9f2177e5d188d7bc6af8cc85c38929bd4a744e"
+        },
+        {
+          "file_id": "S0_set_2",
+          "bins": 6456,
+          "trace_sha256": "f43d1a1f32afd8e5309bbf1dfdf6ce3c2ac68ed68d4d44263312882afa178064"
+        },
+        {
+          "file_id": "S1_set_1",
+          "bins": 12233,
+          "trace_sha256": "b4e337925eb6ceffb7d50aaa34e52ee8224d65564411f700a4ec4ca27975e703"
+        },
+        {
+          "file_id": "S1_set_2",
+          "bins": 6786,
+          "trace_sha256": "4afed36b4420691424909d8bf69c74b22ad293803bfa3c1d60c6da513c4a9a53"
+        },
+        {
+          "file_id": "S1_set_3",
+          "bins": 6505,
+          "trace_sha256": "17ed967f8f03e16c6efbf0fcf36b6de272c871b000544184a45d6ae3d1585004"
+        },
+        {
+          "file_id": "S2_set_1",
+          "bins": 11646,
+          "trace_sha256": "6aadb9ad40fce0ccf8a3963e73280849040e0f062f20ec55aa52a119ea2b848a"
+        },
+        {
+          "file_id": "S2_set_2",
+          "bins": 11732,
+          "trace_sha256": "e9800142b6d454916ccb48ad82652fdb166c46e9ec80cefef671ba51615edd75"
+        },
+        {
+          "file_id": "S3_set_1",
+          "bins": 10071,
+          "trace_sha256": "909e10c6553b36b03e135e430233fe8df6147627c3644b8c0809d54de42b48a0"
+        },
+        {
+          "file_id": "S3_set_2",
+          "bins": 12267,
+          "trace_sha256": "9f4834c75fe804beb3875a7878f08357fed207577cd46c3c7d69a47d3e41f58d"
+        },
+        {
+          "file_id": "S4_set_1",
+          "bins": 11951,
+          "trace_sha256": "6e11cf1535d054f227ea39dc68f44c04818362d1785b2de1c34618d4a6dcf0ed"
+        },
+        {
+          "file_id": "S4_set_2",
+          "bins": 12022,
+          "trace_sha256": "12f4dfb2a2fa29de7c5fc7287bdd01db6d45ca9f049603c338eedaaa9248fcd4"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 102884,
+      "process_rss_before_bytes": 446021632,
+      "process_rss_after_bytes": 446578688,
+      "cpu_seconds_including_validation_and_harness": 9.824362,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 99.98229206051904
+    },
+    {
+      "mode": "paced",
+      "repeat": 0,
+      "precision": "float32",
+      "summary": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.448458,
+          "p95_ms": 0.720833,
+          "p99_ms": 0.859958,
+          "max_ms": 2.232
+        },
+        "prediction_service": {
+          "p50_ms": 0.448458,
+          "p95_ms": 0.720833,
+          "p99_ms": 0.859958,
+          "max_ms": 2.232
+        },
+        "queue_delay": {
+          "p50_ms": 3.726333,
+          "p95_ms": 4.642083,
+          "p99_ms": 4.875291,
+          "max_ms": 6.344375
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.073291,
+          "p95_ms": 5.095916,
+          "p99_ms": 5.406833,
+          "max_ms": 7.4975
+        },
+        "release_to_completion": {
+          "p50_ms": 4.073291,
+          "p95_ms": 5.095916,
+          "p99_ms": 5.406833,
+          "max_ms": 7.4975
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.000606416
+      },
+      "wall_seconds": 60.147988374810666,
+      "constructor_ns": 1766375,
+      "cold_reset_ns": 2167,
+      "file_reset_ns": [
+        5167
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 3001,
+          "trace_sha256": "4ea9ae042d69de9018a56600981a40158bb345a137affa6d3c6c32730017e53d"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 102884,
+      "process_rss_before_bytes": 446644224,
+      "process_rss_after_bytes": 447102976,
+      "cpu_seconds_including_validation_and_harness": 1.550995,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 2.5786315418148544
+    },
+    {
+      "mode": "paced",
+      "repeat": 0,
+      "precision": "dynamic_int8",
+      "summary": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.324625,
+          "p95_ms": 0.64825,
+          "p99_ms": 0.989292,
+          "max_ms": 4.107667
+        },
+        "prediction_service": {
+          "p50_ms": 0.324625,
+          "p95_ms": 0.64825,
+          "p99_ms": 0.989292,
+          "max_ms": 4.107667
+        },
+        "queue_delay": {
+          "p50_ms": 3.68925,
+          "p95_ms": 4.630667,
+          "p99_ms": 4.871958,
+          "max_ms": 5.011792
+        },
+        "release_to_prediction": {
+          "p50_ms": 3.987208,
+          "p95_ms": 4.998667,
+          "p99_ms": 5.316792,
+          "max_ms": 6.661458
+        },
+        "release_to_completion": {
+          "p50_ms": 3.987208,
+          "p95_ms": 4.998667,
+          "p99_ms": 5.316792,
+          "max_ms": 6.661458
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.002006
+      },
+      "wall_seconds": 60.09327595913783,
+      "constructor_ns": 2099291,
+      "cold_reset_ns": 1833,
+      "file_reset_ns": [
+        2667
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 3001,
+          "trace_sha256": "74518bd427ab57755485b986576d8c7b113153ea01eed3b6de0a1afec7306767"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 39641,
+      "process_rss_before_bytes": 447119360,
+      "process_rss_after_bytes": 447578112,
+      "cpu_seconds_including_validation_and_harness": 1.215319,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 2.0223876641812497
+    },
+    {
+      "mode": "paced",
+      "repeat": 1,
+      "precision": "dynamic_int8",
+      "summary": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.350083,
+          "p95_ms": 0.635792,
+          "p99_ms": 0.899709,
+          "max_ms": 2.216625
+        },
+        "prediction_service": {
+          "p50_ms": 0.350083,
+          "p95_ms": 0.635792,
+          "p99_ms": 0.899709,
+          "max_ms": 2.216625
+        },
+        "queue_delay": {
+          "p50_ms": 3.705875,
+          "p95_ms": 4.606459,
+          "p99_ms": 4.885167,
+          "max_ms": 5.977667
+        },
+        "release_to_prediction": {
+          "p50_ms": 3.988875,
+          "p95_ms": 5.001042,
+          "p99_ms": 5.329625,
+          "max_ms": 7.550584
+        },
+        "release_to_completion": {
+          "p50_ms": 3.988875,
+          "p95_ms": 5.001042,
+          "p99_ms": 5.329625,
+          "max_ms": 7.550584
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.002923542
+      },
+      "wall_seconds": 60.095082541927695,
+      "constructor_ns": 2358500,
+      "cold_reset_ns": 2084,
+      "file_reset_ns": [
+        5500
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 3001,
+          "trace_sha256": "cfa33e9a9f9276a20f9268aa6eb8ee6f40560f4c32bbbdff8fe83cb6866cd863"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 39641,
+      "process_rss_before_bytes": 447578112,
+      "process_rss_after_bytes": 447578112,
+      "cpu_seconds_including_validation_and_harness": 1.229741,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 2.04632550282633
+    },
+    {
+      "mode": "paced",
+      "repeat": 1,
+      "precision": "float32",
+      "summary": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.422791,
+          "p95_ms": 0.79,
+          "p99_ms": 1.098208,
+          "max_ms": 3.721208
+        },
+        "prediction_service": {
+          "p50_ms": 0.422791,
+          "p95_ms": 0.79,
+          "p99_ms": 1.098208,
+          "max_ms": 3.721208
+        },
+        "queue_delay": {
+          "p50_ms": 3.5485,
+          "p95_ms": 4.590875,
+          "p99_ms": 4.8645,
+          "max_ms": 6.946083
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.005708,
+          "p95_ms": 5.077333,
+          "p99_ms": 5.404458,
+          "max_ms": 7.622083
+        },
+        "release_to_completion": {
+          "p50_ms": 4.005708,
+          "p95_ms": 5.077333,
+          "p99_ms": 5.404458,
+          "max_ms": 7.622083
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.003964125
+      },
+      "wall_seconds": 60.16437266673893,
+      "constructor_ns": 1722625,
+      "cold_reset_ns": 1750,
+      "file_reset_ns": [
+        4291
+      ],
+      "files": [
+        {
+          "file_id": "S0_set_1",
+          "bins": 3001,
+          "trace_sha256": "4871e2537e1014b8b0625a9c34f269262126927777f372e8e4fb37d0f73d2108"
+        }
+      ],
+      "state_array_bytes": 2944,
+      "graph_file_bytes": 102884,
+      "process_rss_before_bytes": 447578112,
+      "process_rss_after_bytes": 447578112,
+      "cpu_seconds_including_validation_and_harness": 1.503606,
+      "cpu_scope": "includes second parity replay and file persistence; not decoder-only CPU",
+      "one_core_cpu_percent_including_validation_and_harness": 2.4991634307046446
+    }
+  ],
+  "quality_gate": true
+}

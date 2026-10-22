@@ -1,4 +1,6 @@
 .venv/
+/.venv
+/outputs/
 __pycache__/
 *.py[cod]
 *.egg-info/
@@ -15,3 +17,5 @@ results/
 work/
 !neural_experiments/data/
 !neural_experiments/data/**
+!neural_experiments/results/
+!neural_experiments/results/**

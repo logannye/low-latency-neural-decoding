@@ -1,0 +1,452 @@
+{
+  "stage": "early",
+  "designation": "local public calibration recording assessment",
+  "regime": "frozen_zero_new_day_calibration",
+  "models": [
+    {
+      "model": {
+        "name": "constant",
+        "kind": "linear",
+        "path": "results/neural-h1/final-early-models-v1/constant.npz",
+        "sha256": "98216bf11e9d6f38945c0459d236be02be9676c2b5a7c455b8bb1b92a32f654d",
+        "training_days": [
+          "S0",
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "regime": "frozen_zero_calibration"
+      },
+      "scores": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S5"
+        ],
+        "chronological_day_order": [
+          "S5"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23503,
+        "num_scored_bins": 22873,
+        "num_unscored_bins": 630,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 470.06,
+        "scored_duration_seconds": 457.46000000000004,
+        "r2_mean": -3.840062045506448e-05,
+        "r2_population_std": 0.0,
+        "r2_worst_day": -3.840062045506448e-05,
+        "worst_day": "S5",
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": -3.840062045506448e-05,
+            "r2_per_output": [
+              -0.00013342293157880825,
+              -4.773990310624754e-06,
+              -0.00032151916933620406,
+              -0.0002004699000599519,
+              -5.703180174787548e-07,
+              -9.325129091131146e-08,
+              -5.017895423198304e-05
+            ],
+            "sse_per_output": [
+              0.01009859153798834,
+              0.030613405490255728,
+              0.02979224365069446,
+              0.28987255744373625,
+              0.7856363971475553,
+              0.895320302519844,
+              0.7375028397695657
+            ],
+            "sst_per_output": [
+              0.010097244334048424,
+              0.030613259342852247,
+              0.02978266795203391,
+              0.2898144583682312,
+              0.7856359490852183,
+              0.8953202190300777,
+              0.7374658345052084
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "num_unscored_bins": 630,
+            "num_files": 2,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ],
+            "nominal_duration_seconds": 470.06,
+            "scored_duration_seconds": 457.46000000000004
+          }
+        }
+      },
+      "prediction_sha256": {
+        "S5_set_1": "fe4e1e4ab1a31e43912299bb8c36c6273a0671d0350a9781f1c27d1c79d1244f",
+        "S5_set_2": "1d1832b701cf7262ae7c939bc200af134d5144f78845cf6aead1fa6963b71633"
+      }
+    },
+    {
+      "model": {
+        "name": "ridge",
+        "kind": "linear",
+        "path": "results/neural-h1/final-early-models-v1/ridge.npz",
+        "sha256": "23ab01146487dafd3cf693a0807b499e4a82c5f4d513a1fb4e648488da543673",
+        "training_days": [
+          "S0",
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "regime": "frozen_zero_calibration"
+      },
+      "scores": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S5"
+        ],
+        "chronological_day_order": [
+          "S5"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23503,
+        "num_scored_bins": 22873,
+        "num_unscored_bins": 630,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 470.06,
+        "scored_duration_seconds": 457.46000000000004,
+        "r2_mean": 0.16249667615034113,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.16249667615034113,
+        "worst_day": "S5",
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.16249667615034113,
+            "r2_per_output": [
+              0.12026469296848408,
+              -0.00897129052144563,
+              -0.21429228541335532,
+              0.28112349265309144,
+              0.1986035631224552,
+              0.160618594894962,
+              0.10260542657076421
+            ],
+            "sse_per_output": [
+              0.008882902344386325,
+              0.03088789978622533,
+              0.03616486393318235,
+              0.2083408056103901,
+              0.6296058502798021,
+              0.7515151434684171,
+              0.6617978379744369
+            ],
+            "sst_per_output": [
+              0.010097244334048424,
+              0.030613259342852247,
+              0.02978266795203391,
+              0.2898144583682312,
+              0.7856359490852183,
+              0.8953202190300777,
+              0.7374658345052084
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "num_unscored_bins": 630,
+            "num_files": 2,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ],
+            "nominal_duration_seconds": 470.06,
+            "scored_duration_seconds": 457.46000000000004
+          }
+        }
+      },
+      "prediction_sha256": {
+        "S5_set_1": "0790ad4407165049301b42fc59dfb564248b7ea3f8a59922650d34069b6d4439",
+        "S5_set_2": "b16060570c6bc3ce1146a8648285509d9601f56f84ed59fbc9fa1dd985781d04"
+      }
+    },
+    {
+      "model": {
+        "name": "tcn-seed-0",
+        "kind": "tcn",
+        "seed": 0,
+        "path": "results/neural-h1/final-early-models-v1/tcn-seed-0.npz",
+        "sha256": "bf407fb7a12405acbb7d55f5f2a26f3caa8a82cddddf38482bcfdc3e21324766",
+        "training_days": [
+          "S0",
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "regime": "frozen_zero_calibration"
+      },
+      "scores": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S5"
+        ],
+        "chronological_day_order": [
+          "S5"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23503,
+        "num_scored_bins": 22873,
+        "num_unscored_bins": 630,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 470.06,
+        "scored_duration_seconds": 457.46000000000004,
+        "r2_mean": 0.28275600627676406,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.28275600627676406,
+        "worst_day": "S5",
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.28275600627676406,
+            "r2_per_output": [
+              0.26441471710703146,
+              0.10670006471953453,
+              -0.04258507097436448,
+              0.40620860973200745,
+              0.20184348212780212,
+              0.24482258816215519,
+              0.3871898103397581
+            ],
+            "sse_per_output": [
+              0.007427384329900434,
+              0.027346822589694016,
+              0.031050964980577203,
+              0.17208933015423727,
+              0.6270604534370772,
+              0.6761256057732264,
+              0.4519265779110853
+            ],
+            "sst_per_output": [
+              0.010097244334048424,
+              0.030613259342852247,
+              0.02978266795203391,
+              0.2898144583682312,
+              0.7856359490852183,
+              0.8953202190300777,
+              0.7374658345052084
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "num_unscored_bins": 630,
+            "num_files": 2,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ],
+            "nominal_duration_seconds": 470.06,
+            "scored_duration_seconds": 457.46000000000004
+          }
+        }
+      },
+      "prediction_sha256": {
+        "S5_set_1": "bea7b4a7112f98336f6ef0017380685384f49d1816407ad143e267aa996248ca",
+        "S5_set_2": "f18fb27cfbaeabe3cc6cbeaf4462f364e0548ac245e07119ae75a6e5f06cde68"
+      }
+    },
+    {
+      "model": {
+        "name": "tcn-seed-1",
+        "kind": "tcn",
+        "seed": 1,
+        "path": "results/neural-h1/final-early-models-v1/tcn-seed-1.npz",
+        "sha256": "c4d6881097a7645462e2ff9eb6d9b3747c76bb988736b074700afb7275a9692e",
+        "training_days": [
+          "S0",
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "regime": "frozen_zero_calibration"
+      },
+      "scores": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S5"
+        ],
+        "chronological_day_order": [
+          "S5"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23503,
+        "num_scored_bins": 22873,
+        "num_unscored_bins": 630,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 470.06,
+        "scored_duration_seconds": 457.46000000000004,
+        "r2_mean": 0.24099290754384795,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.24099290754384795,
+        "worst_day": "S5",
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.24099290754384795,
+            "r2_per_output": [
+              0.23873426789897279,
+              0.09667073300090001,
+              -0.051497922522713235,
+              0.39220114897800107,
+              0.17460750504078304,
+              0.09182170373723864,
+              0.4512271274700299
+            ],
+            "sse_per_output": [
+              0.007686686100162323,
+              0.02765385312263207,
+              0.031316413478747446,
+              0.17614889480577386,
+              0.6484580161451007,
+              0.8131103911283384,
+              0.40470124439413474
+            ],
+            "sst_per_output": [
+              0.010097244334048424,
+              0.030613259342852247,
+              0.02978266795203391,
+              0.2898144583682312,
+              0.7856359490852183,
+              0.8953202190300777,
+              0.7374658345052084
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "num_unscored_bins": 630,
+            "num_files": 2,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ],
+            "nominal_duration_seconds": 470.06,
+            "scored_duration_seconds": 457.46000000000004
+          }
+        }
+      },
+      "prediction_sha256": {
+        "S5_set_1": "48fbd2f47d21ed93b560bcc6067a8aaaf2166d5982a5a8df72bf59dd38281f40",
+        "S5_set_2": "fc41fd265f50ecb358575e7fc673f2da87b9bbb3c7854910741e1c71b3277d95"
+      }
+    },
+    {
+      "model": {
+        "name": "tcn-seed-2",
+        "kind": "tcn",
+        "seed": 2,
+        "path": "results/neural-h1/final-early-models-v1/tcn-seed-2.npz",
+        "sha256": "215a667146e1a185773eb5d1d934fe38286b3c7c8b24d4333eb83400b3c7e13e",
+        "training_days": [
+          "S0",
+          "S1",
+          "S2",
+          "S3",
+          "S4"
+        ],
+        "regime": "frozen_zero_calibration"
+      },
+      "scores": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S5"
+        ],
+        "chronological_day_order": [
+          "S5"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23503,
+        "num_scored_bins": 22873,
+        "num_unscored_bins": 630,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 470.06,
+        "scored_duration_seconds": 457.46000000000004,
+        "r2_mean": 0.22089683487862039,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.22089683487862039,
+        "worst_day": "S5",
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.22089683487862039,
+            "r2_per_output": [
+              0.20472445556319951,
+              0.06435655415259867,
+              0.10694168761106959,
+              0.38683457915545505,
+              0.057727576870378994,
+              0.15144669453107162,
+              0.4251503449472903
+            ],
+            "sse_per_output": [
+              0.00803009148507176,
+              0.02864309546016643,
+              0.026597659179683285,
+              0.17770420433219034,
+              0.7402830894422682,
+              0.7597269313111374,
+              0.42393198057847775
+            ],
+            "sst_per_output": [
+              0.010097244334048424,
+              0.030613259342852247,
+              0.02978266795203391,
+              0.2898144583682312,
+              0.7856359490852183,
+              0.8953202190300777,
+              0.7374658345052084
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "num_unscored_bins": 630,
+            "num_files": 2,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ],
+            "nominal_duration_seconds": 470.06,
+            "scored_duration_seconds": 457.46000000000004
+          }
+        }
+      },
+      "prediction_sha256": {
+        "S5_set_1": "c8b58b146eb2be75549fe5de143dd2d041211ac975ef68786653a767bcb31ecb",
+        "S5_set_2": "9c0ac1accf01d4acb3c223da36110defd0b169c642759fac677d7ff36092c20b"
+      }
+    }
+  ],
+  "freeze_sha256": "471c01b3fdc030c432b61c8188641c110b56f97aeb25ea64f5455312849a1fff",
+  "index_sha256": "b083f74b0ed94200bfb09d974c808c6be476fd5ccf01f5997c29ac052096a71e"
+}
