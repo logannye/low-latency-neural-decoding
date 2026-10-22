@@ -1,0 +1,256 @@
+"""Fake-clock execution plus independently recomputed trace/clock tamper checks."""
+
+import json
+import shutil
+
+import numpy as np
+import pytest
+
+from neural_experiments.v4.model import Decoder
+from neural_experiments.v4.runtime import PERIOD_NS, measure
+from neural_experiments.v5 import runtime
+from neural_experiments.v5 import runtime_audit as audit
+
+
+class FakeClock:
+    def __init__(self):
+        self.now = 0
+
+    def perf_counter_ns(self):
+        self.now += 1000
+        return self.now
+
+    def process_time_ns(self):
+        return self.now // 100
+
+    def sleep(self, seconds):
+        self.now += round(seconds * 1e9)
+
+
+def write(path, value):
+    path.write_text(json.dumps(value))
+
+
+def fixture_binding(tmp_path, *, zero=False):
+    source_root = runtime.ROOT
+    for name in runtime.SOURCE_FILES:
+        path = tmp_path / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source_root / name, path)
+    shutil.copyfile(source_root / "neural_experiments/v5/plan.json", tmp_path / "plan.json")
+    config = {
+        "family": "tx45",
+        "tau_seconds": 0.4,
+        "baseline_tau_seconds": None,
+        "adapt_gamma": 10.0,
+    }
+    weights = np.zeros((97, 2))
+    if not zero:
+        weights[:3] = [[0.10, -0.03], [-0.02, 0.03], [0.01, -0.04]]
+        weights[-1] = [0.01, -0.02]
+    decoder = Decoder(config, np.full(96, 0.5), np.full(96, 1.2), weights)
+    decoder.save(tmp_path / "model.npz")
+    n = 1500
+    rng = np.random.default_rng(11)
+    features = {
+        "x_tx3": rng.poisson(1, (n, 96)).astype(np.float32),
+        "x_tx45": rng.poisson(0.3, (n, 96)).astype(np.float32),
+        "x_sbp": rng.random((n, 96), dtype=np.float32),
+    }
+    sequence = np.r_[np.zeros(700, np.int64), np.ones(n - 700, np.int64)]
+    np.savez(
+        tmp_path / "features.npz",
+        **features,
+        timestamps=np.arange(n) * 0.02,
+        sequence_id=sequence,
+        channel_ids=np.arange(96, dtype=np.int64),
+    )
+    expected = decoder.predict(features, [(0, 700), (700, n)])
+    np.savez(tmp_path / "assessed.npz", prediction=expected, eval_mask=np.ones(n, bool))
+    item = {
+        "participant_id": "T2",
+        "session_id": "T2_fixture",
+        "source": {"regular_session_rank": 13},
+        "n_bins": n,
+        "feature_path": "features.npz",
+        "feature_sha256": runtime.digest(tmp_path / "features.npz"),
+    }
+    plan = json.loads((tmp_path / "plan.json").read_text())
+    index = {
+        "role": "new_sessions",
+        "study_lock": {"sha256": runtime.PLAN_SHA256},
+        "acquisition_plan_sha256": plan["acquisition_plan_sha256"],
+        "sessions": [item],
+    }
+    write(tmp_path / "index.json", index)
+    selection = {
+        "plan": {"sha256": runtime.PLAN_SHA256},
+        "code_sha256": {name: runtime.digest(tmp_path / name) for name in runtime.SOURCE_FILES},
+    }
+    write(tmp_path / "selection.json", selection)
+    row = {
+        "participant": "T2",
+        "session_id": "T2_fixture",
+        "domain": "new_sessions",
+        "method": "adaptive",
+        "action": "abstain" if zero else "accept",
+        "candidate_id": "zero" if zero else "tx45_scratch1",
+        "label_seconds": 240 if zero else 30,
+        "model_path": "model.npz",
+        "model_sha256": runtime.digest(tmp_path / "model.npz"),
+        "trace_path": "assessed.npz",
+        "trace_sha256": runtime.digest(tmp_path / "assessed.npz"),
+        "metrics": {"r2": -1000.0},
+    }
+    assessment = {
+        "status": "assessment_complete",
+        "stage": "assessment",
+        "cases": [row],
+        "selection_path": "selection.json",
+        "selection_sha256": runtime.digest(tmp_path / "selection.json"),
+        "indices": {
+            "new_sessions": {
+                "path": "index.json",
+                "sha256": runtime.digest(tmp_path / "index.json"),
+            }
+        },
+    }
+    write(tmp_path / "manifest.json", assessment)
+    write(tmp_path / "assessment.json", assessment)
+    receipt = {
+        "status": "PASS",
+        "stage": "assessment",
+        "manifest_sha256": runtime.digest(tmp_path / "manifest.json"),
+        "assessment_sha256": runtime.digest(tmp_path / "assessment.json"),
+        "selection_sha256": runtime.digest(tmp_path / "selection.json"),
+        "plan_sha256": runtime.PLAN_SHA256,
+    }
+    write(tmp_path / "assessment-audit.json", receipt)
+    return assessment, index, receipt
+
+
+def fixture_run(tmp_path, monkeypatch, *, zero=False):
+    fixture_binding(tmp_path, zero=zero)
+    monkeypatch.setattr(runtime, "ROOT", tmp_path)
+    monkeypatch.setattr(
+        runtime, "measure", lambda *args, **kw: measure(*args, **kw, clock=FakeClock())
+    )
+    output = tmp_path / "run"
+    manifest = runtime.run(
+        tmp_path / "manifest.json",
+        tmp_path / "index.json",
+        tmp_path / "plan.json",
+        output,
+        assessment_audit_path=tmp_path / "assessment-audit.json",
+    )
+    assert PERIOD_NS == 20_000_000  # the frozen helper's constants were never changed
+    return output, manifest
+
+
+def save_manifest(output, manifest):
+    write(output / "manifest.json", manifest)
+    write(
+        output / "summary.json",
+        {**manifest, "manifest_sha256": runtime.digest(output / "manifest.json")},
+    )
+
+
+@pytest.mark.parametrize("zero", [False, True])
+def test_fake_clock_full_run_and_independent_nonconstant_replay(tmp_path, monkeypatch, zero):
+    output, manifest = fixture_run(tmp_path, monkeypatch, zero=zero)
+    result = audit.audit(output, tmp_path)
+    assert result["status"] == "passed" and result["blocks_checked"] == 5
+    assert result["prediction_replay"]["measured_trace_max_absolute_error"] < 1e-12
+    assert manifest["representative"]["action"] == ("abstain" if zero else "accept")
+    assert result["representative"]["archive_rank"] == 13
+    assert all(row["deadline_misses"] == 0 for row in result["blocks"])
+    assert manifest["blocks"][3]["n"] == 3000
+    assert manifest["blocks"][3]["service_p99_ms"] == pytest.approx(0.001)
+    assert "not useful decoding" in result["scope"]
+
+
+@pytest.mark.parametrize("change", ["rank", "duplicate", "failed_audit", "audit_result", "model"])
+def test_binding_rejects_wrong_representative_or_unverified_artifacts(tmp_path, change):
+    assessment, index, receipt = fixture_binding(tmp_path)
+    if change == "rank":
+        index["sessions"][0]["source"]["regular_session_rank"] = 14
+    elif change == "duplicate":
+        assessment["cases"].append(assessment["cases"][0].copy())
+    elif change == "failed_audit":
+        receipt["status"] = "FAIL"
+    elif change == "audit_result":
+        receipt["assessment_sha256"] = "0" * 64
+    else:
+        with (tmp_path / "model.npz").open("ab") as stream:
+            stream.write(b"tampered")
+    write(tmp_path / "index.json", index)
+    assessment["indices"]["new_sessions"]["sha256"] = runtime.digest(tmp_path / "index.json")
+    write(tmp_path / "manifest.json", assessment)
+    write(tmp_path / "assessment.json", assessment)
+    receipt["manifest_sha256"] = runtime.digest(tmp_path / "manifest.json")
+    if change != "audit_result":
+        receipt["assessment_sha256"] = runtime.digest(tmp_path / "assessment.json")
+    write(tmp_path / "assessment-audit.json", receipt)
+    with pytest.raises(ValueError):
+        runtime.bind_representative(
+            tmp_path / "manifest.json",
+            tmp_path / "index.json",
+            tmp_path / "plan.json",
+            tmp_path / "assessment-audit.json",
+            tmp_path,
+        )
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        "prediction",
+        "queue",
+        "release",
+        "deadline",
+        "overlap",
+        "missing_block",
+        "false_metric",
+        "wrong_state",
+    ],
+)
+def test_rehashed_trace_or_clock_tampering_rejected(tmp_path, monkeypatch, change):
+    output, manifest = fixture_run(tmp_path, monkeypatch)
+    block = manifest["blocks"][3]
+    path = tmp_path / block["artifact_path"]
+    with np.load(path, allow_pickle=False) as z:
+        stamps, predictions = z["timestamps_ns"], z["predictions"]
+    if change == "prediction":
+        predictions[10, 0] += 0.01
+    elif change == "queue":
+        stamps[10, 1] = stamps[10, 0] - 1
+    elif change == "release":
+        stamps[10] += 1
+    elif change == "deadline":
+        stamps[10, 3] += 1
+    elif change == "overlap":
+        stamps[10, 2] = stamps[11, 1] + 1
+    elif change == "missing_block":
+        manifest["blocks"].pop()
+    elif change == "false_metric":
+        block["service_p99_ms"] = 0.0
+    else:
+        block["persistent_numeric_state_bytes"] = 0
+    np.savez(path, timestamps_ns=stamps, predictions=predictions)
+    block["artifact_sha256"] = runtime.digest(path)
+    save_manifest(output, manifest)
+    with pytest.raises(ValueError):
+        audit.audit(output, tmp_path)
+
+
+def test_independent_audit_rejects_rehashed_assessed_trace(tmp_path, monkeypatch):
+    output, manifest = fixture_run(tmp_path, monkeypatch)
+    path = tmp_path / "assessed.npz"
+    with np.load(path, allow_pickle=False) as z:
+        prediction, mask = z["prediction"], z["eval_mask"]
+    prediction[100, 0] += 0.01
+    np.savez(path, prediction=prediction, eval_mask=mask)
+    manifest["assessment_prediction_sha256"] = runtime.digest(path)
+    save_manifest(output, manifest)
+    with pytest.raises(ValueError, match="assessed trace identity"):
+        audit.audit(output, tmp_path)

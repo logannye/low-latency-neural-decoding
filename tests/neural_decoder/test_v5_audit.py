@@ -322,3 +322,117 @@ def test_mismatched_pairing_mask_rejected():
 def test_missing_person_prevents_usefulness_even_with_good_remaining_scores():
     rows = [r for r in aggregate_rows() if r["participant"] != "T11"]
     assert not audit.summary_reference(rows)["gates"]["adaptive_useful"]
+
+
+def test_synthetic_continuation_runner_is_audited_with_separate_prefix_labels(
+    tmp_path, monkeypatch
+):
+    from neural_experiments.v5 import study
+
+    n, known_n = 16000, 13500
+    rng = np.random.default_rng(208)
+    angle = np.arange(known_n) * 0.03
+    labels = {
+        "y": np.column_stack((np.cos(angle), np.sin(angle))).astype(np.float32),
+        "eval_mask": np.ones(known_n, bool),
+    }
+    known_path = tmp_path / "known.npz"
+    np.savez(known_path, **labels)
+    item = {
+        "participant_id": "T3",
+        "session_id": "T3-synthetic",
+        "post_implant_day": 9,
+        "n_bins": n,
+        "n_channels": 2,
+        "segments": [{"start": 0, "end": n}],
+        "known_prefix_target_path": str(known_path),
+        "known_prefix_n_bins": known_n,
+        "known_prefix_target_sha256": audit.sha256(known_path),
+        "target_path": "scorer-not-used-by-broker.npz",
+        "target_sha256": "unused",
+    }
+    features = {
+        "x_tx3": rng.poisson(2, (n, 2)).astype(float),
+        "x_tx45": rng.poisson(1, (n, 2)).astype(float),
+        "x_sbp": rng.lognormal(1, 0.3, (n, 2)),
+    }
+    case = {"item": item, "features": features, "segments": [(0, n)]}
+    scorer = {"y": np.zeros((n, 2), np.float32), "eval_mask": np.zeros(n, bool)}
+    scorer["y"][14000:, 0] = 1
+    scorer["eval_mask"][14000:] = True
+    monkeypatch.setattr(study, "ROOT", tmp_path)
+    monkeypatch.setattr(study, "relative", lambda p: str(p.relative_to(tmp_path)))
+    monkeypatch.setattr(study, "load_case", lambda *args, **kwargs: case)
+    output = study.init_output(tmp_path / "run")
+    replay = study.CaseReplay(
+        tmp_path / "index.json",
+        item,
+        [],
+        {item["session_id"]: (0, 1)},
+        {f: {} for f in audit.FAMILIES},
+        output,
+        "t3_blocks",
+    )
+    h = {**history(), "current_session_id": item["session_id"]}
+    decision = policy.decide(h, replay.get_stage, policy.policy_grid()[0])
+    fitted = replay.decoder_for(decision)
+    metadata = {
+        **study.row_metadata(
+            item,
+            "t3_blocks",
+            "adaptive",
+            decision["budget_seconds"],
+            decision["action"],
+            decision["candidate_id"],
+        ),
+        "policy_id": "p0",
+        "decision": decision,
+        "label_requests": replay.broker.requests,
+    }
+    row = study.save_score(output, "adaptive", fitted, {**case, **scorer}, "t3_blocks", metadata)
+    controls = []
+    for method, fitted in replay.controls().items():
+        budget = {"zero": 0, "history0": 0, "history30": 30, "daily120": 120, "daily240": 240}[
+            method
+        ]
+        controls.append(
+            study.save_score(
+                output,
+                method,
+                fitted,
+                {**case, **scorer},
+                "t3_blocks",
+                study.row_metadata(
+                    item, "t3_blocks", method, budget, "abstain" if method == "zero" else "accept"
+                ),
+            )
+        )
+    verifier = object.__new__(audit.Verifier)
+    verifier.root, verifier.items, verifier.layouts = tmp_path, [], {item["session_id"]: (0, 1)}
+    verifier.errors, verifier.residuals = [], []
+    verifier.models_checked = verifier.traces_checked = verifier.fits_checked = 0
+    raw = {
+        c["config"]["family"]: audit.reference_representation(
+            features, item["segments"], c["config"]
+        )
+        for c in audit.grids()[0][::3]
+    }
+    evidence = {"history_evidence": h, "stages": list(replay.stages.values()), "controls": controls}
+    audit.check_case(
+        verifier,
+        item,
+        raw,
+        replay.priors,
+        replay.history,
+        scorer,
+        evidence,
+        replay.saved_fits,
+        [row],
+        {},
+        source=False,
+        calibration_labels=labels,
+        domain="t3_blocks",
+    )
+    assert verifier.traces_checked == 6
+    assert row["metrics"]["n"] == 2000
+    assert max(verifier.errors) < 1e-10
