@@ -50,7 +50,8 @@ quality claim; replaying that fixed artifact over an entire file measures runtim
 
 The [BrainGate release](https://doi.org/10.5061/dryad.x0k6djj1h) provides the source
 data under CC0. The importer pins Dryad version 462702 and the nine decoding
-archives, then retains the first six complete eligible MAT members per archive.
+archives, then retains the first six regular decoding-session MAT members in
+archive order, including short and zero-go sessions.
 It streams bounded prefixes rather than downloading all 79 GB. Published archive
 hashes are recorded as provider metadata; local member hashes establish the
 identity of the files actually consumed. A full-archive checksum is not claimed.
@@ -115,10 +116,42 @@ identity, participant exclusion, common masks, seed/day/person aggregation,
 bootstrap intervals, and exact participant sign-flip statistics. It does not
 retrain the models or validate upstream voltage-processing causality.
 
+## Exploratory freezing control
+
+After observing the primary results, we added one random-frozen-core arm to
+separate learned source weights from the regularization effect of freezing.
+The [separate plan](random_core_plan.json) declares that prior exposure and pins
+the original run, source, index, audit, and public summary. It is post-hoc
+analysis on the same cohort, not a second confirmatory test. It uses all nine
+people, all three original seeds, the 120-second prefix, and the original
+40-epoch schedule. No search or model selection is added.
+
+```sh
+python -m neural_experiments.v2.random_core_control run \
+  --index data/neural_v2/index.json \
+  --plan neural_experiments/v2/random_core_plan.json \
+  --reference-run results/neural-v2/transfer-v1 \
+  --reference-public neural_experiments/results/v2-transfer.json \
+  --reference-audit results/neural-v2/transfer-audit-v1.json \
+  --output results/neural-v2/random-core-reproduction
+python -m neural_experiments.v2.random_core_control audit \
+  --run results/neural-v2/random-core-reproduction \
+  --output results/neural-v2/random-core-reproduction-audit.json \
+  --public-output neural_experiments/results/random-core-reproduction.json
+```
+
+These commands assume the exact retained original reference artifacts. For a
+fresh primary reproduction, make a separate control-plan copy with that run's
+actual reference hashes, retaining its recipe and exposure declarations. Do not
+assign the published run's acceptance to new artifacts. The control runner and
+its audit helper share a source file; numerical scoring uses the separately
+implemented scikit-learn reference. This is narrower than an independently
+implemented training pipeline or decoder replay.
+
 ## Same-artifact latency
 
 Stop training and data preparation before timing. Each command checks complete
-trace parity, runs three counterbalanced fast repeats, then two 60-second paced
+trace parity, runs three fast repeats with alternating order, then two 60-second paced
 blocks per implementation. Pacing releases one observation every 20 ms. No
 target arrays or scoring masks enter the timing workload.
 
@@ -127,6 +160,24 @@ python -m neural_experiments.v2.runtime --kind h1 \
   --model results/neural-v2/composed-head-reproduction/model.npz \
   --features data/neural_h1/prepared/features/S4_set_1.npz \
   --output results/neural-v2/h1-runtime-reproduction
+```
+
+The timing audit requires artifacts to resolve inside the checkout. If a shared
+cache is a symlink outside it, copy the selected feature file into an ignored
+local run directory and verify identical SHA256 before passing that copy to
+`--features`. No refitting or data transformation is involved.
+
+After the runtime command's built-in timestamp reconstruction, run the separate
+auditor and aggregate-only export:
+
+```sh
+python -m neural_experiments.v2.audit_runtime \
+  --run results/neural-v2/h1-runtime-reproduction \
+  --output results/neural-v2/h1-runtime-reproduction-audit.json
+python -m neural_experiments.v2.public runtime \
+  --run results/neural-v2/h1-runtime-reproduction \
+  --audit results/neural-v2/h1-runtime-reproduction-audit.json \
+  --output neural_experiments/results/h1-runtime-reproduction.json
 ```
 
 For transfer, use `--kind transfer`, the frozen-core 120-second seed-0 model

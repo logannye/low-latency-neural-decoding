@@ -352,7 +352,7 @@ def transfer_figure(path, output):
         axes[1].set_xlim(float(limits.min()) - span * 0.18, float(limits.max()) + span * 0.23)
         axes[1].text(
             0.02,
-            -0.25,
+            -0.18,
             f"Mean ΔR² {mean:+.3f}  [{interval[0]:+.3f}, {interval[1]:+.3f}]",
             transform=axes[1].transAxes,
             fontsize=10,
@@ -378,6 +378,22 @@ def transfer_figure(path, output):
         title = ax.get_title()
         ax.set_title("")
         ax.set_title(title, loc="left", fontsize=12.5, pad=15)
+    primary_groups = {
+        group["method"]: group
+        for group in summary["groups"]
+        if group["partition"] == "future_day" and group["budget_seconds"] == 120
+    }
+    frozen, scratch = (
+        primary_groups["pretrained_frozen_core"],
+        primary_groups["scratch"],
+    )
+    absolute_note = (
+        f"120 s, all {len(people)} people: frozen core R² {frozen['mean_person_r2']:.3f}; "
+        f"scratch {scratch['mean_person_r2']:.3f}."
+    )
+    if all(row["r2"] < 0 for group in (frozen, scratch) for row in group["people"]):
+        absolute_note += " Every person's mean R² is negative."
+    fig.text(0.075, 0.84, absolute_note, fontsize=11, color=ORANGE)
     frame(
         fig,
         "Transfer to held-out people with limited calibration",
@@ -452,7 +468,14 @@ def runtime_figure(path, output):
             xlim=(-0.5, len(names) - 0.5),
         )
         ax.set_title(title, loc="left", pad=15, fontsize=12.5)
-        ax.legend(fontsize=9, loc="upper left")
+        ax.legend(
+            fontsize=9,
+            loc="upper left",
+            frameon=True,
+            facecolor="white",
+            edgecolor="none",
+            framealpha=1,
+        )
         clean_axis(ax)
     paced = [r for r in runs if r["mode"] == "paced"]
     accounting = "No paced blocks were recorded."

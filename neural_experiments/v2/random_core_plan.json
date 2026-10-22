@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "study": "post-hoc-random-frozen-core-control-v1",
+  "exploratory": true,
+  "prior_outcome_exposure": "Designed after viewing every original transfer-v1 result. At 120 seconds, learned frozen-core mean future-day R2 was -1.5907455120304481 versus scratch -3.108406902511501; their difference was +1.5176613904810508, positive in 8/9 people. Every person's mean R2 was negative in both arms. The original comparison confounds source-learned weights with freezing regularization. This control was not preregistered with the original experiment.",
+  "question": "Does the already-trained learned frozen core outperform a random frozen core when identical target adapters and heads receive the same calibration budget and training schedule?",
+  "participants": ["T2", "T3", "T5", "T6", "T7", "T8", "T9", "T10", "T11"],
+  "seeds": [0, 1, 2],
+  "budget_seconds": 120,
+  "expected_models": 27,
+  "method": "random_frozen_core",
+  "initialization": "torch.manual_seed(seed + 10000); instantiate original AdapterTCN with the participant's channel count; clone its core state. Unchanged transfer.adapt resets the same seed, loads this core, freezes core parameters, and trains only adapter/head. This exactly matches scratch initialization before freezing, including the channel-dependent RNG consumption by the input adapter.",
+  "model": {"width": 32, "dilations": [1, 2, 4, 8, 16], "kernel_size": 3, "channel_dropout": 0.1, "residual_core": true},
+  "adaptation": {"epochs": 40, "batch_chunks": 8, "chunk_bins": 256, "learning_rate": 0.001, "weight_decay": 0.0001},
+  "bin_seconds": 0.02,
+  "common_suffix_start_seconds": 300,
+  "evaluation_session_cap_seconds": 600,
+  "minimum_suffix_scored_bins": 50,
+  "training_burn_bins": 62,
+  "normalization": "Original sqrt-count prefix-only mean/population SD, scale floor 0.1; no target observations after the 120-second prefix fit any parameters.",
+  "evaluation": "Same original selected sessions and masks. Report future-day and common 300-second same-session suffix separately; preserve T6's null suffix. Score full traces after reset at each block; no stitching or score-driven exclusion.",
+  "comparison": "learned frozen minus random frozen, equal day then seed then participant; all nine people at 120 seconds. Reuse the audited published learned-frozen model scores without retraining or selecting seeds.",
+  "uncertainty": {"kind": "descriptive paired-person percentile bootstrap only", "draws": 10000, "seed": 20261022},
+  "no_search": "One additional arm, one label budget, original three seeds and 40 epochs. No alternative random initialization, hyperparameter search, retuning, model selection, confirmatory p value, or success threshold.",
+  "reference": {
+    "manifest_sha256": "236127dcbe2c456b6826f09d52d7c4edbd9111f4c2f8a67fa138d17181a7555a",
+    "config_sha256": "7e91115abb8c9d54c1b2865befc2cdf36a1e2786b129ff63fc6f8362f6266415",
+    "index_sha256": "91de850304c4fb96096daa3f9ec19edab0372675c236a899005cf4308ec6c523",
+    "summary_sha256": "814681091b46b093e6f02b727e06da9a04a2d3a414e07eb3cbab29a4fc704971",
+    "audit_sha256": "c8499c2d67c1ca11efcda4ff24b84dd03ba9edb8fc047a7c97df51e28e4f89f4",
+    "public_sha256": "7d5885860a18381368839dc80d198365ca4e8e66e1a2b157ea80324f4151e82f"
+  },
+  "source_pins": {
+    "neural_experiments/v2/transfer.py": "cbde848faf6d928e77daea05538982c927cd0cc2394a712d54561f7ea1354252",
+    "neural_experiments/v2/data.py": "e75e64c08a4e7041f086b52893dcd17212e4e211094b184abae6ea6d23998a11",
+    "neural_experiments/v2/audit.py": "385c093686687269425a94e1839603e3cf106873f36367b538c59f607e890d68"
+  },
+  "scope": "Post-hoc mechanistic control in this small, nonrepresentative offline cohort. Negative absolute accuracy remains visible. Upstream feature causality, live control, clinical usefulness, and population generalization are not established. Runner and audit helper share the new source; score reconstruction uses the separately implemented existing sklearn reference. No optimizer replay or independent decoder replay is claimed."
+}

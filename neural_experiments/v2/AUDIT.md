@@ -73,13 +73,14 @@ requires a complete run and writes a fresh JSON receipt:
 
 ```sh
 PYTHONPATH=src .venv/bin/python -m neural_experiments.v2.audit \
-  --run results/neural-v2/TRANSFER_RUN \
-  --index data/neural_v2/INDEX.json \
-  --output results/neural-v2/TRANSFER_RUN/independent-audit.json
+  --run results/neural-v2/transfer-v1 \
+  --index data/neural_v2/index.json \
+  --output results/neural-v2/transfer-audit-v1.json
 ```
 
-Use the actual retained paths; the names above are placeholders. Run and model
-artifact paths are repository-relative; prepared-array and raw-member paths are
+The command above produced the retained real-study receipt; use a fresh output
+name when repeating the audit. Run and model artifact paths are repository-relative;
+prepared-array and raw-member paths are
 relative to the input index directory. The audit validates the saved consumed
 source snapshots, so later edits to unrelated analysis or documentation files do
 not invalidate the original execution identity. Its receipt binds its own source,
@@ -115,9 +116,57 @@ adapters remain unchanged. An empty future-session regression exposed sklearn
 ridge's zero-row rejection; the runner now retains an empty prediction array and
 null metrics for that case. These checks do not change the locked study plan.
 
-No completed real nine-person run has yet passed this audit. A real-data execution
-receipt is required before reporting audited cohort results. Hash consistency and
-numerical agreement do not prove exclusive training-data use by themselves; the
-source review and perturbation tests support that separate claim. This audit does
-not independently reproduce optimizer updates or validate upstream acquisition
-filter causality, runtime deadlines, or closed-loop clinical performance.
+The completed `transfer-v1` run passed independent audit: 260 target models,
+1,560 saved traces, 27 source cores, all 54 selected complete session members, and
+10 explicitly unavailable target cases. The unavailable cases are T6's 300-second
+budget for all registered methods/seeds; its first session contains 224.46 seconds.
+T6 remains in the 30- and 120-second future-day comparisons, and its unavailable
+same-session suffix remains visible. No audit failure or outcome-dependent recipe
+change occurred. The aggregate publication retains all per-session metrics and
+calibration counts.
+
+At the registered 120-second future-day comparison, the frozen pretrained core
+minus scratch mean R² difference is **+1.517661**, with a person-bootstrap 95%
+interval of **[+0.494858, +2.714568]**, eight positive person-level differences out
+of nine, and exact two-sided sign-flip p = **0.01171875**. The absolute equal-person
+mean R² is **−1.590746 for the frozen core and −3.108407 for scratch**. Every person's
+future-day mean R² is negative under both methods. The contrast measures relative
+protection against a poor scratch baseline; it does not establish useful decoding
+accuracy or successful practical generalization. The fixed recipe was not retuned
+after these results. Calibration curves use the same eight people across all three
+budgets, while the primary 120-second paired contrast retains all nine.
+
+The receipt binds these exact SHA256 identities:
+
+| Artifact | SHA256 |
+| --- | --- |
+| Run manifest | `236127dcbe2c456b6826f09d52d7c4edbd9111f4c2f8a67fa138d17181a7555a` |
+| Prepared index | `91de850304c4fb96096daa3f9ec19edab0372675c236a899005cf4308ec6c523` |
+| Frozen plan | `7e91115abb8c9d54c1b2865befc2cdf36a1e2786b129ff63fc6f8362f6266415` |
+| Run summary | `814681091b46b093e6f02b727e06da9a04a2d3a414e07eb3cbab29a4fc704971` |
+| Auditor source | `385c093686687269425a94e1839603e3cf106873f36367b538c59f607e890d68` |
+| Public aggregate | `7d5885860a18381368839dc80d198365ca4e8e66e1a2b157ea80324f4151e82f` |
+
+Hash consistency and numerical agreement do not prove exclusive training-data use
+by themselves; source review and perturbation tests support that separate claim.
+This audit does not independently reproduce optimizer updates, replay decoder
+predictions, or validate upstream acquisition filter causality, runtime deadlines,
+or closed-loop clinical performance.
+
+After a passing receipt, the publication gate reads JSON metadata only:
+
+```sh
+PYTHONPATH=src .venv/bin/python -m neural_experiments.v2.public transfer \
+  --run results/neural-v2/transfer-v1 \
+  --audit results/neural-v2/transfer-audit-v1.json \
+  --output neural_experiments/results/v2-transfer.json
+```
+
+For runtime evidence, replace `transfer` with `runtime` and supply the completed
+runtime run and independent timestamp-audit receipt. Both exports require exact
+manifest and summary hashes and refuse an existing output. Public exports retain
+model, trace and source digests, calibration counts, per-session metrics, and
+aggregate timing evidence. They omit numeric weights, recording samples, timing
+arrays, private artifact locations, and installed-library paths. Runtime audit
+scope explicitly preserves that independent timestamp reconstruction does not
+independently replay the decoder or establish prediction correctness.
