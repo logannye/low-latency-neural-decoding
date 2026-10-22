@@ -151,6 +151,19 @@ def test_daily_controls_have_later_normalizer_but_same_prospective_label_start(
             assert row["fit"]["complete_requested_interval"] is False
     # Counterfactual control labels do not advance the policy's broker.
     assert replay.broker.requests == []
+    metadata = study.row_metadata(replay.item, "new_sessions", "daily240", 240, "accept")
+    row = study.save_score(
+        replay.output,
+        "short-daily240-score",
+        controls["daily240"],
+        study.load_case(replay.index_path, replay.item, True),
+        "new_sessions",
+        metadata,
+    )
+    assert row["metrics"]["r2"] is None and row["metrics"]["n"] == 0
+    assert row["metrics"]["summed_mse"] is None
+    assert row["label_seconds"] == 240 and row["available_label_seconds"] == 83
+    assert Path(tmp_path / row["trace_path"]).is_file()
 
 
 def test_history_probe_rows_keep_chronology_and_convert_summed_mse_once():

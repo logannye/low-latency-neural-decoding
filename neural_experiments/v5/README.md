@@ -30,7 +30,15 @@ python -m neural_experiments.v5.study select \
   --development-index data/neural_v5/development/index.json \
   --output results/neural_v5/source
 
-# Independently audit and publish source choices before this assessment.
+python -m neural_experiments.v5.audit \
+  --selection results/neural_v5/source/selection.json \
+  --output results/neural_v5/source-audit.json
+python -m neural_experiments.v5.public \
+  --artifact results/neural_v5/source/selection.json \
+  --audit results/neural_v5/source-audit.json \
+  --output neural_experiments/results/v5-source-selection.json
+
+# Publish the passed source choices before this assessment.
 python -m neural_experiments.v5.study assess \
   --selection results/neural_v5/source/selection.json \
   --audit results/neural_v5/source-audit.json \
@@ -38,6 +46,9 @@ python -m neural_experiments.v5.study assess \
   --t3-index data/neural_v5/t3_blocks/index.json \
   --output results/neural_v5/assessment
 
+python -m neural_experiments.v5.audit \
+  --assessment results/neural_v5/assessment/assessment.json \
+  --output results/neural_v5/assessment-audit.json
 python -m neural_experiments.v5.public \
   --artifact results/neural_v5/assessment/assessment.json \
   --audit results/neural_v5/assessment-audit.json \

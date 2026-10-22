@@ -2,6 +2,7 @@
 
 import copy
 import inspect
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -171,3 +172,153 @@ def test_fit_mask_excludes_warmup_and_reburns_every_block():
     assert not mask[:1500].any()
     assert not mask[2000:2062].any()
     assert mask[1500:2000].all() and mask[2062:].all()
+
+
+def fitted_fixture(tmp_path, candidate_id="tx45_prior10"):
+    from neural_experiments.v5 import model
+
+    n = 4000
+    candidate = next(c for c in model.candidate_grid() if c["candidate_id"] == candidate_id)
+    family = candidate["config"]["family"]
+    dimensions = 2 if family == "tx45" else 4
+    rng = np.random.default_rng(81)
+    raw = rng.normal(size=(n, dimensions))
+    z, mean, scale = audit.reference_design(raw, 1500, 2)
+    angle = np.arange(n) * 0.04
+    labels = {
+        "y": np.column_stack((np.cos(angle), np.sin(angle))).astype(np.float32),
+        "eval_mask": np.ones(n, bool),
+    }
+    segments = [{"start": 0, "end": 2700}, {"start": 2700, "end": n}]
+    prior = rng.normal(0, 0.01, size=(dimensions + 1, 2))
+    weights, receipt = model.fit_stage(
+        z,
+        labels["y"],
+        labels["eval_mask"],
+        [(s["start"], s["end"]) for s in segments],
+        3000,
+        candidate,
+        prior,
+    )
+    path = tmp_path / "model.npz"
+    model.Decoder(candidate["config"], mean, scale, weights).save(path)
+    item = {
+        "participant_id": "p",
+        "session_id": "p-9",
+        "post_implant_day": 9,
+        "n_channels": 2,
+        "n_bins": n,
+        "segments": segments,
+    }
+    row = {
+        "participant": "p",
+        "session_id": "p-9",
+        "post_implant_day": 9,
+        "family": family,
+        "candidate_id": candidate_id,
+        "budget_seconds": 30,
+        "phase": "full",
+        "daily_control": False,
+        "fit": receipt,
+        "history": [],
+        "model_path": path.name,
+        "model_sha256": audit.sha256(path),
+    }
+    verifier = object.__new__(audit.Verifier)
+    verifier.root, verifier.residuals, verifier.models_checked, verifier.fits_checked = (
+        tmp_path,
+        [],
+        0,
+        0,
+    )
+    return SimpleNamespace(
+        verifier=verifier,
+        row=row,
+        item=item,
+        raw={family: raw},
+        prior={family: prior},
+        history={family: []},
+        labels=labels,
+        path=path,
+    )
+
+
+@pytest.mark.parametrize("candidate_id", [c["candidate_id"] for c in audit.grids()[0]])
+def test_saved_fit_checked_independently_for_each_candidate(tmp_path, candidate_id):
+    f = fitted_fixture(tmp_path, candidate_id)
+    f.verifier.fit(f.row, f.item, f.raw, f.prior, f.history, f.labels)
+    assert f.verifier.fits_checked == 1
+    assert max(f.verifier.residuals) < 1e-10
+
+
+def test_rehashed_wrong_fit_weights_fail_normal_equations(tmp_path):
+    f = fitted_fixture(tmp_path)
+    arrays = audit.numeric(f.path)
+    arrays["weights"][0, 0] += 0.01
+    np.savez(f.path, **arrays)
+    f.row["model_sha256"] = audit.sha256(f.path)
+    with pytest.raises(ValueError, match="optimum"):
+        f.verifier.fit(f.row, f.item, f.raw, f.prior, f.history, f.labels)
+
+
+def test_future_labels_do_not_change_fit_verification_but_prefix_does(tmp_path):
+    f = fitted_fixture(tmp_path)
+    f.labels["y"][3000:] *= -1
+    f.verifier.fit(f.row, f.item, f.raw, f.prior, f.history, f.labels)
+    f.labels["y"][1500:3000] *= -1
+    with pytest.raises(ValueError, match="optimum"):
+        f.verifier.fit(f.row, f.item, f.raw, f.prior, f.history, f.labels)
+
+
+def test_tampered_calibration_receipt_rejected(tmp_path):
+    f = fitted_fixture(tmp_path)
+    f.row["fit"]["label_start_bin"] = 0
+    with pytest.raises(ValueError, match="boundaries"):
+        f.verifier.fit(f.row, f.item, f.raw, f.prior, f.history, f.labels)
+
+
+def aggregate_rows():
+    rows = []
+    for person in ["T2", "T5", "T6", "T7", "T8", "T9", "T10", "T11"]:
+        for session in range(3):
+            for method in audit.METHODS:
+                unavailable = person == "T6" and session == 0
+                r2 = None if unavailable else (0.2 if method != "zero" else -0.02)
+                rows.append(
+                    {
+                        "domain": "new_sessions",
+                        "participant": person,
+                        "session_id": f"{person}-{session}",
+                        "method": method,
+                        "action": "abstain" if method == "zero" else "accept",
+                        "label_seconds": 240 if unavailable else 30,
+                        "available_label_seconds": 220 if unavailable else 30,
+                        "eval_mask_sha256": f"mask-{person}-{session}",
+                        "metrics": {"r2": r2, "angular_error_degrees": None if unavailable else 60},
+                    }
+                )
+    return rows
+
+
+def test_independent_summary_keeps_unavailable_cost_and_matches_producer():
+    from neural_experiments.v5 import metrics
+
+    rows = aggregate_rows()
+    expected = audit.summary_reference(rows)
+    audit.compare_structure(metrics.summarize(rows), expected)
+    values = expected["domains"]["new_sessions"]["methods"]["adaptive"]
+    assert values["requested_sessions"] == 24 and values["scored_sessions"] == 23
+    assert values["mean_requested_label_seconds"] == 38.75
+    assert expected["gates"]["adaptive_useful"]
+
+
+def test_mismatched_pairing_mask_rejected():
+    rows = aggregate_rows()
+    rows[1]["eval_mask_sha256"] = "different"
+    with pytest.raises(ValueError, match="Paired"):
+        audit.summary_reference(rows)
+
+
+def test_missing_person_prevents_usefulness_even_with_good_remaining_scores():
+    rows = [r for r in aggregate_rows() if r["participant"] != "T11"]
+    assert not audit.summary_reference(rows)["gates"]["adaptive_useful"]

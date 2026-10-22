@@ -11,6 +11,7 @@ import argparse
 import itertools
 import json
 import math
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -607,7 +608,19 @@ def history_evidence(item, dev_items, layouts, histories, probes):
 
 
 def check_case(
-    verifier, item, raw, prior, history, targets, evidence, fits, rows, probes, source=True
+    verifier,
+    item,
+    raw,
+    prior,
+    history,
+    targets,
+    evidence,
+    fits,
+    rows,
+    probes,
+    source=True,
+    calibration_labels=None,
+    domain="new_sessions",
 ):
     candidates, policies = grids()
     candidate_map = {c["candidate_id"]: c for c in candidates}
@@ -620,8 +633,9 @@ def check_case(
         for key, value in identity.items():
             if row[key] != value:
                 raise ValueError("Scored row identity mismatch")
+    labels = targets if calibration_labels is None else calibration_labels
     checked_fits = {
-        fit_key(row): verifier.fit(row, item, raw, prior, history, targets) for row in fits
+        fit_key(row): verifier.fit(row, item, raw, prior, history, labels) for row in fits
     }
     expected_history = history_evidence(item, verifier.items, verifier.layouts, history, probes)
     compare_structure(
@@ -633,7 +647,7 @@ def check_case(
         if budget not in BUDGETS or budget in stages:
             raise ValueError("Duplicate or unplanned prefix stage")
         stop = 1500 + 50 * budget
-        observed = min(len(targets["y"]), item["n_bins"])
+        observed = min(len(labels["y"]), item["n_bins"])
         if observed < stop:
             expected = {
                 "budget_seconds": budget,
@@ -641,7 +655,7 @@ def check_case(
                 "available_label_seconds": max(0, (observed - 1500) * 0.02),
             }
         else:
-            yy, mask = targets["y"][:stop].copy(), targets["eval_mask"][:stop].copy()
+            yy, mask = labels["y"][:stop].copy(), labels["eval_mask"][:stop].copy()
             yy[:1500], mask[:1500] = 0, False
             predictions = {
                 c["candidate_id"]: replay(
@@ -671,6 +685,7 @@ def check_case(
         budget, cid = decision["budget_seconds"], decision["candidate_id"]
         for key, value in {
             "method": "adaptive",
+            "domain": domain,
             "action": decision["action"],
             "label_seconds": budget,
             "available_label_seconds": max(0, min(budget, item["n_bins"] * 0.02 - 30)),
@@ -687,7 +702,7 @@ def check_case(
             key = item["session_id"], cid, budget, "full", False
             expected_fits.add(key)
             weights = checked_fits[key]["weights"]
-        verifier.score(row, item, raw[family], targets, weights, config, 1500, "new_sessions")
+        verifier.score(row, item, raw[family], targets, weights, config, 1500, domain)
     if set(stages) != requested_union:
         raise ValueError("Unused future-stage evidence or missing requested stage")
     for budget in requested_union:
@@ -717,6 +732,7 @@ def check_case(
             weights = checked_fits[key]["weights"]
         for key, value in {
             "label_seconds": budget,
+            "domain": domain,
             "available_label_seconds": max(0, min(budget, item["n_bins"] * 0.02 - 30)),
             "action": "abstain" if name == "zero" else "accept",
             "candidate_id": None,
@@ -730,12 +746,15 @@ def check_case(
             weights,
             candidates[3]["config"],
             prefix,
-            "new_sessions",
+            domain,
         )
-    for row in rows:
-        compare_structure(
-            row["daily120_r2"], controls["daily120"]["metrics"]["r2"], "matched source comparator"
-        )
+    if source:
+        for row in rows:
+            compare_structure(
+                row["daily120_r2"],
+                controls["daily120"]["metrics"]["r2"],
+                "matched source comparator",
+            )
 
 
 def audit_selection(path, root=ROOT):
@@ -823,14 +842,502 @@ def audit_selection(path, root=ROOT):
     }
 
 
+def validate_fresh_provenance(inputs, development, plan):
+    """Bind ranks13–15/prior12 and the third/fourth eligible original T3 blocks."""
+    index, role = inputs.index, inputs.index["role"]
+    people = plan["new_session_participants"] if role == "new_sessions" else ["T3"]
+    if index["participants"] != people:
+        raise ValueError("Fresh participant inventory changed")
+    for key in ("v4_development_index_sha256", "v4_new_index_sha256", "v4_t3_index_sha256"):
+        if index[key] != development.index[key]:
+            raise ValueError("Fresh input ancestry changed")
+    expected, missing = {}, []
+    if role == "new_sessions":
+        refs = unique(
+            index["acquisition_sources"],
+            lambda r: r["path"],
+            [f"acquisition/{p}.json" for p in people],
+        )
+        for person in people:
+            ref = refs[f"acquisition/{person}.json"]
+            path = contained(inputs.path.parent, ref["path"])
+            verify(path, ref["sha256"])
+            receipt = read(path)
+            prior = sorted(
+                [s["source"] for s in development.items.values() if s["participant_id"] == person],
+                key=lambda s: s["archive_ordinal"],
+            )
+            if (
+                receipt["status"] != "complete"
+                or receipt["participant_id"] != person
+                or receipt["plan_sha256"] != plan["acquisition_plan_sha256"]
+                or len(prior) != 12
+                or receipt["selection"]["regular_session_ranks_one_based"] != [13, 14, 15]
+                or receipt["selection"]["scores_or_duration_used_for_selection"] is not False
+            ):
+                raise ValueError("Fresh archive acquisition policy changed")
+            for key in ("v4_development_index_sha256", "v4_new_index_sha256"):
+                if receipt[key] != development.index[key]:
+                    raise ValueError("Acquisition authenticated the wrong exposed prefix")
+            archive = receipt["archive"]
+            if (
+                archive["file_id"] != prior[0]["archive_file_id"]
+                or archive["provider_sha256"] != prior[0]["archive_sha256_published"]
+            ):
+                raise ValueError("Provider archive identity changed")
+            pattern = rf"(?:\./)?decoding/{person}/{person}_day_(\d+)_decoding\.mat"
+            seen = [
+                s
+                for s in receipt["seen_members"]
+                if s["regular_file"] and re.fullmatch(pattern, s["name"])
+            ]
+            authenticated, selected = receipt["verified_prior_members"], receipt["selected"]
+            if (
+                len(authenticated) != 12
+                or len(seen) != 12 + len(selected)
+                or len(selected) > 3
+                or len(selected) < 3
+                and not receipt["tar_end_observed"]
+                or receipt["missing_requested_ranks"] != list(range(13 + len(selected), 16))
+            ):
+                raise ValueError("Archive walk or shortage inventory mismatch")
+            for rank, (member, observed) in enumerate(
+                zip(authenticated + selected, seen, strict=True), 1
+            ):
+                match = re.fullmatch(pattern, member["member_name"])
+                if (
+                    match is None
+                    or member["regular_session_rank"] != rank
+                    or member["participant_id"] != person
+                    or member["post_implant_day"] != int(match.group(1))
+                    or member["session_id"] != Path(member["member_name"]).stem
+                    or member["member_name"] != observed["name"]
+                    or member["member_size"] != observed["size"]
+                    or member["archive_ordinal"] != observed["ordinal"]
+                ):
+                    raise ValueError("Selected source member does not match archive ordinal")
+                if rank <= 12:
+                    for key in (
+                        "member_name",
+                        "member_size",
+                        "member_sha256",
+                        "archive_ordinal",
+                        "session_id",
+                    ):
+                        if member[key] != prior[rank - 1][key]:
+                            raise ValueError("Prior twelve authenticated members changed")
+                else:
+                    expected[member["session_id"]] = {
+                        **member,
+                        "archive_file_id": archive["file_id"],
+                        "archive_sha256_published": archive["provider_sha256"],
+                        "full_archive_sha256_verified": False,
+                    }
+            if receipt["missing_requested_ranks"]:
+                missing.append(
+                    {
+                        "participant_id": person,
+                        "missing_requested_ranks": receipt["missing_requested_ranks"],
+                    }
+                )
+        if missing:
+            raise ValueError("Unobserved fixed new-session ranks require explicit audit review")
+        if index["participant_dispositions"]:
+            raise ValueError("Unexpected new-session disposition")
+    else:
+        if (
+            index["development_index_sha256"] != sha256(development.path)
+            or Path(index["development_index_path"]).resolve() != development.path.resolve()
+        ):
+            raise ValueError("T3 known-prefix cohort changed")
+        parent = read(index["v4_t3_index_path"])
+        verify(index["v4_t3_index_path"], development.index["v4_t3_index_sha256"])
+        parent_items = unique(parent["sessions"], lambda s: s["session_id"])
+        from scipy.io import loadmat
+
+        for sid, old in development.items.items():
+            if old["participant_id"] != "T3":
+                continue
+            rawpath = contained(old["raw_source_root"], old["source"]["raw_path"])
+            verify(rawpath, old["source"]["member_sha256"])
+            blocks = loadmat(rawpath, simplify_cells=True, variable_names=["blocks"])["blocks"]
+            ids, starts, ends = [
+                np.asarray(blocks[k]).reshape(-1)
+                for k in ("block_id", "sample_start_index", "sample_end_index")
+            ]
+            if (
+                len(ids) != len(starts)
+                or len(ids) != len(ends)
+                or np.any(ends <= starts)
+                or np.any(starts < 0)
+                or np.any(starts[1:] < ends[:-1])
+            ):
+                raise ValueError("Malformed original acquisition metadata")
+            lengths = ((ends - starts) // 2).astype(np.int64)
+            offsets = np.r_[0, np.cumsum(lengths)]
+            eligible = [i for i in range(len(ids)) if offsets[i] >= 30000 and lengths[i] > 0]
+            if [int(ids[i]) for i in eligible[:2]] != parent_items[sid][
+                "selected_evaluation_block_ids"
+            ]:
+                raise ValueError("Previously exposed V4 continuation blocks changed")
+            chosen = eligible[2:4]
+            if not chosen:
+                missing.append(
+                    {
+                        "participant_id": "T3",
+                        "session_id": sid,
+                        "reason": "no_remaining_complete_block_after_V4_selection",
+                        "requested_continuation_blocks": 2,
+                        "available_continuation_blocks": 0,
+                    }
+                )
+                continue
+            expected[sid] = old["source"]
+            item = inputs.items[sid]
+            fields = ("start", "end", "block_id", "original_block_index", "selected_for_evaluation")
+            geometry = [
+                {
+                    "start": int(offsets[i]),
+                    "end": int(offsets[i + 1]),
+                    "block_id": int(ids[i]),
+                    "original_block_index": i,
+                    "selected_for_evaluation": i in chosen,
+                }
+                for i in range(chosen[-1] + 1)
+            ]
+            compare_structure(
+                [{k: s[k] for k in fields} for s in item["segments"]],
+                geometry,
+                "fresh original T3 blocks after prior selections",
+            )
+            if (
+                item["n_bins"] != int(offsets[chosen[-1] + 1])
+                or item["selected_evaluation_block_ids"] != [int(ids[i]) for i in chosen]
+                or item["unavailable_continuation_blocks"] != 2 - len(chosen)
+            ):
+                raise ValueError("T3 block endpoint/shortage changed")
+            known = contained(development.path.parent, old["target_path"])
+            if (
+                Path(item["known_prefix_target_path"]).resolve() != known
+                or item["known_prefix_target_sha256"] != old["target_sha256"]
+                or item["known_prefix_n_bins"] != old["n_bins"]
+            ):
+                raise ValueError("Continuation calibration includes unauthorized labels")
+        compare_structure(
+            index["participant_dispositions"], missing, "unavailable original T3 sessions"
+        )
+    if set(expected) != set(inputs.items):
+        raise ValueError("Fresh session selected inventory changed")
+    for sid, item in inputs.items.items():
+        compare_structure(item["source"], expected[sid], "receipt-bound prepared source")
+        if item["post_implant_day"] != expected[sid]["post_implant_day"]:
+            raise ValueError("Assessment chronology changed")
+        if role == "new_sessions":
+            verify(
+                contained(item["raw_source_root"], item["source"]["raw_path"]),
+                item["source"]["member_sha256"],
+            )
+            if item["n_bins"] != min(item["full_prepared_n_bins"], 30000):
+                raise ValueError("New session cap/truncation differs from fixed selection")
+
+
+def interval(values):
+    if not values:
+        return [None, None]
+    rng = np.random.default_rng(20261024)
+    draws = rng.integers(len(values), size=(10000, len(values)))
+    means = np.asarray(values, float)[draws].mean(axis=1)
+    return np.quantile(means, [0.025, 0.975]).tolist()
+
+
+def average(values):
+    return float(np.mean(values)) if values else None
+
+
+def summary_reference(rows):
+    """Equal-person accuracy/cost, identical-mask contrasts and fixed engineering gates."""
+    domains = {}
+    for domain in ("new_sessions", "t3_blocks"):
+        allrows = [r for r in rows if r["domain"] == domain]
+        unit_key = "participant" if domain == "new_sessions" else "session_id"
+        methods, contrasts = {}, []
+        for method in METHODS:
+            requested = [r for r in allrows if r["method"] == method]
+            scored = [r for r in requested if r["metrics"]["r2"] is not None]
+            units = []
+            for unit in sorted({r[unit_key] for r in scored}):
+                group = [r for r in scored if r[unit_key] == unit]
+                units.append(
+                    {
+                        "unit": unit,
+                        "n_sessions": len(group),
+                        "r2": average([r["metrics"]["r2"] for r in group]),
+                        "angular_error_degrees": average(
+                            [r["metrics"]["angular_error_degrees"] for r in group]
+                        ),
+                    }
+                )
+            costs = []
+            for unit in sorted({r[unit_key] for r in requested}):
+                group = [r for r in requested if r[unit_key] == unit]
+                costs.append(
+                    {
+                        "unit": unit,
+                        "label_seconds": average([r["label_seconds"] for r in group]),
+                        "available_label_seconds": average(
+                            [r["available_label_seconds"] for r in group]
+                        ),
+                    }
+                )
+            values = [u["r2"] for u in units]
+            accepted = [r for r in scored if r["action"] != "abstain"]
+            methods[method] = {
+                "units": units,
+                "n_units": len(units),
+                "requested_sessions": len(requested),
+                "scored_sessions": len(scored),
+                "unavailable_sessions": len(requested) - len(scored),
+                "mean_r2": average(values),
+                "r2_bootstrap_95": interval(values),
+                "positive_units": sum(v > 0 for v in values),
+                "mean_angular_error_degrees": average([u["angular_error_degrees"] for u in units]),
+                "cost_units": costs,
+                "mean_requested_label_seconds": average([c["label_seconds"] for c in costs]),
+                "mean_available_label_seconds": average(
+                    [c["available_label_seconds"] for c in costs]
+                ),
+                "zero_label_sessions": sum(r["label_seconds"] == 0 for r in requested),
+                "abstained_sessions": sum(r["action"] == "abstain" for r in requested),
+                "accepted_scored_sessions": len(accepted),
+                "acceptance_coverage": len(accepted) / len(scored) if scored else None,
+                "negative_accepted_sessions": sum(r["metrics"]["r2"] < 0 for r in accepted),
+            }
+        for control in METHODS[:-1]:
+            left = {
+                r["session_id"]: r
+                for r in allrows
+                if r["method"] == "adaptive" and r["metrics"]["r2"] is not None
+            }
+            right = {
+                r["session_id"]: r
+                for r in allrows
+                if r["method"] == control and r["metrics"]["r2"] is not None
+            }
+            gains = {}
+            for sid in sorted(left.keys() & right.keys()):
+                a, b = left[sid], right[sid]
+                if a["eval_mask_sha256"] != b["eval_mask_sha256"]:
+                    raise ValueError("Paired masks differ")
+                gains.setdefault(a[unit_key], []).append(a["metrics"]["r2"] - b["metrics"]["r2"])
+            values = [average(gains[k]) for k in sorted(gains)]
+            contrasts.append(
+                {
+                    "arm": "adaptive",
+                    "control": control,
+                    "n_units": len(values),
+                    "mean_gain": average(values),
+                    "gain_bootstrap_95": interval(values),
+                }
+            )
+        domains[domain] = {"methods": methods, "contrasts": contrasts}
+    adaptive = domains["new_sessions"]["methods"]["adaptive"]
+    comparisons = {c["control"]: c for c in domains["new_sessions"]["contrasts"]}
+    useful = bool(
+        adaptive["n_units"] == 8
+        and adaptive["mean_r2"] >= 0.1
+        and adaptive["r2_bootstrap_95"][0] > 0
+        and adaptive["positive_units"] >= 6
+        and adaptive["mean_angular_error_degrees"] <= 80
+        and comparisons["zero"]["mean_gain"] >= 0.05
+    )
+    t2 = [
+        r
+        for r in rows
+        if r["domain"] == "new_sessions"
+        and r["participant"] == "T2"
+        and r["metrics"]["r2"] is not None
+    ]
+    t2adaptive = [r for r in t2 if r["method"] == "adaptive"]
+    history = {r["session_id"]: r["metrics"]["r2"] for r in t2 if r["method"] == "history0"}
+    gains = [r["metrics"]["r2"] - history[r["session_id"]] for r in t2adaptive]
+    mean = average([r["metrics"]["r2"] for r in t2adaptive])
+    zero = average([r["metrics"]["r2"] for r in t2 if r["method"] == "zero"])
+    positive = sum(r["metrics"]["r2"] > 0 and r["action"] != "abstain" for r in t2adaptive)
+    ci = interval(gains)
+    return {
+        "domains": domains,
+        "T2": {
+            "mean_r2": mean,
+            "positive_accepted_sessions": positive,
+            "gain_over_history0": average(gains),
+            "gain_bootstrap_95": ci,
+        },
+        "gates": {
+            "adaptive_useful": useful,
+            "reduced_calibration_noninferiority": bool(
+                useful
+                and comparisons["daily120"]["gain_bootstrap_95"][0] > -0.05
+                and adaptive["mean_requested_label_seconds"] <= 90
+            ),
+            "T2_recovered": bool(
+                len(t2adaptive) == 3
+                and mean >= 0.05
+                and positive >= 2
+                and mean - zero >= 0.05
+                and ci[0] > 0
+            ),
+        },
+    }
+
+
+def audit_assessment(path, root=ROOT):
+    assessment = read(path)
+    if (
+        assessment["schema_version"] != 1
+        or assessment["stage"] != "assessment"
+        or assessment["status"] != "assessment_complete"
+    ):
+        raise ValueError("Assessment is incomplete")
+    manifest_path = Path(path).with_name("manifest.json")
+    compare_structure(read(manifest_path), assessment, "completed assessment manifest")
+    selection_path = contained(root, assessment["selection_path"])
+    verify(selection_path, assessment["selection_sha256"])
+    selection = read(selection_path)
+    plan, development = check_identity(selection, root)
+    source_audit_path = contained(root, assessment["source_audit_path"])
+    verify(source_audit_path, assessment["source_audit_sha256"])
+    source_audit = read(source_audit_path)
+    for field, expected in {
+        "status": "PASS",
+        "stage": "source",
+        "selection_sha256": sha256(selection_path),
+        "plan_sha256": PLAN_SHA,
+        "development_index_sha256": sha256(development.path),
+        "code_sha256": selection["code_sha256"],
+    }.items():
+        compare_structure(source_audit[field], expected, "bound passed source audit " + field)
+    compare_structure(
+        selection["choices"],
+        selection_reference(selection["cases"], plan["participants"]),
+        "locked source policy choices",
+    )
+    if set(assessment["indices"]) != {"new_sessions", "t3_blocks"}:
+        raise ValueError("Separate assessment domains missing")
+    inputs_by_domain = {}
+    for domain, ref in assessment["indices"].items():
+        indexpath = contained(root, ref["path"])
+        verify(indexpath, ref["sha256"])
+        inputs = Inputs(indexpath, domain, plan)
+        validate_fresh_provenance(inputs, development, plan)
+        inputs_by_domain[domain] = inputs
+        compare_structure(
+            assessment["data_dispositions"][domain],
+            inputs.index["participant_dispositions"],
+            "retained acquisition shortage",
+        )
+    expected = {
+        (domain, sid, method)
+        for domain, inputs in inputs_by_domain.items()
+        for sid in inputs.items
+        for method in METHODS
+    }
+    rows = unique(
+        assessment["cases"], lambda r: (r["domain"], r["session_id"], r["method"]), expected
+    )
+    cases = {(domain, sid) for domain, inputs in inputs_by_domain.items() for sid in inputs.items}
+    evidence = unique(assessment["evidence"], lambda r: (r["domain"], r["session_id"]), cases)
+    fits = unique(assessment["fits"], fit_key)
+    if any(k[0] not in {sid for _, sid in cases} for k in fits):
+        raise ValueError("Assessment fit outside selected cases")
+    probes = unique(selection["history_probes"], lambda r: (r["session_id"], r["family"]))
+    verifier = Verifier(development, root)
+    for domain, inputs in inputs_by_domain.items():
+        for sid, item in inputs.items.items():
+            raw, prior, history, targets = verifier.query(inputs, item)
+            labels = targets
+            if domain == "t3_blocks":
+                verify(item["known_prefix_target_path"], item["known_prefix_target_sha256"])
+                labels = numeric(item["known_prefix_target_path"])
+                selected = np.zeros(item["n_bins"], bool)
+                for seg in item["segments"]:
+                    if seg["selected_for_evaluation"]:
+                        selected[seg["start"] : seg["end"]] = True
+                if np.any(targets["eval_mask"] & ~selected) or np.any(targets["y"][~selected] != 0):
+                    raise ValueError("Continuation targets leaked outside fresh selected blocks")
+            adaptive = rows[domain, sid, "adaptive"]
+            expected_policy = next(
+                c["policy_id"]
+                for c in selection["choices"]
+                if c["target_participant"] == item["participant_id"]
+            )
+            if adaptive["policy_id"] != expected_policy:
+                raise ValueError("Assessment did not use frozen target-excluded policy")
+            observed_evidence = {
+                **evidence[domain, sid],
+                "controls": [rows[domain, sid, method] for method in METHODS[:-1]],
+            }
+            check_case(
+                verifier,
+                item,
+                raw,
+                prior,
+                history,
+                targets,
+                observed_evidence,
+                [r for k, r in fits.items() if k[0] == sid],
+                [adaptive],
+                probes,
+                source=False,
+                calibration_labels=labels,
+                domain=domain,
+            )
+            print(f"independent assessment decisions, fits and traces: {domain} {sid}", flush=True)
+    summary = summary_reference(assessment["cases"])
+    compare_structure(assessment["summary"], summary, "equal-person costs/accuracy/paired gates")
+    return {
+        "status": "PASS",
+        "stage": "assessment",
+        "created_at": datetime.now(UTC).isoformat(),
+        "auditor_source_sha256": sha256(__file__),
+        "assessment_sha256": sha256(path),
+        "manifest_sha256": sha256(manifest_path),
+        "selection_sha256": sha256(selection_path),
+        "source_audit_sha256": sha256(source_audit_path),
+        "plan_sha256": PLAN_SHA,
+        "development_index_sha256": sha256(development.path),
+        "assessment_indices": {k: sha256(v.path) for k, v in inputs_by_domain.items()},
+        "code_sha256": selection["code_sha256"],
+        "cases_checked": len(rows),
+        "fits_checked": verifier.fits_checked,
+        "models_checked": verifier.models_checked,
+        "full_traces_checked": verifier.traces_checked,
+        "decisions_checked": len(evidence),
+        "unavailable_scores": sum(r["metrics"]["r2"] is None for r in rows.values()),
+        "acquisition_dispositions": assessment["data_dispositions"],
+        "max_prediction_absolute_error": max(verifier.errors, default=0),
+        "max_normal_equation_relative_residual": max(verifier.residuals, default=0),
+        "independent_summary": summary,
+        "scope": (
+            "Separate NumPy/sklearn reference, no V5 producer imports; exact source selection, "
+            "archive order, original T3 block geometry, calibration-only labels, model optimum, "
+            "full traces, operational decisions and equal-person paired uncertainty. "
+            "Policy/verifier share an author; not external replication."
+        ),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--selection", type=Path, required=True)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--selection", type=Path)
+    source.add_argument("--assessment", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
         raise ValueError("Preserve previous audit attempts; output must be fresh")
-    receipt = audit_selection(args.selection)
+    receipt = (
+        audit_selection(args.selection) if args.selection else audit_assessment(args.assessment)
+    )
     args.output.write_text(json.dumps(receipt, indent=2, allow_nan=False) + "\n")
     print(json.dumps(receipt, indent=2))
 
