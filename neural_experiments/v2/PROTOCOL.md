@@ -22,6 +22,13 @@ This deterministic convenience sample is not representative sampling across the
 full 729 sessions or the population of BCI users. Report archive/member selection
 and missing data explicitly. No participant is discarded because decoding is poor.
 
+Before any transfer training or test evaluation, the source optimization budget
+was amended from 600 to 2,400 steps, with source-only validation checkpoints at
+600, 1,200, and 2,400. At the session caps, 600 batches would provide only about
+one pass over eight people's source chunks. This amendment increases coverage;
+it was not triggered by a target-participant result. The original plan commit and
+amendment remain in Git history.
+
 Combine two adjacent 10 ms count bins within the same recording block into one
 20 ms observation. The paired target uses the second bin's contemporaneous
 cursor and target position. Never average future targets into an earlier output.
