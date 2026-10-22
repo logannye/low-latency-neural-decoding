@@ -22,12 +22,21 @@ benchmark = [
     "matplotlib>=3.9,<4",
     "psutil>=6,<8",
 ]
+neural = [
+    "numpy>=2,<3",
+    "scipy>=1.14,<2",
+    "scikit-learn>=1.5,<2",
+    "h5py>=3.11,<4",
+    "pynwb>=2.8,<4",
+    "threadpoolctl>=3,<4",
+]
 
 [project.scripts]
 cnn-train = "classifier.train:main"
 cnn-evaluate = "classifier.evaluate:main"
 cnn-predict = "classifier.predict:main"
 cnn-benchmark = "classifier.benchmark:main"
+neural-decode = "neural_decoder.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

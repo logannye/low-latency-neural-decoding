@@ -1,0 +1,116 @@
+[
+  {
+    "day": "S0",
+    "files": 2,
+    "n_bins": 17275,
+    "nominal_seconds": 345.5,
+    "provider_date": "1925-01-01",
+    "project_role": "development",
+    "scored_bins": 16772,
+    "max_count": 7
+  },
+  {
+    "day": "S1",
+    "files": 3,
+    "n_bins": 25524,
+    "nominal_seconds": 510.48,
+    "provider_date": "1925-01-08",
+    "project_role": "development",
+    "scored_bins": 24927,
+    "max_count": 8
+  },
+  {
+    "day": "S2",
+    "files": 2,
+    "n_bins": 23378,
+    "nominal_seconds": 467.56,
+    "provider_date": "1925-01-13",
+    "project_role": "development",
+    "scored_bins": 22790,
+    "max_count": 7
+  },
+  {
+    "day": "S3",
+    "files": 2,
+    "n_bins": 22338,
+    "nominal_seconds": 446.76,
+    "provider_date": "1925-01-15",
+    "project_role": "development",
+    "scored_bins": 21746,
+    "max_count": 7
+  },
+  {
+    "day": "S4",
+    "files": 2,
+    "n_bins": 23973,
+    "nominal_seconds": 479.46,
+    "provider_date": "1925-01-19",
+    "project_role": "development",
+    "scored_bins": 23368,
+    "max_count": 7
+  },
+  {
+    "day": "S5",
+    "files": 2,
+    "n_bins": 23503,
+    "nominal_seconds": 470.06,
+    "provider_date": "1925-01-20",
+    "project_role": "sealed_metadata_only"
+  },
+  {
+    "day": "S6",
+    "files": 2,
+    "n_bins": 4784,
+    "nominal_seconds": 95.68,
+    "provider_date": "1925-01-26",
+    "project_role": "sealed_metadata_only"
+  },
+  {
+    "day": "S7",
+    "files": 2,
+    "n_bins": 5101,
+    "nominal_seconds": 102.02,
+    "provider_date": "1925-01-27",
+    "project_role": "sealed_metadata_only"
+  },
+  {
+    "day": "S8",
+    "files": 2,
+    "n_bins": 4816,
+    "nominal_seconds": 96.32,
+    "provider_date": "1925-01-29",
+    "project_role": "sealed_metadata_only"
+  },
+  {
+    "day": "S9",
+    "files": 2,
+    "n_bins": 4902,
+    "nominal_seconds": 98.04,
+    "provider_date": "1925-02-02",
+    "project_role": "sealed_metadata_only"
+  },
+  {
+    "day": "S10",
+    "files": 2,
+    "n_bins": 4672,
+    "nominal_seconds": 93.44,
+    "provider_date": "1925-02-03",
+    "project_role": "sealed_metadata_only"
+  },
+  {
+    "day": "S11",
+    "files": 2,
+    "n_bins": 4912,
+    "nominal_seconds": 98.24,
+    "provider_date": "1925-02-06",
+    "project_role": "sealed_metadata_only"
+  },
+  {
+    "day": "S12",
+    "files": 2,
+    "n_bins": 5303,
+    "nominal_seconds": 106.06,
+    "provider_date": "1925-02-09",
+    "project_role": "sealed_metadata_only"
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "regime": "frozen_zero_new_day_calibration",
+  "input": "raw counts with training-only channel mean/std",
+  "target": "training-only masked target mean/std; invert before scoring",
+  "architecture": "176->32 k3 d1 ReLU ->32 k3 d2 ReLU ->32 k3 d4 ReLU ->7 linear",
+  "seeds": [0, 1, 2],
+  "epochs": 20,
+  "learning_rate": 0.001,
+  "weight_decay": 0.0,
+  "optimizer": "Adam",
+  "chunk_scored_bins": 256,
+  "burn_in_bins": 14,
+  "batch_chunks": 16,
+  "threads": 1,
+  "loss": "mean squared standardized target error on supplied training masks after burnin",
+  "checkpoint": "last epoch, fixed in advance; no evaluation-based early stopping",
+  "pilot": "seed0 foldA one epoch timing only, no development prediction or score"
+}

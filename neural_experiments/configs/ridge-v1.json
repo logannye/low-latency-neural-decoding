@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "regime": "frozen_zero_new_day_calibration",
+  "folds": [{"train": ["S0", "S1"], "evaluate": "S2"}, {"train": ["S0", "S1", "S2"], "evaluate": "S3"}, {"train": ["S0", "S1", "S2", "S3"], "evaluate": "S4"}],
+  "history_bins": [1, 5],
+  "regularization": [0.001, 0.01, 0.1],
+  "fir_taps": 12,
+  "fir_tau_bins": 12,
+  "seed": 0,
+  "threads": 1,
+  "selection": "largest mean of three development-day variance-weighted R2 scores; ties shorter history then larger regularization"
+}

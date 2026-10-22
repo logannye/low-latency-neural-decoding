@@ -1,0 +1,40 @@
+name: Neural decoding Python
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  neural:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - name: Install CPU PyTorch wheels
+        run: >-
+          python -m pip install --only-binary=:all:
+          'torch>=2.6,<3' 'torchvision>=0.21,<1'
+          --index-url https://download.pytorch.org/whl/cpu
+      - name: Install Python package and neural dependencies
+        run: python -m pip install --only-binary=:all: -e '.[dev,neural]'
+      - name: Check neural code
+        run: |
+          ruff check src/neural_decoder tests/neural_decoder neural_experiments
+          ruff format --check src/neural_decoder tests/neural_decoder neural_experiments
+      - name: Synthetic correctness and train-export-replay
+        run: pytest -q tests/neural_decoder
+      - name: CLI smoke
+        run: neural-decode --help
