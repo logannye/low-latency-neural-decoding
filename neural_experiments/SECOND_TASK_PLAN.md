@@ -1,9 +1,11 @@
 # M2 secondary-task plan
 
-Status: metadata checked 2026-10-22; no M2 recording arrays downloaded or opened.
-The bounded acquisition was released after required H1 assessment, but awaits
-the current quiet timing window's end. Fitting and scoring additionally await
-the parent's source commit. No decoder source files are changed.
+Status: the following design was fixed before array access, committed as
+`d80e4d0`, and executed after the required H1 assessment and quiet timing window.
+The seven pinned assets were acquired and the independent audit passed. Quality
+transfer failed with this sparse training; see [M2_REVIEW.md](M2_REVIEW.md).
+The run snapshot preserves this document's exact pre-execution version. No
+decoder source files were changed.
 
 ## Bounded design and claim
 
@@ -135,6 +137,7 @@ Five synthetic tests passed before acquisition, covering exact bin endpoints,
 overflow/cadence rejection, forbidden scoring arguments, future causality,
 chunk/reset parity, unequal-length day aggregation and a two-trial NWB fixture.
 An initial collection attempt exposed PyNWB's automatic home-cache creation;
-the runner and fixture now import it lazily with a local cache. Verification of
-that import-only correction waits until the primary timing window ends.
+the runner and fixture now import it lazily with a local cache. The corrected
+version passed all five tests and Ruff before acquisition. The scientific run
+completed on its first attempt, followed by independent artifact reconstruction.
 

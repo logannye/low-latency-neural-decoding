@@ -1,5 +1,7 @@
 # Frozen same-weight runtime comparison
 
+**Current state, October 22, 2026:** The same-weight runtime experiment and independent audit are complete. The prespecified text below is retained as the measurement protocol, not a pending-status claim. See the [final report](FINAL_REPORT.md), [runtime evidence](results/runtime.json), and [reproduction commands](README.md#same-weight-runtime-reproduction).
+
 This is a prespecified G4 experiment, not a measured speed claim. Root owns the
 single measurement process. Commit the implementation, tests, this protocol and
 `configs/runtime-v1.json` before running final timing. Preserve failed runs.

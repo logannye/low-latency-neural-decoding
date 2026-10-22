@@ -22,6 +22,46 @@ def write_json(path, content):
     path.write_text(json.dumps(content))
 
 
+def test_reproduction_config_is_resolved_by_hash_not_original_filename(auditor, tmp_path):
+    old_name = "neural_experiments/configs/runtime-v1.json"
+    fresh_name = "neural_experiments/configs/runtime-reproduction-20261022.json"
+    old = {"primary_model_sha256": "original-model"}
+    fresh = {"primary_model_sha256": "new-model"}
+    for name, value in ((old_name, old), (fresh_name, fresh)):
+        write_json(tmp_path / "source" / name, value)
+    manifest = {
+        "configuration": fresh,
+        "config_sha256": auditor.digest(tmp_path / "source" / fresh_name),
+        "source": {
+            "files": {
+                name: auditor.digest(tmp_path / "source" / name) for name in (old_name, fresh_name)
+            }
+        },
+    }
+    assert auditor.retained_configuration(tmp_path, manifest) == fresh
+    manifest["config_sha256"] = "unretained-hash"
+    with pytest.raises(ValueError, match="no retained configuration"):
+        auditor.retained_configuration(tmp_path, manifest)
+
+
+def test_retained_config_rejects_changed_bytes_and_summary(auditor, tmp_path):
+    name = "neural_experiments/configs/fresh-runtime.json"
+    path = tmp_path / "source" / name
+    write_json(path, {"threads": 1})
+    checksum = auditor.digest(path)
+    manifest = {
+        "config_sha256": checksum,
+        "configuration": {"threads": 2},
+        "source": {"files": {name: checksum}},
+    }
+    with pytest.raises(ValueError, match="differs from its retained"):
+        auditor.retained_configuration(tmp_path, manifest)
+    manifest["configuration"] = {"threads": 1}
+    write_json(path, {"threads": 2})
+    with pytest.raises(ValueError, match="changed evidence"):
+        auditor.retained_configuration(tmp_path, manifest)
+
+
 def test_known_queue_service_deadline_and_quantile_arithmetic(auditor):
     stamps = (
         np.array([[0, 0, 10, 20, 20], [20, 25, 50, 65, 40], [40, 65, 70, 75, 60]], dtype=np.int64)

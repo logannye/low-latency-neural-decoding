@@ -32,6 +32,26 @@ def verify(path, expected):
         raise ValueError(f"changed evidence: {path}")
 
 
+def retained_configuration(run, manifest):
+    """Resolve a reproduced configuration by retained byte identity, not its filename."""
+    expected = manifest["config_sha256"]
+    matches = sorted(
+        relative
+        for relative, checksum in manifest["source"]["files"].items()
+        if relative.startswith("neural_experiments/configs/")
+        and relative.endswith(".json")
+        and checksum == expected
+    )
+    if not matches:
+        raise ValueError("no retained configuration matches the recorded config hash")
+    snapshot = Path(run) / "source" / matches[0]
+    verify(snapshot, expected)
+    config = read_json(snapshot)
+    if config != manifest["configuration"]:
+        raise ValueError("recorded config differs from its retained source bytes")
+    return config
+
+
 def independently_summarize(stamps, period_ns):
     """Derive the complete reporting contract directly from timestamp differences."""
     stamps = np.asarray(stamps)
@@ -134,11 +154,7 @@ def audit(run, index_path, model_path, *, onnx_path=None, quality_run=None):
         if onnx_path is None:
             raise ValueError("primary timing audit requires the exported ONNX graph")
         verify(onnx_path, manifest["onnx_sha256"])
-        config = manifest["configuration"]
-        config_snapshot = run / "source/neural_experiments/configs/runtime-v1.json"
-        verify(config_snapshot, manifest["config_sha256"])
-        if read_json(config_snapshot) != config:
-            raise ValueError("recorded config differs from its retained source bytes")
+        config = retained_configuration(run, manifest)
         if manifest["model_sha256"] != config["primary_model_sha256"]:
             raise ValueError("prespecified runtime model identity changed")
         if manifest.get("parity_status") != "passed":

@@ -1,0 +1,642 @@
+{
+  "status": "passed",
+  "audited_utc": "2026-10-22T17:00:21.612706+00:00",
+  "auditor_sha256": "ae5a12a144460f18fbc9293c9ed54f3a75fd8ac4a47627d3dc8d79ac62927a27",
+  "run_manifest_sha256": "716514c535499b1225ecd2579fb43455c84d7987b7f7f938695f15cf7674dfb6",
+  "measured_source_head": "8d7220e500ee543b1a8cf19f697848a292f761f4",
+  "runs": [
+    {
+      "mode": "fast",
+      "repeat": 0,
+      "implementation": "torch_window",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.086875,
+          "p95_ms": 0.093,
+          "p99_ms": 0.12813033000000018,
+          "max_ms": 1.506959
+        },
+        "prediction_service": {
+          "p50_ms": 0.086875,
+          "p95_ms": 0.093,
+          "p99_ms": 0.12813033000000018,
+          "max_ms": 1.506959
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.086875,
+          "p95_ms": 0.093,
+          "p99_ms": 0.12813033000000018,
+          "max_ms": 1.506959
+        },
+        "release_to_completion": {
+          "p50_ms": 0.086875,
+          "p95_ms": 0.093,
+          "p99_ms": 0.12813033000000018,
+          "max_ms": 1.506959
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 10.024031125
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 0,
+      "implementation": "numpy_incremental",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.026708,
+          "p95_ms": 0.031792,
+          "p99_ms": 0.034709,
+          "max_ms": 0.144416
+        },
+        "prediction_service": {
+          "p50_ms": 0.026708,
+          "p95_ms": 0.031792,
+          "p99_ms": 0.034709,
+          "max_ms": 0.144416
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.026708,
+          "p95_ms": 0.031792,
+          "p99_ms": 0.034709,
+          "max_ms": 0.144416
+        },
+        "release_to_completion": {
+          "p50_ms": 0.026708,
+          "p95_ms": 0.031792,
+          "p99_ms": 0.034709,
+          "max_ms": 0.144416
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 3.153686416
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 0,
+      "implementation": "onnx_incremental",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.044667,
+          "p95_ms": 0.054584,
+          "p99_ms": 0.062625,
+          "max_ms": 0.233209
+        },
+        "prediction_service": {
+          "p50_ms": 0.044667,
+          "p95_ms": 0.054584,
+          "p99_ms": 0.062625,
+          "max_ms": 0.233209
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.044667,
+          "p95_ms": 0.054584,
+          "p99_ms": 0.062625,
+          "max_ms": 0.233209
+        },
+        "release_to_completion": {
+          "p50_ms": 0.044667,
+          "p95_ms": 0.054584,
+          "p99_ms": 0.062625,
+          "max_ms": 0.233209
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 5.322333959
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 1,
+      "implementation": "numpy_incremental",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.026833,
+          "p95_ms": 0.031333,
+          "p99_ms": 0.034333,
+          "max_ms": 0.193
+        },
+        "prediction_service": {
+          "p50_ms": 0.026833,
+          "p95_ms": 0.031333,
+          "p99_ms": 0.034333,
+          "max_ms": 0.193
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.026833,
+          "p95_ms": 0.031333,
+          "p99_ms": 0.034333,
+          "max_ms": 0.193
+        },
+        "release_to_completion": {
+          "p50_ms": 0.026833,
+          "p95_ms": 0.031333,
+          "p99_ms": 0.034333,
+          "max_ms": 0.193
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 3.159797083
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 1,
+      "implementation": "onnx_incremental",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.044875,
+          "p95_ms": 0.055792,
+          "p99_ms": 0.065208,
+          "max_ms": 0.262333
+        },
+        "prediction_service": {
+          "p50_ms": 0.044875,
+          "p95_ms": 0.055792,
+          "p99_ms": 0.065208,
+          "max_ms": 0.262333
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.044875,
+          "p95_ms": 0.055792,
+          "p99_ms": 0.065208,
+          "max_ms": 0.262333
+        },
+        "release_to_completion": {
+          "p50_ms": 0.044875,
+          "p95_ms": 0.055792,
+          "p99_ms": 0.065208,
+          "max_ms": 0.262333
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 5.399705208
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 1,
+      "implementation": "torch_window",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.086375,
+          "p95_ms": 0.092166,
+          "p99_ms": 0.106917,
+          "max_ms": 0.356333
+        },
+        "prediction_service": {
+          "p50_ms": 0.086375,
+          "p95_ms": 0.092166,
+          "p99_ms": 0.106917,
+          "max_ms": 0.356333
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.086375,
+          "p95_ms": 0.092166,
+          "p99_ms": 0.106917,
+          "max_ms": 0.356333
+        },
+        "release_to_completion": {
+          "p50_ms": 0.086375,
+          "p95_ms": 0.092166,
+          "p99_ms": 0.106917,
+          "max_ms": 0.356333
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 9.916586542
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 2,
+      "implementation": "onnx_incremental",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.044417,
+          "p95_ms": 0.053084,
+          "p99_ms": 0.062209,
+          "max_ms": 1.305167
+        },
+        "prediction_service": {
+          "p50_ms": 0.044417,
+          "p95_ms": 0.053084,
+          "p99_ms": 0.062209,
+          "max_ms": 1.305167
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.044417,
+          "p95_ms": 0.053084,
+          "p99_ms": 0.062209,
+          "max_ms": 1.305167
+        },
+        "release_to_completion": {
+          "p50_ms": 0.044417,
+          "p95_ms": 0.053084,
+          "p99_ms": 0.062209,
+          "max_ms": 1.305167
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 5.303498916
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 2,
+      "implementation": "torch_window",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.086167,
+          "p95_ms": 0.0905,
+          "p99_ms": 0.107541,
+          "max_ms": 1.363542
+        },
+        "prediction_service": {
+          "p50_ms": 0.086167,
+          "p95_ms": 0.0905,
+          "p99_ms": 0.107541,
+          "max_ms": 1.363542
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.086167,
+          "p95_ms": 0.0905,
+          "p99_ms": 0.107541,
+          "max_ms": 1.363542
+        },
+        "release_to_completion": {
+          "p50_ms": 0.086167,
+          "p95_ms": 0.0905,
+          "p99_ms": 0.107541,
+          "max_ms": 1.363542
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 9.872928542
+      }
+    },
+    {
+      "mode": "fast",
+      "repeat": 2,
+      "implementation": "numpy_incremental",
+      "metrics": {
+        "bins": 112488,
+        "step_service": {
+          "p50_ms": 0.026375,
+          "p95_ms": 0.029791,
+          "p99_ms": 0.033416,
+          "max_ms": 0.15
+        },
+        "prediction_service": {
+          "p50_ms": 0.026375,
+          "p95_ms": 0.029791,
+          "p99_ms": 0.033416,
+          "max_ms": 0.15
+        },
+        "queue_delay": {
+          "p50_ms": 0.0,
+          "p95_ms": 0.0,
+          "p99_ms": 0.0,
+          "max_ms": 0.0
+        },
+        "release_to_prediction": {
+          "p50_ms": 0.026375,
+          "p95_ms": 0.029791,
+          "p99_ms": 0.033416,
+          "max_ms": 0.15
+        },
+        "release_to_completion": {
+          "p50_ms": 0.026375,
+          "p95_ms": 0.029791,
+          "p99_ms": 0.033416,
+          "max_ms": 0.15
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 2249.76,
+        "first_start_to_last_completion_seconds": 3.092562875
+      }
+    },
+    {
+      "mode": "paced",
+      "repeat": 0,
+      "implementation": "torch_window",
+      "metrics": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.253708,
+          "p95_ms": 0.335792,
+          "p99_ms": 0.391084,
+          "max_ms": 0.981542
+        },
+        "prediction_service": {
+          "p50_ms": 0.253708,
+          "p95_ms": 0.335792,
+          "p99_ms": 0.391084,
+          "max_ms": 0.981542
+        },
+        "queue_delay": {
+          "p50_ms": 3.939291,
+          "p95_ms": 4.690458,
+          "p99_ms": 4.918916,
+          "max_ms": 4.993541
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.146041,
+          "p95_ms": 4.93675,
+          "p99_ms": 5.1775,
+          "max_ms": 5.352416
+        },
+        "release_to_completion": {
+          "p50_ms": 4.146041,
+          "p95_ms": 4.93675,
+          "p99_ms": 5.1775,
+          "max_ms": 5.352416
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.0014475
+      }
+    },
+    {
+      "mode": "paced",
+      "repeat": 0,
+      "implementation": "numpy_incremental",
+      "metrics": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.088542,
+          "p95_ms": 0.346959,
+          "p99_ms": 0.428334,
+          "max_ms": 1.037125
+        },
+        "prediction_service": {
+          "p50_ms": 0.088542,
+          "p95_ms": 0.346959,
+          "p99_ms": 0.428334,
+          "max_ms": 1.037125
+        },
+        "queue_delay": {
+          "p50_ms": 3.968833,
+          "p95_ms": 4.680666,
+          "p99_ms": 4.931541,
+          "max_ms": 9.694458
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.035666,
+          "p95_ms": 4.832333,
+          "p99_ms": 5.069875,
+          "max_ms": 9.97825
+        },
+        "release_to_completion": {
+          "p50_ms": 4.035666,
+          "p95_ms": 4.832333,
+          "p99_ms": 5.069875,
+          "max_ms": 9.97825
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.004058833
+      }
+    },
+    {
+      "mode": "paced",
+      "repeat": 0,
+      "implementation": "onnx_incremental",
+      "metrics": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.094375,
+          "p95_ms": 0.159292,
+          "p99_ms": 0.1855,
+          "max_ms": 0.34825
+        },
+        "prediction_service": {
+          "p50_ms": 0.094375,
+          "p95_ms": 0.159292,
+          "p99_ms": 0.1855,
+          "max_ms": 0.34825
+        },
+        "queue_delay": {
+          "p50_ms": 3.985375,
+          "p95_ms": 4.788834,
+          "p99_ms": 4.944209,
+          "max_ms": 4.990167
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.064334,
+          "p95_ms": 4.885084,
+          "p99_ms": 5.050125,
+          "max_ms": 5.178792
+        },
+        "release_to_completion": {
+          "p50_ms": 4.064334,
+          "p95_ms": 4.885084,
+          "p99_ms": 5.050125,
+          "max_ms": 5.178792
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.004074833
+      }
+    },
+    {
+      "mode": "paced",
+      "repeat": 1,
+      "implementation": "onnx_incremental",
+      "metrics": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.0995,
+          "p95_ms": 0.30475,
+          "p99_ms": 0.6435,
+          "max_ms": 31.224541
+        },
+        "prediction_service": {
+          "p50_ms": 0.0995,
+          "p95_ms": 0.30475,
+          "p99_ms": 0.6435,
+          "max_ms": 31.224541
+        },
+        "queue_delay": {
+          "p50_ms": 3.982,
+          "p95_ms": 4.7345,
+          "p99_ms": 4.922208,
+          "max_ms": 14.99375
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.0625,
+          "p95_ms": 4.861666,
+          "p99_ms": 5.046791,
+          "max_ms": 34.777541
+        },
+        "release_to_completion": {
+          "p50_ms": 4.0625,
+          "p95_ms": 4.861666,
+          "p99_ms": 5.046791,
+          "max_ms": 34.777541
+        },
+        "missed_deadlines": 1,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.004497333
+      }
+    },
+    {
+      "mode": "paced",
+      "repeat": 1,
+      "implementation": "numpy_incremental",
+      "metrics": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.099083,
+          "p95_ms": 0.373083,
+          "p99_ms": 0.537959,
+          "max_ms": 1.522916
+        },
+        "prediction_service": {
+          "p50_ms": 0.099083,
+          "p95_ms": 0.373083,
+          "p99_ms": 0.537959,
+          "max_ms": 1.522916
+        },
+        "queue_delay": {
+          "p50_ms": 3.973209,
+          "p95_ms": 4.708209,
+          "p99_ms": 4.929417,
+          "max_ms": 8.103542
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.05,
+          "p95_ms": 4.871792,
+          "p99_ms": 5.092959,
+          "max_ms": 8.979375
+        },
+        "release_to_completion": {
+          "p50_ms": 4.05,
+          "p95_ms": 4.871792,
+          "p99_ms": 5.092959,
+          "max_ms": 8.979375
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.003831292
+      }
+    },
+    {
+      "mode": "paced",
+      "repeat": 1,
+      "implementation": "torch_window",
+      "metrics": {
+        "bins": 3001,
+        "step_service": {
+          "p50_ms": 0.680417,
+          "p95_ms": 1.230375,
+          "p99_ms": 1.55725,
+          "max_ms": 2.624667
+        },
+        "prediction_service": {
+          "p50_ms": 0.680417,
+          "p95_ms": 1.230375,
+          "p99_ms": 1.55725,
+          "max_ms": 2.624667
+        },
+        "queue_delay": {
+          "p50_ms": 3.776625,
+          "p95_ms": 4.572,
+          "p99_ms": 4.853458,
+          "max_ms": 5.018458
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.191208,
+          "p95_ms": 5.37375,
+          "p99_ms": 5.860916,
+          "max_ms": 7.449083
+        },
+        "release_to_completion": {
+          "p50_ms": 4.191208,
+          "p95_ms": 5.37375,
+          "p99_ms": 5.860916,
+          "max_ms": 7.449083
+        },
+        "missed_deadlines": 0,
+        "max_backlog_bins": 0,
+        "nominal_neural_seconds": 60.02,
+        "first_start_to_last_completion_seconds": 60.004475292
+      }
+    }
+  ],
+  "max_primary_trace_absolute_difference": 2.60770320892334e-08,
+  "scope": "raw timing/hash/summary audit; primary run also independent whole-file arithmetic",
+  "limitations": "RSS/CPU/constructor observations cannot be regenerated from per-bin stamps"
+}

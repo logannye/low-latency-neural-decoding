@@ -1,0 +1,1523 @@
+{
+  "rows": [
+    {
+      "seed": 0,
+      "day": "S2",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S2"
+        ],
+        "chronological_day_order": [
+          "S2"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23378,
+        "num_scored_bins": 22790,
+        "num_unscored_bins": 588,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 467.56,
+        "scored_duration_seconds": 455.8,
+        "r2_mean": -0.06340683273948491,
+        "r2_population_std": 0.0,
+        "r2_worst_day": -0.06340683273948491,
+        "worst_day": "S2",
+        "per_day": {
+          "S2": {
+            "r2_variance_weighted": -0.06340683273948491,
+            "r2_per_output": [
+              -0.14953364927660417,
+              -0.5361183400337224,
+              0.03554638939479493,
+              -0.029700935284211916,
+              0.11281172981956022,
+              0.05536133887764472,
+              -0.39328215449284154
+            ],
+            "sse_per_output": [
+              0.010142811391648713,
+              0.03542006625781985,
+              0.027079029101169393,
+              0.3226569156724099,
+              0.6939272764551572,
+              0.8369615382122739,
+              1.033708827670071
+            ],
+            "sst_per_output": [
+              0.00882341408451291,
+              0.023058162470114295,
+              0.028077067474688605,
+              0.31335012392054595,
+              0.7821646202716629,
+              0.8860123692352939,
+              0.741923539562124
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22790,
+            "num_bins": 23378,
+            "num_unscored_bins": 588,
+            "num_files": 2,
+            "file_ids": [
+              "S2_set_1",
+              "S2_set_2"
+            ],
+            "nominal_duration_seconds": 467.56,
+            "scored_duration_seconds": 455.8
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S2"
+        ],
+        "chronological_day_order": [
+          "S2"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23378,
+        "num_scored_bins": 22790,
+        "num_unscored_bins": 588,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 467.56,
+        "scored_duration_seconds": 455.8,
+        "r2_mean": -0.0604791955247936,
+        "r2_population_std": 0.0,
+        "r2_worst_day": -0.0604791955247936,
+        "worst_day": "S2",
+        "per_day": {
+          "S2": {
+            "r2_variance_weighted": -0.0604791955247936,
+            "r2_per_output": [
+              -0.14991597869989803,
+              -0.5387974183069872,
+              0.03548942272472089,
+              -0.026433337865541473,
+              0.11483815956971499,
+              0.0613076771496881,
+              -0.3928264104965862
+            ],
+            "sse_per_output": [
+              0.010146184842467128,
+              0.03548184087991494,
+              0.02708062855820887,
+              0.32163301361634705,
+              0.6923422747991201,
+              0.8316930089515863,
+              1.0333707004712351
+            ],
+            "sst_per_output": [
+              0.00882341408451291,
+              0.023058162470114295,
+              0.028077067474688605,
+              0.31335012392054595,
+              0.7821646202716629,
+              0.8860123692352939,
+              0.741923539562124
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22790,
+            "num_bins": 23378,
+            "num_unscored_bins": 588,
+            "num_files": 2,
+            "file_ids": [
+              "S2_set_1",
+              "S2_set_2"
+            ],
+            "nominal_duration_seconds": 467.56,
+            "scored_duration_seconds": 455.8
+          }
+        }
+      },
+      "delta_r2": 0.002927637214691317,
+      "max_absolute_trace_difference": 0.00046508305240422487,
+      "model_sha256": "a00cbc1f0f6d317822cd2177c513c53d2168697fb9f06110a0e3efadfdcdcc0a",
+      "float32_graph_sha256": "702c29de3eafdb1d2882c9e6e135bdd5910cbfdbc3c1a45ac44dda1c8c58084a",
+      "int8_graph_sha256": "907e0e1bdc4f0c7d33591b2c2d29fdc5e5c6fb6d0e38777471073cf21ba1b782",
+      "canonical_float32_graph_sha256": "5bf69994c53fc1cf1fb68bbe541e5d14bdda1fd8eb91195760e9d20e568c006f",
+      "canonical_float32_max_trace_difference": 1.30385160446167e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 0,
+      "day": "S3",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S3"
+        ],
+        "chronological_day_order": [
+          "S3"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 22338,
+        "num_scored_bins": 21746,
+        "num_unscored_bins": 592,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 446.76,
+        "scored_duration_seconds": 434.92,
+        "r2_mean": 0.3112249436802121,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.3112249436802121,
+        "worst_day": "S3",
+        "per_day": {
+          "S3": {
+            "r2_variance_weighted": 0.3112249436802121,
+            "r2_per_output": [
+              0.16443634255825168,
+              0.1627565387608788,
+              0.1513492044612056,
+              -0.1537745880856336,
+              0.37771277305748774,
+              0.36458570785567845,
+              0.3693168330241443
+            ],
+            "sse_per_output": [
+              0.008249261097862061,
+              0.0246003548503406,
+              0.025755471730759646,
+              0.3004820845678288,
+              0.4637661967242595,
+              0.502514048850131,
+              0.4344225692061022
+            ],
+            "sst_per_output": [
+              0.00987269015878322,
+              0.029382558346806375,
+              0.030348727493277043,
+              0.26043395969259026,
+              0.7452606716722837,
+              0.7908447371466977,
+              0.6888126906718808
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 21746,
+            "num_bins": 22338,
+            "num_unscored_bins": 592,
+            "num_files": 2,
+            "file_ids": [
+              "S3_set_1",
+              "S3_set_2"
+            ],
+            "nominal_duration_seconds": 446.76,
+            "scored_duration_seconds": 434.92
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S3"
+        ],
+        "chronological_day_order": [
+          "S3"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 22338,
+        "num_scored_bins": 21746,
+        "num_unscored_bins": 592,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 446.76,
+        "scored_duration_seconds": 434.92,
+        "r2_mean": 0.3129312924303297,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.3129312924303297,
+        "worst_day": "S3",
+        "per_day": {
+          "S3": {
+            "r2_variance_weighted": 0.3129312924303297,
+            "r2_per_output": [
+              0.1643816100722283,
+              0.16359874485753956,
+              0.1521871342658746,
+              -0.1418753264155843,
+              0.37732835869981873,
+              0.36474582305778414,
+              0.37130707063580526
+            ],
+            "sse_per_output": [
+              0.00824980145473819,
+              0.02457560868056543,
+              0.02573004162745925,
+              0.2973831127336796,
+              0.4640526856266564,
+              0.5023874225852085,
+              0.43305166828173763
+            ],
+            "sst_per_output": [
+              0.00987269015878322,
+              0.029382558346806375,
+              0.030348727493277043,
+              0.26043395969259026,
+              0.7452606716722837,
+              0.7908447371466977,
+              0.6888126906718808
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 21746,
+            "num_bins": 22338,
+            "num_unscored_bins": 592,
+            "num_files": 2,
+            "file_ids": [
+              "S3_set_1",
+              "S3_set_2"
+            ],
+            "nominal_duration_seconds": 446.76,
+            "scored_duration_seconds": 434.92
+          }
+        }
+      },
+      "delta_r2": 0.0017063487501176033,
+      "max_absolute_trace_difference": 0.0005938452668488026,
+      "model_sha256": "9cb5c7a26477901a4daa3399611cac81c159cc58b0b02f591b15c8cf6bd87800",
+      "float32_graph_sha256": "2941ff05caa79586eb8225de630aa492697ea446328183a13603e06adef3ae81",
+      "int8_graph_sha256": "de4110a9dea0291a9140b0f235ca49584dece3ae275ce7d5c36fe173953d57db",
+      "canonical_float32_graph_sha256": "ce9b28cc41ed47e8feea48d08c30c4e9a084c0b27b782aa329ab4dd9e8a5b0de",
+      "canonical_float32_max_trace_difference": 1.4901161193847656e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 0,
+      "day": "S4",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S4"
+        ],
+        "chronological_day_order": [
+          "S4"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23973,
+        "num_scored_bins": 23368,
+        "num_unscored_bins": 605,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 479.46000000000004,
+        "scored_duration_seconds": 467.36,
+        "r2_mean": 0.3158905337626997,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.3158905337626997,
+        "worst_day": "S4",
+        "per_day": {
+          "S4": {
+            "r2_variance_weighted": 0.3158905337626997,
+            "r2_per_output": [
+              0.12076275674758463,
+              0.12355863920380972,
+              0.049029796913433454,
+              0.34729010706243446,
+              0.3939406381790489,
+              0.2794264458580836,
+              0.2833492361638056
+            ],
+            "sse_per_output": [
+              0.008251808565826819,
+              0.01907372563396556,
+              0.031443241305023295,
+              0.21102653832401377,
+              0.47591023487282025,
+              0.6414257879324726,
+              0.5316620905088458
+            ],
+            "sst_per_output": [
+              0.009385189980467936,
+              0.02176269455909556,
+              0.033064381200344536,
+              0.32330831906695084,
+              0.7852534996620002,
+              0.8901600457656323,
+              0.7418705418841476
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 23368,
+            "num_bins": 23973,
+            "num_unscored_bins": 605,
+            "num_files": 2,
+            "file_ids": [
+              "S4_set_1",
+              "S4_set_2"
+            ],
+            "nominal_duration_seconds": 479.46000000000004,
+            "scored_duration_seconds": 467.36
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S4"
+        ],
+        "chronological_day_order": [
+          "S4"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23973,
+        "num_scored_bins": 23368,
+        "num_unscored_bins": 605,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 479.46000000000004,
+        "scored_duration_seconds": 467.36,
+        "r2_mean": 0.31615214982653783,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.31615214982653783,
+        "worst_day": "S4",
+        "per_day": {
+          "S4": {
+            "r2_variance_weighted": 0.31615214982653783,
+            "r2_per_output": [
+              0.12052262232851729,
+              0.12349471751540031,
+              0.05006944060546947,
+              0.34792840761234656,
+              0.39464095954421474,
+              0.2787948504437472,
+              0.28403530589105896
+            ],
+            "sse_per_output": [
+              0.008254062272970614,
+              0.019075116742146115,
+              0.03140886612967728,
+              0.2108201704461622,
+              0.47536030506993576,
+              0.6419880089354038,
+              0.5311531155885181
+            ],
+            "sst_per_output": [
+              0.009385189980467936,
+              0.02176269455909556,
+              0.033064381200344536,
+              0.32330831906695084,
+              0.7852534996620002,
+              0.8901600457656323,
+              0.7418705418841476
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 23368,
+            "num_bins": 23973,
+            "num_unscored_bins": 605,
+            "num_files": 2,
+            "file_ids": [
+              "S4_set_1",
+              "S4_set_2"
+            ],
+            "nominal_duration_seconds": 479.46000000000004,
+            "scored_duration_seconds": 467.36
+          }
+        }
+      },
+      "delta_r2": 0.0002616160638381215,
+      "max_absolute_trace_difference": 0.0006196144968271255,
+      "model_sha256": "14b6cd3a620dab84e15e942cb307c510114d290a6eb1808e4899980007c9a5a5",
+      "float32_graph_sha256": "c98141f2ab7f9e81d49b665d1bf452051edc515f494ecac72a12a01c0a71f45f",
+      "int8_graph_sha256": "f7fb579e938c362c23813391d6d7067bb5d42213d16df6c4cc7752dffc859bf9",
+      "canonical_float32_graph_sha256": "6bce32241c37cae74bd582ddcd41b1df7cb2d40287c68f20c274c26a906ef871",
+      "canonical_float32_max_trace_difference": 1.6763806343078613e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 1,
+      "day": "S2",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S2"
+        ],
+        "chronological_day_order": [
+          "S2"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23378,
+        "num_scored_bins": 22790,
+        "num_unscored_bins": 588,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 467.56,
+        "scored_duration_seconds": 455.8,
+        "r2_mean": -0.09545863560694913,
+        "r2_population_std": 0.0,
+        "r2_worst_day": -0.09545863560694913,
+        "worst_day": "S2",
+        "per_day": {
+          "S2": {
+            "r2_variance_weighted": -0.09545863560694913,
+            "r2_per_output": [
+              -0.0469324326629168,
+              -0.5005919630596734,
+              -0.2626936562815765,
+              -0.2749948460273677,
+              0.11281906334002634,
+              0.15076259688286842,
+              -0.5149033118048556
+            ],
+            "sse_per_output": [
+              0.009237518371891344,
+              0.034600893285577694,
+              0.035452734987279085,
+              0.39951979300073304,
+              0.6939215404349065,
+              0.7524348435790381,
+              1.1239424271886425
+            ],
+            "sst_per_output": [
+              0.00882341408451291,
+              0.023058162470114295,
+              0.028077067474688605,
+              0.31335012392054595,
+              0.7821646202716629,
+              0.8860123692352939,
+              0.741923539562124
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22790,
+            "num_bins": 23378,
+            "num_unscored_bins": 588,
+            "num_files": 2,
+            "file_ids": [
+              "S2_set_1",
+              "S2_set_2"
+            ],
+            "nominal_duration_seconds": 467.56,
+            "scored_duration_seconds": 455.8
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S2"
+        ],
+        "chronological_day_order": [
+          "S2"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23378,
+        "num_scored_bins": 22790,
+        "num_unscored_bins": 588,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 467.56,
+        "scored_duration_seconds": 455.8,
+        "r2_mean": -0.0908223865491708,
+        "r2_population_std": 0.0,
+        "r2_worst_day": -0.0908223865491708,
+        "worst_day": "S2",
+        "per_day": {
+          "S2": {
+            "r2_variance_weighted": -0.0908223865491708,
+            "r2_per_output": [
+              -0.04445845306713525,
+              -0.5037411764045201,
+              -0.26667651751881083,
+              -0.2794670045493295,
+              0.11614380512132061,
+              0.15475684743711637,
+              -0.5036769628428415
+            ],
+            "sse_per_output": [
+              0.009215689425481127,
+              0.03467350835853623,
+              0.035564562050979236,
+              0.4009211444277821,
+              0.6913210450420392,
+              0.7488958881821495,
+              1.1156133346303854
+            ],
+            "sst_per_output": [
+              0.00882341408451291,
+              0.023058162470114295,
+              0.028077067474688605,
+              0.31335012392054595,
+              0.7821646202716629,
+              0.8860123692352939,
+              0.741923539562124
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22790,
+            "num_bins": 23378,
+            "num_unscored_bins": 588,
+            "num_files": 2,
+            "file_ids": [
+              "S2_set_1",
+              "S2_set_2"
+            ],
+            "nominal_duration_seconds": 467.56,
+            "scored_duration_seconds": 455.8
+          }
+        }
+      },
+      "delta_r2": 0.004636249057778333,
+      "max_absolute_trace_difference": 0.0005477499216794968,
+      "model_sha256": "bbf3dd2b8c0995f62e63cbd9b74319eb43c4d976b4552239bdf686d1289dfe5c",
+      "float32_graph_sha256": "aaca82f951647f75febd5bdc9e04821ba99f2888af7acbe62cc1bfee3c647ee8",
+      "int8_graph_sha256": "c5cb982155064cb14ea87b2448c4f93ca14ae9a348cca862340cf8086a6bb9a5",
+      "canonical_float32_graph_sha256": "9b03f214ed2524dc9f8964a71b83771b2118829346a8bac72e0f574d202bdd73",
+      "canonical_float32_max_trace_difference": 1.862645149230957e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 1,
+      "day": "S3",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S3"
+        ],
+        "chronological_day_order": [
+          "S3"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 22338,
+        "num_scored_bins": 21746,
+        "num_unscored_bins": 592,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 446.76,
+        "scored_duration_seconds": 434.92,
+        "r2_mean": 0.23580056438286556,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.23580056438286556,
+        "worst_day": "S3",
+        "per_day": {
+          "S3": {
+            "r2_variance_weighted": 0.23580056438286556,
+            "r2_per_output": [
+              0.1634230086015115,
+              0.1641877487812331,
+              0.07402910459674894,
+              -0.32272570597407,
+              0.3071233544173311,
+              0.24317774315275065,
+              0.37255649659781664
+            ],
+            "sse_per_output": [
+              0.008259265430044332,
+              0.024558302238411007,
+              0.028102038371299008,
+              0.34448269319400393,
+              0.5163737142729787,
+              0.5985288987831334,
+              0.4321910478230493
+            ],
+            "sst_per_output": [
+              0.00987269015878322,
+              0.029382558346806375,
+              0.030348727493277043,
+              0.26043395969259026,
+              0.7452606716722837,
+              0.7908447371466977,
+              0.6888126906718808
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 21746,
+            "num_bins": 22338,
+            "num_unscored_bins": 592,
+            "num_files": 2,
+            "file_ids": [
+              "S3_set_1",
+              "S3_set_2"
+            ],
+            "nominal_duration_seconds": 446.76,
+            "scored_duration_seconds": 434.92
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S3"
+        ],
+        "chronological_day_order": [
+          "S3"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 22338,
+        "num_scored_bins": 21746,
+        "num_unscored_bins": 592,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 446.76,
+        "scored_duration_seconds": 434.92,
+        "r2_mean": 0.23641952657338303,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.23641952657338303,
+        "worst_day": "S3",
+        "per_day": {
+          "S3": {
+            "r2_variance_weighted": 0.23641952657338303,
+            "r2_per_output": [
+              0.16221617364006413,
+              0.16348384325763676,
+              0.07489603821741464,
+              -0.31858524232315144,
+              0.3085769697613556,
+              0.24187251126531129,
+              0.3732218504577265
+            ],
+            "sse_per_output": [
+              0.008271180137691488,
+              0.024578984783528716,
+              0.028075728039090662,
+              0.343404375850432,
+              0.5152903919253379,
+              0.5995611345520709,
+              0.43173274364055586
+            ],
+            "sst_per_output": [
+              0.00987269015878322,
+              0.029382558346806375,
+              0.030348727493277043,
+              0.26043395969259026,
+              0.7452606716722837,
+              0.7908447371466977,
+              0.6888126906718808
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 21746,
+            "num_bins": 22338,
+            "num_unscored_bins": 592,
+            "num_files": 2,
+            "file_ids": [
+              "S3_set_1",
+              "S3_set_2"
+            ],
+            "nominal_duration_seconds": 446.76,
+            "scored_duration_seconds": 434.92
+          }
+        }
+      },
+      "delta_r2": 0.0006189621905174636,
+      "max_absolute_trace_difference": 0.0005824151448905468,
+      "model_sha256": "51ef634723496c63cc7739a10d3e32d1550addea4bfa5c74dacc2c01e980baec",
+      "float32_graph_sha256": "4780f5068e35c386877928674d48818173b0df20df0276a5c98b5150eb5cae2d",
+      "int8_graph_sha256": "20ccca1481a5eb91c0ccfcfe8f88810e6c31c02e3d66b12ee9b454b51a3e80e1",
+      "canonical_float32_graph_sha256": "e9a0d72669fdc6de647bc55b45997e1c339454afa37c382ad4bb1e4370b494d6",
+      "canonical_float32_max_trace_difference": 1.6763806343078613e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 1,
+      "day": "S4",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S4"
+        ],
+        "chronological_day_order": [
+          "S4"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23973,
+        "num_scored_bins": 23368,
+        "num_unscored_bins": 605,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 479.46000000000004,
+        "scored_duration_seconds": 467.36,
+        "r2_mean": 0.2780577670686064,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.2780577670686064,
+        "worst_day": "S4",
+        "per_day": {
+          "S4": {
+            "r2_variance_weighted": 0.2780577670686064,
+            "r2_per_output": [
+              0.1212535258434887,
+              0.18130134589960956,
+              0.10257809495454384,
+              0.25505455543354594,
+              0.35697705711477146,
+              0.25071397573538245,
+              0.2500006836731625
+            ],
+            "sse_per_output": [
+              0.008247202604625217,
+              0.017817088745129425,
+              0.02967269996596236,
+              0.2408470594793627,
+              0.5049360162635842,
+              0.6669844816509407,
+              0.5564023992161311
+            ],
+            "sst_per_output": [
+              0.009385189980467936,
+              0.02176269455909556,
+              0.033064381200344536,
+              0.32330831906695084,
+              0.7852534996620002,
+              0.8901600457656323,
+              0.7418705418841476
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 23368,
+            "num_bins": 23973,
+            "num_unscored_bins": 605,
+            "num_files": 2,
+            "file_ids": [
+              "S4_set_1",
+              "S4_set_2"
+            ],
+            "nominal_duration_seconds": 479.46000000000004,
+            "scored_duration_seconds": 467.36
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S4"
+        ],
+        "chronological_day_order": [
+          "S4"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23973,
+        "num_scored_bins": 23368,
+        "num_unscored_bins": 605,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 479.46000000000004,
+        "scored_duration_seconds": 467.36,
+        "r2_mean": 0.27753810224638836,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.27753810224638836,
+        "worst_day": "S4",
+        "per_day": {
+          "S4": {
+            "r2_variance_weighted": 0.27753810224638836,
+            "r2_per_output": [
+              0.12340195997914405,
+              0.1831142160030017,
+              0.09988352574592918,
+              0.25462114985253537,
+              0.3577730978725451,
+              0.25029904793877034,
+              0.24791986446531278
+            ],
+            "sse_per_output": [
+              0.008227039142101569,
+              0.017777635806793986,
+              0.029761794229446706,
+              0.24098718310923342,
+              0.5043109224726688,
+              0.6673538337973624,
+              0.5579460976894216
+            ],
+            "sst_per_output": [
+              0.009385189980467936,
+              0.02176269455909556,
+              0.033064381200344536,
+              0.32330831906695084,
+              0.7852534996620002,
+              0.8901600457656323,
+              0.7418705418841476
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 23368,
+            "num_bins": 23973,
+            "num_unscored_bins": 605,
+            "num_files": 2,
+            "file_ids": [
+              "S4_set_1",
+              "S4_set_2"
+            ],
+            "nominal_duration_seconds": 479.46000000000004,
+            "scored_duration_seconds": 467.36
+          }
+        }
+      },
+      "delta_r2": -0.0005196648222180467,
+      "max_absolute_trace_difference": 0.0007081031799316406,
+      "model_sha256": "29bd1b8e6f3c890c791004543cd824e865323fa2573794b7da0461ed13f9e256",
+      "float32_graph_sha256": "ed93c739bb0b8e067d0ce06be3c738873b8a3e0ca7bac011dcb2d47c3fd8caba",
+      "int8_graph_sha256": "88affcc8f9bdf6c8634888eb5eba999f6effb567ace699588e7815d3a6744fc7",
+      "canonical_float32_graph_sha256": "0c01978674bdc2eedf788827025363167c8b1ac6546594864ecd1f8d9e55423a",
+      "canonical_float32_max_trace_difference": 1.6763806343078613e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 2,
+      "day": "S2",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S2"
+        ],
+        "chronological_day_order": [
+          "S2"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23378,
+        "num_scored_bins": 22790,
+        "num_unscored_bins": 588,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 467.56,
+        "scored_duration_seconds": 455.8,
+        "r2_mean": 0.013870172946415422,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.013870172946415422,
+        "worst_day": "S2",
+        "per_day": {
+          "S2": {
+            "r2_variance_weighted": 0.013870172946415422,
+            "r2_per_output": [
+              -0.0847026985750361,
+              -0.49482711457301365,
+              -0.09951639540706392,
+              -0.13457483915644808,
+              0.049879033225480596,
+              0.16335029166431836,
+              -0.11863390084071224
+            ],
+            "sse_per_output": [
+              0.009570781068116135,
+              0.034467966472556705,
+              0.03087119602337053,
+              0.3555191664468065,
+              0.7431510051893372,
+              0.741281990302515,
+              0.8299408231859272
+            ],
+            "sst_per_output": [
+              0.00882341408451291,
+              0.023058162470114295,
+              0.028077067474688605,
+              0.31335012392054595,
+              0.7821646202716629,
+              0.8860123692352939,
+              0.741923539562124
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22790,
+            "num_bins": 23378,
+            "num_unscored_bins": 588,
+            "num_files": 2,
+            "file_ids": [
+              "S2_set_1",
+              "S2_set_2"
+            ],
+            "nominal_duration_seconds": 467.56,
+            "scored_duration_seconds": 455.8
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S2"
+        ],
+        "chronological_day_order": [
+          "S2"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23378,
+        "num_scored_bins": 22790,
+        "num_unscored_bins": 588,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 467.56,
+        "scored_duration_seconds": 455.8,
+        "r2_mean": 0.02027711220304182,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.02027711220304182,
+        "worst_day": "S2",
+        "per_day": {
+          "S2": {
+            "r2_variance_weighted": 0.02027711220304182,
+            "r2_per_output": [
+              -0.08630445545269527,
+              -0.5023442585259954,
+              -0.10062372914999096,
+              -0.13589918891151886,
+              0.05772952129798581,
+              0.16647136694055287,
+              -0.10574714257638762
+            ],
+            "sse_per_output": [
+              0.009584914032310439,
+              0.034641297999135796,
+              0.03090228670758769,
+              0.3559341516066721,
+              0.7370106311671589,
+              0.7385166790024567,
+              0.820379833880978
+            ],
+            "sst_per_output": [
+              0.00882341408451291,
+              0.023058162470114295,
+              0.028077067474688605,
+              0.31335012392054595,
+              0.7821646202716629,
+              0.8860123692352939,
+              0.741923539562124
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 22790,
+            "num_bins": 23378,
+            "num_unscored_bins": 588,
+            "num_files": 2,
+            "file_ids": [
+              "S2_set_1",
+              "S2_set_2"
+            ],
+            "nominal_duration_seconds": 467.56,
+            "scored_duration_seconds": 455.8
+          }
+        }
+      },
+      "delta_r2": 0.006406939256626398,
+      "max_absolute_trace_difference": 0.0006685338448733091,
+      "model_sha256": "205037da20894eae49a97a70390dcebcff3da31a5f41a7645a6bcd423be35a99",
+      "float32_graph_sha256": "3b94c60e5dc71e609cdc252ab61951a10859e3cae2e6ad98cbcc530f931ba5f1",
+      "int8_graph_sha256": "22fd8f2a1b2fe08ae20c18da2bec2f8077f303b87591dbc438b257aa05d38333",
+      "canonical_float32_graph_sha256": "51512c72a3fe71f4e44f20bf0a7bcda3b04d4512306b38899145874dbb2c80ba",
+      "canonical_float32_max_trace_difference": 1.1175870895385742e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 2,
+      "day": "S3",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S3"
+        ],
+        "chronological_day_order": [
+          "S3"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 22338,
+        "num_scored_bins": 21746,
+        "num_unscored_bins": 592,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 446.76,
+        "scored_duration_seconds": 434.92,
+        "r2_mean": 0.2379382684298913,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.2379382684298913,
+        "worst_day": "S3",
+        "per_day": {
+          "S3": {
+            "r2_variance_weighted": 0.2379382684298913,
+            "r2_per_output": [
+              0.1901899772308222,
+              0.17112782007523164,
+              0.1008932883785777,
+              -0.30919663105255335,
+              0.3484427357597767,
+              0.31216791782326536,
+              0.2495921680957256
+            ],
+            "sse_per_output": [
+              0.007995003442277276,
+              0.0243543851886841,
+              0.027286744578374975,
+              0.3409592626412156,
+              0.48558000438062443,
+              0.5439683822301254,
+              0.5168904377952357
+            ],
+            "sst_per_output": [
+              0.00987269015878322,
+              0.029382558346806375,
+              0.030348727493277043,
+              0.26043395969259026,
+              0.7452606716722837,
+              0.7908447371466977,
+              0.6888126906718808
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 21746,
+            "num_bins": 22338,
+            "num_unscored_bins": 592,
+            "num_files": 2,
+            "file_ids": [
+              "S3_set_1",
+              "S3_set_2"
+            ],
+            "nominal_duration_seconds": 446.76,
+            "scored_duration_seconds": 434.92
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S3"
+        ],
+        "chronological_day_order": [
+          "S3"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 22338,
+        "num_scored_bins": 21746,
+        "num_unscored_bins": 592,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 446.76,
+        "scored_duration_seconds": 434.92,
+        "r2_mean": 0.23732090135865788,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.23732090135865788,
+        "worst_day": "S3",
+        "per_day": {
+          "S3": {
+            "r2_variance_weighted": 0.23732090135865788,
+            "r2_per_output": [
+              0.19005058318150303,
+              0.17119605475681776,
+              0.10291722752940924,
+              -0.30752439515986163,
+              0.34736768170496424,
+              0.3125883872510885,
+              0.24726027731967903
+            ],
+            "sse_per_output": [
+              0.007996379636536183,
+              0.024352380279171117,
+              0.027225320600623413,
+              0.34052375562614184,
+              0.486381199887598,
+              0.5436358561960004,
+              0.5184966737550373
+            ],
+            "sst_per_output": [
+              0.00987269015878322,
+              0.029382558346806375,
+              0.030348727493277043,
+              0.26043395969259026,
+              0.7452606716722837,
+              0.7908447371466977,
+              0.6888126906718808
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 21746,
+            "num_bins": 22338,
+            "num_unscored_bins": 592,
+            "num_files": 2,
+            "file_ids": [
+              "S3_set_1",
+              "S3_set_2"
+            ],
+            "nominal_duration_seconds": 446.76,
+            "scored_duration_seconds": 434.92
+          }
+        }
+      },
+      "delta_r2": -0.0006173670712334156,
+      "max_absolute_trace_difference": 0.0005782428197562695,
+      "model_sha256": "d94a98bd09d0d43922fef8a4b891c30c2ba29d49500bdb4b38d784b5075f3f40",
+      "float32_graph_sha256": "0e22780d5e5db6a8f0c14a08d2fbff702bdc66efdb41da875dfef46c249a6a48",
+      "int8_graph_sha256": "009ec539d9e537b0cdf99fb015c1eb1fda6ee2655690f413797fb2d3e93ac6bc",
+      "canonical_float32_graph_sha256": "9562a0af0242d76f4bfd1c3c56126decc3f00c6397d91a5af33bd9cb53798fe4",
+      "canonical_float32_max_trace_difference": 1.6763806343078613e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    },
+    {
+      "seed": 2,
+      "day": "S4",
+      "float32": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S4"
+        ],
+        "chronological_day_order": [
+          "S4"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23973,
+        "num_scored_bins": 23368,
+        "num_unscored_bins": 605,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 479.46000000000004,
+        "scored_duration_seconds": 467.36,
+        "r2_mean": 0.31545722580827845,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.31545722580827845,
+        "worst_day": "S4",
+        "per_day": {
+          "S4": {
+            "r2_variance_weighted": 0.31545722580827845,
+            "r2_per_output": [
+              0.11205447522068757,
+              0.17907359097991482,
+              0.13657683223771722,
+              0.29635329431305646,
+              0.3818137683967038,
+              0.2683888159907407,
+              0.3245690431788856
+            ],
+            "sse_per_output": [
+              0.008333537442360147,
+              0.017865570694999264,
+              0.02854855275610115,
+              0.2274948336326432,
+              0.48543290180935217,
+              0.6512510450403307,
+              0.5010823299422085
+            ],
+            "sst_per_output": [
+              0.009385189980467936,
+              0.02176269455909556,
+              0.033064381200344536,
+              0.32330831906695084,
+              0.7852534996620002,
+              0.8901600457656323,
+              0.7418705418841476
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 23368,
+            "num_bins": 23973,
+            "num_unscored_bins": 605,
+            "num_files": 2,
+            "file_ids": [
+              "S4_set_1",
+              "S4_set_2"
+            ],
+            "nominal_duration_seconds": 479.46000000000004,
+            "scored_duration_seconds": 467.36
+          }
+        }
+      },
+      "dynamic_int8": {
+        "schema_version": 1,
+        "metric": "mean_day_variance_weighted_r2",
+        "evaluation_kind": "local_evaluation",
+        "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+        "canonical_day_order": [
+          "S4"
+        ],
+        "chronological_day_order": [
+          "S4"
+        ],
+        "num_days": 1,
+        "num_files": 2,
+        "num_outputs": 7,
+        "num_bins": 23973,
+        "num_scored_bins": 23368,
+        "num_unscored_bins": 605,
+        "nominal_bin_seconds": 0.02,
+        "nominal_duration_seconds": 479.46000000000004,
+        "scored_duration_seconds": 467.36,
+        "r2_mean": 0.3156114221634926,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.3156114221634926,
+        "worst_day": "S4",
+        "per_day": {
+          "S4": {
+            "r2_variance_weighted": 0.3156114221634926,
+            "r2_per_output": [
+              0.11337680346493206,
+              0.1799634995750593,
+              0.13633940922003862,
+              0.2943449104654594,
+              0.383189460120979,
+              0.267595041547509,
+              0.32549132073664055
+            ],
+            "sse_per_output": [
+              0.008321127140571373,
+              0.01784620388605762,
+              0.02855640300126341,
+              0.22814416083845102,
+              0.484352635068409,
+              0.6519576313350455,
+              0.5003981193906691
+            ],
+            "sst_per_output": [
+              0.009385189980467936,
+              0.02176269455909556,
+              0.033064381200344536,
+              0.32330831906695084,
+              0.7852534996620002,
+              0.8901600457656323,
+              0.7418705418841476
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 23368,
+            "num_bins": 23973,
+            "num_unscored_bins": 605,
+            "num_files": 2,
+            "file_ids": [
+              "S4_set_1",
+              "S4_set_2"
+            ],
+            "nominal_duration_seconds": 479.46000000000004,
+            "scored_duration_seconds": 467.36
+          }
+        }
+      },
+      "delta_r2": 0.00015419635521413122,
+      "max_absolute_trace_difference": 0.0007065203972160816,
+      "model_sha256": "ca683ae1d05c1cfcac79a5f22e817b7bc97696c8f5a3563af780ae049d8b9aa8",
+      "float32_graph_sha256": "f0d3b60e5d092d0c905318e6dfc46e84ad2cf3a63eee51ed1e241e9abd29d868",
+      "int8_graph_sha256": "76432fb83029885880ef4e1d567dc928201867caced6a4506deeb5c8f6feca24",
+      "canonical_float32_graph_sha256": "ecf5f990e8f7ace2bee963e8d93a8f4814df2a20ce1a402ee2703c93dd6a76b5",
+      "canonical_float32_max_trace_difference": 1.6763806343078613e-08,
+      "float32_graph_bytes": 102884,
+      "int8_graph_bytes": 39641,
+      "operations": {
+        "Add": 5,
+        "Cast": 4,
+        "Concat": 8,
+        "Constant": 37,
+        "Div": 1,
+        "DynamicQuantizeLinear": 4,
+        "Gather": 6,
+        "MatMulInteger": 4,
+        "Mul": 9,
+        "Relu": 3,
+        "Reshape": 3,
+        "Shape": 3,
+        "Slice": 6,
+        "Sub": 1,
+        "Unsqueeze": 9
+      }
+    }
+  ],
+  "mean_delta_r2": 0.0017305463328146562,
+  "worst_seed_day_delta": -0.0006173670712334156,
+  "quality_gate": true,
+  "gate": "no seed/day loses more than .005 absolute R2",
+  "prediction_sha256": {
+    "seed-0/S2/S2_set_1.npy": "ad766920a3df4b193ecdeb376b7f522b98e2d8e8820cc2f174259ac56db16a68",
+    "seed-0/S2/S2_set_2.npy": "34a249c8b8d98748a9446ebdb9593e22524cd2e090a47b7723519df58585d3ab",
+    "seed-0/S3/S3_set_1.npy": "b676f53ce6bef29b156e3b8f78549206f7e0d99baf7d7f50560926b279343c17",
+    "seed-0/S3/S3_set_2.npy": "273d321c8aca47220d3a4f48af4f0a0b278b7659be9f6a4a710546dcb6408366",
+    "seed-0/S4/S4_set_1.npy": "1eee367501f0cb26fadd9a8ef099ad38996318334efb0baf2279b828bd26a999",
+    "seed-0/S4/S4_set_2.npy": "c20b5a6a088a6be8384c702fe8f788396abd2562d259caeacad15087c4ed270c",
+    "seed-1/S2/S2_set_1.npy": "332ea4e8eeb0a6ec5e48a6c7fac816d86ef9c33b5eecc0dd4ef31cbb876428a7",
+    "seed-1/S2/S2_set_2.npy": "6d447be3b5111c6a58b86ed8787fdfd6e86925cf35a37dd02e912350883b3bce",
+    "seed-1/S3/S3_set_1.npy": "f231d515f6d4bda17b881dc524baec34564f64ea9481223b6cdcc19914c920c9",
+    "seed-1/S3/S3_set_2.npy": "9bc2d52f7238aad5683ae4c7b85431acb22d5b2982ca782449d8053b29da4694",
+    "seed-1/S4/S4_set_1.npy": "d0acb2e833ab556e3a8a4ed622963e402730338bbd1520cc13bbc429563d28ff",
+    "seed-1/S4/S4_set_2.npy": "377f5be3225d6bba7c52c23228af68b853063c65c3fc015f2893ad836351e12e",
+    "seed-2/S2/S2_set_1.npy": "75273b80b7ac2b622519912f62d3c8dc3946439150273d8490e070ebd79f1d4a",
+    "seed-2/S2/S2_set_2.npy": "c3fd4d1696629cf1fcc50a2699be17808c63b5da8d3045dce566b9a67d0346c6",
+    "seed-2/S3/S3_set_1.npy": "89e49eaaf4d875a1afe3c8126f1e72529593ba743ba2ef9debf5bc67e43ddfae",
+    "seed-2/S3/S3_set_2.npy": "dcbbad4a17fba14385b0a9381e9f9452af888317512e8c6cc757794e9e8a763e",
+    "seed-2/S4/S4_set_1.npy": "4e60ad9c567343cce0bed2b6a6997eee678075536b54296e05e0d278911b96c1",
+    "seed-2/S4/S4_set_2.npy": "c1cffba3a8b12d88b5a02879b5a21adfd899bcd9f4d750d4cc96d4992e3e7560"
+  },
+  "sealed_days_used_for_selection": []
+}

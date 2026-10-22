@@ -99,20 +99,66 @@ read-only H1 cache and Python interpreter; new runs use fresh local directories.
 Only prebuilt ONNX/ORT wheels were added. No local native compilation occurred.
 
 Bounded correction did not pass its locked mixture-harm advantage criterion.
-Ordinary EMA improved real mean R2 from0.052625 to0.142009 and harmed no
+Ordinary EMA improved real mean R2 from 0.052625 to 0.142009 and harmed no
 development day, but the diagnostic also harmed no day, leaving no demonstrated
 protective advantage for a bound. Retain frozen normalization; do not turn the
-unmet criterion into a post hoc positive claim. All90traces and45day scores
+unmet criterion into a post hoc positive claim. All 90 traces and 45 day scores
 passed independent arithmetic/scoring audit.
 
 The second and final hypothesis, training channel dropout p=0.1, improved
-three-seed mean development R2 from0.160722 to0.172153. Seed-average day gains
-were0.010648/0.005737/0.017909, meeting both prespecified retention conditions.
+three-seed mean development R2 from 0.160722 to 0.172153. Seed-average day gains
+were 0.010648/0.005737/0.017909, meeting both prespecified retention conditions.
 Some individual seed/day differences are negative. Retain this single new
-configuration with all three seeds. Nine model/18trace independent audits passed.
+configuration with all three seeds. Nine model/18-trace independent audits passed.
 The nonlinear family used two configurations total; no further architecture,
 epoch, dropout probability, adaptation time constant or stress setting is searched.
 
 The final recipe, metrics and separate calibration budgets are recorded before
 S5 access. S0-S4 final refits are complete; array release awaits the exact
 committed-source freeze and runtime validation. S5-S12 remain sealed at this entry.
+
+
+## 2026-10-22: completed frozen evidence and stretch decisions
+
+This entry supersedes earlier progress notes that describe final data as sealed
+or runtime measurements as pending. The early freeze was recorded at 8d7220e,
+then S5 was released and scored once: ridge 0.162497, three-seed TCN mean 0.248215.
+The identical recipe was refitted on S0–S5 and frozen at 4f30a3d with unchanged
+implementation hashes. Across S6–S12, ridge averaged 0.034146 and TCN 0.177583.
+All 21 TCN seed/day scores exceeded ridge; `tz` remained weak. Independent audits
+reconstructed all 80 final traces and every day/output score. No final result
+triggered model selection or changed the primary recipe.
+
+Same-weight runtime measurement used the prespecified original seed 0/S4 artifact,
+separately from the final dropout refits. Three fast repeats and two 60-second
+paced repeats per implementation were measured sequentially on M4 Max. Incremental
+NumPy's median fast p99 was 0.034333 ms versus 0.107541 ms for PyTorch. Its paced
+p99 was 0.428334–0.537959 ms with zero observed deadline misses. ONNX had one
+31.224541 ms service outlier and a deadline miss; no sample was removed. The
+independent audit checked all 15 timing blocks and prediction traces. This is
+counts-ready recorded replay, not acquisition-to-action or closed-loop evidence.
+
+The separate intercept calibration study used labels within fixed 0/5/15/30-second
+file prefixes and scored one common suffix. It helped ridge modestly but did not
+improve the TCN average at any budget. All 224 calibration traces were independently
+reconstructed exactly. Runtime snapshot/restore was implemented and tested;
+full training resume and new native kernels were unnecessary for this scope.
+
+Dynamic int8 quantization passed its nine-model development quality gate (mean
+R² change +0.001731; worst -0.000617), reduced graph bytes by 61.47%, and lowered
+fast p99 about 2.15× in a separate float32/int8 campaign. Paced rankings reversed
+between repeats, so no consistent paced advantage is claimed. Float32 final
+models remain primary; final-day compressed accuracy was not evaluated.
+
+The prespecified M2 minival transfer check completed within its storage cap.
+Four training trials supplied only 302 bins (6.04 seconds); evaluation covered
+three later days. Ridge mean R² -13.497285 was much worse than constant -0.034258.
+Independent preparation/refitting/scoring confirmed this failure. We retain it
+as evidence of numerical portability and failed quality transfer under sparse
+training, and do not retune or generalize H1 success to a second participant/task.
+
+A private seven-output replay was generated from a completed later-day run and
+visually checked. The public repository includes its generator, aggregate plots,
+audit receipts, reproduction guide and final report. Raw arrays, trained artifacts,
+sample traces and the private replay stay local. Hidden EvalAI evaluation was not
+submitted because local authentication is unavailable; there is no official score.

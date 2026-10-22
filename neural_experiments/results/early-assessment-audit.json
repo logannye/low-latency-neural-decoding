@@ -1,0 +1,204 @@
+{
+  "status": "passed",
+  "stage": "early",
+  "models_checked": 5,
+  "prediction_traces_checked": 10,
+  "max_absolute_prediction_difference": 2.0489096641540527e-08,
+  "models": [
+    {
+      "model": "constant",
+      "kind": "linear",
+      "scores": {
+        "r2_mean": -3.840062045506448e-05,
+        "r2_population_std": 0.0,
+        "r2_worst_day": -3.840062045506448e-05,
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": -3.840062045506448e-05,
+            "r2_per_output": [
+              -0.00013342293157880825,
+              -4.773990310624754e-06,
+              -0.00032151916933620406,
+              -0.0002004699000599519,
+              -5.703180174787548e-07,
+              -9.325129091131146e-08,
+              -5.017895423198304e-05
+            ],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ]
+          }
+        },
+        "canonical_day_order": [
+          "S5"
+        ]
+      },
+      "trace_max_absolute_difference": {
+        "S5_set_1": 0.0,
+        "S5_set_2": 0.0
+      }
+    },
+    {
+      "model": "ridge",
+      "kind": "linear",
+      "scores": {
+        "r2_mean": 0.16249667615034113,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.16249667615034113,
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.16249667615034113,
+            "r2_per_output": [
+              0.12026469296848408,
+              -0.00897129052144563,
+              -0.21429228541335532,
+              0.28112349265309144,
+              0.1986035631224552,
+              0.160618594894962,
+              0.10260542657076421
+            ],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ]
+          }
+        },
+        "canonical_day_order": [
+          "S5"
+        ]
+      },
+      "trace_max_absolute_difference": {
+        "S5_set_1": 1.734723475976807e-17,
+        "S5_set_2": 1.734723475976807e-17
+      }
+    },
+    {
+      "model": "tcn-seed-0",
+      "kind": "tcn",
+      "scores": {
+        "r2_mean": 0.28275600627676406,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.28275600627676406,
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.28275600627676406,
+            "r2_per_output": [
+              0.26441471710703146,
+              0.10670006471953453,
+              -0.04258507097436448,
+              0.40620860973200745,
+              0.20184348212780212,
+              0.24482258816215519,
+              0.3871898103397581
+            ],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ]
+          }
+        },
+        "canonical_day_order": [
+          "S5"
+        ]
+      },
+      "trace_max_absolute_difference": {
+        "S5_set_1": 1.862645149230957e-08,
+        "S5_set_2": 1.862645149230957e-08
+      }
+    },
+    {
+      "model": "tcn-seed-1",
+      "kind": "tcn",
+      "scores": {
+        "r2_mean": 0.24099290754384795,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.24099290754384795,
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.24099290754384795,
+            "r2_per_output": [
+              0.23873426789897279,
+              0.09667073300090001,
+              -0.051497922522713235,
+              0.39220114897800107,
+              0.17460750504078304,
+              0.09182170373723864,
+              0.4512271274700299
+            ],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ]
+          }
+        },
+        "canonical_day_order": [
+          "S5"
+        ]
+      },
+      "trace_max_absolute_difference": {
+        "S5_set_1": 2.0489096641540527e-08,
+        "S5_set_2": 1.6763806343078613e-08
+      }
+    },
+    {
+      "model": "tcn-seed-2",
+      "kind": "tcn",
+      "scores": {
+        "r2_mean": 0.22089683487862039,
+        "r2_population_std": 0.0,
+        "r2_worst_day": 0.22089683487862039,
+        "per_day": {
+          "S5": {
+            "r2_variance_weighted": 0.22089683487862039,
+            "r2_per_output": [
+              0.20472445556319951,
+              0.06435655415259867,
+              0.10694168761106959,
+              0.38683457915545505,
+              0.057727576870378994,
+              0.15144669453107162,
+              0.4251503449472903
+            ],
+            "num_scored_bins": 22873,
+            "num_bins": 23503,
+            "file_ids": [
+              "S5_set_1",
+              "S5_set_2"
+            ]
+          }
+        },
+        "canonical_day_order": [
+          "S5"
+        ]
+      },
+      "trace_max_absolute_difference": {
+        "S5_set_1": 1.5832483768463135e-08,
+        "S5_set_2": 1.57160684466362e-08
+      }
+    }
+  ],
+  "freeze_sha256": "471c01b3fdc030c432b61c8188641c110b56f97aeb25ea64f5455312849a1fff",
+  "index_sha256": "b083f74b0ed94200bfb09d974c808c6be476fd5ccf01f5997c29ac052096a71e",
+  "primary_manifest_sha256": "80a127989f626b3d34f38efe7d1a7923842a3b752dbc0b3292bd0d1c115ba7f8",
+  "primary_summary_sha256": "421c4f863e6ad2bd4dae52d4198291b98c3dba0a22f3cf1493c4cbe17eb1ad92",
+  "audited_utc": "2026-10-22T16:38:13.313451+00:00",
+  "audit_source_sha256": "a6fa783440203a384e846871eff127d505b0cd4c69e290e9a56e07a1089c07cb",
+  "torch_version": "2.14.1",
+  "sklearn_version": "1.9.1",
+  "inference_reference": "independent whole-file Torch and NumPy FIR/lag calculation",
+  "scoring_reference": "sklearn float64 per-day variance-weighted R2",
+  "limitations": [
+    "Does not rerun training or establish biological/clinical validity.",
+    "Authorizes only the supplied local public-recording assessment.",
+    "Does not validate latency, energy, or hidden FALCON evaluation."
+  ]
+}

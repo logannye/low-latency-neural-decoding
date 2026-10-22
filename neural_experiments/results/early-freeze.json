@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "status": "frozen",
+  "stage": "early",
+  "created_at": "2026-10-22T16:28:14.688696+00:00",
+  "source": {
+    "git_revision": "8d7220e500ee543b1a8cf19f697848a292f761f4",
+    "files_sha256": {
+      "src/neural_decoder/__init__.py": "882e1f3f2f092661a4c5622ef60dafd2c06e29b89b9439dcee3399e792daa343",
+      "src/neural_decoder/adaptation.py": "c9593fd9d599b8d79bccc906961a8de57797a436db213c05244faa696e39ebf2",
+      "src/neural_decoder/artifacts.py": "0a318c22b91d98084fbab50edffab21fd76d2f430b0144fcc612b375075616b7",
+      "src/neural_decoder/assessment.py": "208c788736b8bf69eb1e05cd7a08ff74ce440848158dca47507742a52271b25b",
+      "src/neural_decoder/assessment_data.py": "60c4044b61ce8ee6dca8f0e2b84f60a5dffdb54cf988b202ea621c9e721e80d6",
+      "src/neural_decoder/cli.py": "c32cc68d936a0c4d06fbf17c260f66ba4351d2be35754a2364f07a1c6ba237ea",
+      "src/neural_decoder/data.py": "2b7a576264b7db604d107620325972a81701accd1dfd3b16d1e84be01edd99d7",
+      "src/neural_decoder/falcon_adapter.py": "72791e152314d11f75e74e3b44796ad2e3f12dae3d9729024cbb28826beb08be",
+      "src/neural_decoder/features.py": "e822c18846aa1fa7ebd35c3120bfabb018a3791ad7bd497ecf009e9a0fb6b4f9",
+      "src/neural_decoder/metrics.py": "0f533578249c296f8955ef7080d5193496935b66c65812594350e96affede244",
+      "src/neural_decoder/models.py": "50849a99bb74e406968c40d1fbe29c867a384dac3ce40b2a23f2380f73a2f3b9",
+      "src/neural_decoder/optimized.py": "e66e7ce45235cfc597a24cb9f7ced7a1a8c495dede67ba334c14be9b411c18ed",
+      "src/neural_decoder/replay.py": "51ac3dd1283f7f4450b5f76ce2feb9031cb1f43a673663b4b269a20a18cb41b8",
+      "src/neural_decoder/run_adaptation.py": "5ff9d14db07acbf48809216c982ae1ea2a83df54f72d543e37572da6b6e34076",
+      "src/neural_decoder/runtime.py": "1717aaa21b9cf767cd3bbd41ba3ea617c765e715abde5f4117d1fbbe95e95b0c",
+      "src/neural_decoder/snapshot.py": "1fd038839bbee213920f69cb4dbf1df16ac8a69a5138eb010f18f1612a1ad2bc",
+      "src/neural_decoder/splits.py": "e2a6362ba5857b7dea34d243a42d32237503c60bc9e7841cf4e0d31f318a929a",
+      "src/neural_decoder/temporal.py": "cb4d40fcbdef18227d51bc368fedfa7916fb0bb2ec8d12bf80982d1df003ddbd",
+      "src/neural_decoder/train.py": "5523d08d88e09dda348f5dfad1f40cff0a2720b324185c5f36fc3bc003e9c583",
+      "src/neural_decoder/train_augmented.py": "e11848da8b94bef6ef08e455f65bc63675181537a5ede52d1072adb6896418d4",
+      "src/neural_decoder/train_temporal.py": "02685fab10a62d6998dfd712ee769435714e82be08c2df11bcab6a21b13c90b9",
+      "neural_experiments/configs/frozen-recipe-v1.json": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb"
+    }
+  },
+  "recipe": {
+    "path": "neural_experiments/configs/frozen-recipe-v1.json",
+    "sha256": "39ee187630b137a12d04ca5232513b5ec403e90caf5f651c523d40d74a731ebb"
+  },
+  "models": [
+    {
+      "name": "constant",
+      "kind": "linear",
+      "path": "results/neural-h1/final-early-models-v1/constant.npz",
+      "sha256": "98216bf11e9d6f38945c0459d236be02be9676c2b5a7c455b8bb1b92a32f654d",
+      "training_days": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "regime": "frozen_zero_calibration"
+    },
+    {
+      "name": "ridge",
+      "kind": "linear",
+      "path": "results/neural-h1/final-early-models-v1/ridge.npz",
+      "sha256": "23ab01146487dafd3cf693a0807b499e4a82c5f4d513a1fb4e648488da543673",
+      "training_days": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "regime": "frozen_zero_calibration"
+    },
+    {
+      "name": "tcn-seed-0",
+      "kind": "tcn",
+      "seed": 0,
+      "path": "results/neural-h1/final-early-models-v1/tcn-seed-0.npz",
+      "sha256": "bf407fb7a12405acbb7d55f5f2a26f3caa8a82cddddf38482bcfdc3e21324766",
+      "training_days": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "regime": "frozen_zero_calibration"
+    },
+    {
+      "name": "tcn-seed-1",
+      "kind": "tcn",
+      "seed": 1,
+      "path": "results/neural-h1/final-early-models-v1/tcn-seed-1.npz",
+      "sha256": "c4d6881097a7645462e2ff9eb6d9b3747c76bb988736b074700afb7275a9692e",
+      "training_days": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "regime": "frozen_zero_calibration"
+    },
+    {
+      "name": "tcn-seed-2",
+      "kind": "tcn",
+      "seed": 2,
+      "path": "results/neural-h1/final-early-models-v1/tcn-seed-2.npz",
+      "sha256": "215a667146e1a185773eb5d1d934fe38286b3c7c8b24d4333eb83400b3c7e13e",
+      "training_days": [
+        "S0",
+        "S1",
+        "S2",
+        "S3",
+        "S4"
+      ],
+      "regime": "frozen_zero_calibration"
+    }
+  ],
+  "data": {
+    "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+    "manifest_sha256": "e55f58ebb10aee5201febb31209a8d8152e5cf7f0bff5bb5852c0a65693c5449",
+    "schema_audit_sha256": "6b5abfe16652c7e752eb6c2169e9d4d26c50f38a9d3cecc13e92a5044b211b3f",
+    "split_manifest_sha256": "78ead4e78d5adcb64c218f8b164c9024d79b685a2e3268ad1fc75e524442ea56"
+  },
+  "evaluation_days": [
+    "S5"
+  ],
+  "provider_split": "held-in-calib",
+  "primary_metrics": {
+    "decoding": "mean_of_day_variance_weighted_r2",
+    "runtime": "p99_complete_step_service_ms"
+  }
+}

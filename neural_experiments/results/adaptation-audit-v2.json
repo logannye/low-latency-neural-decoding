@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "traces_checked": 90,
+  "day_scores_checked": 45,
+  "per_output_day_scores_checked": 315,
+  "condition_method_aggregates_checked": 15,
+  "max_absolute_prediction_difference": 3.8163916471489756e-17,
+  "max_absolute_ema_state_difference": 2.0261570199409107e-15,
+  "summary_sha256": "062638a27f9be2dbb330d1a0932f5d0b673ae8bc8f5f3b000ea292253f5c6efe",
+  "run_manifest_sha256": "c7a7fb67da010761a469c6f7caeb102211d3886b379c09d74d3a5367a41140eb",
+  "config_sha256": "65fc61effa23beb8867186458d742ff1ee740196bae68860bcc40844a3187eb2",
+  "index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+  "baseline_manifest_sha256": "3e3bd0e95a4bd7708332dfe2278328a24c68e582c39d629cf8de59a50741f0ff",
+  "baseline_model_sha256": {
+    "S2": "35797f7a81604af3cf9bbf5b9975f5800e6be9f729c7d67312b6df4ae613cee3",
+    "S3": "b576585be3faf1ec91c79548258ebc2c7b3ee2e7512ac9664d0cf1bf3968bfde",
+    "S4": "a4156cf13b622c4ada3a631805cf727957398b4d0457433de04a199d75b246e8"
+  },
+  "trace_manifest_sha256": "91ff3667e1b7e01f58f4d6969fcc65c3cda09af62f36da2ac469ae1682225cbe",
+  "audit_source_sha256": "06ebc3429b915b9467df8f2f4e8973017feff6cd928524b7a8ae54240863beb2",
+  "sealed_arrays_opened": false,
+  "reference": "scipy lfilter delayed EMA and batch affine predictions; sklearn float64 scoring"
+}

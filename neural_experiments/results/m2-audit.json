@@ -1,0 +1,137 @@
+{
+  "status": "passed",
+  "run_manifest_sha256": "39369cd07d3273805ed85d58c9ae21e75fc7ded45eb5f6984ca794fa97553507",
+  "source_head": "d80e4d0d1b8d505121eeba63f62f177176abe999",
+  "config_sha256": "eb8bfd8c6ba89496783b901c37007a53d9f4973b10c3fef07047f1853e9dee32",
+  "independent_methods": [
+    "direct HDF5 arrays and histogram binning",
+    "NumPy full-file convolution",
+    "sklearn Ridge normal-equation parity",
+    "sklearn per-day R2"
+  ],
+  "raw_checks": {
+    "2020-10-19_Run1": {
+      "bins": 173,
+      "scored_bins": 173,
+      "trials": 2,
+      "direct_hdf5_preparation_exact": true,
+      "release_offset_seconds": 0.02
+    },
+    "2020-10-19_Run2": {
+      "bins": 129,
+      "scored_bins": 129,
+      "trials": 2,
+      "direct_hdf5_preparation_exact": true,
+      "release_offset_seconds": 0.02
+    },
+    "2020-10-20_Run1": {
+      "bins": 117,
+      "scored_bins": 117,
+      "trials": 2,
+      "direct_hdf5_preparation_exact": true,
+      "release_offset_seconds": 0.02
+    },
+    "2020-10-20_Run2": {
+      "bins": 116,
+      "scored_bins": 116,
+      "trials": 2,
+      "direct_hdf5_preparation_exact": true,
+      "release_offset_seconds": 0.02
+    },
+    "2020-10-27_Run1": {
+      "bins": 141,
+      "scored_bins": 141,
+      "trials": 2,
+      "direct_hdf5_preparation_exact": true,
+      "release_offset_seconds": 0.02
+    },
+    "2020-10-27_Run2": {
+      "bins": 141,
+      "scored_bins": 141,
+      "trials": 2,
+      "direct_hdf5_preparation_exact": true,
+      "release_offset_seconds": 0.02
+    },
+    "2020-10-28_Run1": {
+      "bins": 194,
+      "scored_bins": 194,
+      "trials": 2,
+      "direct_hdf5_preparation_exact": true,
+      "release_offset_seconds": 0.02
+    }
+  },
+  "training_bins": 302,
+  "training_seconds": 6.04,
+  "evaluation_bins": 709,
+  "models": {
+    "constant": {
+      "per_day": {
+        "2020-10-20": {
+          "r2_variance_weighted": -0.027441810907742448,
+          "r2_per_output": [
+            -0.0005924998137405435,
+            -0.03978124061022181
+          ],
+          "scored_bins": 233
+        },
+        "2020-10-27": {
+          "r2_variance_weighted": -0.010114236185820264,
+          "r2_per_output": [
+            -0.0017504238062975297,
+            -0.019400941782061754
+          ],
+          "scored_bins": 282
+        },
+        "2020-10-28": {
+          "r2_variance_weighted": -0.06521902025903235,
+          "r2_per_output": [
+            -0.13910374348627008,
+            -0.04770432862362051
+          ],
+          "scored_bins": 194
+        }
+      },
+      "r2_mean": -0.034258355784198356,
+      "r2_population_std": 0.023007002846646283,
+      "max_prediction_abs_error": 0.0,
+      "independent_fit_atol": 1e-12,
+      "coefficient_max_abs_error": 0.0,
+      "intercept_max_abs_error": 0.0
+    },
+    "ridge": {
+      "per_day": {
+        "2020-10-20": {
+          "r2_variance_weighted": -25.04271282786035,
+          "r2_per_output": [
+            -72.99539461028536,
+            -3.0045777029787466
+          ],
+          "scored_bins": 233
+        },
+        "2020-10-27": {
+          "r2_variance_weighted": -5.417753077018879,
+          "r2_per_output": [
+            -1.500399354083422,
+            -9.76736173518417
+          ],
+          "scored_bins": 282
+        },
+        "2020-10-28": {
+          "r2_variance_weighted": -10.031390546732133,
+          "r2_per_output": [
+            -26.25288762790233,
+            -6.186014847514655
+          ],
+          "scored_bins": 194
+        }
+      },
+      "r2_mean": -13.497285483870455,
+      "r2_population_std": 8.378308583956459,
+      "max_prediction_abs_error": 2.0747292772682613e-15,
+      "independent_fit_atol": 1e-12,
+      "coefficient_max_abs_error": 7.948557177034354e-17,
+      "intercept_max_abs_error": 1.3688052427629493e-17
+    }
+  },
+  "audit_source_sha256": "8c2b1bc0e69641b06de257ad34c823f5a984bbba4e64c9013fc9fe5447ff3f99"
+}

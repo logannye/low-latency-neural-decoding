@@ -1,0 +1,340 @@
+{
+  "schema_version": 1,
+  "experiment": "m2-minival-transfer-v1",
+  "evaluation_kind": "local_minival_only",
+  "status": "complete",
+  "source_commit": "d80e4d0d1b8d505121eeba63f62f177176abe999",
+  "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+  "config_sha256": "eb8bfd8c6ba89496783b901c37007a53d9f4973b10c3fef07047f1853e9dee32",
+  "run_manifest_sha256": "39369cd07d3273805ed85d58c9ae21e75fc7ded45eb5f6984ca794fa97553507",
+  "independent_audit_sha256": "4e698ae0af2173f8faf27bc45394336a2279fe12f7da9123519154b78e396c85",
+  "audit_source_sha256": "8c2b1bc0e69641b06de257ad34c823f5a984bbba4e64c9013fc9fe5447ff3f99",
+  "dataset": "DANDI:000953/draft",
+  "license": "CC-BY-4.0",
+  "scope": "Local minival-only numerical/implementation transfer and sparse-training forward-day quality; no official result, H1-weight transfer, or cross-participant generalization claim.",
+  "input_channels": 96,
+  "output_names": [
+    "index",
+    "mrs"
+  ],
+  "recipe": {
+    "history": 1,
+    "regularization": 0.1,
+    "fir_taps": 12,
+    "fir_tau_bins": 12,
+    "normalization": "training-only frozen",
+    "new_day_calibration_seconds": 0,
+    "no_search": true
+  },
+  "training": {
+    "days": [
+      "2020-10-19"
+    ],
+    "num_files": 2,
+    "num_trials": 4,
+    "num_bins": 302,
+    "scored_bins": 302,
+    "nominal_seconds": 6.04,
+    "scored_seconds": 6.04
+  },
+  "evaluation": {
+    "days": [
+      "2020-10-20",
+      "2020-10-27",
+      "2020-10-28"
+    ],
+    "num_files": 5,
+    "num_trials": 10,
+    "num_bins": 709,
+    "scored_bins": 709,
+    "nominal_seconds": 14.18
+  },
+  "file_counts": [
+    {
+      "file_id": "2020-10-19_Run1",
+      "role": "training",
+      "num_bins": 173,
+      "num_scored_bins": 173,
+      "num_trials": 2,
+      "nominal_seconds": 3.46
+    },
+    {
+      "file_id": "2020-10-19_Run2",
+      "role": "training",
+      "num_bins": 129,
+      "num_scored_bins": 129,
+      "num_trials": 2,
+      "nominal_seconds": 2.58
+    },
+    {
+      "file_id": "2020-10-20_Run1",
+      "role": "evaluation",
+      "num_bins": 117,
+      "num_scored_bins": 117,
+      "num_trials": 2,
+      "nominal_seconds": 2.34
+    },
+    {
+      "file_id": "2020-10-20_Run2",
+      "role": "evaluation",
+      "num_bins": 116,
+      "num_scored_bins": 116,
+      "num_trials": 2,
+      "nominal_seconds": 2.32
+    },
+    {
+      "file_id": "2020-10-27_Run1",
+      "role": "evaluation",
+      "num_bins": 141,
+      "num_scored_bins": 141,
+      "num_trials": 2,
+      "nominal_seconds": 2.82
+    },
+    {
+      "file_id": "2020-10-27_Run2",
+      "role": "evaluation",
+      "num_bins": 141,
+      "num_scored_bins": 141,
+      "num_trials": 2,
+      "nominal_seconds": 2.82
+    },
+    {
+      "file_id": "2020-10-28_Run1",
+      "role": "evaluation",
+      "num_bins": 194,
+      "num_scored_bins": 194,
+      "num_trials": 2,
+      "nominal_seconds": 3.88
+    }
+  ],
+  "models": {
+    "constant": {
+      "scores": {
+        "evaluation_kind": "local_minival_transfer",
+        "metric": "mean_day_variance_weighted_r2",
+        "per_day": {
+          "2020-10-20": {
+            "r2_variance_weighted": -0.027441810907742448,
+            "r2_per_output": [
+              -0.0005924998137405435,
+              -0.03978124061022181
+            ],
+            "sse_per_output": [
+              0.010925541163508154,
+              0.024703913102121958
+            ],
+            "sst_per_output": [
+              0.010919071615609685,
+              0.023758760148070997
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 233,
+            "sklearn_variance_weighted_r2": -0.027441810907742448,
+            "file_ids": [
+              "2020-10-20_Run1",
+              "2020-10-20_Run2"
+            ],
+            "num_files": 2,
+            "num_bins": 233
+          },
+          "2020-10-27": {
+            "r2_variance_weighted": -0.010114236185820264,
+            "r2_per_output": [
+              -0.0017504238062975297,
+              -0.019400941782061754
+            ],
+            "sse_per_output": [
+              0.03739085891694499,
+              0.03426837740886775
+            ],
+            "sst_per_output": [
+              0.037325523432146845,
+              0.03361619163207915
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 282,
+            "sklearn_variance_weighted_r2": -0.010114236185820264,
+            "file_ids": [
+              "2020-10-27_Run1",
+              "2020-10-27_Run2"
+            ],
+            "num_files": 2,
+            "num_bins": 282
+          },
+          "2020-10-28": {
+            "r2_variance_weighted": -0.06521902025903235,
+            "r2_per_output": [
+              -0.13910374348627008,
+              -0.04770432862362051
+            ],
+            "sse_per_output": [
+              0.008463593525336821,
+              0.03283843201550495
+            ],
+            "sst_per_output": [
+              0.007430046274304809,
+              0.031343224532292546
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 194,
+            "sklearn_variance_weighted_r2": -0.06521902025903235,
+            "file_ids": [
+              "2020-10-28_Run1"
+            ],
+            "num_files": 1,
+            "num_bins": 194
+          }
+        },
+        "r2_mean": -0.034258355784198356,
+        "r2_population_std": 0.023007002846646283,
+        "num_days": 3,
+        "num_files": 5,
+        "official_helper_parity": true,
+        "independent_sklearn_parity": true
+      },
+      "max_batch_stream_abs_error": 0.0,
+      "independent_refit_and_convolution_max_abs_error": 0.0
+    },
+    "ridge": {
+      "scores": {
+        "evaluation_kind": "local_minival_transfer",
+        "metric": "mean_day_variance_weighted_r2",
+        "per_day": {
+          "2020-10-20": {
+            "r2_variance_weighted": -25.04271282786035,
+            "r2_per_output": [
+              -72.99539461028536,
+              -3.0045777029787466
+            ],
+            "sse_per_output": [
+              0.8079610129750048,
+              0.09514380113938514
+            ],
+            "sst_per_output": [
+              0.010919071615609685,
+              0.023758760148070997
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 233,
+            "sklearn_variance_weighted_r2": -25.04271282786035,
+            "file_ids": [
+              "2020-10-20_Run1",
+              "2020-10-20_Run2"
+            ],
+            "num_files": 2,
+            "num_bins": 233
+          },
+          "2020-10-27": {
+            "r2_variance_weighted": -5.417753077018879,
+            "r2_per_output": [
+              -1.500399354083422,
+              -9.76736173518417
+            ],
+            "sse_per_output": [
+              0.09332871468056561,
+              0.36195769546186735
+            ],
+            "sst_per_output": [
+              0.037325523432146845,
+              0.03361619163207915
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 282,
+            "sklearn_variance_weighted_r2": -5.417753077018879,
+            "file_ids": [
+              "2020-10-27_Run1",
+              "2020-10-27_Run2"
+            ],
+            "num_files": 2,
+            "num_bins": 282
+          },
+          "2020-10-28": {
+            "r2_variance_weighted": -10.031390546732133,
+            "r2_per_output": [
+              -26.25288762790233,
+              -6.186014847514655
+            ],
+            "sse_per_output": [
+              0.20249021618374333,
+              0.2252328768580398
+            ],
+            "sst_per_output": [
+              0.007430046274304809,
+              0.031343224532292546
+            ],
+            "zero_variance_outputs": [],
+            "num_scored_bins": 194,
+            "sklearn_variance_weighted_r2": -10.031390546732133,
+            "file_ids": [
+              "2020-10-28_Run1"
+            ],
+            "num_files": 1,
+            "num_bins": 194
+          }
+        },
+        "r2_mean": -13.497285483870455,
+        "r2_population_std": 8.378308583956459,
+        "num_days": 3,
+        "num_files": 5,
+        "official_helper_parity": true,
+        "independent_sklearn_parity": true
+      },
+      "max_batch_stream_abs_error": 1.3877787807814457e-16,
+      "independent_refit_and_convolution_max_abs_error": 2.0747292772682613e-15
+    }
+  },
+  "ridge_minus_constant": {
+    "mean_r2": -13.463027128086257,
+    "per_day": {
+      "2020-10-20": -25.015271016952607,
+      "2020-10-27": -5.407638840833059,
+      "2020-10-28": -9.9661715264731
+    }
+  },
+  "ridge_improves_on_constant_any_day": false,
+  "numerical_audit": {
+    "status": "passed",
+    "raw_files": 7,
+    "models": 2,
+    "prediction_traces": 10,
+    "source_config_raw_model_prediction_hashes_verified": true,
+    "direct_hdf5_preparation_parity": true,
+    "independent_sklearn_fit_and_scores_verified": true,
+    "causality_chunk_reset_and_metadata_boundary_tests": true
+  },
+  "timing_convention": {
+    "bin_seconds": 0.02,
+    "counts_release_time": "target timestamp + 20 ms",
+    "provider_ambiguity": "converter describes target timestamps as right edge; pinned M2 loader treats them as bin starts",
+    "physical_zero_acquisition_delay_claim": false,
+    "performance_campaign": false
+  },
+  "storage": {
+    "raw_bytes": 124175536,
+    "run_plus_raw_bytes_including_audit": 124914484,
+    "added_storage_cap_bytes": 402653184
+  },
+  "failures": [
+    {
+      "stage": "pre-run test collection",
+      "detail": "PyNWB attempted a home cache write; fixed by lazy imports and local cache before the committed run",
+      "resolved": true
+    },
+    {
+      "stage": "quality transfer",
+      "detail": "Fixed ridge underperformed training-target mean on every future day. No retuning or extra data requested.",
+      "resolved": false
+    }
+  ],
+  "limitations": [
+    "Only four training trials (6.04 seconds), and 10 evaluation trials (14.18 seconds)",
+    "One macaque and one local minival-only split; no official hidden-test result",
+    "No H1 fitted weights transferred; only implementation and fixed recipe transported",
+    "Observed quality failure cause is not established; sparse training is a limitation, not a proven explanation",
+    "No M2 latency or hardware speed claim"
+  ],
+  "sources": [
+    "https://api.dandiarchive.org/api/dandisets/000953/versions/draft/info/",
+    "https://github.com/snel-repo/falcon-challenge/tree/770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f"
+  ]
+}
