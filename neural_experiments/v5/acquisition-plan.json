@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "study": "adaptive-calibration-and-T2-v5",
+  "status": "locked_before_new_acquisition_and_fresh_outcome_preparation",
+  "prior_exposure": "All V2/V3 first-600-second outcomes (80 sessions), V4 new-session first-600-second outcomes (24 sessions), and V4 T3 continuation outcomes informed follow-up design. V5 development is limited to the 104 distinct exposed first-min(600s,duration) sessions; V4 T3 continuation tails are excluded from development. No subsequent bins or archive ranks13-15 have informed design.",
+  "provider": {
+    "doi": "10.5061/dryad.x0k6djj1h",
+    "version_id": 462702,
+    "license": "CC0-1.0"
+  },
+  "parent_v4_acquisition_plan_sha256": "dadc1cce640900008087c9357527032fea85394b797fc21bb45fb02c3baf4fbe",
+  "parent_v4_new_index_sha256": "76293562fd6e586e7d6f5506c41ebda97241c971e18984c22489b69ac29558cc",
+  "new_session_domain": {
+    "participants": [
+      "T2",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11"
+    ],
+    "regular_session_ranks": [
+      13,
+      14,
+      15
+    ],
+    "selection": "Fixed regular MAT session archive ranks, independent of duration, signals and outcomes. Authenticate all12 previously acquired members against the V4 acquisition receipts while streaming. No substitution for missing or unusable cases. Archive rank is not chronological day order.",
+    "maximum_compressed_bytes_total": 20000000000,
+    "maximum_retained_raw_bytes_total": 12000000000,
+    "export_cap_seconds": 600
+  },
+  "T3_continuation_domain": {
+    "participant": "T3",
+    "sessions": "All eight previously acquired regular session members",
+    "selection": "The next two complete acquisition blocks immediately after the last V4-selected continuation block in each session. Metadata-only selection; retain unavailable and partial-block-count dispositions without replacements.",
+    "scope": "Fresh continuation blocks of known sessions in a known participant; a separate negative-control domain, never pooled with new sessions.",
+    "parent_v4_index_sha256": "7f8908c54312814ce41b7e743042e85fb890a443ee267f8fed937ae66b27de69"
+  },
+  "development": "Only first min(600 seconds,duration) from the80 V4 development and24 V4 new-session identities, deduplicated. Never use fresh tails or fresh archive members for model or policy selection.",
+  "features": [
+    "tx_3",
+    "tx_4_5",
+    "sbp"
+  ],
+  "feature_preparation": "Unchanged V4 within-block adjacent10ms pair preparation: sum counts, average power, separate pure feature files and scorer target files, preserve unit cursor-to-target and valid-go-pair semantics.",
+  "evaluation_lock": "Commit full algorithm, source-only policy selection, calibration intervals, shared evaluation windows, controls and gates before preparing fresh outcomes. Commit independently verified source selections and exact source snapshot before assessment. No assessment-dependent policy retuning."
+}
