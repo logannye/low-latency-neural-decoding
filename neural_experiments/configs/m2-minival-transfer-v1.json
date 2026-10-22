@@ -1,0 +1,1038 @@
+{
+  "schema_version": 1,
+  "name": "m2-minival-transfer-v1",
+  "status": "locked_before_array_access",
+  "source_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+  "source_sha256": {
+    "falcon_challenge/config.py": "3565e4449b7fc1f55a57e7c202083bfc6094ba55e37df2956851b7865a1c6ca9",
+    "falcon_challenge/dataloaders.py": "7638d839ec2085c7dde71ec9ca9676cbf1256c79fdcb327c4ac6487bfe5c9b05",
+    "falcon_challenge/evaluator.py": "2b848f84ef620eac82ce53d331d03727d9ae4ea9a5f2e5edb6e6557537ce4418"
+  },
+  "dataset": "DANDI:000953/draft",
+  "dataset_metadata_url": "https://api.dandiarchive.org/api/dandisets/000953/versions/draft/info/",
+  "license": "CC-BY-4.0",
+  "scope": "Local minival-only numerical/implementation transfer and sparse-training forward-day quality; no official result, H1-weight transfer, or cross-participant generalization claim.",
+  "train_days": [
+    "2020-10-19"
+  ],
+  "evaluation_days": [
+    "2020-10-20",
+    "2020-10-27",
+    "2020-10-28"
+  ],
+  "channels": 96,
+  "output_names": [
+    "index",
+    "mrs"
+  ],
+  "bin_seconds": 0.02,
+  "expected_trials_per_file": 2,
+  "history": 1,
+  "regularization": 0.1,
+  "fir_taps": 12,
+  "fir_tau_bins": 12,
+  "threads": 1,
+  "normalization": "Fit all training neural bins only; fit coefficients and intercept using training eval_mask. Frozen afterward.",
+  "target_semantics": "finger_vel index,mrs; provider AU; preprocessing gradient per sample without time divisor; no rescaling.",
+  "timestamp_semantics": "Match pinned loader start-bin behavior; release count[t] at target_timestamp[t]+0.02. Converter calls timestamp RHS. Treat as official observation convention, not zero-acquisition-delay target prediction.",
+  "state_semantics": "Reset per file; continuous across trials and mask=false bins; complete predictions, scorer applies masks afterward.",
+  "score": "Concatenate scored rows within calendar day; variance-weighted R2 per day, arithmetic mean and population std across three days. Preserve per-output R2 and counts. Independent sklearn and pinned helper parity.",
+  "parity_atol": 1e-10,
+  "raw_bytes": 124175536,
+  "total_added_bytes_cap": 402653184,
+  "no_search": true,
+  "no_adaptation": true,
+  "no_timing_during_primary_run": true,
+  "assets": [
+    {
+      "asset_id": "9df908a2-3381-4486-b52d-358f68424033",
+      "metadata_url": "https://api.dandiarchive.org/api/assets/9df908a2-3381-4486-b52d-358f68424033/",
+      "download_url": "https://api.dandiarchive.org/api/assets/9df908a2-3381-4486-b52d-358f68424033/download/",
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-19-Run1_behavior+ecephys.nwb",
+      "content_size": 21196248,
+      "sha256": "fc2a4f58e90eb528dfd31a69b01b29d26c029ca37114b10386d52e4eb84f28e5",
+      "etag": "d7c38d6cb6b276c1a1b01ec7fdb12c33-1",
+      "session": {
+        "name": "2020-10-19_Run1",
+        "schemaKey": "Session",
+        "startDate": "2020-10-19T13:00:00-04:00",
+        "identifier": "2020-10-19_Run1",
+        "description": "M2 data"
+      },
+      "date_modified": "2024-10-29T12:13:28.222860-04:00",
+      "role": "training"
+    },
+    {
+      "asset_id": "08b354ca-d8e1-4c67-a84c-893e7c082454",
+      "metadata_url": "https://api.dandiarchive.org/api/assets/08b354ca-d8e1-4c67-a84c-893e7c082454/",
+      "download_url": "https://api.dandiarchive.org/api/assets/08b354ca-d8e1-4c67-a84c-893e7c082454/download/",
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-19-Run2_behavior+ecephys.nwb",
+      "content_size": 15855264,
+      "sha256": "fc8195cf3a10fcb467983c20141dad581da4a49e81de72d141d38b96db531368",
+      "etag": "d29aba68abdb30d73a3de76479797f88-1",
+      "session": {
+        "name": "2020-10-19_Run2",
+        "schemaKey": "Session",
+        "startDate": "2020-10-19T14:00:00-04:00",
+        "identifier": "2020-10-19_Run2",
+        "description": "M2 data"
+      },
+      "date_modified": "2024-10-29T12:13:31.267784-04:00",
+      "role": "training"
+    },
+    {
+      "asset_id": "5f29fc64-32f8-41b1-93e7-82043fd87f72",
+      "metadata_url": "https://api.dandiarchive.org/api/assets/5f29fc64-32f8-41b1-93e7-82043fd87f72/",
+      "download_url": "https://api.dandiarchive.org/api/assets/5f29fc64-32f8-41b1-93e7-82043fd87f72/download/",
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-20-Run1_behavior+ecephys.nwb",
+      "content_size": 14449040,
+      "sha256": "ba34874464934308e044270ef2cf4cf657cab61c6535b9464a63436f57754970",
+      "etag": "676b43ac845a5268d1285f5a9372556e-1",
+      "session": {
+        "name": "2020-10-20_Run1",
+        "schemaKey": "Session",
+        "startDate": "2020-10-20T13:00:00-04:00",
+        "identifier": "2020-10-20_Run1",
+        "description": "M2 data"
+      },
+      "date_modified": "2024-10-29T12:13:34.165259-04:00",
+      "role": "evaluation"
+    },
+    {
+      "asset_id": "5704e8e3-a8e9-42e1-9c94-f413cea74ba0",
+      "metadata_url": "https://api.dandiarchive.org/api/assets/5704e8e3-a8e9-42e1-9c94-f413cea74ba0/",
+      "download_url": "https://api.dandiarchive.org/api/assets/5704e8e3-a8e9-42e1-9c94-f413cea74ba0/download/",
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-20-Run2_behavior+ecephys.nwb",
+      "content_size": 14278472,
+      "sha256": "9103ac8c202bbfc0f7fca1e658ca39bdb1d1bde7930ee8b93528c329017aa7c4",
+      "etag": "30ca3ddb926acdc04bae0aad50951d8b-1",
+      "session": {
+        "name": "2020-10-20_Run2",
+        "schemaKey": "Session",
+        "startDate": "2020-10-20T14:00:00-04:00",
+        "identifier": "2020-10-20_Run2",
+        "description": "M2 data"
+      },
+      "date_modified": "2024-10-29T12:13:35.210726-04:00",
+      "role": "evaluation"
+    },
+    {
+      "asset_id": "bc2760ef-f23e-486c-9159-4264aeb514d0",
+      "metadata_url": "https://api.dandiarchive.org/api/assets/bc2760ef-f23e-486c-9159-4264aeb514d0/",
+      "download_url": "https://api.dandiarchive.org/api/assets/bc2760ef-f23e-486c-9159-4264aeb514d0/download/",
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-27-Run1_behavior+ecephys.nwb",
+      "content_size": 17341136,
+      "sha256": "b7343ed721df7b50858eb25eb5b3dbba5cc91e393b05dc8bd2659df66486a2b7",
+      "etag": "1abdfa34eaebf620edc1e5d4fbb88e6d-1",
+      "session": {
+        "name": "2020-10-27_Run1",
+        "schemaKey": "Session",
+        "startDate": "2020-10-27T13:00:00-04:00",
+        "identifier": "2020-10-27_Run1",
+        "description": "M2 data"
+      },
+      "date_modified": "2024-10-29T12:13:37.408857-04:00",
+      "role": "evaluation"
+    },
+    {
+      "asset_id": "c32a6c5a-db80-47ce-9501-8afaa1a2e62e",
+      "metadata_url": "https://api.dandiarchive.org/api/assets/c32a6c5a-db80-47ce-9501-8afaa1a2e62e/",
+      "download_url": "https://api.dandiarchive.org/api/assets/c32a6c5a-db80-47ce-9501-8afaa1a2e62e/download/",
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-27-Run2_behavior+ecephys.nwb",
+      "content_size": 17360784,
+      "sha256": "b6fdaf80e698e7a7e664c3b72161655328be131e29b7366e045f599d63267dd8",
+      "etag": "0654e21d72ba58c34e58efca912a41eb-1",
+      "session": {
+        "name": "2020-10-27_Run2",
+        "schemaKey": "Session",
+        "startDate": "2020-10-27T14:00:00-04:00",
+        "identifier": "2020-10-27_Run2",
+        "description": "M2 data"
+      },
+      "date_modified": "2024-10-29T12:13:38.912530-04:00",
+      "role": "evaluation"
+    },
+    {
+      "asset_id": "3381f481-440a-4d80-92e1-0edd9927e060",
+      "metadata_url": "https://api.dandiarchive.org/api/assets/3381f481-440a-4d80-92e1-0edd9927e060/",
+      "download_url": "https://api.dandiarchive.org/api/assets/3381f481-440a-4d80-92e1-0edd9927e060/download/",
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-28-Run1_behavior+ecephys.nwb",
+      "content_size": 23694592,
+      "sha256": "bc578c5fda5a36a1ad979026277fc3573d2bde541e316f24f9431a01ab502412",
+      "etag": "1849336557bb8c085aafa3d2ef85c2ad-1",
+      "session": {
+        "name": "2020-10-28_Run1",
+        "schemaKey": "Session",
+        "startDate": "2020-10-28T13:00:00-04:00",
+        "identifier": "2020-10-28_Run1",
+        "description": "M2 data"
+      },
+      "date_modified": "2024-10-29T12:13:39.402530-04:00",
+      "role": "evaluation"
+    }
+  ],
+  "metadata_observed_date": "2026-10-22",
+  "provider_asset_metadata": [
+    {
+      "approach": [
+        {
+          "name": "electrophysiological approach",
+          "schemaKey": "ApproachType"
+        },
+        {
+          "name": "behavioral approach",
+          "schemaKey": "ApproachType"
+        }
+      ],
+      "schemaKey": "Asset",
+      "dateModified": "2024-10-29T12:13:28.222860-04:00",
+      "schemaVersion": "0.6.8",
+      "encodingFormat": "application/x-nwb",
+      "wasGeneratedBy": [
+        {
+          "name": "2020-10-19_Run1",
+          "schemaKey": "Session",
+          "startDate": "2020-10-19T13:00:00-04:00",
+          "identifier": "2020-10-19_Run1",
+          "description": "M2 data"
+        },
+        {
+          "id": "urn:uuid:95053dd6-9e72-487d-bb65-022532eadf00",
+          "name": "Metadata generation",
+          "endDate": "2024-10-29T12:13:28.222810-04:00",
+          "schemaKey": "Activity",
+          "startDate": "2024-10-29T12:13:28.156801-04:00",
+          "description": "Metadata generated by DANDI cli",
+          "wasAssociatedWith": [
+            {
+              "url": "https://github.com/dandi/dandi-cli",
+              "name": "DANDI Command Line Interface",
+              "version": "0.63.1",
+              "schemaKey": "Software",
+              "identifier": "RRID:SCR_019009"
+            }
+          ]
+        }
+      ],
+      "wasAttributedTo": [
+        {
+          "age": {
+            "value": "P8Y",
+            "unitText": "ISO-8601 duration",
+            "schemaKey": "PropertyValue",
+            "valueReference": {
+              "value": "dandi:BirthReference",
+              "schemaKey": "PropertyValue"
+            }
+          },
+          "sex": {
+            "name": "Male",
+            "schemaKey": "SexType",
+            "identifier": "http://purl.obolibrary.org/obo/PATO_0000384"
+          },
+          "species": {
+            "name": "Macaca mulatta - Rhesus monkey",
+            "schemaKey": "SpeciesType",
+            "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_9544"
+          },
+          "schemaKey": "Participant",
+          "identifier": "MonkeyN-held_in-minival"
+        }
+      ],
+      "blobDateModified": "2024-10-29T09:52:02.203436-04:00",
+      "variableMeasured": [
+        {
+          "value": "ElectricalSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "ElectrodeGroup",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "BehavioralTimeSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "Units",
+          "schemaKey": "PropertyValue"
+        }
+      ],
+      "measurementTechnique": [
+        {
+          "name": "multi electrode extracellular electrophysiology recording technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "surgical technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "behavioral technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "spike sorting technique",
+          "schemaKey": "MeasurementTechniqueType"
+        }
+      ],
+      "id": "dandiasset:9df908a2-3381-4486-b52d-358f68424033",
+      "access": [
+        {
+          "schemaKey": "AccessRequirements",
+          "status": "dandi:OpenAccess"
+        }
+      ],
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-19-Run1_behavior+ecephys.nwb",
+      "identifier": "9df908a2-3381-4486-b52d-358f68424033",
+      "contentUrl": [
+        "https://api.dandiarchive.org/api/assets/9df908a2-3381-4486-b52d-358f68424033/download/",
+        "https://dandiarchive.s3.amazonaws.com/blobs/2c2/bd5/2c2bd5be-9104-4d26-8216-40929257bebc"
+      ],
+      "contentSize": 21196248,
+      "digest": {
+        "dandi:dandi-etag": "d7c38d6cb6b276c1a1b01ec7fdb12c33-1",
+        "dandi:sha2-256": "fc2a4f58e90eb528dfd31a69b01b29d26c029ca37114b10386d52e4eb84f28e5"
+      },
+      "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.6.8/context.json"
+    },
+    {
+      "approach": [
+        {
+          "name": "electrophysiological approach",
+          "schemaKey": "ApproachType"
+        },
+        {
+          "name": "behavioral approach",
+          "schemaKey": "ApproachType"
+        }
+      ],
+      "schemaKey": "Asset",
+      "dateModified": "2024-10-29T12:13:31.267784-04:00",
+      "schemaVersion": "0.6.8",
+      "encodingFormat": "application/x-nwb",
+      "wasGeneratedBy": [
+        {
+          "name": "2020-10-19_Run2",
+          "schemaKey": "Session",
+          "startDate": "2020-10-19T14:00:00-04:00",
+          "identifier": "2020-10-19_Run2",
+          "description": "M2 data"
+        },
+        {
+          "id": "urn:uuid:7acddfeb-fd96-4a32-b715-a9a9f9662ba4",
+          "name": "Metadata generation",
+          "endDate": "2024-10-29T12:13:31.267745-04:00",
+          "schemaKey": "Activity",
+          "startDate": "2024-10-29T12:13:31.264148-04:00",
+          "description": "Metadata generated by DANDI cli",
+          "wasAssociatedWith": [
+            {
+              "url": "https://github.com/dandi/dandi-cli",
+              "name": "DANDI Command Line Interface",
+              "version": "0.63.1",
+              "schemaKey": "Software",
+              "identifier": "RRID:SCR_019009"
+            }
+          ]
+        }
+      ],
+      "wasAttributedTo": [
+        {
+          "age": {
+            "value": "P8Y",
+            "unitText": "ISO-8601 duration",
+            "schemaKey": "PropertyValue",
+            "valueReference": {
+              "value": "dandi:BirthReference",
+              "schemaKey": "PropertyValue"
+            }
+          },
+          "sex": {
+            "name": "Male",
+            "schemaKey": "SexType",
+            "identifier": "http://purl.obolibrary.org/obo/PATO_0000384"
+          },
+          "species": {
+            "name": "Macaca mulatta - Rhesus monkey",
+            "schemaKey": "SpeciesType",
+            "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_9544"
+          },
+          "schemaKey": "Participant",
+          "identifier": "MonkeyN-held_in-minival"
+        }
+      ],
+      "blobDateModified": "2024-10-29T09:57:28.668538-04:00",
+      "variableMeasured": [
+        {
+          "value": "ElectricalSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "ElectrodeGroup",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "BehavioralTimeSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "Units",
+          "schemaKey": "PropertyValue"
+        }
+      ],
+      "measurementTechnique": [
+        {
+          "name": "multi electrode extracellular electrophysiology recording technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "surgical technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "behavioral technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "spike sorting technique",
+          "schemaKey": "MeasurementTechniqueType"
+        }
+      ],
+      "id": "dandiasset:08b354ca-d8e1-4c67-a84c-893e7c082454",
+      "access": [
+        {
+          "schemaKey": "AccessRequirements",
+          "status": "dandi:OpenAccess"
+        }
+      ],
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-19-Run2_behavior+ecephys.nwb",
+      "identifier": "08b354ca-d8e1-4c67-a84c-893e7c082454",
+      "contentUrl": [
+        "https://api.dandiarchive.org/api/assets/08b354ca-d8e1-4c67-a84c-893e7c082454/download/",
+        "https://dandiarchive.s3.amazonaws.com/blobs/d00/b8d/d00b8dd6-41bb-4af3-b7e3-bea56ed20273"
+      ],
+      "contentSize": 15855264,
+      "digest": {
+        "dandi:dandi-etag": "d29aba68abdb30d73a3de76479797f88-1",
+        "dandi:sha2-256": "fc8195cf3a10fcb467983c20141dad581da4a49e81de72d141d38b96db531368"
+      },
+      "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.6.8/context.json"
+    },
+    {
+      "approach": [
+        {
+          "name": "electrophysiological approach",
+          "schemaKey": "ApproachType"
+        },
+        {
+          "name": "behavioral approach",
+          "schemaKey": "ApproachType"
+        }
+      ],
+      "schemaKey": "Asset",
+      "dateModified": "2024-10-29T12:13:34.165259-04:00",
+      "schemaVersion": "0.6.8",
+      "encodingFormat": "application/x-nwb",
+      "wasGeneratedBy": [
+        {
+          "name": "2020-10-20_Run1",
+          "schemaKey": "Session",
+          "startDate": "2020-10-20T13:00:00-04:00",
+          "identifier": "2020-10-20_Run1",
+          "description": "M2 data"
+        },
+        {
+          "id": "urn:uuid:f2626451-e445-496a-888d-9228271f4bb4",
+          "name": "Metadata generation",
+          "endDate": "2024-10-29T12:13:34.165196-04:00",
+          "schemaKey": "Activity",
+          "startDate": "2024-10-29T12:13:34.034621-04:00",
+          "description": "Metadata generated by DANDI cli",
+          "wasAssociatedWith": [
+            {
+              "url": "https://github.com/dandi/dandi-cli",
+              "name": "DANDI Command Line Interface",
+              "version": "0.63.1",
+              "schemaKey": "Software",
+              "identifier": "RRID:SCR_019009"
+            }
+          ]
+        }
+      ],
+      "wasAttributedTo": [
+        {
+          "age": {
+            "value": "P8Y",
+            "unitText": "ISO-8601 duration",
+            "schemaKey": "PropertyValue",
+            "valueReference": {
+              "value": "dandi:BirthReference",
+              "schemaKey": "PropertyValue"
+            }
+          },
+          "sex": {
+            "name": "Male",
+            "schemaKey": "SexType",
+            "identifier": "http://purl.obolibrary.org/obo/PATO_0000384"
+          },
+          "species": {
+            "name": "Macaca mulatta - Rhesus monkey",
+            "schemaKey": "SpeciesType",
+            "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_9544"
+          },
+          "schemaKey": "Participant",
+          "identifier": "MonkeyN-held_in-minival"
+        }
+      ],
+      "blobDateModified": "2024-10-29T10:02:17.074210-04:00",
+      "variableMeasured": [
+        {
+          "value": "ElectricalSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "ElectrodeGroup",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "BehavioralTimeSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "Units",
+          "schemaKey": "PropertyValue"
+        }
+      ],
+      "measurementTechnique": [
+        {
+          "name": "multi electrode extracellular electrophysiology recording technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "surgical technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "behavioral technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "spike sorting technique",
+          "schemaKey": "MeasurementTechniqueType"
+        }
+      ],
+      "id": "dandiasset:5f29fc64-32f8-41b1-93e7-82043fd87f72",
+      "access": [
+        {
+          "schemaKey": "AccessRequirements",
+          "status": "dandi:OpenAccess"
+        }
+      ],
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-20-Run1_behavior+ecephys.nwb",
+      "identifier": "5f29fc64-32f8-41b1-93e7-82043fd87f72",
+      "contentUrl": [
+        "https://api.dandiarchive.org/api/assets/5f29fc64-32f8-41b1-93e7-82043fd87f72/download/",
+        "https://dandiarchive.s3.amazonaws.com/blobs/0e5/575/0e557565-3616-4dd3-b39a-b9695970ef48"
+      ],
+      "contentSize": 14449040,
+      "digest": {
+        "dandi:dandi-etag": "676b43ac845a5268d1285f5a9372556e-1",
+        "dandi:sha2-256": "ba34874464934308e044270ef2cf4cf657cab61c6535b9464a63436f57754970"
+      },
+      "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.6.8/context.json"
+    },
+    {
+      "approach": [
+        {
+          "name": "electrophysiological approach",
+          "schemaKey": "ApproachType"
+        },
+        {
+          "name": "behavioral approach",
+          "schemaKey": "ApproachType"
+        }
+      ],
+      "schemaKey": "Asset",
+      "dateModified": "2024-10-29T12:13:35.210726-04:00",
+      "schemaVersion": "0.6.8",
+      "encodingFormat": "application/x-nwb",
+      "wasGeneratedBy": [
+        {
+          "name": "2020-10-20_Run2",
+          "schemaKey": "Session",
+          "startDate": "2020-10-20T14:00:00-04:00",
+          "identifier": "2020-10-20_Run2",
+          "description": "M2 data"
+        },
+        {
+          "id": "urn:uuid:1ce19513-24e1-4ae9-9911-d9ade6dba46a",
+          "name": "Metadata generation",
+          "endDate": "2024-10-29T12:13:35.210703-04:00",
+          "schemaKey": "Activity",
+          "startDate": "2024-10-29T12:13:35.208083-04:00",
+          "description": "Metadata generated by DANDI cli",
+          "wasAssociatedWith": [
+            {
+              "url": "https://github.com/dandi/dandi-cli",
+              "name": "DANDI Command Line Interface",
+              "version": "0.63.1",
+              "schemaKey": "Software",
+              "identifier": "RRID:SCR_019009"
+            }
+          ]
+        }
+      ],
+      "wasAttributedTo": [
+        {
+          "age": {
+            "value": "P8Y",
+            "unitText": "ISO-8601 duration",
+            "schemaKey": "PropertyValue",
+            "valueReference": {
+              "value": "dandi:BirthReference",
+              "schemaKey": "PropertyValue"
+            }
+          },
+          "sex": {
+            "name": "Male",
+            "schemaKey": "SexType",
+            "identifier": "http://purl.obolibrary.org/obo/PATO_0000384"
+          },
+          "species": {
+            "name": "Macaca mulatta - Rhesus monkey",
+            "schemaKey": "SpeciesType",
+            "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_9544"
+          },
+          "schemaKey": "Participant",
+          "identifier": "MonkeyN-held_in-minival"
+        }
+      ],
+      "blobDateModified": "2024-10-29T10:07:17.167707-04:00",
+      "variableMeasured": [
+        {
+          "value": "ElectricalSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "ElectrodeGroup",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "BehavioralTimeSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "Units",
+          "schemaKey": "PropertyValue"
+        }
+      ],
+      "measurementTechnique": [
+        {
+          "name": "multi electrode extracellular electrophysiology recording technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "surgical technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "behavioral technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "spike sorting technique",
+          "schemaKey": "MeasurementTechniqueType"
+        }
+      ],
+      "id": "dandiasset:5704e8e3-a8e9-42e1-9c94-f413cea74ba0",
+      "access": [
+        {
+          "schemaKey": "AccessRequirements",
+          "status": "dandi:OpenAccess"
+        }
+      ],
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-20-Run2_behavior+ecephys.nwb",
+      "identifier": "5704e8e3-a8e9-42e1-9c94-f413cea74ba0",
+      "contentUrl": [
+        "https://api.dandiarchive.org/api/assets/5704e8e3-a8e9-42e1-9c94-f413cea74ba0/download/",
+        "https://dandiarchive.s3.amazonaws.com/blobs/fa3/95f/fa395fa5-69f2-4aa8-85eb-ace60265499d"
+      ],
+      "contentSize": 14278472,
+      "digest": {
+        "dandi:dandi-etag": "30ca3ddb926acdc04bae0aad50951d8b-1",
+        "dandi:sha2-256": "9103ac8c202bbfc0f7fca1e658ca39bdb1d1bde7930ee8b93528c329017aa7c4"
+      },
+      "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.6.8/context.json"
+    },
+    {
+      "approach": [
+        {
+          "name": "electrophysiological approach",
+          "schemaKey": "ApproachType"
+        },
+        {
+          "name": "behavioral approach",
+          "schemaKey": "ApproachType"
+        }
+      ],
+      "schemaKey": "Asset",
+      "dateModified": "2024-10-29T12:13:37.408857-04:00",
+      "schemaVersion": "0.6.8",
+      "encodingFormat": "application/x-nwb",
+      "wasGeneratedBy": [
+        {
+          "name": "2020-10-27_Run1",
+          "schemaKey": "Session",
+          "startDate": "2020-10-27T13:00:00-04:00",
+          "identifier": "2020-10-27_Run1",
+          "description": "M2 data"
+        },
+        {
+          "id": "urn:uuid:4bf59c21-97a8-4120-b62b-6ef9bbd670d2",
+          "name": "Metadata generation",
+          "endDate": "2024-10-29T12:13:37.408822-04:00",
+          "schemaKey": "Activity",
+          "startDate": "2024-10-29T12:13:37.273917-04:00",
+          "description": "Metadata generated by DANDI cli",
+          "wasAssociatedWith": [
+            {
+              "url": "https://github.com/dandi/dandi-cli",
+              "name": "DANDI Command Line Interface",
+              "version": "0.63.1",
+              "schemaKey": "Software",
+              "identifier": "RRID:SCR_019009"
+            }
+          ]
+        }
+      ],
+      "wasAttributedTo": [
+        {
+          "age": {
+            "value": "P8Y",
+            "unitText": "ISO-8601 duration",
+            "schemaKey": "PropertyValue",
+            "valueReference": {
+              "value": "dandi:BirthReference",
+              "schemaKey": "PropertyValue"
+            }
+          },
+          "sex": {
+            "name": "Male",
+            "schemaKey": "SexType",
+            "identifier": "http://purl.obolibrary.org/obo/PATO_0000384"
+          },
+          "species": {
+            "name": "Macaca mulatta - Rhesus monkey",
+            "schemaKey": "SpeciesType",
+            "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_9544"
+          },
+          "schemaKey": "Participant",
+          "identifier": "MonkeyN-held_in-minival"
+        }
+      ],
+      "blobDateModified": "2024-10-29T10:11:07.894232-04:00",
+      "variableMeasured": [
+        {
+          "value": "ElectricalSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "ElectrodeGroup",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "BehavioralTimeSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "Units",
+          "schemaKey": "PropertyValue"
+        }
+      ],
+      "measurementTechnique": [
+        {
+          "name": "multi electrode extracellular electrophysiology recording technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "surgical technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "behavioral technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "spike sorting technique",
+          "schemaKey": "MeasurementTechniqueType"
+        }
+      ],
+      "id": "dandiasset:bc2760ef-f23e-486c-9159-4264aeb514d0",
+      "access": [
+        {
+          "schemaKey": "AccessRequirements",
+          "status": "dandi:OpenAccess"
+        }
+      ],
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-27-Run1_behavior+ecephys.nwb",
+      "identifier": "bc2760ef-f23e-486c-9159-4264aeb514d0",
+      "contentUrl": [
+        "https://api.dandiarchive.org/api/assets/bc2760ef-f23e-486c-9159-4264aeb514d0/download/",
+        "https://dandiarchive.s3.amazonaws.com/blobs/e8e/073/e8e07310-b357-4bda-a88a-75bb5454022a"
+      ],
+      "contentSize": 17341136,
+      "digest": {
+        "dandi:dandi-etag": "1abdfa34eaebf620edc1e5d4fbb88e6d-1",
+        "dandi:sha2-256": "b7343ed721df7b50858eb25eb5b3dbba5cc91e393b05dc8bd2659df66486a2b7"
+      },
+      "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.6.8/context.json"
+    },
+    {
+      "approach": [
+        {
+          "name": "electrophysiological approach",
+          "schemaKey": "ApproachType"
+        },
+        {
+          "name": "behavioral approach",
+          "schemaKey": "ApproachType"
+        }
+      ],
+      "schemaKey": "Asset",
+      "dateModified": "2024-10-29T12:13:38.912530-04:00",
+      "schemaVersion": "0.6.8",
+      "encodingFormat": "application/x-nwb",
+      "wasGeneratedBy": [
+        {
+          "name": "2020-10-27_Run2",
+          "schemaKey": "Session",
+          "startDate": "2020-10-27T14:00:00-04:00",
+          "identifier": "2020-10-27_Run2",
+          "description": "M2 data"
+        },
+        {
+          "id": "urn:uuid:d566c2e8-26d1-4f0d-9c50-5a61c07e9b85",
+          "name": "Metadata generation",
+          "endDate": "2024-10-29T12:13:38.912500-04:00",
+          "schemaKey": "Activity",
+          "startDate": "2024-10-29T12:13:38.908954-04:00",
+          "description": "Metadata generated by DANDI cli",
+          "wasAssociatedWith": [
+            {
+              "url": "https://github.com/dandi/dandi-cli",
+              "name": "DANDI Command Line Interface",
+              "version": "0.63.1",
+              "schemaKey": "Software",
+              "identifier": "RRID:SCR_019009"
+            }
+          ]
+        }
+      ],
+      "wasAttributedTo": [
+        {
+          "age": {
+            "value": "P8Y",
+            "unitText": "ISO-8601 duration",
+            "schemaKey": "PropertyValue",
+            "valueReference": {
+              "value": "dandi:BirthReference",
+              "schemaKey": "PropertyValue"
+            }
+          },
+          "sex": {
+            "name": "Male",
+            "schemaKey": "SexType",
+            "identifier": "http://purl.obolibrary.org/obo/PATO_0000384"
+          },
+          "species": {
+            "name": "Macaca mulatta - Rhesus monkey",
+            "schemaKey": "SpeciesType",
+            "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_9544"
+          },
+          "schemaKey": "Participant",
+          "identifier": "MonkeyN-held_in-minival"
+        }
+      ],
+      "blobDateModified": "2024-10-29T10:15:25.106339-04:00",
+      "variableMeasured": [
+        {
+          "value": "ElectricalSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "ElectrodeGroup",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "BehavioralTimeSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "Units",
+          "schemaKey": "PropertyValue"
+        }
+      ],
+      "measurementTechnique": [
+        {
+          "name": "multi electrode extracellular electrophysiology recording technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "surgical technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "behavioral technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "spike sorting technique",
+          "schemaKey": "MeasurementTechniqueType"
+        }
+      ],
+      "id": "dandiasset:c32a6c5a-db80-47ce-9501-8afaa1a2e62e",
+      "access": [
+        {
+          "schemaKey": "AccessRequirements",
+          "status": "dandi:OpenAccess"
+        }
+      ],
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-27-Run2_behavior+ecephys.nwb",
+      "identifier": "c32a6c5a-db80-47ce-9501-8afaa1a2e62e",
+      "contentUrl": [
+        "https://api.dandiarchive.org/api/assets/c32a6c5a-db80-47ce-9501-8afaa1a2e62e/download/",
+        "https://dandiarchive.s3.amazonaws.com/blobs/486/ec2/486ec2a6-51e1-453b-9e02-33c11db00dc2"
+      ],
+      "contentSize": 17360784,
+      "digest": {
+        "dandi:dandi-etag": "0654e21d72ba58c34e58efca912a41eb-1",
+        "dandi:sha2-256": "b6fdaf80e698e7a7e664c3b72161655328be131e29b7366e045f599d63267dd8"
+      },
+      "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.6.8/context.json"
+    },
+    {
+      "approach": [
+        {
+          "name": "electrophysiological approach",
+          "schemaKey": "ApproachType"
+        },
+        {
+          "name": "behavioral approach",
+          "schemaKey": "ApproachType"
+        }
+      ],
+      "schemaKey": "Asset",
+      "dateModified": "2024-10-29T12:13:39.402530-04:00",
+      "schemaVersion": "0.6.8",
+      "encodingFormat": "application/x-nwb",
+      "wasGeneratedBy": [
+        {
+          "name": "2020-10-28_Run1",
+          "schemaKey": "Session",
+          "startDate": "2020-10-28T13:00:00-04:00",
+          "identifier": "2020-10-28_Run1",
+          "description": "M2 data"
+        },
+        {
+          "id": "urn:uuid:b0ea1f36-8bfd-4dd9-a4b6-681075614802",
+          "name": "Metadata generation",
+          "endDate": "2024-10-29T12:13:39.402498-04:00",
+          "schemaKey": "Activity",
+          "startDate": "2024-10-29T12:13:39.312235-04:00",
+          "description": "Metadata generated by DANDI cli",
+          "wasAssociatedWith": [
+            {
+              "url": "https://github.com/dandi/dandi-cli",
+              "name": "DANDI Command Line Interface",
+              "version": "0.63.1",
+              "schemaKey": "Software",
+              "identifier": "RRID:SCR_019009"
+            }
+          ]
+        }
+      ],
+      "wasAttributedTo": [
+        {
+          "age": {
+            "value": "P8Y",
+            "unitText": "ISO-8601 duration",
+            "schemaKey": "PropertyValue",
+            "valueReference": {
+              "value": "dandi:BirthReference",
+              "schemaKey": "PropertyValue"
+            }
+          },
+          "sex": {
+            "name": "Male",
+            "schemaKey": "SexType",
+            "identifier": "http://purl.obolibrary.org/obo/PATO_0000384"
+          },
+          "species": {
+            "name": "Macaca mulatta - Rhesus monkey",
+            "schemaKey": "SpeciesType",
+            "identifier": "http://purl.obolibrary.org/obo/NCBITaxon_9544"
+          },
+          "schemaKey": "Participant",
+          "identifier": "MonkeyN-held_in-minival"
+        }
+      ],
+      "blobDateModified": "2024-10-29T10:20:28.466750-04:00",
+      "variableMeasured": [
+        {
+          "value": "ElectricalSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "ElectrodeGroup",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "BehavioralTimeSeries",
+          "schemaKey": "PropertyValue"
+        },
+        {
+          "value": "Units",
+          "schemaKey": "PropertyValue"
+        }
+      ],
+      "measurementTechnique": [
+        {
+          "name": "multi electrode extracellular electrophysiology recording technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "surgical technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "behavioral technique",
+          "schemaKey": "MeasurementTechniqueType"
+        },
+        {
+          "name": "spike sorting technique",
+          "schemaKey": "MeasurementTechniqueType"
+        }
+      ],
+      "id": "dandiasset:3381f481-440a-4d80-92e1-0edd9927e060",
+      "access": [
+        {
+          "schemaKey": "AccessRequirements",
+          "status": "dandi:OpenAccess"
+        }
+      ],
+      "path": "sub-MonkeyN-held-in-minival/sub-MonkeyN-held-in-minival_ses-2020-10-28-Run1_behavior+ecephys.nwb",
+      "identifier": "3381f481-440a-4d80-92e1-0edd9927e060",
+      "contentUrl": [
+        "https://api.dandiarchive.org/api/assets/3381f481-440a-4d80-92e1-0edd9927e060/download/",
+        "https://dandiarchive.s3.amazonaws.com/blobs/5e7/f8a/5e7f8acd-a0c8-4b3c-b2ac-67e468300353"
+      ],
+      "contentSize": 23694592,
+      "digest": {
+        "dandi:dandi-etag": "1849336557bb8c085aafa3d2ef85c2ad-1",
+        "dandi:sha2-256": "bc578c5fda5a36a1ad979026277fc3573d2bde541e316f24f9431a01ab502412"
+      },
+      "@context": "https://raw.githubusercontent.com/dandi/schema/master/releases/0.6.8/context.json"
+    }
+  ]
+}
