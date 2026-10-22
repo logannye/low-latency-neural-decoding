@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "study": "reduced-calibration-and-T3-v4",
+  "status": "locked_before_new_acquisition_and_fresh_outcome_preparation",
+  "prior_exposure": "All V2/V3 first-600-second outcomes from 80 known sessions influenced follow-up design. No subsequent time bins have been used for model development or scoring. T3 has no unused session identities in this pinned release.",
+  "provider": {"doi": "10.5061/dryad.x0k6djj1h", "version_id": 462702, "license": "CC0-1.0"},
+  "new_session_domain": {
+    "participants": ["T2", "T5", "T6", "T7", "T8", "T9", "T10", "T11"],
+    "regular_session_ranks": [10, 11, 12],
+    "selection": "Fixed regular MAT session archive ranks, independent of duration, signals and outcomes; authenticate every previously retained member passed while streaming. No replacement for any missing or unusable case.",
+    "maximum_compressed_bytes_total": 18000000000,
+    "maximum_retained_raw_bytes_total": 12000000000,
+    "export_cap_seconds": 600
+  },
+  "T3_continuation_domain": {
+    "participant": "T3",
+    "sessions": "All eight already acquired regular session members in the pinned archive",
+    "selection": "First two complete acquisition blocks with observed start at or after 600 seconds in each session. Retain unavailable dispositions without replacements. Selection uses block metadata only, never labels or signal quality.",
+    "scope": "Unexposed continuation blocks in known sessions and a known participant, not new-session or untouched-person confirmation. Keep separate from the new-session cohort."
+  },
+  "development": "Only original first min(600 seconds, duration) of the 80 V2/V3 known sessions. New threshold features may be exported from those same bounded observations. Never use later labels, feature statistics or scores for design/selection.",
+  "features": ["tx_3_0", "tx_4_5", "sbp"],
+  "feature_preparation": "Within-block adjacent 10ms bins: sum counts and average power. Keep pure feature files separate from scorer targets. Preserve V3 unit cursor-to-target direction and valid-go-pair semantics.",
+  "evaluation_lock": "Commit full algorithm, source-only selection rules, calibration budgets, score windows, controls and success gates before opening or scoring any fresh evaluation outcome. Commit all selected configurations and source snapshots before assessment."
+}
