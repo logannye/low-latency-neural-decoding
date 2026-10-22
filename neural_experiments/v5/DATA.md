@@ -52,6 +52,30 @@ transfer budget and remain in private receipts. Published full-archive hashes
 are not claimed verified when acquisition stops after a prefix. Observed signed
 redirects remain private; public provenance uses provider IDs and hashes.
 
+Acquisition completed on 2026-10-22 with all 24 requested ranks, no failed
+participants, no missing ranks and no substitutions. Actual transfer was
+13,332,971,520 compressed bytes; retained raw storage was 2,265,009,299 bytes.
+The [public cohort receipt](../results/v5-cohort.json) binds acquisition accounting,
+member and prepared-artifact hashes, parent indexes, selected geometry and every
+disposition. All 135 exported session entries match their participant-specific
+electrode ID, array ID, x and y reference layout.
+
+The new-session index passed full identity and schema validation. Its SHA256 is
+`6ac718377da28dcb43ca127c8da6e6a78b40703ffc4b81358b06bb56ada4c5a4`;
+it contains 672,163 bins, or 3.73424 recorded feature hours. The fixed `[272,600)`
+window geometry totals 6,921.90 seconds before go masks and decoder burn-in.
+The minimum exported duration is 13,268 bins (265.36 seconds), so no selected
+session is below the 30-second input requirement. T6 day1048 is below the fixed
+272-second evaluation start and remains unavailable. T6 day1057 has only 4.20
+seconds of window geometry; whether it meets the fixed minimum valid-pair count
+is an assessment question, not a reason to replace it.
+
+T8 day38, selected at archive rank13, has no strictly earlier same-participant
+development session. Its empty history pool is retained under the predefined
+fallback. These are newly accessed sessions, not necessarily later acquisition
+days. For example, T11 day122 is rank15, following days1139 and1181 in archive
+order; historical training still follows numeric day.
+
 ## Separate T3 continuation
 
 For every cached T3 session, the fixed rule selects the next two whole blocks
@@ -71,6 +95,9 @@ immediately after its last V4-selected block. The metadata inventory is:
 Thus 13 requested blocks are available across seven sessions, totaling 2,910.30
 recorded seconds. The exhausted day62 remains an explicit session disposition.
 These are metadata geometry counts, not valid-label counts or accuracy evidence.
+The prepared T3 index passed identity, schema and label-isolation validation.
+It contains 567,959 feature-history bins and 145,515 selected-block bins; its
+SHA256 is `e368324e7a8b5216e781bfe68d75a94170762417c46982bfde7a0bb6df4c45c9`.
 Features preserve history from session start through the final selected block.
 Fresh scorer targets and masks are zero/false outside the selected new blocks.
 Known-prefix labels are separately bound to the development artifact; the runner
@@ -93,7 +120,10 @@ and authenticates parent, member, receipt, artifact and block identities.
 a separate training/scoring interface.
 
 Fresh export requires a full study-plan path and SHA256 whose exact bytes are
-committed in this repository. Acquisition alone does not authorize fresh sample
+committed in this repository. The [full study plan](plan.json) was committed at
+`4b39a60`, with SHA256
+`87c417f915259e7f77b7999217d3a2461884fffd175c676188e20c346472390e`,
+before fresh preparation. Importer and execution sources were frozen at `c41f793`. Acquisition alone does not authorize fresh sample
 inspection or scoring. Source selections and their independent audit must be
 published before the one-shot assessment. Raw files, prepared arrays, fitted
 models and prediction traces remain ignored local artifacts.

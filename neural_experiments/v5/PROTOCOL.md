@@ -94,8 +94,8 @@ uses strictly earlier numeric days and matching electrode layouts. The fixed
 history pool never adds another fresh assessment session.
 
 Every method and stopping time uses the **same 272–600 second score window**.
-Controls are zero output, fixed combined-feature history with zero or 30 fresh
-labels, and daily calibration with 120 or 240 labels. Daily controls receive all
+Controls are zero output, fixed combined-feature history with zero or 30 seconds
+of fresh labels, and daily calibration with 120 or 240 seconds of labels. Daily controls receive all
 unlabeled normalization observations available at their own stopping time, making
 them stronger comparators than using a 30-second normalizer for every method.
 The target remains an offline cursor-to-target direction proxy.

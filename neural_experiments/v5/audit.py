@@ -842,6 +842,18 @@ def audit_selection(path, root=ROOT):
     }
 
 
+def validate_acquisition_dispositions(actual, receipts):
+    expected = [
+        {
+            "participant_id": r["participant_id"],
+            "selected_sessions": len(r["selected"]),
+            "missing_requested_ranks": r["missing_requested_ranks"],
+        }
+        for r in receipts
+    ]
+    compare_structure(actual, expected, "receipt-bound participant acquisition accounting")
+
+
 def validate_fresh_provenance(inputs, development, plan):
     """Bind ranks13–15/prior12 and the third/fourth eligible original T3 blocks."""
     index, role = inputs.index, inputs.index["role"]
@@ -853,6 +865,7 @@ def validate_fresh_provenance(inputs, development, plan):
             raise ValueError("Fresh input ancestry changed")
     expected, missing = {}, []
     if role == "new_sessions":
+        receipts = []
         refs = unique(
             index["acquisition_sources"],
             lambda r: r["path"],
@@ -863,6 +876,7 @@ def validate_fresh_provenance(inputs, development, plan):
             path = contained(inputs.path.parent, ref["path"])
             verify(path, ref["sha256"])
             receipt = read(path)
+            receipts.append(receipt)
             prior = sorted(
                 [s["source"] for s in development.items.values() if s["participant_id"] == person],
                 key=lambda s: s["archive_ordinal"],
@@ -942,8 +956,7 @@ def validate_fresh_provenance(inputs, development, plan):
                 )
         if missing:
             raise ValueError("Unobserved fixed new-session ranks require explicit audit review")
-        if index["participant_dispositions"]:
-            raise ValueError("Unexpected new-session disposition")
+        validate_acquisition_dispositions(index["participant_dispositions"], receipts)
     else:
         if (
             index["development_index_sha256"] != sha256(development.path)

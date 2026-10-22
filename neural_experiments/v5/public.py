@@ -29,6 +29,7 @@ ROW_FIELDS = {
     "daily120_r2",
 }
 AUDIT_FIELDS = {
+    "stage",
     "source_cases_checked",
     "source_choices_checked",
     "full_traces_checked",
@@ -38,6 +39,10 @@ AUDIT_FIELDS = {
     "status",
     "selection_sha256",
     "assessment_sha256",
+    "manifest_sha256",
+    "source_audit_sha256",
+    "assessment_indices",
+    "unavailable_scores",
     "auditor_source_sha256",
     "plan_sha256",
     "development_index_sha256",

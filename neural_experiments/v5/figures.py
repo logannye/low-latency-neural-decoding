@@ -28,6 +28,14 @@ LABELS = {
 }
 
 
+def save_figure(fig, stem):
+    for extension in ("png", "svg"):
+        path = stem.with_suffix(f".{extension}")
+        fig.savefig(path, bbox_inches="tight")
+        if extension == "svg":
+            path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n")
+
+
 def render(study_path, output):
     study = json.loads(Path(study_path).read_text())
     if (
@@ -65,7 +73,7 @@ def render(study_path, output):
     axes[0].set_xticks(x, people)
     axes[0].set_ylabel("Held-out R², mean within participant")
     axes[0].set_title("Fresh sessions · identical 272–600 s score window", loc="left", fontsize=12)
-    axes[0].legend(frameon=False, fontsize=9, loc="lower right")
+    axes[0].legend(frameon=False, fontsize=9, loc="upper right")
     for method in COLORS:
         m = summary[method]
         mean = m["mean_r2"]
@@ -81,7 +89,11 @@ def render(study_path, output):
             markersize=7,
         )
         axes[1].annotate(
-            LABELS[method], (cost, mean), xytext=(5, 7), textcoords="offset points", fontsize=8
+            LABELS[method],
+            (cost, mean),
+            xytext=(12, -40) if method == "adaptive" else (5, 7),
+            textcoords="offset points",
+            fontsize=8,
         )
     axes[1].axhline(0, color="#39424e", linewidth=0.8)
     axes[1].set_xlim(-12, 290)
@@ -89,8 +101,7 @@ def render(study_path, output):
     axes[1].set_ylabel("Mean R² and participant-bootstrap 95% interval")
     axes[1].set_title("Accuracy and calibration cost", loc="left", fontsize=12)
     fig.suptitle("Adaptive calibration under recording drift", fontsize=16, x=0.04, ha="left")
-    for extension in ("png", "svg"):
-        fig.savefig(output / f"v5-adaptive-calibration.{extension}", bbox_inches="tight")
+    save_figure(fig, output / "v5-adaptive-calibration")
     plt.close(fig)
     rows = [r for r in study["cases"] if r["domain"] == "new_sessions" and r["participant"] == "T2"]
     days = sorted({r["post_implant_day"] for r in rows})
@@ -110,8 +121,7 @@ def render(study_path, output):
     ax.set_ylabel("Held-out R²")
     ax.set_title("T2: every fresh session, including abstentions", loc="left")
     ax.legend(frameon=False, ncol=3, fontsize=8, loc="lower left")
-    for extension in ("png", "svg"):
-        fig.savefig(output / f"v5-t2-transfer.{extension}", bbox_inches="tight")
+    save_figure(fig, output / "v5-t2-transfer")
     plt.close(fig)
 
 

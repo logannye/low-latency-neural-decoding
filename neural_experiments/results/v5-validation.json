@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "scope": "V5 scientific execution, software checks, separate-code audit attempts and runtime; no external-laboratory replication",
+  "created_at": "2026-10-22T23:02:33.669251+00:00",
+  "base_commit": "d83eb405d45182cf4c807dbc4b7368893fd64b7c",
+  "local_validation": {
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "python": "3.12.13",
+    "command": "PYTHONPATH=.:src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m pytest -q",
+    "passed": 652,
+    "skipped": 22,
+    "elapsed_seconds": 14.46,
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS",
+    "rust_compilation": "none; reused installed native Python libraries",
+    "tested_code_sha256": {
+      "neural_experiments/v5/__init__.py": "a6cc9aa8030dd483887a653f12886071d5856e04baa092efa056829698c44c80",
+      "neural_experiments/v5/audit.py": "8f61fbfce5e53d0862cf0eb850a9d4916fde4b92142c845d7a0e8d6486640e9b",
+      "neural_experiments/v5/data.py": "ef192fe13c973fc796aeb69d9711224ac6e5ce1ac366d99021e57b2a28d6744c",
+      "neural_experiments/v5/diagnosis.py": "bbcf6a366acfba42442cd80c15fd06c9dcb55b83c574b4bf3f9f13e098e2bb5d",
+      "neural_experiments/v5/diagnosis_followup.py": "44be75bcee396cfa61f06243eb9b92ce61545ee42446642eade219ad566386ef",
+      "neural_experiments/v5/diagnosis_pilot.py": "3ffa63d8b57e1c7a961ed963aa1b05f6636f430bbd365b6b4d1469b6cff62dbf",
+      "neural_experiments/v5/metrics.py": "3c53c7613385dae5b909be4ee10df3a9cc60266c14aeec66a9bb66465b827a30",
+      "neural_experiments/v5/model.py": "54a28f2f2706c495257344b3a7073d2a14b711586d00472e9dd2dbafa17ccf58",
+      "neural_experiments/v5/policy.py": "c4361b6f6a211ab680c14c1da67d759a1cd41dc6430b19d3a435d4ace3559d1a",
+      "neural_experiments/v5/public.py": "c8f6cf56c77dc452de3b9ba731a705d8f8d9d17dd1611fa6a4447ac05f9d76ab",
+      "neural_experiments/v5/runtime.py": "6d9eb63a5caf617ddb139edcfa288c3bb0f9c33658a03b835f86477423bf75f8",
+      "neural_experiments/v5/runtime_audit.py": "4cc82cfe739dfb4c94121717ffba7fa2d66a3fea1ef526c5de4d246a6511b4f9",
+      "neural_experiments/v5/runtime_public.py": "aaab527062261573e47d67a4eba4dd2ff7abd0c8b7ed60c2f531d038335b0a69",
+      "neural_experiments/v5/study.py": "e20790ad84f72f968774256c043a5a0293b9c63e91251bc5a1dfb1508779586b"
+    },
+    "note": "Figures received a subsequent label-placement-only edit and visual inspection; no scientific execution source changed."
+  },
+  "execution_source_sha256": {
+    "neural_experiments/v5/model.py": "54a28f2f2706c495257344b3a7073d2a14b711586d00472e9dd2dbafa17ccf58",
+    "neural_experiments/v5/policy.py": "c4361b6f6a211ab680c14c1da67d759a1cd41dc6430b19d3a435d4ace3559d1a",
+    "neural_experiments/v5/study.py": "e20790ad84f72f968774256c043a5a0293b9c63e91251bc5a1dfb1508779586b",
+    "neural_experiments/v5/data.py": "ef192fe13c973fc796aeb69d9711224ac6e5ce1ac366d99021e57b2a28d6744c",
+    "neural_experiments/v5/metrics.py": "3c53c7613385dae5b909be4ee10df3a9cc60266c14aeec66a9bb66465b827a30",
+    "neural_experiments/v4/model.py": "02ba0ef2f771bf20c49ff7d5ed2475776e56d59ff01970e6092f2b503c8dd30d",
+    "neural_experiments/v4/study.py": "0957c4c944c69c5267cfe04a38937a39421580897bce073195c63f18987abdb4",
+    "neural_experiments/v4/data.py": "102b4f6d74451cc3ce4444e6be58b35c7de8376dc2cb81300aff8b49ed94fa01",
+    "neural_experiments/v3/study.py": "8a193512fd5bc4d3b1447382de5ae9b56f5dc87c51bccdd393ad81f44e336d43",
+    "neural_experiments/v2/data.py": "e75e64c08a4e7041f086b52893dcd17212e4e211094b184abae6ea6d23998a11"
+  },
+  "earlier_v2_v3_v4_source_unchanged": true,
+  "audits": [
+    {
+      "attempt": "source_attempt1",
+      "status": "FAILED_AUDITOR_ASSUMPTION",
+      "auditor_source_sha256": "8b167cc6da43bc2a39ea016612853f36c272f88d5c60dd69feb31123234b51d2",
+      "log_sha256": "e905123674300244fc926c06edf87a61ebf4de32e0e7246c14ae316304fd48d9",
+      "reason": "Auditor float precision at directional-sector boundary; preserved failure. Producer and result unchanged."
+    },
+    {
+      "attempt": "assessment_attempt1",
+      "status": "FAILED_AUDITOR_ASSUMPTION",
+      "auditor_source_sha256": "15b18d4d362a9cbde0c2974f87d595d34ab198b34f4fbd3ec51a934a28bcd454",
+      "log_sha256": "c515f460c4a87b062f10b92d917c0b426eef1e092c090d0975603eeee400239c",
+      "reason": "Auditor assumed empty completeness-accounting list; exact authenticated receipt reconstruction replaced that assumption. Producer and result unchanged."
+    },
+    {
+      "attempt": "source_attempt2",
+      "status": "PASS",
+      "receipt_sha256": "30419cfbf548fb0ccfd8b625d2298d63db6afd2886509c1adc7629ff3b5cb19c",
+      "auditor_source_sha256": "4db2ecd501ee0d004160d75e783d819d53898705efda6ed32d48960f88f6b770"
+    },
+    {
+      "attempt": "assessment_attempt2",
+      "status": "PASS",
+      "receipt_sha256": "04dc238302daa5feee9ef1f3269af5168c3f6bd7d2a5b2df327fae1025aacca2",
+      "auditor_source_sha256": "8f61fbfce5e53d0862cf0eb850a9d4916fde4b92142c845d7a0e8d6486640e9b"
+    },
+    {
+      "attempt": "runtime_attempt1",
+      "status": "passed",
+      "receipt_sha256": "557af50d541bb8356af57c7d82b662f368c071ff6212514ec84071dfbf12aa68",
+      "auditor_source_sha256": "4cc82cfe739dfb4c94121717ffba7fa2d66a3fea1ef526c5de4d246a6511b4f9"
+    }
+  ],
+  "public_artifacts_sha256": {
+    "v5-source-selection.json": "aa24824da7756ab2cfc754fcff07885bf9618f36a121360c86a50d6aac2c4adb",
+    "v5-cohort.json": "7e1963f6e2bc59d9a739d7a9a5b6c066b807438a5030853ab7968eccf4aaee07",
+    "v5-study.json": "b46bfd15aebec4b9157f9f60d6254bbde63164fb406baf42c235969f6d17e533",
+    "v5-runtime.json": "e098b07a805cddd97416d7de20a6710a54bbb238b5ede43f8070218ddf2165e4",
+    "v5-diagnosis.json": "38c56732de59f41ebd1d8b23a7fd1e4053f8e5834c23c8ce5898900cdf818971",
+    "v5-environment.json": "80ded2755d4ea5093b65ecaa255ca5a167e9f8c12249f128998f05a8ea7c42be"
+  },
+  "ci_scope": "Final PR-head and actual-main GitHub Actions results are recorded by GitHub; this receipt does not claim an unrun future revision passed."
+}

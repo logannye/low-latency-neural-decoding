@@ -324,6 +324,23 @@ def test_missing_person_prevents_usefulness_even_with_good_remaining_scores():
     assert not audit.summary_reference(rows)["gates"]["adaptive_useful"]
 
 
+def test_complete_acquisition_dispositions_are_bound_to_receipts():
+    receipts = [
+        {"participant_id": p, "selected": [{}, {}, {}], "missing_requested_ranks": []}
+        for p in ("T2", "T5")
+    ]
+    records = [
+        {"participant_id": p, "selected_sessions": 3, "missing_requested_ranks": []}
+        for p in ("T2", "T5")
+    ]
+    audit.validate_acquisition_dispositions(records, receipts)
+    with pytest.raises(ValueError, match="accounting"):
+        audit.validate_acquisition_dispositions([], receipts)
+    records[0]["selected_sessions"] = 2
+    with pytest.raises(ValueError, match="accounting"):
+        audit.validate_acquisition_dispositions(records, receipts)
+
+
 def test_synthetic_continuation_runner_is_audited_with_separate_prefix_labels(
     tmp_path, monkeypatch
 ):
