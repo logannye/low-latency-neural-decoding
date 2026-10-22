@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "study": "exact-model-confirmation-and-history-budget-routing-v6",
+  "status": "locked_before_fresh_outcome_preparation",
+  "acquisition_plan_sha256": "0849f2188f13b0df565809db1302ae673af938d4bf55e5f31b2c890960ac33c5",
+  "development_index_sha256": "357f8b917abec17f6354dac3cd93b4d87d24df0db4bf60afeee8bdbefbf84678",
+  "prior_exposure": "All128 previously exposed first-min(600s,duration) prefixes inform development. V5 fresh outcomes are now exposed. The bounded15-session T2 pilot retained1440fits+15priors; all findings are exploratory. T3 continuation labels are excluded. No V6 rank16-18 outcomes have informed design.",
+  "participants": [
+    "T2",
+    "T3",
+    "T5",
+    "T6",
+    "T7",
+    "T8",
+    "T9",
+    "T10",
+    "T11"
+  ],
+  "new_session_participants": [
+    "T2",
+    "T5",
+    "T6",
+    "T7",
+    "T8",
+    "T9",
+    "T10",
+    "T11"
+  ],
+  "target": "Unchanged unit cursor-to-target direction proxy,20ms within-block adjacent10ms valid-go pairs; no signal/outcome-based exclusion.",
+  "bin_seconds": 0.02,
+  "models": {
+    "production_fit": "Fixed tx45_sbp_scratch1_fit_available: sqrtTX4.5+log1pSBP,causal tau.2s,no baseline,ridge1 free intercept,normalizer all features available at FIT stop,scale floors.1/.01,clip[-8,8],unit-disk output. No model selection on current confirmation labels.",
+    "prior0": "TX4.5/tau.4 or TX4.5+SBP/tau.2,first30s normalizer,historyridge1/freeintercept. Choose eligible family with lowest strictly-earlier historical prior0 summedMSE, family-order ties; fallbackcombined. No query training labels but60seconds confirmation labels. Uniform2s purge gives[32,90)confirmation.",
+    "history": "Last3strictlyearlier sameperson/layout development sessions selected beforeavailability. Each<=600s;normalizeeachhistoricalprefix,separateblock62binburn,globalstride5,min50validrows;equal-sessionGram/RHS,ridge1/freebias. Freshcases never enteranotherfreshhistory.",
+    "exploratory_only": "Twelve-candidate inner selection retained in diagnosis but NOTproduction; short-prefix selection discarded useful longer fits.",
+    "export_contract": "Export and reload the full fitted model BEFORE confirmation. All coefficients,normalizer and filter config remain unchanged afterward. Deployed/scored model SHA must equal confirmed model SHA; no post-confirmation refit."
+  },
+  "timeline": {
+    "warmup_seconds": 30,
+    "training_budgets_seconds": [
+      0,
+      60,
+      120,
+      240,
+      360
+    ],
+    "confirmation_seconds": 60,
+    "requested_label_seconds": [
+      60,
+      120,
+      180,
+      300,
+      420
+    ],
+    "label_intervals": "Prospective labels beginat30s. Stageb fits[30,30+b),then scores exactfrozenmodel[32+b,90+b); entire[30,90+b)counts towardrequestedcost, includingpurge. b0useszerotrainingand60labels. Earlier rejectedconfirmation labels may enterlatertraining; laterconfirmation is alwaysnew.",
+    "stopping": "Use historybudgetfloor then stagesinascendingorder; deployfirstconfirmedartifact, otherwiseabstainat420labelseconds. Unavailable checkpointabstainsatobservedrecordendwithfullrequestedcost retained; no replacements.",
+    "confirmation": "Pooled58s andtwo29shalves. Each>=100validburnedrows and>=4of8directionsectors with>=10rows. Bothhalves beat zero ANDfixedtraininglabelmean byconfiguredmargin. Prior0 nullmean zero. Pooled own-window variance-weightedR2 meetsconfiguredthreshold. Full2swithin-blockgroups retaineddiagnostically, notindependenttrials.",
+    "policy_grid": [
+      {
+        "policy_id": "c0",
+        "gain_margin": 0,
+        "pooled_r2_min": 0
+      },
+      {
+        "policy_id": "c1",
+        "gain_margin": 0,
+        "pooled_r2_min": 0.05
+      },
+      {
+        "policy_id": "c2",
+        "gain_margin": 0.025,
+        "pooled_r2_min": 0
+      },
+      {
+        "policy_id": "c3",
+        "gain_margin": 0.025,
+        "pooled_r2_min": 0.05
+      }
+    ],
+    "inequalities": "Zero thresholds requirestrict>0; positive thresholds use>=. No confidence/safetyguarantee is claimed from these empirical sequential tests."
+  },
+  "history_budget_floor": {
+    "input": "Last3strictlyearlier layoutmatched development identities, BEFOREscoreeligibility. Historical fixed daily120/240/360 models each fitonlytheirprefix and scorethecommon[452,600)historicalsuffix. No currentqueryscore entersfloor.",
+    "eligibility": "Atleast2same-identity paired valid historical scores (>=50rows),allquery-chronologychecked; mean historicaldaily120R2<=.05.",
+    "floor240": "Historicaldaily240meanR2>0,meanpaired(240-120)R2gain>=.03,and>=2/3pairedgainsstrictlypositive.",
+    "floor360": "Independentoverrideunderweak120condition: historicaldaily360meanR2>0,meanpaired(360-240)R2gain>=.03,and>=2/3pairedgainsstrictlypositive. Doesnotrequirefloor240first.",
+    "otherwise": "Floor0; floorappliesbeforeprior0 too. A relativegainthatneverbecameusefuldoesnotjustifyhigherfloor."
+  },
+  "source_selection": {
+    "cases": 128,
+    "outer_exclusion": "For eachtargetpersonexcludeentirepersonfromthresholdranking. DesignitselfwasinformedbyexposedT2; thisisnotunseenpersonmodeldevelopment.",
+    "weighting": "Equaleligible-sessionaccuracy/risk/coveragewithinpersonthenequalperson; costaveragesALLrequestedcaseswithinpersonincludingunscorable.",
+    "feasible": "Meanacceptancecoverage>=.6 andmeanR2>=matcheddaily240meanR2-.05.",
+    "ranking": "Amongfeasibleminharmfulacceptanceburden,thenminnonpositiveacceptanceburden,thenmaxR2,thenminrequestedcost,thenfixedgridorder.",
+    "fallback": "IfnonefeasiblemaximizeR2-.10*harmfulburden-.05*nonpositiveburden-.02*cost/420,fixedgridties.",
+    "lock": "Commitplanandsourcehashesbeforefreshpreparation; commitindependentlyauditedsourcechoicesbeforefreshassessment."
+  },
+  "assessment": {
+    "methods": [
+      "zero",
+      "history0",
+      "daily120",
+      "daily240",
+      "daily360",
+      "v5_adaptive",
+      "confirmed"
+    ],
+    "window": "Identical[452,600)forallmethods,>=50validrows; maxdecision450plus2sgap. Retainall24selectedsessionsincost; nosubstitutionfornonevaluables.",
+    "controls": "history0=fixedcombinedpriorwithfirst30normalizer; daily120/240/360=fixedproductioncandidate,matchingtrainingbudgetswithnormalizerthroughfitstop,withoutconfirmation. Controlsuseonlytheirprefixlabels. Theirlabelcostexcludesconfirmation; reportcompleteproceduretradeoff.",
+    "v5_comparator": "FrozenV5thresholdchoices fromselectionSHAc9bc13df6eda97efd1e26cbd050993101aca2589d5da5d4d029e522ffcd7a044 andunmodifiedV5numeric/controllercode. SAME128developmenthistorypoolasV6; recomputehistoricalreliabilityonoriginalV5[272,600)window. OriginalV5warmup/labelscheduleandhalfvalidation/refit retained. Allfreshmethods rescored[452,600). ThisismatchedhistoryV5policy,notexactoriginalV5cohort.",
+    "freshness": "Newarchive-ranksessionsfromknownparticipants,notuntouchedpeople. Archiveorderisnotdayorder. NoT3freshcontinuationthisstudy.",
+    "metrics": "Variance-weightedR2,coordinateR2,angularerror(zeroprediction90degrees),MSE,requested/availablelabels,trainingbudget,decisiontime,acceptancecoverage,nonpositiveacceptedR2<=0,harmfulacceptedMSE>zero+1e-12(summedunits). Allabstentionsretainzeropredictionsinaccuracy.",
+    "benefit_opportunity": "Prespecifieddescriptivecounterfactual: max(daily240,daily360)R2 exceedsdaily120by>=.05 andzeroby>=.05. Capturedifconfirmedacceptswith>=240trainingsecondsandgains>=.025overdaily120. Scorer-onlydiagnostic; nooracleavailabletodecisions.",
+    "uncertainty": "10000bootstrapdraws,seed20261025. Eightparticipantresamplingafterequaldayaverages;T2sessionCIsdescriptivesmallN. Pairedidenticalmasks,pairedpersonriskburdendifferences. NoIIDwindoworsafetyclaims."
+  },
+  "gates": {
+    "useful_cohort_accuracy": "Exactly8eligiblepeople,meanR2>=.1,participantCI lower>0,>=6positivepersonmeans.",
+    "fewer_false_acceptances_with_useful_coverage": "Requiresusefulcohortandacceptancecoverage>=.5;strictlyfewernonpositiveacceptedcasesthanmatchedV5,nomoreharmful-vs-zeroacceptedcases. Observedengineeringgate,notpopulationriskguarantee.",
+    "T2_recovered_without_harmful_acceptance": "All3selectedT2scored,meanR2>=.05,>=2positiveacceptedcases,noharmfulacceptedcases,meanpairedgainoverV5>=.03.",
+    "captured_later_label_benefit": "Atleastoneopportunityandcapturefraction>=.5;otherwiseunavailable(null),notautomaticpass."
+  },
+  "runtime": "ExactconfirmedexportfromT2firstnewarchive-rank16evenifabstainedornegative. Threefastreplaysandtwo60s20mspacedrunsusingfrozenV4numericmeasurementcoreafterallotherheavycomputeends. Independentauditbindsassessmentandmodel; reportprocessing/scheduling/filterresponse/memoryseparately.",
+  "publication": "Aggregateallowlistonly. Rawneuralfeatures,targets,coefficients,modelsandsampletracesstayignoredlocal. Retainattempts/codehashes; labelauditorfixesandanyexposure. Nofresh-outcome-drivenretuning. NoRustlocalcompilation."
+}
