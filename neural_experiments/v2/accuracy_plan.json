@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "study": "H1 V2 bounded accuracy, matched exposure, and supervised head calibration",
+  "role": "development_only; S0-S4; published S5-S12 never opened or used",
+  "input_index": "data/neural_h1/prepared/index.json",
+  "seeds": [0, 1, 2],
+  "threads": 2,
+  "device": "cpu",
+  "arms": [
+    {"name": "rf15_standardized", "dilations": [1, 2, 4], "loss_kind": "standardized"},
+    {"name": "rf63_standardized", "dilations": [1, 2, 4, 8, 16], "loss_kind": "standardized"},
+    {"name": "rf15_source_units", "dilations": [1, 2, 4], "loss_kind": "source_units"},
+    {"name": "rf63_source_units", "dilations": [1, 2, 4, 8, 16], "loss_kind": "source_units"}
+  ],
+  "architecture": "single causal Conv1d/ReLU per dilation, kernel3 width32, linear7; no future input",
+  "training": {
+    "width": 32,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0,
+    "optimizer": "Adam",
+    "channel_dropout": 0.1,
+    "dropout_scope": "one source-mean replacement mask per chunk/channel, constant over time",
+    "chunk_scored_bins": 256,
+    "batch_chunks": 16,
+    "minimum_loss_start": 62,
+    "common_training_positions": "all arms exclude first62 bins/file; real preceding context is RF-1, right pad excluded",
+    "transforms": "input mean/std all training neural rows; target mean/std training scored rows only",
+    "source_units_loss": "standardized residual squared times target_scale squared / mean(target_scale squared)"
+  },
+  "schedule_check": {
+    "training_files": ["S0_set_1", "S0_set_2", "S1_set_1", "S1_set_2"],
+    "validation_file": "S1_set_3",
+    "seed": 0,
+    "train_epochs": 40,
+    "candidate_checkpoints": [20, 40],
+    "rule": "choose40 only if four-arm mean validation VW-R2 gain >=0.005 and no arm loses >0.01; otherwise20",
+    "scope": "one global epoch count, written and hashed before any outer S2-S4 scoring",
+    "no_additional_search": true
+  },
+  "folds": [
+    {"train": ["S0", "S1"], "evaluate": "S2"},
+    {"train": ["S0", "S1", "S2"], "evaluate": "S3"},
+    {"train": ["S0", "S1", "S2", "S3"], "evaluate": "S4"}
+  ],
+  "diagnostics": {
+    "arm": "rf15_standardized",
+    "fractions": [0.25, 0.5, 1.0],
+    "days": ["S2", "S3", "S4"],
+    "same_day": "prefix of first file that day; evaluate complete last file that day",
+    "earlier_days": "same raw bin budget from chronological tail of all earlier-day files, retaining file boundaries",
+    "label_match": "exclude first62 bins of each selected segment, then retain earliest scored labels up to the smaller eligible count across conditions",
+    "learning_curves": "25/50/100 percent of first same-day file duration; all three seeds; one fixed selected epoch count",
+    "interpretation": "matched neural-duration and label-count diagnostic; behavior distributions and number of resets may differ"
+  },
+  "calibration": {
+    "methods": ["unadapted", "intercept", "ridge_delta_head"],
+    "budgets_seconds_per_file": [0, 10, 30],
+    "bin_seconds": 0.02,
+    "common_suffix_start_bin": 1500,
+    "prefix_labels": "original eval_mask within first budget/0.02 bins only; no suffix labels",
+    "state": "all neural bins ingested causally; reset at file only; prefix predictions remain unadapted until fitting boundary",
+    "latent_features": "32-D final ReLU activations standardized using source-training neural rows only",
+    "ridge_lambda": 1.0,
+    "ridge_objective": "mean residual SSE plus lambda times squared delta-head coefficients; unpenalized intercept; anchored to original prediction",
+    "arms": "all four main arms, all seeds/folds; no calibration setting search"
+  },
+  "metrics": {
+    "primary": "equal-day mean variance-weighted R2, separately per seed and seed mean",
+    "secondary": ["per-output R2", "worst day", "paired day/seed differences", "training losses", "label and neural exposure counts"],
+    "all_results": "retain every arm, seed, day, budget, negative score and failed attempt",
+    "selection": "candidate eligible only if mean paired gain across all seeds/days >=0.005 and no seed-mean day gain <-0.01; choose eligible highest mean R2, then fewer parameters, then listed arm order; otherwise retain rf15_standardized; runtime candidate always selected arm seed0/S4; development-only selection"
+  },
+  "execution": {
+    "fit_count": "4 nested schedule fits +36 main fits +54 matched-exposure diagnostic fits; calibration is closed-form",
+    "publication": "aggregate scores/counts/timing/provenance only; model weights, calibration coefficients and full predictions private",
+    "performance_scope": "training wall time and correctness only; no latency campaign while parallel work runs",
+    "checkpoint_format": "numeric NPZ, allow_pickle=False, version, architecture, affine transforms, exact state arrays",
+    "streaming": "test full-file, chunk and explicit causal-step parity; preserve feature-only interface"
+  }
+}

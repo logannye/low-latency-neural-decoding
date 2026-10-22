@@ -1,5 +1,9 @@
 # Reproducing the neural decoding study
 
+The new [V2 study](v2/README.md) adds controlled H1 accuracy experiments and a
+separate nine-participant calibration and transfer evaluation. This page
+preserves the original V1 reproduction procedure and its evidence boundary.
+
 The H1 study is complete: forward-day development, the two bounded research
 hypotheses, frozen S5 and S6–S12 assessments, same-weight runtime measurements,
 separate supervised-prefix calibration, independent audits, and a private replay
