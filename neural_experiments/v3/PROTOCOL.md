@@ -122,13 +122,15 @@ same `[302,min(600,duration))` interval**. Report this matched comparison separa
 from the primary 120-second task. Secondary-prefix labels must never enter a
 120-second fit or trigger a primary-model change.
 
-Keep original recording gaps, block resets, and non-go observations in context.
+Preserve observed non-go bins and acquisition-block resets; unknown between-block
+wall time is not reconstructed.
 Never concatenate disjoint go intervals or normalize with future-session/block
 statistics. All methods use the same original 20-ms target and go mask; no
 outcome-driven near-target exclusions or target redefinition. Require at least
 50 scored evaluation bins by a fixed rule, retain null results and exact reasons,
-and never replace an inconvenient session. Preserve the original earliest-day
-frozen mapping as a separate between-session stress arm; identify chronological
+and never replace an inconvenient session. Fit the selected V3 recipe on the
+earliest original session and freeze it as a separate between-session stress arm;
+identify chronological
 direction rather than assuming every newly acquired session is later.
 
 ## Metrics and useful-accuracy decision
@@ -136,7 +138,7 @@ direction rather than assuming every newly acquired session is later.
 Report independent pooled-SSE R² and per-output R², angular error, zero-output
 counts, calibration counts, per-session/day/person scores, and absolute performance
 of zero-vector and prefix-mean baselines. Aggregate equal sessions within person,
-then equal people, averaging seeds before person-level comparisons. Use paired
+then equal people. V3 uses deterministic closed-form fits without training seeds. Use paired
 person-level bootstrap uncertainty with the resampling rule fixed before scoring;
 report the small cohort and source-fold dependence rather than treating time bins
 or sessions as independent people. Do not let relative improvement over a poor
@@ -178,5 +180,22 @@ receiving an assessment index. Its passed receipt gates assessment-label access.
 normalizers, ridge normal-equation residuals, full-session predictions using an
 independent NumPy recurrence, and all evaluation summaries. Neither mode refits
 source-grid models. The source-only gate passed on all 3,528 candidate cases, 54
-outer choices, and 10 unavailable cases before fresh assessment. This document
-does not itself claim a completed assessment audit or fresh accuracy result.
+outer choices, and 10 unavailable cases before fresh assessment.
+
+The completed assessment audit passed for 361 models, 722 scored traces, and three
+unavailable model cases. Independent full-session replay covered all 257
+nonconstant models; the maximum absolute prediction difference was
+1.41 × 10⁻¹⁴, and the maximum relative ridge normal-equation residual was
+3.01 × 10⁻¹³. The receipt binds manifest SHA-256
+`4ddccf19da305a3c228aa376fa176d26f21abce44bd25cad65ac4917dc6a0c77`
+and summary SHA-256
+`07c57f05943a1b2cc436b697c3ba64ce9200abb4d0f422652002ac1c512703e8`.
+The exact source-only and final-audit implementations are retained with the private
+receipts; the public auditor and aggregate receipt provide the reproducible checks.
+
+The independently reconstructed primary mean R² is 0.2578, with descriptive
+person-bootstrap interval [0.0688, 0.4074], eight of nine person means positive,
+and mean angular error 51.44°. All prespecified offline usefulness gates pass.
+T3 remains negative (−0.3734) and worse than both null controls; this failure is
+retained. These findings apply to daily calibrated, held-out sessions from the
+already studied cohort, with upstream feature causality still unverified.

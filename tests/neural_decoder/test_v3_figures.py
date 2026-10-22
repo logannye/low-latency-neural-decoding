@@ -149,6 +149,7 @@ def test_svg_output_is_deterministic_and_scope_labels_visible(tmp_path):
     render(data, second, source="Synthetic aggregate test")
     for name in ("v3-participant-accuracy.svg", "v3-methods-and-budget.svg"):
         assert (first / name).read_bytes() == (second / name).read_bytes()
+        assert all(line == line.rstrip() for line in (first / name).read_text().splitlines())
     individual = (first / "v3-participant-accuracy.svg").read_text()
     budget = (first / "v3-methods-and-budget.svg").read_text()
     assert "no fresh labels" in individual

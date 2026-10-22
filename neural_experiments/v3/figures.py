@@ -230,6 +230,10 @@ def save(fig, output, name):
     for extension in ("png", "svg"):
         path = output / f"{name}.{extension}"
         fig.savefig(path, dpi=180, metadata={"Date": None} if extension == "svg" else None)
+        if extension == "svg":
+            path.write_text(
+                "\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n"
+            )
         paths.append(path)
     plt.close(fig)
     return paths

@@ -1,6 +1,10 @@
 # Reproducing the neural decoding study
 
-The new [V2 study](v2/README.md) adds controlled H1 accuracy experiments and a
+The [V3 study](v3/README.md) diagnoses failed transfer and evaluates causal daily
+recalibration on 26 held-out sessions across nine previously studied people. Its
+[results report](v3/REPORT.md) contains the latest accuracy and evidence boundaries.
+
+The [V2 study](v2/README.md) adds controlled H1 accuracy experiments and a
 separate nine-participant calibration and transfer evaluation. This page
 preserves the original V1 reproduction procedure and its evidence boundary.
 

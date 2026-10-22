@@ -16,7 +16,7 @@ The provider's trial-window dSNR procedure differs from V2's instantaneous
 20 ms endpoint; the new assessment does not change that endpoint after seeing
 results. SBP is an additional feature fixed in the V3 plan.
 
-## Current acquisition status
+## Completed acquisition and validation
 
 The development export and full identity/schema validation are complete:
 54 sessions, 1,481,767 bins, index SHA256
@@ -24,12 +24,21 @@ The development export and full identity/schema validation are complete:
 Its parent V2 index SHA256 is
 `91de850304c4fb96096daa3f9ec19edab0372675c236a899005cf4308ec6c523`.
 
-Assessment acquisition is in progress. T3's archive ended after eight regular
-session members, so rank 9 is unavailable. Its ranks 7–8 remain selected; no
-replacement session is allowed. The maximum fresh cohort is therefore 26
-sessions across nine participants. Complete final counts and dispositions will
-be recorded after acquisition and validation; no assessment scores are used to
-choose or replace sessions.
+Assessment acquisition, preparation, and full identity/schema validation completed
+on 2026-10-22. The [cohort receipt](../results/v3-cohort.json) records 26 sessions
+across all nine participants, with exactly 30,000 bins per session: 780,000 bins
+or 4.3333 recorded hours. The assessment index SHA256 is
+`8850117ea21bfe939e869b53a49d5b8ccf7d40e905d51936d503759310f04c4d`.
+The retained full raw sessions contain 13.3433 recorded hours; only their first
+600 seconds per session were exported. The export contains 663,232 eligible
+go-direction bins before model-specific prefix and evaluation-window restrictions.
+
+T3's archive ended after eight regular session members, so rank 9 is unavailable.
+Its ranks 7–8 remain selected; the other eight participants have all three
+requested sessions. No replacement was made. All 26 fresh sessions have the
+same electrode IDs, array labels, and grid coordinates as their participant's
+V2 reference session. Selection and this metadata check used no model outcomes.
+The prepared assessment inputs are now immutable for the locked evaluation.
 
 ## Feature and target contract
 
@@ -77,8 +86,11 @@ other entries. Every retained MAT and prepared artifact receives a local SHA256.
 The locked total compressed-transfer limit is 14,000,000,000 bytes, including
 the preserved partial T5 prefix from switching the initial sequential downloader
 to three synchronized workers. The retained-raw limit is 18,000,000,000 bytes.
-The orchestrator shares an exact response-byte counter and reserves new member
-sizes before writes. It preserves its own source hash, importer hash, attempt
+Actual transfer was 9,836,893,277 bytes, including 758,710,272 bytes from the
+interrupted initial T5 attempt. The complete selected raw members occupy
+3,058,347,483 bytes. All nine participant acquisitions completed without a
+failed final attempt. The orchestrator shares an exact response-byte counter
+and reserves new member sizes before writes. It preserves its own source hash, importer hash, attempt
 receipts, and accounting ledger. Whole-archive provider hashes remain metadata
 unless explicitly verified; a consumed partial-prefix hash does not authenticate
 unseen bytes. Signed provider redirects are private transport inputs and are
