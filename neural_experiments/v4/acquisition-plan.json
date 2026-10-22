@@ -19,7 +19,7 @@
     "scope": "Unexposed continuation blocks in known sessions and a known participant, not new-session or untouched-person confirmation. Keep separate from the new-session cohort."
   },
   "development": "Only original first min(600 seconds, duration) of the 80 V2/V3 known sessions. New threshold features may be exported from those same bounded observations. Never use later labels, feature statistics or scores for design/selection.",
-  "features": ["tx_3_0", "tx_4_5", "sbp"],
+  "features": ["tx_3", "tx_4_5", "sbp"],
   "feature_preparation": "Within-block adjacent 10ms bins: sum counts and average power. Keep pure feature files separate from scorer targets. Preserve V3 unit cursor-to-target direction and valid-go-pair semantics.",
   "evaluation_lock": "Commit full algorithm, source-only selection rules, calibration budgets, score windows, controls and success gates before opening or scoring any fresh evaluation outcome. Commit all selected configurations and source snapshots before assessment."
 }
