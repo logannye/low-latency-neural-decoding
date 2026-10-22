@@ -791,7 +791,12 @@ def validate_fresh_provenance(inputs, development, plan):
                         if member[key] != prior[rank - 1][key]:
                             raise ValueError("Previously exposed archive prefix changed")
                 else:
-                    expected[member["session_id"]] = member
+                    expected[member["session_id"]] = {
+                        **member,
+                        "archive_file_id": archive["file_id"],
+                        "archive_sha256_published": archive["provider_sha256"],
+                        "full_archive_sha256_verified": False,
+                    }
     else:
         if (
             index["development_index_sha256"] != sha256(development.path)

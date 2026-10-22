@@ -6,6 +6,7 @@ import shutil
 import numpy as np
 import pytest
 
+from neural_experiments.v4 import runtime, runtime_public
 from neural_experiments.v4 import runtime_audit as audit
 
 
@@ -168,3 +169,74 @@ def test_rehashed_manifest_declarations_rejected(tmp_path, change):
     save_manifest(run, manifest)
     with pytest.raises(ValueError):
         audit.audit(run, tmp_path)
+
+
+def fixture_publication(tmp_path):
+    run, manifest = fixture_run(tmp_path)
+    manifest.update(
+        schema_version=1,
+        filter_response=runtime.filter_response(manifest["config"]),
+        model_load_ms=0.1,
+        scope="feature-ready replay",
+        private_notes="/Users/private/should-not-publish",
+    )
+    manifest["protocol"].update(
+        service_boundary="complete step",
+        exclude="file loading",
+        scheduler="sleep",
+        private_config_path="/Users/private/protocol",
+    )
+    manifest["environment"].update(
+        python="3.12", platform="synthetic", numpy="2", scipy="1", private_path="/Users/private"
+    )
+    manifest["environment"]["threadpools"][0]["filepath"] = "/Users/private/library.dylib"
+    for block in manifest["blocks"]:
+        block.update(
+            initialization_ms=0.02,
+            initialization_scope="constructor before warmup",
+            state_measurement="numeric arrays",
+            process_cpu_seconds=0.01,
+            block_wall_seconds=60.0,
+            process_cpu_fraction_of_block_wall=0.01 / 60,
+            process_peak_rss_bytes=4096,
+            rss_scope="process high-water",
+            raw_samples=[[1, 2]],
+        )
+    save_manifest(run, manifest)
+    receipt = audit.audit(run, tmp_path)
+    # Independent interpolation and NumPy quantiles may differ by a rounding ulp.
+    receipt["blocks"][0]["service_p99_ms"] += 1e-16
+    receipt["private_path"] = "/Users/private/audit"
+    path = tmp_path / "audit.json"
+    path.write_text(json.dumps(receipt))
+    return run, path, manifest
+
+
+def test_publication_is_allowlisted_and_keeps_both_bound_metric_records(tmp_path):
+    run, path, manifest = fixture_publication(tmp_path)
+    result = runtime_public.export(run, path, tmp_path)
+    text = json.dumps(result)
+    for forbidden in ("/Users/", "_path", "source_snapshots", "raw_samples", "neural_experiments/"):
+        assert forbidden not in text
+    assert set(result["source_sha256"]) == set(runtime_public.COMPONENTS)
+    assert result["blocks"][0]["service_p99_ms"] == manifest["blocks"][0]["service_p99_ms"]
+    assert (
+        result["independent_audit"]["blocks"][0]["service_p99_ms"]
+        != (result["blocks"][0]["service_p99_ms"])
+    )
+    assert result["model_sha256"] == manifest["model_sha256"]
+
+
+@pytest.mark.parametrize("change", ["failed", "stale_manifest", "wrong_source"])
+def test_publication_requires_exact_passed_audit(tmp_path, change):
+    run, path, _ = fixture_publication(tmp_path)
+    receipt = audit.read(path)
+    key = {
+        "failed": "status",
+        "stale_manifest": "manifest_sha256",
+        "wrong_source": "auditor_source_sha256",
+    }[change]
+    receipt[key] = "wrong"
+    path.write_text(json.dumps(receipt))
+    with pytest.raises(ValueError, match="audit"):
+        runtime_public.export(run, path, tmp_path)

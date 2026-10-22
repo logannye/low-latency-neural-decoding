@@ -1,6 +1,7 @@
 """Independent references reject leakage, chronology changes and artifact tampering."""
 
 import json
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
@@ -316,3 +317,92 @@ def test_full_artifact_verification_detects_rehashed_trace_tampering(synthetic, 
             row, raw, {"n_bins": 400, "n_channels": 4}, cfg, 150, {"y": y}, mask, tmp_path
         )
         assert error < 1e-12
+
+
+def test_acquisition_enrichment_is_bound_to_original_archive(tmp_path):
+    """The preparer adds archive identity fields absent from receipt.selected."""
+    root = tmp_path
+    (root / "acquisition").mkdir()
+    (root / "raw/T2").mkdir(parents=True)
+    archive = {"file_id": 123, "provider_sha256": "archive-digest"}
+    members = []
+    for rank in range(1, 13):
+        sid = f"T2_day_{rank}_decoding"
+        path = root / f"raw/T2/{sid}.mat"
+        path.write_bytes(b"synthetic raw identity")
+        members.append(
+            {
+                "participant_id": "T2",
+                "session_id": sid,
+                "post_implant_day": rank,
+                "regular_session_rank": rank,
+                "archive_ordinal": rank,
+                "member_name": f"decoding/T2/{sid}.mat",
+                "member_size": path.stat().st_size,
+                "member_sha256": audit.sha256(path),
+                "raw_path": str(path.relative_to(root)),
+            }
+        )
+    enrich = {
+        "archive_file_id": 123,
+        "archive_sha256_published": "archive-digest",
+        "full_archive_sha256_verified": False,
+    }
+    old = {
+        m["session_id"]: {"participant_id": "T2", "source": {**m, **enrich}} for m in members[:9]
+    }
+    parents = {"v2_index_sha256": "v2", "v3_index_sha256": "v3"}
+    receipt = {
+        "status": "complete",
+        "participant_id": "T2",
+        "plan_sha256": "acquisition",
+        **parents,
+        "archive": archive,
+        "selection": {
+            "regular_session_ranks_one_based": [10, 11, 12],
+            "scores_or_duration_used_for_selection": False,
+        },
+        "seen_members": [
+            {
+                "regular_file": True,
+                "name": m["member_name"],
+                "size": m["member_size"],
+                "ordinal": m["archive_ordinal"],
+            }
+            for m in members
+        ],
+        "verified_prior_members": members[:9],
+        "selected": members[9:],
+        "tar_end_observed": False,
+        "missing_requested_ranks": [],
+    }
+    receipt_path = root / "acquisition/T2.json"
+    receipt_path.write_text(json.dumps(receipt))
+    new = {
+        m["session_id"]: {
+            "source": {**m, **enrich},
+            "post_implant_day": m["post_implant_day"],
+            "raw_source_root": str(root),
+            "n_bins": 30000,
+            "full_prepared_n_bins": 40000,
+        }
+        for m in members[9:]
+    }
+    inputs = SimpleNamespace(
+        path=root / "index.json",
+        items=new,
+        index={
+            "role": "new_sessions",
+            "participants": ["T2"],
+            **parents,
+            "acquisition_sources": [
+                {"path": "acquisition/T2.json", "sha256": audit.sha256(receipt_path)}
+            ],
+        },
+    )
+    development = SimpleNamespace(items=old, index=parents)
+    plan = {"new_session_participants": ["T2"], "acquisition_plan_sha256": "acquisition"}
+    audit.validate_fresh_provenance(inputs, development, plan)
+    next(iter(new.values()))["source"]["archive_file_id"] = 999
+    with pytest.raises(ValueError, match="authenticated selection"):
+        audit.validate_fresh_provenance(inputs, development, plan)
