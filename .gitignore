@@ -12,3 +12,6 @@ checkpoints/
 *.pth
 .DS_Store
 results/
+work/
+!neural_experiments/data/
+!neural_experiments/data/**

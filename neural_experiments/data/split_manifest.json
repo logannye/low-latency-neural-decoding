@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "development_folds": [
+    {
+      "name": "A",
+      "train_days": [
+        "S0",
+        "S1"
+      ],
+      "evaluation_days": [
+        "S2"
+      ]
+    },
+    {
+      "name": "B",
+      "train_days": [
+        "S0",
+        "S1",
+        "S2"
+      ],
+      "evaluation_days": [
+        "S3"
+      ]
+    },
+    {
+      "name": "C",
+      "train_days": [
+        "S0",
+        "S1",
+        "S2",
+        "S3"
+      ],
+      "evaluation_days": [
+        "S4"
+      ]
+    }
+  ],
+  "sealed_early": {
+    "train_days_after_recipe_freeze": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4"
+    ],
+    "evaluation_days": [
+      "S5"
+    ],
+    "status": "sealed"
+  },
+  "sealed_later": {
+    "train_days_after_recipe_freeze": [
+      "S0",
+      "S1",
+      "S2",
+      "S3",
+      "S4",
+      "S5"
+    ],
+    "evaluation_days": [
+      "S6",
+      "S7",
+      "S8",
+      "S9",
+      "S10",
+      "S11",
+      "S12"
+    ],
+    "provider_split": "held-out-calib",
+    "status": "sealed"
+  },
+  "minival_role": "overlapping interface checks only; excluded from training and scores",
+  "stream_boundary": "Each provider file resets state; trials do not reset state",
+  "later_evidence_label": "local evaluation on public FALCON calibration recordings"
+}

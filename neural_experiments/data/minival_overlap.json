@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "upstream_pin": "770c9b9597b8f58bf67b5a9ec6401ef705a2cb0f",
+  "pairs": [
+    {
+      "file_id": "S0_set_2",
+      "day": "S0",
+      "minival_asset_id": "3ccec807-0955-453d-a982-54c1beb8bf69",
+      "calibration_asset_id": "782b6fad-2679-4174-a88f-ad58589fe283",
+      "same_session_start_time": true,
+      "minival_n_bins": 1714,
+      "calibration_n_bins": 6456,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1714
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S0_set_1",
+      "day": "S0",
+      "minival_asset_id": "6e45be2c-12b9-43ee-b945-9426f7349eb2",
+      "calibration_asset_id": "dd1bdcf3-5430-4037-ad4a-1727004d38d2",
+      "same_session_start_time": true,
+      "minival_n_bins": 1503,
+      "calibration_n_bins": 10819,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1503
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S1_set_1",
+      "day": "S1",
+      "minival_asset_id": "1f52eef5-de31-444c-bd30-10ce9b1143dd",
+      "calibration_asset_id": "e40a2eca-883d-4c80-81e3-4203a49506b5",
+      "same_session_start_time": true,
+      "minival_n_bins": 1691,
+      "calibration_n_bins": 12233,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1691
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S1_set_3",
+      "day": "S1",
+      "minival_asset_id": "f860bec0-c9ad-460c-8e9d-9b1f008c1dcc",
+      "calibration_asset_id": "31a4259f-a8fa-47fc-bc31-4c88dfdd10e1",
+      "same_session_start_time": true,
+      "minival_n_bins": 1761,
+      "calibration_n_bins": 6505,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1761
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S2_set_1",
+      "day": "S2",
+      "minival_asset_id": "145b08bd-460c-4e35-adfd-393ae4da898b",
+      "calibration_asset_id": "bd4c010b-bf13-4e4b-8149-964b99b51ba4",
+      "same_session_start_time": true,
+      "minival_n_bins": 1530,
+      "calibration_n_bins": 11646,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1530
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S2_set_2",
+      "day": "S2",
+      "minival_asset_id": "8a67178b-b652-47f1-82e1-e23d76fad874",
+      "calibration_asset_id": "6ffa00d8-b1b0-44b7-98d2-e3ddf3751c13",
+      "same_session_start_time": true,
+      "minival_n_bins": 1536,
+      "calibration_n_bins": 11732,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1536
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S1_set_2",
+      "day": "S1",
+      "minival_asset_id": "cafc683b-91d3-46e1-b981-352361907a11",
+      "calibration_asset_id": "98f1e471-ad68-4006-b090-9a3e347852e6",
+      "same_session_start_time": true,
+      "minival_n_bins": 1831,
+      "calibration_n_bins": 6786,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1831
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S3_set_1",
+      "day": "S3",
+      "minival_asset_id": "fe6a8fe2-2f88-43aa-9f72-e703346e179d",
+      "calibration_asset_id": "9a95d428-053c-42ba-afae-da03791b7127",
+      "same_session_start_time": true,
+      "minival_n_bins": 1547,
+      "calibration_n_bins": 10071,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1547
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S3_set_2",
+      "day": "S3",
+      "minival_asset_id": "a1c3a7d5-07d1-4c24-9f92-bf316e507687",
+      "calibration_asset_id": "46938dff-771b-4b57-b0f7-cedb6cf2fdc6",
+      "same_session_start_time": true,
+      "minival_n_bins": 1530,
+      "calibration_n_bins": 12267,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1530
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S4_set_2",
+      "day": "S4",
+      "minival_asset_id": "2136f538-f47e-4c73-9505-46ca77cd1a62",
+      "calibration_asset_id": "02f569e8-7a26-4101-9eda-2b54b47bfab8",
+      "same_session_start_time": true,
+      "minival_n_bins": 1657,
+      "calibration_n_bins": 12022,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1657
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S5_set_1",
+      "day": "S5",
+      "minival_asset_id": "3698950f-dec6-4f97-9c3f-f34987c0f15e",
+      "calibration_asset_id": "18389588-85a6-4df8-a99b-48e3cfc9c9d8",
+      "same_session_start_time": true,
+      "minival_n_bins": 1517,
+      "calibration_n_bins": 12078,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "behavioral_arrays_inspected": false,
+      "exact_interval": "not inspected; sealed"
+    },
+    {
+      "file_id": "S4_set_1",
+      "day": "S4",
+      "minival_asset_id": "06c7a3c7-ea46-4083-a146-2b96f0b22629",
+      "calibration_asset_id": "c389e73f-f5cf-4cc8-93bf-6972d4333a97",
+      "same_session_start_time": true,
+      "minival_n_bins": 1583,
+      "calibration_n_bins": 11951,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "exact_development_prefix_fields": {
+        "OpenLoopKinematicsVelocity": true,
+        "eval_mask": true,
+        "TrialNum": true
+      },
+      "calibration_interval_bins_half_open": [
+        0,
+        1583
+      ],
+      "behavioral_arrays_inspected": true
+    },
+    {
+      "file_id": "S5_set_2",
+      "day": "S5",
+      "minival_asset_id": "22fa4b8e-75f0-4449-a2b3-cbdc36f5d574",
+      "calibration_asset_id": "04e815ce-b86e-43f2-891f-9bba135857ca",
+      "same_session_start_time": true,
+      "minival_n_bins": 1520,
+      "calibration_n_bins": 11425,
+      "provider_declares_minival_subset": true,
+      "use": "interface checks only; not independent evidence",
+      "behavioral_arrays_inspected": false,
+      "exact_interval": "not inspected; sealed"
+    }
+  ]
+}

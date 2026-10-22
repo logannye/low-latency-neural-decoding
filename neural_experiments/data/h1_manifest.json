@@ -1,0 +1,655 @@
+{
+  "schema_version": 1,
+  "dandiset": "000954",
+  "version": "draft",
+  "retrieved_at": "2026-10-22T15:28:47.107700+00:00",
+  "asset_count": 40,
+  "total_bytes": 102258934,
+  "license": [
+    "spdx:CC-BY-4.0"
+  ],
+  "dua": "Metadata description includes additional no-redistribution terms; local cache only.",
+  "assets": [
+    {
+      "asset_id": "dd1bdcf3-5430-4037-ad4a-1727004d38d2",
+      "blob": "bf99691b-d6bb-4db8-a7f2-98e46ac46934",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250101T111740.nwb",
+      "size": 5158319,
+      "created": "2024-04-02T21:46:59.782311Z",
+      "modified": "2024-04-02T21:46:59.782329Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "cb30e699c38a1ff393d58b7381779d1e-1",
+        "dandi:sha2-256": "f8af652a31228f08b26ff8a7ecfd2a6bd05a345e368da8c98be649229f80adb2"
+      },
+      "sha256": "f8af652a31228f08b26ff8a7ecfd2a6bd05a345e368da8c98be649229f80adb2",
+      "retrieved_at": "2026-10-22T15:28:49.358272+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250101T111740.nwb"
+    },
+    {
+      "asset_id": "782b6fad-2679-4174-a88f-ad58589fe283",
+      "blob": "31b618a9-fc51-4277-b263-52d2d40a8297",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250101T112404.nwb",
+      "size": 3090448,
+      "created": "2024-04-02T21:46:59.801185Z",
+      "modified": "2024-04-02T21:46:59.801203Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "dda833a99dfc7f3f1e6b19499e08d5f8-1",
+        "dandi:sha2-256": "b946c4cf49f00c2ea8f0051481765ed090294e3e1e5a035cc5716ad93aa052b2"
+      },
+      "sha256": "b946c4cf49f00c2ea8f0051481765ed090294e3e1e5a035cc5716ad93aa052b2",
+      "retrieved_at": "2026-10-22T15:28:48.609320+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250101T112404.nwb"
+    },
+    {
+      "asset_id": "98f1e471-ad68-4006-b090-9a3e347852e6",
+      "blob": "2a6c5375-ed0d-4d27-bf34-f6cc07f3d88a",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250108T111022.nwb",
+      "size": 3308274,
+      "created": "2024-04-02T21:46:59.821286Z",
+      "modified": "2024-04-02T21:46:59.821303Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "304136741a4ce5e5e1f38d19bf78add5-1",
+        "dandi:sha2-256": "9398f27c6164e84a379c4a0b8d40d8acf642659c175b9411d4573147881c0e68"
+      },
+      "sha256": "9398f27c6164e84a379c4a0b8d40d8acf642659c175b9411d4573147881c0e68",
+      "retrieved_at": "2026-10-22T15:28:49.219982+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250108T111022.nwb"
+    },
+    {
+      "asset_id": "31a4259f-a8fa-47fc-bc31-4c88dfdd10e1",
+      "blob": "06822e81-78a2-489b-8385-98ed313a0bc1",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250108T111455.nwb",
+      "size": 3151141,
+      "created": "2024-04-02T21:46:59.836540Z",
+      "modified": "2024-04-02T21:46:59.836557Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "0a196549701ba395080d7bf0a84bb088-1",
+        "dandi:sha2-256": "3a093dd558a7c5b3dbb38eaa1bb1699742a4b865066a336e65c5fe3abdfdd861"
+      },
+      "sha256": "3a093dd558a7c5b3dbb38eaa1bb1699742a4b865066a336e65c5fe3abdfdd861",
+      "retrieved_at": "2026-10-22T15:28:49.230058+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250108T111455.nwb"
+    },
+    {
+      "asset_id": "e40a2eca-883d-4c80-81e3-4203a49506b5",
+      "blob": "d35574eb-dfab-4491-a51c-dc2aea2629dc",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250108T110520.nwb",
+      "size": 5801669,
+      "created": "2024-04-02T21:47:00.057919Z",
+      "modified": "2024-04-02T21:47:00.057937Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "0546ab8b04978f5f04292f225df1aa03-1",
+        "dandi:sha2-256": "8a09f6ead8a44776d2cee62850ff489bd16b1323799c986cad070dad784a2b83"
+      },
+      "sha256": "8a09f6ead8a44776d2cee62850ff489bd16b1323799c986cad070dad784a2b83",
+      "retrieved_at": "2026-10-22T15:28:50.474228+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250108T110520.nwb"
+    },
+    {
+      "asset_id": "bd4c010b-bf13-4e4b-8149-964b99b51ba4",
+      "blob": "0eee8645-4c7a-489b-9a6e-68821db8e88c",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250113T120811.nwb",
+      "size": 5853252,
+      "created": "2024-04-02T21:47:01.518433Z",
+      "modified": "2024-04-02T21:47:01.518464Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "ab8df46bfa32f7ca516b11ee5266c81a-1",
+        "dandi:sha2-256": "477410e16b8c1ccfcb3caba9403169ec21ab8bee35c4846376bae781003c5f92"
+      },
+      "sha256": "477410e16b8c1ccfcb3caba9403169ec21ab8bee35c4846376bae781003c5f92",
+      "retrieved_at": "2026-10-22T15:28:52.206096+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250113T120811.nwb"
+    },
+    {
+      "asset_id": "6ffa00d8-b1b0-44b7-98d2-e3ddf3751c13",
+      "blob": "bb35aeab-019f-4d4f-9dff-e2972098d6dc",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250113T121303.nwb",
+      "size": 5567825,
+      "created": "2024-04-02T21:47:01.649505Z",
+      "modified": "2024-04-02T21:47:01.649519Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "c3f63f5a62417f48e32df3a8576ff052-1",
+        "dandi:sha2-256": "29d01954747e028dc8b91f82ece28ef11b95a1a33ab3a57e55eb5f967706419f"
+      },
+      "sha256": "29d01954747e028dc8b91f82ece28ef11b95a1a33ab3a57e55eb5f967706419f",
+      "retrieved_at": "2026-10-22T15:29:00.108174+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250113T121303.nwb"
+    },
+    {
+      "asset_id": "9a95d428-053c-42ba-afae-da03791b7127",
+      "blob": "1bf1729c-0475-426e-9e48-0525912aab92",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250115T110633.nwb",
+      "size": 5944811,
+      "created": "2024-04-02T21:47:01.856639Z",
+      "modified": "2024-04-02T21:47:01.856654Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "6119f5fd453e8065728f3f8fbe617cae-1",
+        "dandi:sha2-256": "ed0760aaa946e42f8ad812d3aef7f5faf66b21b5f2804aa77574c7f7ee853451"
+      },
+      "sha256": "ed0760aaa946e42f8ad812d3aef7f5faf66b21b5f2804aa77574c7f7ee853451",
+      "retrieved_at": "2026-10-22T15:28:55.104690+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250115T110633.nwb"
+    },
+    {
+      "asset_id": "46938dff-771b-4b57-b0f7-cedb6cf2fdc6",
+      "blob": "fbd76ddc-e2ad-4454-a01b-f1a614dea300",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250115T111328.nwb",
+      "size": 6858862,
+      "created": "2024-04-02T21:47:01.969567Z",
+      "modified": "2024-04-02T21:47:01.969585Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "797148a6a6bd67f6990020be5913c9a0-1",
+        "dandi:sha2-256": "022956ab01c8cb645e19327ba3457f2a065b30dd402bb4541e51c684d6a46e20"
+      },
+      "sha256": "022956ab01c8cb645e19327ba3457f2a065b30dd402bb4541e51c684d6a46e20",
+      "retrieved_at": "2026-10-22T15:28:53.701216+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250115T111328.nwb"
+    },
+    {
+      "asset_id": "c389e73f-f5cf-4cc8-93bf-6972d4333a97",
+      "blob": "20ab14a5-2d33-49e3-a908-b308e16fc006",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250119T113543.nwb",
+      "size": 6153697,
+      "created": "2024-04-02T21:47:02.169443Z",
+      "modified": "2024-04-02T21:47:02.169457Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "3b54bb526d636a4daabcaed389f9fd2c-1",
+        "dandi:sha2-256": "f176ad4e1221843a94b67f87e0676bbcb83b7b1f5e49a58b2ae1d85b30e445d6"
+      },
+      "sha256": "f176ad4e1221843a94b67f87e0676bbcb83b7b1f5e49a58b2ae1d85b30e445d6",
+      "retrieved_at": "2026-10-22T15:28:54.048713+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250119T113543.nwb"
+    },
+    {
+      "asset_id": "02f569e8-7a26-4101-9eda-2b54b47bfab8",
+      "blob": "050d2356-e146-46ef-8023-d24420dcdf12",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250119T114045.nwb",
+      "size": 5997093,
+      "created": "2024-04-02T21:47:03.183043Z",
+      "modified": "2024-04-02T21:47:03.183061Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "5d61974d9e088c93065d98c0648fbc10-1",
+        "dandi:sha2-256": "a9548924522750f6217409a9797b37389d22c9a0fe3ef145b87343192ff7d6ac"
+      },
+      "sha256": "a9548924522750f6217409a9797b37389d22c9a0fe3ef145b87343192ff7d6ac",
+      "retrieved_at": "2026-10-22T15:28:55.433651+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250119T114045.nwb"
+    },
+    {
+      "asset_id": "3ccec807-0955-453d-a982-54c1beb8bf69",
+      "blob": "cce242f6-fb62-4ad2-8fca-2fdbc9f18276",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250101T112404.nwb",
+      "size": 1015480,
+      "created": "2024-04-02T21:47:03.509376Z",
+      "modified": "2024-04-02T21:47:03.509395Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "c7a74f75ae5c11c67b370dfb5a65a11d-1",
+        "dandi:sha2-256": "e3177a65ffad2d5472c05737e6ff71ef98879bfb744c55608bda18afb11efe60"
+      },
+      "sha256": "e3177a65ffad2d5472c05737e6ff71ef98879bfb744c55608bda18afb11efe60",
+      "retrieved_at": "2026-10-22T15:28:55.239083+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250101T112404.nwb"
+    },
+    {
+      "asset_id": "6e45be2c-12b9-43ee-b945-9426f7349eb2",
+      "blob": "43a68409-e847-42ac-a33d-78cd098a9d49",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250101T111740.nwb",
+      "size": 925980,
+      "created": "2024-04-02T21:47:03.700730Z",
+      "modified": "2024-04-02T21:47:03.700747Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "289c2734ddd2a3a47efba7df7c154074-1",
+        "dandi:sha2-256": "a95585515b1a12a61603fb3170843351d2fb6551ba6e0456c483570b085e68f3"
+      },
+      "sha256": "a95585515b1a12a61603fb3170843351d2fb6551ba6e0456c483570b085e68f3",
+      "retrieved_at": "2026-10-22T15:28:57.313877+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250101T111740.nwb"
+    },
+    {
+      "asset_id": "04e815ce-b86e-43f2-891f-9bba135857ca",
+      "blob": "60b7dd8f-5ca5-4184-9d80-eb1f391b97c6",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250120T115537.nwb",
+      "size": 6144273,
+      "created": "2024-04-02T21:47:03.762535Z",
+      "modified": "2024-04-02T21:47:03.762553Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "8a17f04739cd23353b86ff30ae9a518d-1",
+        "dandi:sha2-256": "df0ba7830d01e82b716d7a1eaac0b0400ebc84e8cbf0c9e2e047437a31c43e70"
+      },
+      "sha256": "df0ba7830d01e82b716d7a1eaac0b0400ebc84e8cbf0c9e2e047437a31c43e70",
+      "retrieved_at": "2026-10-22T15:28:57.766580+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250120T115537.nwb"
+    },
+    {
+      "asset_id": "18389588-85a6-4df8-a99b-48e3cfc9c9d8",
+      "blob": "987022bb-a04b-4477-9ac7-ba1830ae020f",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250120T115044.nwb",
+      "size": 6725140,
+      "created": "2024-04-02T21:47:03.778773Z",
+      "modified": "2024-04-02T21:47:03.778788Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "65954b65a7a2cbef2f9614ce87be8446-1",
+        "dandi:sha2-256": "34e0f0d229942516aec6148d2deaf0bbeabda3d10b86cd889fedf0563366c084"
+      },
+      "sha256": "34e0f0d229942516aec6148d2deaf0bbeabda3d10b86cd889fedf0563366c084",
+      "retrieved_at": "2026-10-22T15:29:03.357301+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-calib/sub-HumanPitt-held-in-calib_ses-19250120T115044.nwb"
+    },
+    {
+      "asset_id": "1f52eef5-de31-444c-bd30-10ce9b1143dd",
+      "blob": "2d821d2e-38b7-405a-af54-d880013b6278",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250108T110520.nwb",
+      "size": 1024284,
+      "created": "2024-04-02T21:47:04.511136Z",
+      "modified": "2024-04-02T21:47:04.511153Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "d9d8a5b58b8a7875622168b8723bf4fd-1",
+        "dandi:sha2-256": "99fb1997035c4f9b0dd0a97be093042f9b7cf10af55cb2a3dc83eea7e35b4d0e"
+      },
+      "sha256": "99fb1997035c4f9b0dd0a97be093042f9b7cf10af55cb2a3dc83eea7e35b4d0e",
+      "retrieved_at": "2026-10-22T15:28:58.644100+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250108T110520.nwb"
+    },
+    {
+      "asset_id": "f860bec0-c9ad-460c-8e9d-9b1f008c1dcc",
+      "blob": "6414b6d0-0dbe-42d9-8d5d-33e9412912c4",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250108T111455.nwb",
+      "size": 1019604,
+      "created": "2024-04-02T21:47:05.296018Z",
+      "modified": "2024-04-02T21:47:05.296036Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "818603e6a91a478db1237d56168dfde0-1",
+        "dandi:sha2-256": "052423d5963899ebfc669d56ada6bc7ab4c060f023616a870c804c1b24f1418e"
+      },
+      "sha256": "052423d5963899ebfc669d56ada6bc7ab4c060f023616a870c804c1b24f1418e",
+      "retrieved_at": "2026-10-22T15:28:59.010363+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250108T111455.nwb"
+    },
+    {
+      "asset_id": "145b08bd-460c-4e35-adfd-393ae4da898b",
+      "blob": "3100334e-bc71-4db4-b06a-7fc3954623f8",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250113T120811.nwb",
+      "size": 984848,
+      "created": "2024-04-02T21:47:05.538631Z",
+      "modified": "2024-04-02T21:47:05.538650Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "0461025295f67df6ac311488d28799fb-1",
+        "dandi:sha2-256": "8fcaf8bf0030556ccccd1ff8133b45728409b4972ab8fcf0f554b9ad8befc41e"
+      },
+      "sha256": "8fcaf8bf0030556ccccd1ff8133b45728409b4972ab8fcf0f554b9ad8befc41e",
+      "retrieved_at": "2026-10-22T15:28:59.917149+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250113T120811.nwb"
+    },
+    {
+      "asset_id": "8a67178b-b652-47f1-82e1-e23d76fad874",
+      "blob": "2a0157d5-75e0-45f0-925e-990bf99ef85d",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250113T121303.nwb",
+      "size": 922184,
+      "created": "2024-04-02T21:47:05.559349Z",
+      "modified": "2024-04-02T21:47:05.559367Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "7a49d930e8c6309049bc9fa49bf8e3a6-1",
+        "dandi:sha2-256": "8842d94cda42a92e71fb6d611cb97534263887441458086261110f9c3f363b5a"
+      },
+      "sha256": "8842d94cda42a92e71fb6d611cb97534263887441458086261110f9c3f363b5a",
+      "retrieved_at": "2026-10-22T15:29:00.086216+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250113T121303.nwb"
+    },
+    {
+      "asset_id": "cafc683b-91d3-46e1-b981-352361907a11",
+      "blob": "6cce2be3-9ca8-4969-955d-2001c6288f7b",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250108T111022.nwb",
+      "size": 1067820,
+      "created": "2024-04-02T21:47:05.676831Z",
+      "modified": "2024-04-02T21:47:05.676849Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "fbb0915b02fc2c6bfe5de52528e36c63-1",
+        "dandi:sha2-256": "0831e7fb7f262faabc1520237bf8dfeea47dd02211642fac75c5257a24d5bc3f"
+      },
+      "sha256": "0831e7fb7f262faabc1520237bf8dfeea47dd02211642fac75c5257a24d5bc3f",
+      "retrieved_at": "2026-10-22T15:29:01.264563+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250108T111022.nwb"
+    },
+    {
+      "asset_id": "fe6a8fe2-2f88-43aa-9f72-e703346e179d",
+      "blob": "05f2c053-4b80-48a3-a6e4-b8a4a0230d22",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250115T110633.nwb",
+      "size": 1106836,
+      "created": "2024-04-02T21:47:06.522572Z",
+      "modified": "2024-04-02T21:47:06.522586Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "9f33f7a0f3d38bf08b469413e7efd3eb-1",
+        "dandi:sha2-256": "d4616e5bca7d1b4581bfca0796e7a6b2c0fc1d2f2b0f1b24171d63818922fec7"
+      },
+      "sha256": "d4616e5bca7d1b4581bfca0796e7a6b2c0fc1d2f2b0f1b24171d63818922fec7",
+      "retrieved_at": "2026-10-22T15:29:01.757466+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250115T110633.nwb"
+    },
+    {
+      "asset_id": "a1c3a7d5-07d1-4c24-9f92-bf316e507687",
+      "blob": "7375a959-d886-40c5-b0c7-69768d42ff7f",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250115T111328.nwb",
+      "size": 1111248,
+      "created": "2024-04-02T21:47:06.843680Z",
+      "modified": "2024-04-02T21:47:06.843696Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "f665923be9ddee7170c552cc918f243b-1",
+        "dandi:sha2-256": "dd320a6352e312cdbd89eed3a0a8f0729b49c5c6f24101fd00d3fc334d91671c"
+      },
+      "sha256": "dd320a6352e312cdbd89eed3a0a8f0729b49c5c6f24101fd00d3fc334d91671c",
+      "retrieved_at": "2026-10-22T15:29:01.272023+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250115T111328.nwb"
+    },
+    {
+      "asset_id": "2136f538-f47e-4c73-9505-46ca77cd1a62",
+      "blob": "60a7a490-2b70-4950-9013-10058d41bdc5",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250119T114045.nwb",
+      "size": 1021356,
+      "created": "2024-04-02T21:47:07.137753Z",
+      "modified": "2024-04-02T21:47:07.137772Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "1aa41f2544ae2af942f987fab4f36e7c-1",
+        "dandi:sha2-256": "da99134321f3fbd0702791cc76deb46e468260fa24568bc297fb7ba7b7c7ee2e"
+      },
+      "sha256": "da99134321f3fbd0702791cc76deb46e468260fa24568bc297fb7ba7b7c7ee2e",
+      "retrieved_at": "2026-10-22T15:29:02.455707+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250119T114045.nwb"
+    },
+    {
+      "asset_id": "3698950f-dec6-4f97-9c3f-f34987c0f15e",
+      "blob": "2d866c1d-6905-4214-ab82-81cda409a79d",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250120T115044.nwb",
+      "size": 1109660,
+      "created": "2024-04-02T21:47:07.194515Z",
+      "modified": "2024-04-02T21:47:07.194529Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "4798240c4dfe7737c1dbe98d5a82b9ab-1",
+        "dandi:sha2-256": "9b4420f19793bcbe8ed2bb242e1fdc55e223dc20ad6c8c5ed49a4a61fbb11dc4"
+      },
+      "sha256": "9b4420f19793bcbe8ed2bb242e1fdc55e223dc20ad6c8c5ed49a4a61fbb11dc4",
+      "retrieved_at": "2026-10-22T15:29:02.700057+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250120T115044.nwb"
+    },
+    {
+      "asset_id": "06c7a3c7-ea46-4083-a146-2b96f0b22629",
+      "blob": "c2fcbb10-ea05-4c37-b9c7-4de74d67f243",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250119T113543.nwb",
+      "size": 1067268,
+      "created": "2024-04-02T21:47:07.215516Z",
+      "modified": "2024-04-02T21:47:07.215533Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "7aef862837919c751f9a1af0545852f0-1",
+        "dandi:sha2-256": "5c5ce0f17fdacfb89d0361eec46bc00ef8472fb8bd1018a124fe28ae8ab8fb54"
+      },
+      "sha256": "5c5ce0f17fdacfb89d0361eec46bc00ef8472fb8bd1018a124fe28ae8ab8fb54",
+      "retrieved_at": "2026-10-22T15:29:02.929237+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250119T113543.nwb"
+    },
+    {
+      "asset_id": "22fa4b8e-75f0-4449-a2b3-cbdc36f5d574",
+      "blob": "9c369fa5-1b24-4986-b50a-c2a295d0952d",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250120T115537.nwb",
+      "size": 1044752,
+      "created": "2024-04-02T21:47:07.816734Z",
+      "modified": "2024-04-02T21:47:07.816749Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "4fc019c241644e3c2d39c9fa9c791d4b-1",
+        "dandi:sha2-256": "666047a942c82919bbb6b7bb6dda6c7222091c2051cbe12213b1a493610ae179"
+      },
+      "sha256": "666047a942c82919bbb6b7bb6dda6c7222091c2051cbe12213b1a493610ae179",
+      "retrieved_at": "2026-10-22T15:29:03.588088+00:00",
+      "local_path": "raw/sub-HumanPitt-held-in-minival/sub-HumanPitt-held-in-minival_ses-19250120T115537.nwb"
+    },
+    {
+      "asset_id": "dbec5a3f-46a3-4c8d-bb88-6e8546b0c729",
+      "blob": "bb52b157-1c3c-4709-9732-631d1ca73e84",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250126T113454.nwb",
+      "size": 1472872,
+      "created": "2024-04-02T21:47:08.346438Z",
+      "modified": "2024-04-02T21:47:08.346456Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "2684f7d3b3ad87c9f01e866d175020e6-1",
+        "dandi:sha2-256": "6fcdb0441ee732bf0b7ac633312b8feac426e5d461218b30b99ac8de6477d553"
+      },
+      "sha256": "6fcdb0441ee732bf0b7ac633312b8feac426e5d461218b30b99ac8de6477d553",
+      "retrieved_at": "2026-10-22T15:29:04.454785+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250126T113454.nwb"
+    },
+    {
+      "asset_id": "bf00d112-80aa-475c-80bd-4ba1e510708a",
+      "blob": "7cc1ae34-4c4a-411e-b8a9-b9b5659a5683",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250126T114029.nwb",
+      "size": 1431320,
+      "created": "2024-04-02T21:47:08.856948Z",
+      "modified": "2024-04-02T21:47:08.856962Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "647ebc2ef805cd00728c04f16bb49f97-1",
+        "dandi:sha2-256": "82a75e51605598fbb81997c2f0c2847ee22c0b578c8a4029401bbc02422e5946"
+      },
+      "sha256": "82a75e51605598fbb81997c2f0c2847ee22c0b578c8a4029401bbc02422e5946",
+      "retrieved_at": "2026-10-22T15:29:04.231915+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250126T114029.nwb"
+    },
+    {
+      "asset_id": "a28ab2e2-f7ac-4da5-ad8a-2ce287565fec",
+      "blob": "c3cdba7f-0dd5-4ffb-b3a6-0bc5c7f732e6",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250127T120826.nwb",
+      "size": 1415291,
+      "created": "2024-04-02T21:47:08.982675Z",
+      "modified": "2024-04-02T21:47:08.982690Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "0be065f7e247f758b2b22b25632c5282-1",
+        "dandi:sha2-256": "e6f5c4763776eca2a8a807cbfa45219e1492915151d54f531cc13d1884ceff92"
+      },
+      "sha256": "e6f5c4763776eca2a8a807cbfa45219e1492915151d54f531cc13d1884ceff92",
+      "retrieved_at": "2026-10-22T15:29:04.568311+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250127T120826.nwb"
+    },
+    {
+      "asset_id": "95beef44-4bab-496e-bbbf-e1375127d6b1",
+      "blob": "656e1686-ea84-4f89-b02a-cab91119bd72",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250127T120333.nwb",
+      "size": 1505958,
+      "created": "2024-04-02T21:47:09.176065Z",
+      "modified": "2024-04-02T21:47:09.176080Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "3ef4d91e38237d443bc8a254eb260c0a-1",
+        "dandi:sha2-256": "c0f2c2bf9589ef138e3cb5aa96b123d7146db6ab994d9a228f17824a9a900068"
+      },
+      "sha256": "c0f2c2bf9589ef138e3cb5aa96b123d7146db6ab994d9a228f17824a9a900068",
+      "retrieved_at": "2026-10-22T15:29:05.261479+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250127T120333.nwb"
+    },
+    {
+      "asset_id": "7b3de668-4f40-4af0-bf1f-4e9a2282e4ea",
+      "blob": "fbb0c290-70fc-4e77-af2a-27f836ddc957",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250129T112555.nwb",
+      "size": 1351985,
+      "created": "2024-04-02T21:47:09.894042Z",
+      "modified": "2024-04-02T21:47:09.894060Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "15e1ffedca692398ff2fd903914a4821-1",
+        "dandi:sha2-256": "e8b7c769b6b5296273cece03b1a2ad57d1ff166f5b9875acce46345912838109"
+      },
+      "sha256": "e8b7c769b6b5296273cece03b1a2ad57d1ff166f5b9875acce46345912838109",
+      "retrieved_at": "2026-10-22T15:29:05.634696+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250129T112555.nwb"
+    },
+    {
+      "asset_id": "54420259-4d3e-4e57-828e-a3e7f51ab76f",
+      "blob": "730fd528-945d-4281-8b5b-46353a4f5185",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250129T113059.nwb",
+      "size": 1254631,
+      "created": "2024-04-02T21:47:10.100834Z",
+      "modified": "2024-04-02T21:47:10.100852Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "73d9089af55fa133f32244f3d15b0b07-1",
+        "dandi:sha2-256": "f8eb0cdcd5105448411028b348de89c899e9598898667161356a5fd3103600a5"
+      },
+      "sha256": "f8eb0cdcd5105448411028b348de89c899e9598898667161356a5fd3103600a5",
+      "retrieved_at": "2026-10-22T15:29:06.767066+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250129T113059.nwb"
+    },
+    {
+      "asset_id": "1105af5f-f06d-4b03-b03d-e843dc7277cd",
+      "blob": "09e3a9c8-66cd-496a-bf35-4cdc617bc6ab",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250202T113958.nwb",
+      "size": 1381886,
+      "created": "2024-04-02T21:47:10.501109Z",
+      "modified": "2024-04-02T21:47:10.501129Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "c7f18b9105020015574bde5c4018e621-1",
+        "dandi:sha2-256": "eb76704aa5828f91e500879e912b4a22f65ec80a1a1fa6eea2ab0af0260f9560"
+      },
+      "sha256": "eb76704aa5828f91e500879e912b4a22f65ec80a1a1fa6eea2ab0af0260f9560",
+      "retrieved_at": "2026-10-22T15:29:05.828094+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250202T113958.nwb"
+    },
+    {
+      "asset_id": "875e087c-3d29-4802-a5a7-02638a10af4e",
+      "blob": "e4ebceb5-7b3d-4183-bf17-482c6cea01b8",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250202T114452.nwb",
+      "size": 1271944,
+      "created": "2024-04-02T21:47:10.575424Z",
+      "modified": "2024-04-02T21:47:10.575439Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "88e6d04f61a21119d326d2865ff200ff-1",
+        "dandi:sha2-256": "07aec96a8acdb6e9c89e724f9a9ed7ffb9fafec4bc8d331be59dc7770e6c27b0"
+      },
+      "sha256": "07aec96a8acdb6e9c89e724f9a9ed7ffb9fafec4bc8d331be59dc7770e6c27b0",
+      "retrieved_at": "2026-10-22T15:29:06.571910+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250202T114452.nwb"
+    },
+    {
+      "asset_id": "2a503f2f-834c-43eb-b7ae-237f83f88aa2",
+      "blob": "910218f0-8dda-4bdb-9378-cd4fa0108233",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250203T113515.nwb",
+      "size": 1206269,
+      "created": "2024-04-02T21:47:10.712102Z",
+      "modified": "2024-04-02T21:47:10.712118Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "652519bdf1f80c688f555be9f3ae5f31-1",
+        "dandi:sha2-256": "354813371b8d6d8ea933a15895570646c62406ee31e705a881b57758da0d2d51"
+      },
+      "sha256": "354813371b8d6d8ea933a15895570646c62406ee31e705a881b57758da0d2d51",
+      "retrieved_at": "2026-10-22T15:29:06.996356+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250203T113515.nwb"
+    },
+    {
+      "asset_id": "7fe0bd9e-f20f-4f03-8e53-e503a1bcbd39",
+      "blob": "8adefa4d-e466-48e2-ab6f-363fefce8074",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250206T112219.nwb",
+      "size": 1363294,
+      "created": "2024-04-02T21:47:11.257836Z",
+      "modified": "2024-04-02T21:47:11.257851Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "cdbcfa9f83a1b9e538fbcd4fd34e0c01-1",
+        "dandi:sha2-256": "ab254456922d99b54237f9634c1985e8f59900f94befc6c8f31f426cbba9e3ea"
+      },
+      "sha256": "ab254456922d99b54237f9634c1985e8f59900f94befc6c8f31f426cbba9e3ea",
+      "retrieved_at": "2026-10-22T15:29:07.110966+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250206T112219.nwb"
+    },
+    {
+      "asset_id": "1fb172b5-f508-44a3-9b3d-875f1502797d",
+      "blob": "31008dab-25e1-4b92-aefd-f8af566eb217",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250203T114018.nwb",
+      "size": 1172811,
+      "created": "2024-04-02T21:47:11.294318Z",
+      "modified": "2024-04-02T21:47:11.294333Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "122ae68b5d40f295386970356e7c8578-1",
+        "dandi:sha2-256": "745d0b9ec3487f6f68d85e826215574cf7f133314c54e3a7485e0022492fd4ef"
+      },
+      "sha256": "745d0b9ec3487f6f68d85e826215574cf7f133314c54e3a7485e0022492fd4ef",
+      "retrieved_at": "2026-10-22T15:29:07.779688+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250203T114018.nwb"
+    },
+    {
+      "asset_id": "9bdc2778-3598-47a9-99d9-39900245c5f4",
+      "blob": "1d62399a-415d-457b-9b1d-60660973584a",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250206T112712.nwb",
+      "size": 1360362,
+      "created": "2024-04-02T21:47:11.675140Z",
+      "modified": "2024-04-02T21:47:11.675158Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "5dc7f6cf98e12d86fc0e414b9275c937-1",
+        "dandi:sha2-256": "94b2341973c2bdfacdd8e791883ceb0914600ccb4d7e280758a358072b4018ef"
+      },
+      "sha256": "94b2341973c2bdfacdd8e791883ceb0914600ccb4d7e280758a358072b4018ef",
+      "retrieved_at": "2026-10-22T15:29:08.034307+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250206T112712.nwb"
+    },
+    {
+      "asset_id": "f2407a64-cde7-4bf5-92df-31837ecf3a5e",
+      "blob": "00295589-c586-464e-bb3f-8b9873c00f92",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250209T111826.nwb",
+      "size": 1509485,
+      "created": "2024-04-02T21:47:11.864958Z",
+      "modified": "2024-04-02T21:47:11.864976Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "47cbeb920429bf3f9e2f243d20852257-1",
+        "dandi:sha2-256": "301d6bd105c3e86f25d95557693dd38bbb39a8341e358087cdcfb4d3342eb761"
+      },
+      "sha256": "301d6bd105c3e86f25d95557693dd38bbb39a8341e358087cdcfb4d3342eb761",
+      "retrieved_at": "2026-10-22T15:29:10.423969+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250209T111826.nwb"
+    },
+    {
+      "asset_id": "de27f0a5-3f49-4faa-970f-c8a5b59d6dc7",
+      "blob": "8d564414-ba6f-49e9-b572-a391cf88e2f6",
+      "zarr": null,
+      "path": "sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250209T112327.nwb",
+      "size": 1384702,
+      "created": "2024-04-02T21:47:11.926329Z",
+      "modified": "2024-04-02T21:47:11.926347Z",
+      "provider_digest": {
+        "dandi:dandi-etag": "f131df6be3c490765fbf70db7cbbf3a6-1",
+        "dandi:sha2-256": "48acb759e00a07615b4a7929d58637e625af6b5cefd423a7f6be5e179d4ac937"
+      },
+      "sha256": "48acb759e00a07615b4a7929d58637e625af6b5cefd423a7f6be5e179d4ac937",
+      "retrieved_at": "2026-10-22T15:29:08.401032+00:00",
+      "local_path": "raw/sub-HumanPitt-held-out-calib/sub-HumanPitt-held-out-calib_ses-19250209T112327.nwb"
+    }
+  ],
+  "failures": []
+}
