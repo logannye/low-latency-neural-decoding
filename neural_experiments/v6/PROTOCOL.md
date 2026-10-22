@@ -106,8 +106,11 @@ cost accounting even when accuracy is unavailable. No cutoff changes follow
 inspection of fresh durations.
 
 The target remains the offline unit cursor-to-target direction proxy. Final
-labels are loaded only after the policy stops. Counterfactual controls have
-separate label access. Features are precomputed; upstream extraction causality,
+labels enter the scorer only after the policy stops. The label broker returns
+only the requested prefix to the model and controller; it internally loads a
+compressed target file, so this is an information-flow boundary rather than
+filesystem isolation. Counterfactual controls have separate label access.
+Features are precomputed; upstream extraction causality,
 transport latency, closed-loop utility and clinical benefit are unverified.
 
 ## Metrics and falsifiable claims

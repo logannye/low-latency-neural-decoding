@@ -114,6 +114,23 @@ def test_prior_confirmation_costs_labels_and_has_uniform_purge(tmp_path, monkeyp
     assert len(replay.saved_fits) == 1
 
 
+def test_future_neural_features_cannot_change_fit_or_confirmation(tmp_path, monkeypatch):
+    replay, _, _ = fixture(tmp_path, monkeypatch)
+    evidence = replay.get_stage(120)
+    for values in replay.case["features"].values():
+        values[10500:] = 1e6
+    # Recompute the producer's causal caches as if the altered session were loaded fresh.
+    for family in replay.raw:
+        config = next(c["config"] for c in replay.candidates if c["config"]["family"] == family)
+        replay.raw[family] = study.core.representation(
+            replay.case["features"], replay.case["segments"], config
+        )
+    replay.stages.clear()
+    changed = replay.get_stage(120)
+    assert changed["model_sha256"] == evidence["model_sha256"]
+    assert changed["confirmation"] == evidence["confirmation"]
+
+
 def test_short_checkpoint_keeps_requested_and_available_cost(tmp_path, monkeypatch):
     replay, _, _ = fixture(tmp_path, monkeypatch, n=5000)
     evidence = replay.get_stage(240)
