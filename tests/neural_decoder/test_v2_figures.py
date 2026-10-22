@@ -1,6 +1,8 @@
 """Aggregate figure semantics: fixed cohort, equal-person means, no invented rows."""
 
 import copy
+import hashlib
+import json
 
 import numpy as np
 import pytest
@@ -84,3 +86,35 @@ def test_h1_means_require_all_days_and_seeds():
         figures.h1_mean(rows[:-1])
     with pytest.raises(ValueError, match="all three seeds"):
         figures.h1_mean(rows + [rows[0]])
+
+
+def test_control_figure_requires_exact_original_reference_and_complete_pairing(tmp_path):
+    reference = transfer_summary()
+    reference_path, control_path = tmp_path / "reference.json", tmp_path / "control.json"
+    reference_path.write_text(json.dumps(reference))
+    control = {
+        "status": "complete",
+        "exploratory": True,
+        "score_verification": {"status": "passed"},
+        "reference": {"public_sha256": hashlib.sha256(reference_path.read_bytes()).hexdigest()},
+        "comparisons": [
+            {
+                "partition": "future_day",
+                "people": [
+                    {
+                        "participant": p,
+                        "n_seeds": 3,
+                        "learned_frozen_r2": -0.5,
+                        "random_frozen_r2": -0.2,
+                    }
+                    for p in figures.PEOPLE
+                ],
+            }
+        ],
+    }
+    control_path.write_text(json.dumps(control))
+    _, scores = figures.control_data(control_path, reference_path)
+    assert scores[1] == [-0.5] * 9 and scores[2] == [-0.2] * 9
+    reference_path.write_text(json.dumps({**reference, "changed": True}))
+    with pytest.raises(ValueError, match="exact reference"):
+        figures.control_data(control_path, reference_path)

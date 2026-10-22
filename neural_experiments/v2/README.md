@@ -205,8 +205,9 @@ python -m neural_experiments.v2.figures \
   --outputdir neural_experiments/figures
 ```
 
-Use the optional `--transfer` and `--runtime` arguments with completed public
-summaries. Synthetic tests require no neural-data download. Re-executing training
+Use the optional `--transfer`, `--runtime`, and `--control` arguments with completed
+public summaries. The control plot requires its exact original `--transfer`
+reference as well. Synthetic tests require no neural-data download. Re-executing training
 on a different numerical stack can change floating-point results and artifact
 hashes; new receipts must identify that environment rather than inherit this
 run's acceptance.

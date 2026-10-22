@@ -170,3 +170,46 @@ aggregate timing evidence. They omit numeric weights, recording samples, timing
 arrays, private artifact locations, and installed-library paths. Runtime audit
 scope explicitly preserves that independent timestamp reconstruction does not
 independently replay the decoder or establish prediction correctness.
+
+## Post-hoc random frozen-core control
+
+After the original nine-person results were inspected, the original frozen-versus-
+scratch contrast was recognized to mix source-learned information with the effect
+of freezing the temporal core. Commit `8a21df3` froze one exploratory control before
+its execution: random frozen cores at the original scratch initialization, all nine
+people, seeds 0/1/2, 120-second calibration, and the same 40-epoch adapter/head
+training, prefix normalization, burn-in, masks, and evaluation sessions. No settings
+were searched or changed after control outcomes. This is a post-hoc comparison in
+the same already-observed cohort, not a new confirmatory test.
+
+The first attempt completed in 18.937 seconds of run wall time and passed a separate
+verification pass covering all 27 models and 162 full traces. Exact initial-core
+and trained-core equality, model and prediction digests, calibration budgets and
+effective masks, original learned model/core identities, prefix normalization,
+and matched evaluation masks were checked. The run and verification receipts are
+`results/neural-v2/random-core-v1` and `results/neural-v2/random-core-audit-v1.json`;
+the public aggregate is `neural_experiments/results/v2-random-core.json`. No failed
+attempt or retuning occurred. The source/plan and every run identity remain bound
+in the receipts.
+
+Future-day equal-person mean R² is **−0.562298 for random frozen cores**, compared
+with **−1.590746 for learned frozen cores** and **−3.108407 for scratch**. Random
+frozen cores outperform learned frozen cores in all nine person-level means. The
+learned-minus-random mean difference is **−1.028448**, with a descriptive paired-
+person bootstrap interval of **[−1.543836, −0.582877]**. Every person's future-day
+mean remains negative under all three methods. These results weaken attributing
+the original frozen-versus-scratch gain to learned source information; they do not
+establish useful absolute accuracy. The common same-session suffix has eight
+eligible people: random mean **0.023045**, learned mean **−0.079275**, and difference
+**−0.102321**, with descriptive interval **[−0.240711, 0.022938]**. T6's short first
+session remains explicitly unavailable for this suffix.
+
+The control runner and its second verification pass share `random_core_control.py`
+and its aggregation function. Both use the separately implemented existing
+`audit.score_arrays` sklearn reference rather than the production scorer. This is
+shared-source artifact/score verification with an independent numerical reference,
+not an independent implementation of the control's entire analysis, optimizer
+retraining, or decoder replay. The public key is `score_verification`, and its
+receipt explicitly preserves those limits. The accompanying `v2-random-core`
+PNG/SVG uses public aggregates only and shows all nine person means alongside all
+three overall means.

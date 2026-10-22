@@ -167,11 +167,55 @@ and reserve fresh participant/session evidence before revising the recipe.
 The current held-out results must not become both the tuning set and the claimed
 confirmatory test.
 
+## Exploratory control: random features outperformed learned features
+
+After the primary outcomes were visible, the separate
+[random-core plan](random_core_plan.json) was committed in `8a21df3` before
+its 27 new fits. It fixes one arm, the 120-second prefix, all nine people and
+three seeds, and the original 40-epoch procedure. The random core exactly
+matches the corresponding scratch initialization, including channel-dependent
+random-number consumption. Only adapter and head train, matching the learned
+frozen-core arm's trainable parameters. No target-dependent search or refit of
+the original arms occurred.
+
+The random frozen core averaged **−0.562298 future-day R²**, compared with
+**−1.590746** for the learned frozen core and **−3.108407** for scratch.
+Random frozen features outperformed learned frozen features in **all nine
+people**. Learned-minus-random mean difference was **−1.028448**, with a
+**descriptive** person-bootstrap 95% interval **[−1.543836, −0.582877]**.
+Every person's random-core mean remained negative. This interval is exploratory
+because the control was chosen after seeing the primary results; there is no
+new confirmatory p value or success gate.
+
+The primary frozen-versus-scratch improvement therefore cannot be credited to
+learned source information here. Freezing a random feature map gives a stronger
+relative result under the same calibration procedure. This supports freezing
+and limited trainable capacity as practical controls and weakens the proposed
+pretraining explanation, while leaving the causes of poor absolute accuracy
+unresolved. Useful cross-person decoding remains unestablished.
+
+The control completed in 18.94 seconds, including 11.82 seconds of summed
+target-model fitting. Its verification pass checked all 27 models and 162
+traces, initial/final core equality, prefix statistics, common masks, complete
+seed pairing, hashes, and the original learned-model references. The runner and
+verification share a new source file and aggregation helpers; numerical scores
+use the existing independently implemented scikit-learn reference. This is
+shared-source verification, not a second independently implemented optimizer
+or decoder. Full details are in [v2-random-core.json](../results/v2-random-core.json).
+
+On the common same-session suffix, the eight eligible people's means were
+0.023045 for random frozen features and −0.079275 for learned frozen features.
+The descriptive learned-minus-random interval was [−0.240711, +0.022938]. This
+secondary result concerns a different evaluation horizon and does not replace
+the negative future-day endpoint.
+
+![Exploratory random-core control](../figures/v2-random-core.png)
+
 ## Same-artifact H1 runtime
 
 The composed H1 model retains 23,367 parameters and 93,468 bytes of numeric
 weights. Full-trace maximum absolute disagreement was 1.863 × 10⁻⁸ for NumPy
-incremental execution and 3.726 × 10⁻⁹ for the PyTorch window reference. Three
+incremental execution and 3.725 × 10⁻⁹ for the PyTorch window reference. Three
 fast repeats used alternating order; two 60-second paced blocks per implementation
 released observations every 20 ms, after a 500-bin warmup and reset.
 
@@ -208,8 +252,8 @@ The prespecified representative is T2, frozen core, 120 seconds, seed 0. It is
 the first eligible person in plan order, not the most accurate or fastest model.
 Its SHA256 is `d92d5d670d2a3c8ed27e3cf540c0cdaee21512b4b7cdc0f4641444863716f0e4`.
 It has 18,690 parameters and 74,760 numeric weight bytes. Across the complete
-30,000-bin timing workload, maximum absolute disagreement was 5.961 × 10⁻⁷
-for NumPy and 4.769 × 10⁻⁷ for the PyTorch window reference.
+30,000-bin timing workload, maximum absolute disagreement was 5.960 × 10⁻⁷
+for NumPy and 4.768 × 10⁻⁷ for the PyTorch window reference.
 
 | Implementation | Median fast p99 | Paced service p99 | Paced release-to-completion p99 | Paced misses |
 | --- | ---: | ---: | ---: | ---: |

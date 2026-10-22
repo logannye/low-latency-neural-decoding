@@ -32,6 +32,13 @@ and every person's transfer mean was negative. This is relative protection
 against a failing baseline; useful cross-person decoding is **not established**.
 All 260 models and 1,560 traces passed the independent protocol/scoring audit.
 
+A subsequent, explicitly **post-hoc freezing control** was decisive: random
+frozen features beat the learned frozen core in **all nine people**, averaging
+**−0.562 R²**. Thus the primary gain over scratch cannot be credited to source
+pretraining in this experiment. All absolute future-day person means remain
+negative. The control's 27 models and 162 traces passed a separate verification
+pass using the existing scikit-learn scoring reference.
+
 ![Participant-held-out transfer results](neural_experiments/figures/v2-participant-transfer.png)
 
 H1 predicts seven movement coordinates; the nine-person study predicts a
@@ -41,9 +48,9 @@ study tests calibrated transfer, with target labels explicitly budgeted. Neither
 study establishes zero-shot decoding, closed-loop control, or clinical benefit.
 
 **Systems:** exact exported models achieved **0.029–0.030 ms median fast-replay
-p99** with incremental NumPy, **3.12× faster for calibrated H1 and 5.88× for
-the transfer model** than the matching PyTorch window implementations. Paced
-processing p99 was **0.872–1.311 ms**, below the 2 ms target, with no observed
+p99** with incremental NumPy, **3.12× lower for calibrated H1 and 5.88× lower
+for the transfer model** than the matching PyTorch window implementations. NumPy
+paced processing p99 was **0.872–1.311 ms**, below the 2 ms target, with no observed
 20 ms deadline misses. Scheduler delay brought measured release-to-completion
 p99 to approximately **9.9–10.0 ms**. These are feature-ready replay timings,
 with processing and scheduling costs reported separately.

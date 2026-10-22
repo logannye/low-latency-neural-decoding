@@ -2,7 +2,7 @@
 
 Example:
   python -m neural_experiments.v2.figures --accuracy neural_experiments/results/v2-accuracy.json
-Optional --transfer and --runtime add their figures when completed receipts exist.
+Optional --transfer, --runtime, and --control add figures from completed receipts.
 """
 
 from __future__ import annotations
@@ -96,6 +96,9 @@ def save(fig, output, stem):
     for extension in ("png", "svg"):
         path = output / f"{stem}.{extension}"
         fig.savefig(path, dpi=180, metadata={"Date": None} if extension == "svg" else None)
+        if extension == "svg":
+            lines = (line.rstrip() for line in path.read_text().splitlines())
+            path.write_text("\n".join(lines) + "\n")
         paths.append(str(path))
     plt.close(fig)
     return paths
@@ -504,11 +507,133 @@ def runtime_figure(path, output):
     return save(fig, output, stem)
 
 
+def control_data(path, transfer_path):
+    data, baseline = read(path), read(transfer_path)
+    if (
+        data["status"] != "complete"
+        or data["exploratory"] is not True
+        or data["score_verification"]["status"] != "passed"
+        or hashlib.sha256(Path(transfer_path).read_bytes()).hexdigest()
+        != data["reference"]["public_sha256"]
+    ):
+        raise ValueError(
+            "Control figure requires verified post-hoc evidence and its exact reference"
+        )
+    matches = [g for g in data["comparisons"] if g["partition"] == "future_day"]
+    if len(matches) != 1 or [p["participant"] for p in matches[0]["people"]] != list(PEOPLE):
+        raise ValueError("Control figure requires all nine paired people")
+    contrast = matches[0]
+    scratch = [
+        g
+        for g in baseline["groups"]
+        if g["partition"] == "future_day"
+        and g["budget_seconds"] == 120
+        and g["method"] == "scratch"
+    ]
+    if len(scratch) != 1 or [p["participant"] for p in scratch[0]["people"]] != list(PEOPLE):
+        raise ValueError("Scratch reference must contain the same nine people")
+    if any(p["n_seeds"] != 3 for group in (contrast, scratch[0]) for p in group["people"]):
+        raise ValueError("Control figure requires all three seeds for each person")
+    values = [
+        [p["r2"] for p in scratch[0]["people"]],
+        [p["learned_frozen_r2"] for p in contrast["people"]],
+        [p["random_frozen_r2"] for p in contrast["people"]],
+    ]
+    return contrast, values
+
+
+def control_figure(path, transfer_path, output):
+    contrast, values = control_data(path, transfer_path)
+    fig, axes = plt.subplots(1, 2, figsize=(13, 6.9), gridspec_kw={"width_ratios": [1.04, 1]})
+    fig.subplots_adjust(left=0.17, right=0.95, top=0.765, bottom=0.255, wspace=0.37)
+    labels = ["All layers trained\nfrom scratch", "Learned core\nfrozen", "Random core\nfrozen"]
+    for position, (scores, color) in enumerate(zip(values, (ORANGE, BLUE, TEAL), strict=True)):
+        mean = float(np.mean(scores))
+        axes[0].barh(position, mean, height=0.5, color=color, alpha=0.8)
+        axes[0].scatter(
+            scores,
+            position + np.linspace(-0.17, 0.17, len(scores)),
+            s=27,
+            facecolor="white",
+            edgecolor=color,
+            linewidth=1.2,
+            zorder=3,
+        )
+        axes[0].text(
+            1.02,
+            position,
+            f"{mean:.3f}",
+            transform=axes[0].get_yaxis_transform(),
+            ha="left",
+            va="center",
+            fontsize=11,
+            weight="bold",
+            color=color,
+        )
+    axes[0].set(yticks=range(3), yticklabels=labels, xlabel="Future-day R²")
+    axes[0].invert_yaxis()
+    axes[0].axvline(0, color=GRAY, lw=0.8, ls=(0, (3, 3)))
+    axes[0].set_xlim(min(min(v) for v in values) * 1.1, 0.8)
+    axes[0].spines["left"].set_visible(False)
+    axes[0].tick_params(length=0, pad=8)
+    differences = [p["difference"] for p in contrast["people"]]
+    for position, value in enumerate(differences):
+        axes[1].hlines(position, 0, value, color=ORANGE, lw=1.8)
+        axes[1].plot(value, position, "o", color=ORANGE, ms=6)
+    mean, interval = contrast["mean_difference"], contrast["descriptive_bootstrap_percentile_95"]
+    y = len(PEOPLE) + 0.65
+    axes[1].hlines(y, *interval, color=INK, lw=2.4)
+    axes[1].plot(mean, y, "D", color=INK, ms=8)
+    axes[1].axhline(len(PEOPLE) - 0.2, color="#DCE2E7", lw=0.7)
+    axes[1].set(
+        yticks=[*range(len(PEOPLE)), y],
+        yticklabels=[*PEOPLE, "Mean · 95%"],
+        xlabel="ΔR²: learned frozen − random frozen",
+    )
+    axes[1].invert_yaxis()
+    axes[1].axvline(0, color=GRAY, lw=0.8, ls=(0, (3, 3)))
+    axes[1].spines["left"].set_visible(False)
+    axes[1].tick_params(length=0, pad=7)
+    axes[1].text(
+        0.02,
+        -0.18,
+        f"Mean ΔR² {mean:+.3f}  [{interval[0]:+.3f}, {interval[1]:+.3f}]",
+        transform=axes[1].transAxes,
+        fontsize=10,
+    )
+    for ax, title in zip(
+        axes,
+        ("A   Absolute accuracy · all nine people", "B   Paired effect · descriptive only"),
+        strict=True,
+    ):
+        ax.set_title(title, loc="left", fontsize=12, pad=15)
+    if all(value < 0 for scores in values for value in scores):
+        fig.text(
+            0.075,
+            0.84,
+            "Every person's mean R² is negative under all three methods.",
+            fontsize=11,
+            color=ORANGE,
+        )
+    frame(
+        fig,
+        "A random frozen core performs better here",
+        "POST-HOC · SAME COHORT  /  NINE PEOPLE  /  120 s TARGET CALIBRATION",
+        "Control designed after viewing original outcomes; 40 epochs and three seeds unchanged. "
+        "Bars: overall means; dots: person means.\n"
+        "Right: person-bootstrap 95% descriptive interval. Source: v2-transfer.json for the "
+        "original reference; no confirmatory test.",
+        path,
+    )
+    return save(fig, output, "v2-random-core")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--accuracy", type=Path, required=True)
     parser.add_argument("--transfer", type=Path)
     parser.add_argument("--runtime", type=Path)
+    parser.add_argument("--control", type=Path)
     parser.add_argument("--outputdir", type=Path, default=ROOT / "neural_experiments/figures")
     args = parser.parse_args()
     args.outputdir.mkdir(parents=True, exist_ok=True)
@@ -518,6 +643,10 @@ def main():
         outputs += transfer_figure(args.transfer, args.outputdir)
     if args.runtime:
         outputs += runtime_figure(args.runtime, args.outputdir)
+    if args.control:
+        if not args.transfer:
+            parser.error("--control requires the original --transfer aggregate")
+        outputs += control_figure(args.control, args.transfer, args.outputdir)
     print(json.dumps({"figures": outputs, "input_scope": "public aggregate JSON only"}, indent=2))
 
 
