@@ -8,124 +8,121 @@ processing schedule. The project connects decoding accuracy to an explicit
 information budget, exported-model correctness, and measured streaming cost.
 Protocols, source choices, failures and independent audit receipts are retained.
 
-**Latest result: 0.258 mean held-out R² across nine participants and 26 new
-sessions**, with a participant-bootstrap 95% interval of **[0.069, 0.407]**.
-The locked decoder uses **120 seconds of labeled daily calibration**. Eight of
-nine participant means and 23 of 26 session scores are positive; mean angular
-error is **51.44°**. It passes every predeclared offline accuracy criterion.
+**Latest result: useful decoding with no fresh daily labels on 23 newly accessed
+sessions across eight known participants.** Reusing strictly earlier recordings
+with a **30-second unlabeled normalization prefix** gives mean held-out R²
+**0.238 [0.105, 0.339]**, with seven of eight participant means positive.
+Historical supervised recordings are still required; this is not immediate
+zero-data operation or generalization to untouched participants.
 
-Given identical calibration labels and scoring windows, the original ridge
-recipe reaches **0.021 R²**. The new procedure improves all nine participant
-means, with paired gain **+0.237 R² [0.162, 0.310]**. These are held-out sessions
-from previously studied people, using a cursor-to-target direction proxy.
-They establish useful accuracy under the declared offline gate, not untouched
-participant confirmation, zero-shot decoding, closed-loop control or clinical benefit.
+Adding 30 seconds of fresh labels reaches **0.245 R² [0.118, 0.352]** and passes
+the predeclared useful-accuracy gate. It improves on matched 30-second scratch
+training by **+0.176 [0.110, 0.229]**. However, retaining the accuracy of
+120-second daily calibration is **not established**: the paired difference is
+**−0.029 [−0.083, 0.018]**, which fails the declared −0.05 noninferiority margin.
+T2 remains negative under history reuse.
 
-![Held-out session accuracy by participant](neural_experiments/figures/v3-participant-accuracy.png)
+![Reduced-calibration results by participant](neural_experiments/figures/v4-reduced-calibration.png)
 
-## From failure diagnosis to a testable repair
+## Accuracy and information budgets
 
-The earlier learned temporal core fitted its calibration prefix but lost almost
-all centered prediction–target correlation across days. Source validation was
-already worse than a zero predictor; longer training increased overfitting.
-Sparse channels, changing feature distributions and unconstrained output
-magnitudes compounded the problem. Raw target, mask and channel-order audits
-found no corresponding indexing error. The [failure analysis](neural_experiments/v3/DIAGNOSIS.md)
-preserves these negative findings and their limits.
+These V4 results use identical scoring windows beginning at 122 seconds, equal
+session weight within person, and equal weight across eight people. Intervals
+resample participants. The short T6 day1034 recording remains unavailable, with
+no replacement. Every requested archive member is accounted for.
 
-The replacement is deliberately compact: square-root spike counts plus optional
-log spike-band power, causal exponential smoothing, prefix-only normalization,
-strongly regularized ridge with a free intercept, and unit-disk output projection.
-Every 20 ms, it updates bounded filter state and computes a two-coordinate command.
-All observations advance state; acquisition boundaries reset it. Work and
-persistent state grow linearly with channel count.
+| Procedure | Fresh labeled prefix | Mean R² | Positive participant means | Angular error |
+| --- | ---: | ---: | ---: | ---: |
+| V3 daily refit | 30 s | −0.021 | 4/8 | 67.75° |
+| Matched scratch | 30 s | 0.069 | 6/8 | 66.45° |
+| Historical prior | **0 s** | **0.238** | **7/8** | **55.00°** |
+| Historical prior + adaptation, primary | **30 s** | **0.245** | **7/8** | **53.77°** |
+| V3 daily refit | 120 s | 0.275 | 8/8 | 51.41° |
+| Historical prior + adaptation, secondary | 120 s | 0.299 | 7/8 | 50.27° |
 
-A finite 36-setting grid chooses the recipe using only other participants'
-previously exposed sessions. All **3,528 development scores and 54 selections**
-were independently checked and published before fresh assessment. Every
-120-second primary selection chose counts plus power, a 200 ms smoothing time
-constant, no slow-baseline subtraction, and mean-loss ridge lambda 1. Each new
-session fits its own coefficients using only the permitted prefix.
+The history arms use up to three earlier labeled recordings, each capped at
+600 seconds. The matched scratch arm has the same current labels, representation,
+normalization and regularization, with a zero prior. All history arms require
+30 seconds of current unlabeled features, including the zero-fresh-label arm.
+The label is an offline cursor-to-target direction proxy, not measured limb
+velocity or evidence of closed-loop control or clinical benefit.
 
-| Procedure | Mean R² | Positive participant means | Mean angular error |
-| --- | ---: | ---: | ---: |
-| Zero vector | −0.034 | 0/9 | 90.00° |
-| Calibration-prefix mean | −0.041 | 0/9 | 84.56° |
-| Original ridge, daily refit | 0.021 | 6/9 | 59.49° |
-| Selected count-only recipe | 0.259 | 7/9 | 53.77° |
-| Locked counts + power recipe | **0.258** | **8/9** | **51.44°** |
+## T3: reduced error, failed recovery
 
-The combined procedure improves some participants and angular error, but not cohort
-mean R² over the separately selected count-only procedure. **T3 still fails**
-(−0.373 R²), and T6 is weak (0.042). Reusing the new recipe's old-session mapping
-without fresh labels also fails: **−0.734 mean R²**, with every participant mean
-negative. Daily calibration changes the information available; the project does
-not claim to have solved calibration-free recording drift.
+T3's exposed-data diagnosis found sparse high-threshold spike counts, unstable
+power features, limited directional coverage and overfitting. Lowering the spike
+threshold adds many events, but the bounded pilots still failed; weaker
+regularization increased training fit while worsening later predictions.
 
-On an identical later suffix, increasing calibration from 120 to 300 seconds
-raises the selected procedure's R² from **0.216 to 0.312**. Both budgets have their
-own source-selected settings, so this compares complete calibration procedures.
+The locked repair combines conservative count features, regularization and
+intercept constraints, selected from earlier T3 sessions with a non-T3 fallback
+for the earliest session. On untouched later
+blocks in eight known T3 recordings, it improves mean R² from **−0.351 to −0.087**,
+with paired gain **+0.263 [0.082, 0.456]**. But the zero-output control reaches
+**−0.046**, and **none of the eight repaired session scores is positive**.
+T3 has not been recovered. Its continuation result is kept separate from the
+eight-person new-session cohort.
 
-![Methods and matched calibration budgets](neural_experiments/figures/v3-methods-and-budget.png)
+![T3 continuation results](neural_experiments/figures/v4-t3-continuation.png)
 
-## Exact-export streaming cost
+## Design and verification
 
-The protocol selected one representative export without consulting its score:
-T2's first new archive-selected session, with 120-second calibration. On the
-macOS ARM64 host it used **386 readout coefficients**, **6,160 bytes of numeric
-model arrays** and **3,072 bytes of persistent numeric filter state**. These
-counts exclude Python, scratch allocations and loaded replay data.
+The streaming decoder transforms counts with a square root and optional spike-band
+power with `log1p`, applies causal exponential smoothing, normalizes using an allowed
+prefix, and projects a linear readout to the unit disk. State resets at acquisition
+boundaries. Inference receives features only; its persistent state and per-step
+arithmetic grow linearly with channel count.
 
-Across three fast replays, median processing p99 was **0.0158 ms**. In two
-60-second runs paced at 20 ms, processing p99 was **0.622–0.662 ms** and
-release-to-completion p99 was **5.10–5.13 ms**. No 20 ms deadline misses were
-observed in 6,000 paced steps. Maximum processing time reached 2.92 ms;
-the 2 ms target concerns p99, not every observation. Independent timestamp
-audit passed, and full batch/stream discrepancy was at most **3.17 × 10⁻¹⁵**.
+Earlier recordings supply an equal-session ridge prior. A prior-centered fit
+adapts that mapping using the allowed current labels; fewer than 50 eligible labels
+returns the prior unchanged. A finite grid chooses settings using entire-person
+exclusion. History selection enforces strictly earlier acquisition days and the
+same electrode layout, regardless of archive order. T3's targeted choice excludes
+the query session and later T3 sessions.
 
-The selected 200 ms causal smoothing filter has approximately **190 ms mean
-sample age**, a separate response property rather than a fixed end-to-end
-delay. These are feature-ready measurements of one export, not a hard real-time
-guarantee or timings for every participant. See the
-[runtime evidence](neural_experiments/results/v3-runtime.json).
+Before fresh assessment, **2,560 source models/traces**, nine global choices and
+eight T3 choices passed independent verification and were published. The fresh
+assessment audited **264 model exports/full traces plus eight unavailable cases**.
+Independent checks reconstruct feature recurrences, fit optimality, prefix/history
+boundaries, scoring masks, predictions, paired bootstrap intervals and gate decisions.
+Maximum assessment replay discrepancy was **1.78 × 10⁻¹⁴**. Sample arrays, models,
+coefficients and prediction traces stay local; GitHub contains code and aggregates.
 
-## Evidence and engineering
+Read the **[V4 report](neural_experiments/v4/REPORT.md)**,
+[locked protocol](neural_experiments/v4/PROTOCOL.md),
+[T3 diagnosis](neural_experiments/v4/DIAGNOSIS.md),
+[data provenance](neural_experiments/v4/DATA.md), and
+[reproduction guide](neural_experiments/v4/README.md).
+The [complete aggregate results](neural_experiments/results/v4-study.json) retain
+all cases, fixed gates, artifact hashes and the independent audit receipt.
 
-- **Evaluation boundaries:** locked archive-member selection, disjoint new sessions,
-  participant-excluded source ranking, equal-person summaries, fixed scoring masks,
-  matched calibration budgets and explicit unavailable cases.
-- **Inspectable computation:** closed-form fitting with a documented penalty scale,
-  prefix-only statistics, validation before state mutation, strict numeric exports,
-  feature-only inference and recording-boundary resets.
-- **Independent verification:** 361 models and 722 scored traces checked; every
-  nonconstant assessment model replayed independently, with maximum prediction
-  discrepancy **1.41 × 10⁻¹⁴**. Separate checks reconstruct ridge optimality,
-  scores, bootstrap intervals, gate decisions and runtime timestamps.
-- **Reproduction:** bounded public-data acquisition, preserved source snapshots and
-  hashes, synthetic leakage/tamper tests, Python CI, and aggregate-only publication.
-  The historical neural-network and CNN experiments remain reproducible.
+## Streaming cost of the exact export
 
-Read the **[V3 results report](neural_experiments/v3/REPORT.md)**,
-[locked protocol](neural_experiments/v3/PROTOCOL.md),
-[data provenance](neural_experiments/v3/DATA.md), and
-[reproduction guide](neural_experiments/v3/README.md).
-The [aggregate results](neural_experiments/results/v3-results.json) contain
-participant/session scores, exact identities and the independent audit receipt.
+The predefined representative is T2 day187, archive rank10, with 30-second
+adaptation. On macOS ARM64, three fast replays measured processing p99 of
+**0.020–0.025 ms**. Two 60-second runs paced at 20 ms measured processing p99 of
+**0.850–1.078 ms** and release-to-completion p99 of **5.198–5.205 ms**, with
+**zero deadline misses in 6,000 paced updates**. The numeric model uses
+**6,160 bytes**, with **3,072 bytes** of persistent numeric filter state.
 
-## Earlier results remain available
+These are feature-ready measurements of one export, not hard real-time guarantees.
+Maximum processing time reached 3.84 ms. The 200 ms smoothing filter has about
+190 ms mean sample age, a response property separate from CPU latency. The full
+batch/stream discrepancy is **7.61 × 10⁻¹⁵**; independent timestamp audit passed.
+See the [runtime evidence](neural_experiments/results/v4-runtime.json).
 
-The original H1 TCN averaged **0.1776 R²** on seven held-out recording days versus
-0.0341 for ridge. A later 30-second supervised correction improved H1 development
-R² from **0.174 to 0.298** on a common suffix, winning all nine day/seed comparisons.
-H1 predicts seven movement coordinates, so its values are not comparable to this
-nine-person direction-proxy task. Read the [V1 report](neural_experiments/FINAL_REPORT.md)
-and [V2 report](neural_experiments/v2/REPORT.md).
+## Earlier evidence
 
-The V2 frozen-core transfer result remains explicitly negative: mean future-day
-R² **−1.591**, despite outperforming scratch. Random frozen features performed
-better than the learned core. V2's same-export NumPy implementation achieved
-0.029–0.030 ms median fast-replay p99 and 0.872–1.311 ms paced processing p99;
-those timings belong to the V2 artifacts and are separate from V3 evidence.
+The [V3 study](neural_experiments/v3/REPORT.md) achieved **0.258 mean R²** across
+nine known participants and 26 different new sessions with 120-second daily
+calibration. Its original ridge comparator reached 0.021; T3 failed, and simply
+freezing the old-session mapping also failed. V3 and V4 have different assessment
+cohorts, so their headline means are not a matched improvement comparison.
+
+The [V1 report](neural_experiments/FINAL_REPORT.md) and
+[V2 report](neural_experiments/v2/REPORT.md) preserve the earlier temporal-network,
+H1 and transfer experiments, including negative results. H1 predicts seven
+movement coordinates and is not directly comparable to this direction-proxy task.
 
 ## Quick start
 
@@ -142,7 +139,7 @@ python neural_experiments/replay_demo.py --smoke --output work/replay-smoke.html
 ```
 
 Synthetic tests and the smoke replay require no neural-data download. No Rust
-or native extension build is required. The [V3 guide](neural_experiments/v3/README.md)
+or native extension build is required. The [V4 guide](neural_experiments/v4/README.md)
 covers acquisition, source selection, one-shot assessment, independent audit,
 plots and timing. Raw recordings, prepared arrays, models, coefficients and
 sample-level predictions remain in ignored local caches.

@@ -1,14 +1,14 @@
 {
   "status": "passed",
-  "tested_revision": "a3ab98f",
+  "tested_revision": "840ab3933af5fc78aa760e7175881851382e5ada",
   "platform": "macOS ARM64, Python3.12.13",
   "lint": "ruff check .",
   "format": "ruff format --check .",
   "test_command": "PYTHONPATH=.:src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m pytest -q",
-  "passed": 502,
+  "passed": 507,
   "skipped": 22,
-  "elapsed_seconds": 9.47,
-  "local_log_sha256": "82c81852a52825443e963b8fe74489953b5e468684b628e39957db45b11112d2",
+  "elapsed_seconds": 8.75,
+  "local_log_sha256": "4ddece7ffb93df76b8ccd592c17c93e98a2c36cd9cc60cf24ee86174cc110dea",
   "native_builds_performed": false,
   "hosted_ci": "See the exact PR and main commit workflow checks; local tests do not substitute for hosted validation."
 }

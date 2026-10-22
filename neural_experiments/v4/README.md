@@ -67,6 +67,27 @@ fit equations, predictions, scoring masks, selections and aggregate results.
 Synthetic tests cover temporal causality, future-label isolation, chronology,
 fallbacks, export tampering and batch/stream parity.
 
+Generate the published plots and reproduce the predetermined runtime case:
+
+```bash
+python -m neural_experiments.v4.figures \
+  --study neural_experiments/results/v4-study.json --output neural_experiments/figures
+python -m neural_experiments.v4.runtime \
+  --model results/neural_v4/assessment/models/new_sessions-T2_day_187_decoding-selected_prior30.npz \
+  --features data/neural_v4/new_sessions/prepared/T2/T2_day_187_decoding.features.npz \
+  --plan neural_experiments/v4/plan.json --output results/neural_v4/runtime
+python -m neural_experiments.v4.runtime_audit \
+  --run results/neural_v4/runtime --output results/neural_v4/runtime-audit.json
+python -m neural_experiments.v4.runtime_public \
+  --run results/neural_v4/runtime --audit results/neural_v4/runtime-audit.json \
+  --output neural_experiments/results/v4-runtime.json
+```
+
+The real benchmark uses three fast blocks and two60-second paced blocks after
+other experiment compute has stopped. Timing replay does not expand scientific
+scoring masks. Runtime measurements are host-specific, and the raw clock trace
+stays local for independent auditing.
+
 The primary accuracy endpoint is variance-weighted R² of a 20 ms cursor-to-target
 direction proxy. It does not measure closed-loop task performance. Confidence
 intervals resample eight people in the new-session domain and eight sessions
