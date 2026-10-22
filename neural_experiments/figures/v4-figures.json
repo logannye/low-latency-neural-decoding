@@ -1,0 +1,21 @@
+{
+  "study_sha256": "20f6a8329a1145fd6982b9d6c762137267271cb40732dcb0f23562659fba45a1",
+  "files": [
+    {
+      "path": "v4-reduced-calibration.png",
+      "sha256": "328bb51980275ee6380785b4bd7b5d96e1d55ad1fec4cc3e5bde91154db24a6c"
+    },
+    {
+      "path": "v4-reduced-calibration.svg",
+      "sha256": "97f44c783d8012ca3e1eb376fb4ec416d90714446e42b79f2e2d1f0054e7923a"
+    },
+    {
+      "path": "v4-t3-continuation.png",
+      "sha256": "43e96b5271a19e1d8036e47bb1eb1946200df30e36de86083708aa2a8b147583"
+    },
+    {
+      "path": "v4-t3-continuation.svg",
+      "sha256": "5ed9d714d3e65242da2b91cc861cc96aaee6e6fa86a303609476c136216e9e64"
+    }
+  ]
+}

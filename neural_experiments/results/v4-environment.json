@@ -1,0 +1,18 @@
+{
+  "python": "3.12.13",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "dependencies": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "threadpoolctl": "3.7.0",
+    "matplotlib": "3.11.2",
+    "pytest": "9.1.1",
+    "ruff": "0.16.10"
+  },
+  "blas_thread_limit": 1,
+  "execution_source_commit": "be33f2f5934cdd99378ee88a05931672847ce3d6",
+  "local_native_builds": false,
+  "scope": "Execution environment, not a claim that all dependency versions are required."
+}

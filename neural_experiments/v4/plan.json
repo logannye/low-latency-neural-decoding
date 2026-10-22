@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "study": "history-prior-reduced-calibration-and-T3-continuation-v4",
+  "status": "locked_before_fresh_outcome_preparation_and_assessment",
+  "acquisition_plan_sha256": "dadc1cce640900008087c9357527032fea85394b797fc21bb45fb02c3baf4fbe",
+  "development_index_sha256": "aa6bf303c746edde0fb4d0a3a937a0fb07afb849270f2c79093fc021a9c2c500",
+  "prior_exposure": "All first-600-second V2/V3 outcomes, and explicitly post-hoc T3 and history-prior pilots on those same windows, informed this design. No fresh new-session or continuation-block outcomes informed it. These are known people; the T3 domain also uses known session identities.",
+  "participants": ["T2", "T3", "T5", "T6", "T7", "T8", "T9", "T10", "T11"],
+  "new_session_participants": ["T2", "T5", "T6", "T7", "T8", "T9", "T10", "T11"],
+  "bin_seconds": 0.02,
+  "target": "Unchanged V3 unit cursor-to-target direction and within-go valid-pair mask. No new target, near-target exclusions, trial averaging, or outcome-dependent quality selection.",
+  "global_grid": {
+    "families": ["tx45", "tx3", "tx45_sbp", "tx3_sbp"],
+    "tau_seconds_by_family": {"tx45": 0.4, "tx3": 0.4, "tx45_sbp": 0.2, "tx3_sbp": 0.2},
+    "baseline_tau_seconds": [null, 5.0],
+    "adapt_gamma": [1.0, 10.0]
+  },
+  "features": "sqrt counts from tx_4_5 or tx_3; optionally concatenate log1p spike-band power. Optional baseline subtracts the previous-observation EW mean from current transformed features, before causal fast smoothing. Reset both filters at acquisition boundaries, initialized to the first current transformed vector. No label, go mask, future mean or trial metadata enters the representation.",
+  "normalization": {
+    "target_unlabeled_prefix_seconds": 30,
+    "history": "All observations of the strictly earlier historical session's first min(600s,duration); offline history normalization is allowed because this entire recording precedes the query day.",
+    "target": "First 30 observed seconds only, for every history-based budget including zero labels. This is 30 seconds of unlabeled warm-up, not immediate zero-data operation.",
+    "floor_counts": 0.1,
+    "floor_power": 0.01,
+    "clip_z": 8.0,
+    "output": "Project to Euclidean unit disk."
+  },
+  "history": {
+    "maximum_sessions": 3,
+    "selection": "Same participant, same channel layout, strictly smaller post-implant day, sorted by day/session ID and take last three BEFORE checking training-label availability. Entire query session and all other new assessment sessions are excluded. Histories always come from the fixed development index.",
+    "max_observed_seconds_per_session": 600,
+    "training_stride_bins": 5,
+    "stride_rule": "After the common per-block burn and go mask, use fixed session-global indices divisible by five; 100ms historical training spacing. This bounds redundant correlated matrix work. All observations still advance filters and contribute permitted normalization statistics.",
+    "training_burn_bins_per_block": 62,
+    "minimum_training_rows": 50,
+    "fit": "Equal-session mean Gram and RHS; ridge lambda1 on feature weights, free intercept. Omit insufficient historical statistics with an explicit disposition and no replacement session. No eligible history gives an all-zero prior.",
+    "fresh_label_budgets_seconds": [0, 30, 120],
+    "adaptation": "Minimize mean target-prefix squared residual plus gamma times squared distance to prior weights, with intercept distance penalized by 0.1*gamma. Fewer than50 eligible fresh rows returns the prior unchanged, with the fallback explicitly reported. Target fitting uses all eligible bins, not historical stride5."
+  },
+  "global_selection": {
+    "queries": "All80 development sessions; strict chronology within each pseudo-query as above. No-history and no-fresh-label fallback cases are retained. Sessions lacking50 evaluation rows after122s are unavailable by fixed geometry/mask rules.",
+    "score_window_seconds": [122, 600],
+    "selected_budget_seconds": 30,
+    "outer_exclusion": "For each target person, rank the16 configurations using only the other people's chronological pseudo-query scores; equal sessions within each source person, then equal source people. First grid order breaks exact ties. No target-person outcomes enter this ranking.",
+    "budget_transfer": "Use the same selected configuration at0/30/120 fresh-label budgets. Do not retune by assessment budget."
+  },
+  "T3_targeted_grid": {
+    "families": ["tx45", "tx3"],
+    "tau_seconds": 0.4,
+    "baseline_tau_seconds": [null, 5.0],
+    "ridge_penalty": [1.0, 10.0],
+    "free_intercept": [false, true],
+    "fit": "Daily mean-loss ridge from first120s with matching120s normalization; free intercept or exact zero-intercept constrained fit. No historical prior in this targeted daily arm."
+  },
+  "T3_targeted_selection": {
+    "source_validation_seconds": [302, 600],
+    "rule": "Score16 targeted daily120 configurations on development windows. For each T3 continuation query, rank using only strictly earlier T3 development-session scores, equal sessions. If no earlier eligible T3 score exists, use all non-T3 development people with equal-person weighting. Exclude the query session and later T3 sessions from its ranking. First grid order breaks ties.",
+    "secondary": "Apply the exact same selected targeted recipe with30s calibration/normalization as a secondary result; do not retune."
+  },
+  "assessment": {
+    "new_sessions": {"primary_window_seconds": [122, 600], "methods": ["zero", "prefix_mean30", "v3_daily30", "v3_daily120", "selected_prior0", "selected_prior30", "selected_prior120", "selected_scratch30"]},
+    "t3_blocks": {"window": "All valid go pairs in the fixed first two whole acquisition blocks starting>=600s, or the available subset; no tail truncation or selection based on outcomes.", "methods": ["zero", "prefix_mean30", "v3_daily30", "v3_daily120", "selected_prior0", "selected_prior30", "selected_prior120", "selected_scratch30", "targeted_daily30", "targeted_daily120"]},
+    "v3_comparator": "Fixed V3 overall-selected recipe from the existing source choice for this person at120s: TX4.5+SBP,tau.2,no baseline,lambda1,free intercept,original floors; refit at30 or120 as named. If fewer than50 training rows, output zero and record the fallback. These are predefined low-label fallbacks rather than silently omitted cases.",
+    "prefix_mean30": "Mean of the same burned valid30s training rows; fewer than50 rows gives zero.",
+    "selected_scratch30": "Same selected global representation,30s normalization and adaptation penalty as selected_prior30, but the prior weights are exactly zero. This isolates use of historical weights under the same current-label budget.",
+    "T3_calibration": "Only the first0:30 or0:120 of the separate known-prefix labels may enter a fit. No other part of the query session's exposed first600s is historical training or hyperparameter validation. Features replay from recording start through selected blocks; scorer labels outside selected blocks are zero/masked, stored separately from known-prefix labels.",
+    "minimum_evaluation_rows": 50,
+    "missing": "No score-based replacement. Publish every requested session/block shortage, duration shortage, no-history case and insufficient-fresh-label fallback. New-session and T3-continuation domains are never pooled into one accuracy headline."
+  },
+  "metrics": "Variance-weighted R2, coordinate R2, angular error (zero output assigned90degrees), MSE, label counts, per-session and equal-person means, paired contrasts on identical masks."
+  ,"uncertainty": {"bootstrap_draws": 10000, "seed": 20261023, "new_sessions_unit": "participant after equal-session averaging", "T3_unit": "session after scoring the combined selected blocks; descriptive within-one-person uncertainty, not independent participant inference"},
+  "gates": {
+    "reduced_label_useful": {"eligible_people": 8, "mean_r2_min": 0.1, "r2_interval_lower_above": 0, "positive_people_min": 6, "mean_gain_over_each_null_min": 0.05, "angular_error_max_degrees": 80},
+    "calibration_noninferiority": {"contrast": "selected_prior30 - v3_daily120", "paired_r2_interval_lower_above": -0.05, "requires_reduced_label_useful": true, "meaning": "Predeclared descriptive engineering criterion for retaining accuracy with a75% shorter fresh labeled prefix; not a powered clinical noninferiority trial."},
+    "zero_fresh_label_useful": {"same_absolute_criteria_as": "reduced_label_useful", "arm": "selected_prior0", "unlabeled_warmup_seconds": 30},
+    "T3_recovered": {"arm": "targeted_daily120", "eligible_sessions": 8, "mean_r2_min": 0.05, "r2_interval_lower_above": 0, "positive_sessions_min": 6, "mean_gain_over_zero_min": 0.05, "paired_gain_over_v3_daily120_interval_lower_above": 0, "angular_error_max_degrees": 80}
+  },
+  "execution": "Publish all selected configurations and independently checked source scores before assessment. Pin plan/data/model/study sources. One-shot assessment; retain failed attempts and exposure state, no post-assessment retuning. Models reload numeric exports before feature-only prediction. Separate independent scorer, prediction/fit verifier and case-inventory audit.",
+  "runtime": "If a selected model is exportable, choose selected_prior30 from first available new-session participant in plan order and first archive rank, without inspecting quality. Three fast and two60-second20ms-paced replays of the exact model; report filter response separately. No local Rust builds."
+}
