@@ -178,3 +178,141 @@ def test_locked_grids_have_exact_order_and_count():
     assert global_grid[-1]["config"] == config("tx3_sbp", 5.0, 10.0)
     assert targeted[0]["bias"] == 0
     assert targeted[-1]["bias"] == 1
+
+
+@pytest.mark.parametrize(
+    "key,value",
+    [("format_version", np.asarray(4.0)), ("config", np.asarray(json.dumps(config()).encode()))],
+)
+def test_export_types_match_deployable_model_contract(synthetic, key, value):
+    features, _, _, segments = synthetic
+    raw = audit.reference_representation(features, segments, config())
+    _, mean, scale = audit.reference_design(raw, 150, 4)
+    arrays = {
+        "format_version": np.asarray(4, np.int64),
+        "config": np.asarray(json.dumps(config())),
+        "mean": mean,
+        "scale": scale,
+        "weights": np.zeros((5, 2)),
+    }
+    arrays[key] = value
+    with pytest.raises(ValueError, match="format|Unicode"):
+        audit.validate_normalization(arrays, raw, 150, 4, config())
+
+
+@pytest.fixture
+def summary_rows():
+    plan = audit.read(audit.ROOT / "neural_experiments/v4/plan.json")
+    rows = []
+    for domain in ("new_sessions", "t3_blocks"):
+        for i in range(8):
+            person = plan["new_session_participants"][i] if domain == "new_sessions" else "T3"
+            for method in plan["assessment"][domain]["methods"]:
+                r2 = {
+                    "zero": 0.0,
+                    "prefix_mean30": 0.01,
+                    "v3_daily120": 0.22,
+                    "targeted_daily120": 0.3,
+                }.get(method, 0.2)
+                rows.append(
+                    {
+                        "domain": domain,
+                        "session_id": f"{domain}-{i}",
+                        "participant": person,
+                        "method": method,
+                        "eval_mask_sha256": "same-mask-per-session",
+                        "metrics": {"r2": r2, "angular_error_degrees": 55.0},
+                    }
+                )
+    return rows, plan
+
+
+def test_summary_uses_eight_people_and_eight_t3_sessions_separately(summary_rows):
+    rows, plan = summary_rows
+    result = audit.reconstruct_summary(rows, plan)
+    assert all(result["gates"].values())
+    for domain in result["domains"].values():
+        assert domain["methods"]["selected_prior30"]["n_units"] == 8
+        assert domain["methods"]["selected_prior30"]["mean_r2"] == pytest.approx(0.2)
+    pair = next(
+        c
+        for c in result["domains"]["new_sessions"]["contrasts"]
+        if c["arm"] == "selected_prior30" and c["control"] == "v3_daily120"
+    )
+    np.testing.assert_allclose(pair["gain_bootstrap_95"], [-0.02, -0.02])
+
+
+def test_missing_person_never_passes_reduced_label_gate(summary_rows):
+    rows, plan = summary_rows
+    rows = [r for r in rows if not (r["domain"] == "new_sessions" and r["participant"] == "T2")]
+    result = audit.reconstruct_summary(rows, plan)
+    assert not result["gates"]["reduced_label_useful"]
+    assert not result["gates"]["calibration_noninferiority"]
+    assert not result["gates"]["zero_fresh_label_useful"]
+    assert result["gates"]["T3_recovered"]
+
+
+def test_comparison_rejects_different_scoring_masks(summary_rows):
+    rows, plan = summary_rows
+    rows[0]["eval_mask_sha256"] = "different"
+    with pytest.raises(ValueError, match="different scoring masks"):
+        audit.reconstruct_summary(rows, plan)
+
+
+def test_session_imbalance_does_not_change_participant_weight(summary_rows):
+    rows, plan = summary_rows
+    extra = [
+        {**r, "session_id": r["session_id"] + "-extra"}
+        for r in rows
+        if r["domain"] == "new_sessions" and r["participant"] == "T2"
+    ]
+    before, after = (
+        audit.reconstruct_summary(rows, plan),
+        audit.reconstruct_summary(rows + extra, plan),
+    )
+    for method in plan["assessment"]["new_sessions"]["methods"]:
+        a, b = [s["domains"]["new_sessions"]["methods"][method] for s in (before, after)]
+        assert a["mean_r2"] == b["mean_r2"]
+        assert a["r2_bootstrap_95"] == b["r2_bootstrap_95"]
+
+
+@pytest.mark.parametrize("tamper", [None, "prediction", "mask", "hash"])
+def test_full_artifact_verification_detects_rehashed_trace_tampering(synthetic, tmp_path, tamper):
+    features, y, mask, segments = synthetic
+    cfg = config()
+    raw = audit.reference_representation(features, segments, cfg)
+    z, mean, scale = audit.reference_design(raw, 150, 4)
+    stats = audit.reference_statistics(z[:150], y[:150], audit.reference_mask(mask, segments, 150))
+    weights = model.solve_daily(stats, 1.0, 1)
+    fitted = model.Decoder(cfg, mean, scale, weights)
+    model_path, trace_path = tmp_path / "model.npz", tmp_path / "trace.npz"
+    fitted.save(model_path)
+    prediction = fitted.predict(features, segments)
+    np.savez_compressed(trace_path, prediction=prediction, eval_mask=mask)
+    metrics, _ = audit.score_reference(y, prediction, mask)
+    metrics["mse"] = float(np.square(y[mask] - prediction[mask]).mean())
+    row = {
+        "model_path": "model.npz",
+        "model_sha256": audit.sha256(model_path),
+        "trace_path": "trace.npz",
+        "trace_sha256": audit.sha256(trace_path),
+        "eval_mask_sha256": audit.mask_hash(mask),
+        "metrics": metrics,
+    }
+    if tamper is not None:
+        changed_mask = mask.copy()
+        if tamper == "prediction":
+            prediction[200, 0] += 0.1
+        elif tamper == "mask":
+            changed_mask[200] = not changed_mask[200]
+        np.savez_compressed(trace_path, prediction=prediction, eval_mask=changed_mask)
+        row["trace_sha256"] = "wrong" if tamper == "hash" else audit.sha256(trace_path)
+        with pytest.raises(ValueError, match="replay|mask|hash"):
+            audit.check_artifacts(
+                row, raw, {"n_bins": 400, "n_channels": 4}, cfg, 150, {"y": y}, mask, tmp_path
+            )
+    else:
+        _, _, _, error = audit.check_artifacts(
+            row, raw, {"n_bins": 400, "n_channels": 4}, cfg, 150, {"y": y}, mask, tmp_path
+        )
+        assert error < 1e-12

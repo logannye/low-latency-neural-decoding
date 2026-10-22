@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -152,8 +153,14 @@ def validate_weights(weights, stats, prior=None, gamma=None, daily_penalty=None,
 def validate_normalization(arrays, raw, prefix, channels, config):
     if set(arrays) != {"format_version", "config", "mean", "scale", "weights"}:
         raise ValueError("Unexpected model export fields")
-    if arrays["format_version"].shape != () or arrays["format_version"].item() != 4:
+    if (
+        arrays["format_version"].shape != ()
+        or arrays["format_version"].dtype != np.int64
+        or arrays["format_version"].item() != 4
+    ):
         raise ValueError("Unsupported model format")
+    if arrays["config"].shape != () or arrays["config"].dtype.kind != "U":
+        raise ValueError("Scalar Unicode model configuration required")
     if json.loads(arrays["config"].item()) != config:
         raise ValueError("Exported model configuration mismatch")
     x, mean, scale = reference_design(raw, prefix, channels)
@@ -569,14 +576,561 @@ def audit_selection(selection_path, root=ROOT):
     }
 
 
+def interval(values):
+    """Fixed descriptive resampling of complete participant/session means."""
+    a = np.asarray(values, dtype=float)
+    if not len(a):
+        return [None, None]
+    draw = np.random.default_rng(20261023).integers(0, len(a), size=(10000, len(a)))
+    return np.quantile(a[draw].mean(axis=1), [0.025, 0.975]).tolist()
+
+
+def reconstruct_summary(rows, plan):
+    domains = {}
+    for domain in ("new_sessions", "t3_blocks"):
+        methods, contrasts = {}, []
+        unit_field = "participant" if domain == "new_sessions" else "session_id"
+        usable = [r for r in rows if r["domain"] == domain and r["metrics"]["r2"] is not None]
+        for method in plan["assessment"][domain]["methods"]:
+            group = [r for r in usable if r["method"] == method]
+            units = []
+            for unit in sorted({r[unit_field] for r in group}):
+                scores = [r["metrics"] for r in group if r[unit_field] == unit]
+                units.append(
+                    {
+                        "unit": unit,
+                        "r2": float(np.mean([s["r2"] for s in scores])),
+                        "angular_error_degrees": float(
+                            np.mean([s["angular_error_degrees"] for s in scores])
+                        ),
+                        "n_sessions": len(scores),
+                    }
+                )
+            values = [u["r2"] for u in units]
+            methods[method] = {
+                "units": units,
+                "n_units": len(units),
+                "n_sessions": len(group),
+                "mean_r2": float(np.mean(values)) if values else None,
+                "r2_bootstrap_95": interval(values),
+                "positive_units": sum(v > 0 for v in values),
+                "mean_angular_error_degrees": float(
+                    np.mean([u["angular_error_degrees"] for u in units])
+                )
+                if units
+                else None,
+            }
+        for arm in (
+            "selected_prior0",
+            "selected_prior30",
+            "selected_prior120",
+            "targeted_daily120",
+        ):
+            if arm not in methods:
+                continue
+            for control in ("zero", "prefix_mean30", "v3_daily120", "selected_scratch30"):
+                left = {r["session_id"]: r for r in usable if r["method"] == arm}
+                right = {r["session_id"]: r for r in usable if r["method"] == control}
+                gains = {}
+                for sid in sorted(left.keys() & right.keys()):
+                    a, b = left[sid], right[sid]
+                    if a["eval_mask_sha256"] != b["eval_mask_sha256"]:
+                        raise ValueError("Paired comparison uses different scoring masks")
+                    gains.setdefault(a[unit_field], []).append(
+                        a["metrics"]["r2"] - b["metrics"]["r2"]
+                    )
+                values = [float(np.mean(gains[u])) for u in sorted(gains)]
+                contrasts.append(
+                    {
+                        "arm": arm,
+                        "control": control,
+                        "n_units": len(values),
+                        "mean_gain": float(np.mean(values)) if values else None,
+                        "gain_bootstrap_95": interval(values),
+                    }
+                )
+        domains[domain] = {"methods": methods, "contrasts": contrasts}
+
+    def useful(arm):
+        m = domains["new_sessions"]["methods"][arm]
+        pairs = [
+            c
+            for c in domains["new_sessions"]["contrasts"]
+            if c["arm"] == arm and c["control"] in ("zero", "prefix_mean30")
+        ]
+        return bool(
+            m["n_units"] == 8
+            and m["mean_r2"] >= 0.1
+            and m["r2_bootstrap_95"][0] > 0
+            and m["positive_units"] >= 6
+            and m["mean_angular_error_degrees"] <= 80
+            and len(pairs) == 2
+            and all(c["n_units"] == 8 and c["mean_gain"] >= 0.05 for c in pairs)
+        )
+
+    ni = next(
+        c
+        for c in domains["new_sessions"]["contrasts"]
+        if c["arm"] == "selected_prior30" and c["control"] == "v3_daily120"
+    )
+    t = domains["t3_blocks"]["methods"]["targeted_daily120"]
+    tc = {
+        c["control"]: c
+        for c in domains["t3_blocks"]["contrasts"]
+        if c["arm"] == "targeted_daily120"
+    }
+    recovered = bool(
+        t["n_units"] == 8
+        and t["mean_r2"] >= 0.05
+        and t["r2_bootstrap_95"][0] > 0
+        and t["positive_units"] >= 6
+        and t["mean_angular_error_degrees"] <= 80
+        and tc["zero"]["n_units"] == 8
+        and tc["zero"]["mean_gain"] >= 0.05
+        and tc["v3_daily120"]["n_units"] == 8
+        and tc["v3_daily120"]["gain_bootstrap_95"][0] > 0
+    )
+    return {
+        "domains": domains,
+        "gates": {
+            "reduced_label_useful": useful("selected_prior30"),
+            "zero_fresh_label_useful": useful("selected_prior0"),
+            "T3_recovered": recovered,
+            "calibration_noninferiority": bool(
+                useful("selected_prior30")
+                and ni["n_units"] == 8
+                and ni["gain_bootstrap_95"][0] > -0.05
+            ),
+        },
+    }
+
+
+def validate_fresh_provenance(inputs, development, plan):
+    """Authenticate archive order and known-prefix bindings without the V4 importer."""
+    index, role = inputs.index, inputs.index["role"]
+    expected_people = plan["new_session_participants"] if role == "new_sessions" else ["T3"]
+    if index["participants"] != expected_people:
+        raise ValueError("Fresh domain participant inventory mismatch")
+    for key in ("v2_index_sha256", "v3_index_sha256"):
+        if index[key] != development.index[key]:
+            raise ValueError("Fresh input parent cohort changed")
+    expected = {}
+    if role == "new_sessions":
+        if len(index["acquisition_sources"]) != len(expected_people):
+            raise ValueError("Missing acquisition provenance")
+        for person in expected_people:
+            references = [
+                r for r in index["acquisition_sources"] if r["path"] == f"acquisition/{person}.json"
+            ]
+            if len(references) != 1:
+                raise ValueError("Duplicate or missing acquisition receipt")
+            ref = references[0]
+            path = contained(inputs.path.parent, ref["path"])
+            verify(path, ref["sha256"])
+            receipt = read(path)
+            prior = sorted(
+                [s["source"] for s in development.items.values() if s["participant_id"] == person],
+                key=lambda s: s["archive_ordinal"],
+            )
+            if (
+                receipt["status"] != "complete"
+                or receipt["participant_id"] != person
+                or receipt["plan_sha256"] != plan["acquisition_plan_sha256"]
+                or receipt["v2_index_sha256"] != index["v2_index_sha256"]
+                or receipt["v3_index_sha256"] != index["v3_index_sha256"]
+                or receipt["selection"]["regular_session_ranks_one_based"] != [10, 11, 12]
+                or receipt["selection"]["scores_or_duration_used_for_selection"] is not False
+                or len(prior) != 9
+            ):
+                raise ValueError("Invalid fixed archive acquisition role")
+            archive = receipt["archive"]
+            if (
+                archive["file_id"] != prior[0]["archive_file_id"]
+                or archive["provider_sha256"] != prior[0]["archive_sha256_published"]
+            ):
+                raise ValueError("Fresh acquisition changed provider archive")
+            pattern = rf"(?:\./)?decoding/{person}/{person}_day_(\d+)_decoding\.mat"
+            seen = [
+                r
+                for r in receipt["seen_members"]
+                if r["regular_file"] and re.fullmatch(pattern, r["name"])
+            ]
+            selected = receipt["selected"]
+            authenticated = receipt["verified_prior_members"]
+            if (
+                len(authenticated) != 9
+                or len(seen) != 9 + len(selected)
+                or not 0 <= len(selected) <= 3
+                or (len(selected) < 3 and not receipt["tar_end_observed"])
+                or receipt["missing_requested_ranks"] != list(range(10 + len(selected), 13))
+            ):
+                raise ValueError("Archive rank or shortage accounting mismatch")
+            for rank, (member, observed) in enumerate(
+                zip(authenticated + selected, seen, strict=True), 1
+            ):
+                match = re.fullmatch(pattern, member["member_name"])
+                if (
+                    match is None
+                    or member["regular_session_rank"] != rank
+                    or member["participant_id"] != person
+                    or member["post_implant_day"] != int(match.group(1))
+                    or member["session_id"] != Path(member["member_name"]).stem
+                    or member["member_name"] != observed["name"]
+                    or member["member_size"] != observed["size"]
+                    or member["archive_ordinal"] != observed["ordinal"]
+                ):
+                    raise ValueError("Archive walk does not bind selected identity")
+                if rank <= 9:
+                    for key in (
+                        "member_name",
+                        "member_size",
+                        "member_sha256",
+                        "archive_ordinal",
+                        "session_id",
+                    ):
+                        if member[key] != prior[rank - 1][key]:
+                            raise ValueError("Previously exposed archive prefix changed")
+                else:
+                    expected[member["session_id"]] = member
+    else:
+        if (
+            index["development_index_sha256"] != sha256(development.path)
+            or Path(index["development_index_path"]).resolve() != development.path.resolve()
+        ):
+            raise ValueError("Known-prefix source index changed")
+        expected = {
+            sid: s["source"] for sid, s in development.items.items() if s["participant_id"] == "T3"
+        }
+    if set(inputs.items) != set(expected):
+        raise ValueError("Fresh session inventory omitted or substituted an identity")
+    for sid, item in inputs.items.items():
+        if item["source"] != expected[sid]:
+            raise ValueError("Prepared input source differs from authenticated selection")
+        if item["post_implant_day"] != expected[sid]["post_implant_day"]:
+            raise ValueError("Prepared chronology differs from source identity")
+        raw_path = contained(item["raw_source_root"], item["source"]["raw_path"])
+        verify(raw_path, item["source"]["member_sha256"])
+        if role == "new_sessions":
+            if item["n_bins"] != min(item["full_prepared_n_bins"], 30000):
+                raise ValueError("New recording does not preserve the fixed 600-second cap")
+        else:
+            known = development.items[sid]
+            expected_path = contained(development.path.parent, known["target_path"])
+            if (
+                Path(item["known_prefix_target_path"]).resolve() != expected_path
+                or item["known_prefix_target_sha256"] != known["target_sha256"]
+                or item["known_prefix_n_bins"] != known["n_bins"]
+            ):
+                raise ValueError("T3 calibration points outside its fixed known-prefix file")
+            eligible = [
+                s for s in item["segments"] if s["start"] >= 30000 and s["end"] > s["start"]
+            ]
+            selected = [s for s in item["segments"] if s["selected_for_evaluation"]]
+            if (
+                selected != eligible[:2]
+                or not selected
+                or len(selected) > 2
+                or item["n_bins"] != selected[-1]["end"]
+                or item["selected_evaluation_block_ids"] != [s["block_id"] for s in selected]
+                or item["unavailable_continuation_blocks"] != 2 - len(selected)
+            ):
+                raise ValueError("T3 continuation block selection differs from fixed metadata rule")
+            # Read only acquisition block metadata from the independently hashed raw member.
+            from scipy.io import loadmat
+
+            blocks = loadmat(raw_path, simplify_cells=True, variable_names=["blocks"])["blocks"]
+            ids, starts, ends = [
+                np.asarray(blocks[k]).reshape(-1)
+                for k in ("block_id", "sample_start_index", "sample_end_index")
+            ]
+            if (
+                len(ids) != len(starts)
+                or len(ids) != len(ends)
+                or np.any(ends <= starts)
+                or np.any(starts < 0)
+                or np.any(starts[1:] < ends[:-1])
+            ):
+                raise ValueError("Malformed original acquisition blocks")
+            lengths = ((ends - starts) // 2).astype(np.int64)
+            offsets = np.r_[0, np.cumsum(lengths)]
+            chosen = [i for i in range(len(ids)) if offsets[i] >= 30000 and lengths[i] > 0][:2]
+            expected_segments = [
+                {
+                    "start": int(offsets[i]),
+                    "end": int(offsets[i + 1]),
+                    "block_id": int(ids[i]),
+                    "original_block_index": i,
+                    "selected_for_evaluation": i in chosen,
+                }
+                for i in range(chosen[-1] + 1)
+            ]
+            actual_segments = [{k: s[k] for k in expected_segments[0]} for s in item["segments"]]
+            compare_structure(actual_segments, expected_segments, "whole original T3 blocks")
+
+
+def audit_assessment(assessment_path, root=ROOT):
+    assessment = read(assessment_path)
+    if (
+        assessment["schema_version"] != 1
+        or assessment["stage"] != "assessment"
+        or assessment["status"] != "assessment_complete"
+    ):
+        raise ValueError("Assessment is incomplete")
+    selection_path = contained(root, assessment["selection_path"])
+    verify(selection_path, assessment["selection_sha256"])
+    selection = read(selection_path)
+    plan, development = check_source_identity(selection, root)
+    source_audit_path = contained(root, assessment["source_audit_path"])
+    verify(source_audit_path, assessment["source_audit_sha256"])
+    source_audit = read(source_audit_path)
+    if (
+        source_audit["status"] != "PASS"
+        or source_audit["stage"] != "source"
+        or source_audit["selection_sha256"] != sha256(selection_path)
+        or source_audit["plan_sha256"] != PLAN_SHA256
+        or source_audit["development_index_sha256"] != sha256(development.path)
+        or source_audit["code_sha256"] != selection["code_sha256"]
+    ):
+        raise ValueError("Source selection lacks a matching passed audit")
+    source_scores = [
+        {**r, "post_implant_day": development.items[r["session_id"]]["post_implant_day"]}
+        for r in source_audit["independent_scores"]
+    ]
+    choices, targeted_choices = reconstruct_choices(
+        source_scores,
+        selection["candidates"],
+        selection["targeted_candidates"],
+        list(development.items.values()),
+        plan["participants"],
+    )
+    compare_structure(selection["choices"], choices)
+    compare_structure(selection["targeted_choices"], targeted_choices)
+    if set(assessment["indices"]) != {"new_sessions", "t3_blocks"}:
+        raise ValueError("Separate assessment domains missing")
+    inputs_by_domain = {}
+    for role, ref in assessment["indices"].items():
+        path = contained(root, ref["path"])
+        verify(path, ref["sha256"])
+        inputs = Inputs(path, role, plan)
+        validate_fresh_provenance(inputs, development, plan)
+        inputs_by_domain[role] = inputs
+    rows = {(r["domain"], r["session_id"], r["method"]): r for r in assessment["cases"]}
+    expected = {
+        (role, sid, method)
+        for role, inputs in inputs_by_domain.items()
+        for sid in inputs.items
+        for method in plan["assessment"][role]["methods"]
+    }
+    if set(rows) != expected or len(rows) != len(assessment["cases"]):
+        raise ValueError("Assessment case inventory omitted, duplicated or added cases")
+    layouts, stats_cache = {}, {}
+    for sid, item in development.items.items():
+        features, _ = development.arrays(item)
+        layouts[sid] = tuple(features["channel_ids"])
+
+    def prior_for(item, config, dimension):
+        config_key = tuple(config[k] for k in ("family", "tau_seconds", "baseline_tau_seconds"))
+        selected = selected_histories(item, list(development.items.values()), layouts)
+        stats = {}
+        for history in selected:
+            sid = history["session_id"]
+            key = (sid, config_key)
+            if key not in stats_cache:
+                features, target = development.arrays(history)
+                raw = reference_representation(features, history["segments"], config)
+                x, _, _ = reference_design(raw, len(raw), history["n_channels"])
+                train = reference_mask(target["eval_mask"], history["segments"], stride=5)
+                stats_cache[key] = reference_statistics(x, target["y"], train)
+            stats[sid] = stats_cache[key]
+        return checked_prior(item, list(development.items.values()), layouts, stats, dimension)
+
+    checked, errors, residuals, unavailable, fallbacks = [], [], [], 0, 0
+    for domain, inputs in inputs_by_domain.items():
+        for sid, item in inputs.items.items():
+            features, labels = inputs.arrays(item)
+            layouts[sid] = tuple(features["channel_ids"])
+            methods = plan["assessment"][domain]["methods"]
+            if domain == "new_sessions" and item["n_bins"] < 6100:
+                for method in methods:
+                    row = rows[domain, sid, method]
+                    expected_row = {
+                        "domain": domain,
+                        "method": method,
+                        "participant": item["participant_id"],
+                        "session_id": sid,
+                        "unavailable": "duration_before_common_evaluation",
+                        "metrics": {"r2": None},
+                    }
+                    compare_structure(row, expected_row)
+                    checked.append(row)
+                    unavailable += 1
+                continue
+            mask = labels["eval_mask"].copy()
+            fit_labels = labels
+            if domain == "new_sessions":
+                mask[:6100] = False
+            else:
+                allowed = np.zeros(item["n_bins"], bool)
+                for segment in item["segments"]:
+                    if segment["selected_for_evaluation"]:
+                        allowed[segment["start"] : segment["end"]] = True
+                if np.any(mask & ~allowed) or np.any(labels["y"][~allowed]):
+                    raise ValueError("T3 scorer labels escape the selected fresh blocks")
+                known_features, known = development.arrays(development.items[sid])
+                for name in features:
+                    before = known_features[name]
+                    current = (
+                        features[name] if name == "channel_ids" else features[name][: len(before)]
+                    )
+                    if not np.array_equal(current, before):
+                        raise ValueError("T3 causal feature prefix differs from its known session")
+                fit_labels = {"y": np.zeros_like(labels["y"]), "eval_mask": np.zeros_like(mask)}
+                fit_labels["y"][:6000] = known["y"][:6000]
+                fit_labels["eval_mask"][:6000] = known["eval_mask"][:6000]
+            selected_id = next(
+                c["candidate_id"]
+                for c in choices
+                if c["target_participant"] == item["participant_id"]
+            )
+            selected = next(c for c in selection["candidates"] if c["candidate_id"] == selected_id)
+            raw_cache = {}
+            for method in methods:
+                row = rows[domain, sid, method]
+                config = selected["config"]
+                candidate_id = selected_id
+                budget = (
+                    0
+                    if method in ("zero", "selected_prior0")
+                    else 120
+                    if method.endswith("120")
+                    else 30
+                )
+                normalizer, penalty, bias = 30, config["adapt_gamma"], 1
+                daily = method.startswith(("v3_daily", "targeted_daily"))
+                if method.startswith("v3_daily"):
+                    config = {
+                        "family": "tx45_sbp",
+                        "tau_seconds": 0.2,
+                        "baseline_tau_seconds": None,
+                        "adapt_gamma": 1.0,
+                    }
+                    candidate_id, normalizer, penalty = "v3_fixed", budget, 1.0
+                elif method.startswith("targeted_daily"):
+                    candidate_id = next(
+                        c["candidate_id"] for c in targeted_choices if c["target_session_id"] == sid
+                    )
+                    candidate = next(
+                        c
+                        for c in selection["targeted_candidates"]
+                        if c["candidate_id"] == candidate_id
+                    )
+                    config, penalty, bias = (
+                        candidate["config"],
+                        candidate["penalty"],
+                        candidate["bias"],
+                    )
+                    normalizer = budget
+                raw_key = tuple(
+                    config[k] for k in ("family", "tau_seconds", "baseline_tau_seconds")
+                )
+                if raw_key not in raw_cache:
+                    raw_cache[raw_key] = reference_representation(
+                        features, item["segments"], config
+                    )
+                raw = raw_cache[raw_key]
+                x, fitted, metrics, error = check_artifacts(
+                    row, raw, item, config, normalizer * 50, labels, mask, root
+                )
+                stop = budget * 50
+                train = reference_mask(fit_labels["eval_mask"], item["segments"], stop)
+                st = reference_statistics(x[:stop], fit_labels["y"][:stop], train)
+                prior, histories = np.zeros_like(fitted["weights"]), []
+                if method.startswith("selected_prior"):
+                    prior, histories = prior_for(item, config, len(prior))
+                metadata = {
+                    "domain": domain,
+                    "method": method,
+                    "participant": item["participant_id"],
+                    "session_id": sid,
+                    "post_implant_day": item["post_implant_day"],
+                    "kind": "assessment",
+                    "candidate_id": candidate_id,
+                    "budget_seconds": budget,
+                    "normalization_bins": normalizer * 50,
+                    "training_rows": st["n"],
+                    "history": histories,
+                    "fallback": budget > 0 and st["n"] < 50,
+                    "penalty": penalty,
+                    "bias": bias,
+                }
+                for key, expected_value in metadata.items():
+                    compare_structure(row[key], expected_value, key)
+                if method in ("zero", "prefix_mean30"):
+                    expected_weights = np.zeros_like(fitted["weights"])
+                    if method == "prefix_mean30" and st["n"] >= 50:
+                        expected_weights[-1] = st["rhs"][-1]
+                    if not np.allclose(fitted["weights"], expected_weights, atol=1e-12, rtol=1e-12):
+                        raise ValueError(
+                            "Constant control used different labels or nonzero feature weights"
+                        )
+                else:
+                    optimum = validate_weights(
+                        fitted["weights"],
+                        st,
+                        prior=None if daily else prior,
+                        gamma=config["adapt_gamma"],
+                        daily_penalty=penalty,
+                        free_bias=bool(bias),
+                    )
+                    if optimum["normal_equation_relative_residual"] is not None:
+                        residuals.append(optimum["normal_equation_relative_residual"])
+                fallbacks += int(metadata["fallback"])
+                errors.append(error)
+                checked.append({**row, "metrics": metrics})
+            print(f"independent assessment {domain} {sid} checked", flush=True)
+    by_key = {(r["domain"], r["session_id"], r["method"]): r for r in checked}
+    checked = [by_key[r["domain"], r["session_id"], r["method"]] for r in assessment["cases"]]
+    summary = reconstruct_summary(checked, plan)
+    compare_structure(assessment["summary"], summary, "independent assessment summary")
+    return {
+        "status": "PASS",
+        "stage": "assessment",
+        "created_at": datetime.now(UTC).isoformat(),
+        "auditor_source_sha256": sha256(__file__),
+        "assessment_sha256": sha256(assessment_path),
+        "selection_sha256": sha256(selection_path),
+        "source_audit_sha256": sha256(source_audit_path),
+        "plan_sha256": PLAN_SHA256,
+        "development_index_sha256": sha256(development.path),
+        "indices": assessment["indices"],
+        "cases_checked": len(checked),
+        "models_and_full_traces_checked": len(errors),
+        "unavailable_cases_checked": unavailable,
+        "insufficient_label_fallbacks_checked": fallbacks,
+        "max_prediction_absolute_error": max(errors, default=0),
+        "max_normal_equation_relative_residual": max(residuals, default=0),
+        "summary": summary,
+        "independent_scores": checked,
+        "scope": (
+            "Independent saved-model optimum, recurrence replay, prefix/history boundaries, "
+            "score arithmetic, case inventory, archive-order receipts, paired summaries and "
+            "fixed gates. No V4 implementation imports."
+        ),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--selection", type=Path, required=True)
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--selection", type=Path)
+    group.add_argument("--assessment", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists():
         raise ValueError("Refusing to overwrite an audit receipt")
-    result = audit_selection(args.selection)
+    result = (
+        audit_selection(args.selection) if args.selection else audit_assessment(args.assessment)
+    )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
 

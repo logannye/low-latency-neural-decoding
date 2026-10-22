@@ -48,6 +48,13 @@ AUDIT_FIELDS = {
     "max_fit_residual",
     "elapsed_seconds",
     "fresh_labels_opened",
+    "models_and_full_traces_checked",
+    "unavailable_cases_checked",
+    "insufficient_label_fallbacks_checked",
+    "global_choices_checked",
+    "max_prediction_absolute_error",
+    "max_normal_equation_relative_residual",
+    "scope",
 }
 
 
