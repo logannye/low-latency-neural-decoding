@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "study": "prospective-adaptive-calibration-and-T2-v5",
+  "status": "locked_before_fresh_outcome_preparation",
+  "acquisition_plan_sha256": "43a55022369f44d76659d453e20880009692bfa80591aa49d0b54677cb8c1f47",
+  "development_index_sha256": "1fb2d9b3167e2c671e279dd89fe05ebb6f38633d4f3e6f3b56078a0c61621fb1",
+  "prior_exposure": "All104 exposed first-min(600s,duration) recordings informed design; T2 mechanistic pilots and prefix-selector failures are explicitly exploratory. V4 T3 continuation outcomes were previously exposed but their samples are excluded from V5 development. Fresh ranks13-15 and next T3 continuation blocks have not informed algorithm or policy design.",
+  "participants": [
+    "T2",
+    "T3",
+    "T5",
+    "T6",
+    "T7",
+    "T8",
+    "T9",
+    "T10",
+    "T11"
+  ],
+  "new_session_participants": [
+    "T2",
+    "T5",
+    "T6",
+    "T7",
+    "T8",
+    "T9",
+    "T10",
+    "T11"
+  ],
+  "target": "Unchanged unit cursor-to-target direction proxy, within-block20ms valid-go pairs; no outcome-driven quality exclusions.",
+  "bin_seconds": 0.02,
+  "candidate_grid": {
+    "families": [
+      "tx45",
+      "tx45_sbp"
+    ],
+    "tau_seconds": [
+      0.4,
+      0.2
+    ],
+    "baseline_tau_seconds": null,
+    "heads": [
+      "prior-centered gamma10 (bias penalty1)",
+      "daily ridge1 free intercept",
+      "daily ridge10 exact zero intercept"
+    ],
+    "order": "family then head in listed order; no participant-ID-specific routing"
+  },
+  "normalization": {
+    "query": "First30 observed seconds, before any requested labels. Fixed for all adaptive and fixed-history fits; counts floor.1, power floor.01, clip z to[-8,8].",
+    "history": "Entire strictly earlier permitted recording, capped600s.",
+    "daily_controls": "All features available by end of matched calibration: first150s for daily120 and first270s for daily240. These stronger controls may use more contemporaneous unlabeled observations."
+  },
+  "history": {
+    "maximum_sessions": 3,
+    "selection": "Same participant and channel layout, strictly smaller post-implant day, last3 by(day,sessionID) BEFORE label-availability checks. All come from fixed104-case development; no fresh case, same-day case, or query session admitted. No replacement for insufficient history.",
+    "training": "Equal-session mean Gram/RHS with ridge1 and free intercept; first62 observations of each acquisition block burned; valid-go rows at fixed session-global stride5. Minimum50 rows per history; empty history gives zero prior.",
+    "quality_probes": "For each selected prior family, evaluate its prior0 in each selected historical session as a chronological pseudoquery. Each probe uses only that older session's strictly earlier histories and first30s unlabeled normalizer, scoring[272,600). Only probes with>=50 score rows and at least one valid history count. Retain last3 identities before availability checks. Query-session outcomes never enter reliability. Report all probe identities, errors and exclusions."
+  },
+  "prospective_calibration": {
+    "warmup_seconds": 30,
+    "fresh_label_budgets_seconds": [
+      30,
+      60,
+      120,
+      240
+    ],
+    "label_intervals": "If zero-label reuse is rejected, collect labels prospectively on[30,30+b); decision times60,90,150,270. Never request labels from warmup or retroactively before a label request.",
+    "validation": "At each b fit on[30,30+b/2), validate[30+b/2+2,30+b). No labels from the2s gap enter validation or its training fit. Labels from the entire requested interval may enter final refit after stopping. Burn62bins per acquisition block in both sets; all normalizers remain fixedfirst30.",
+    "geometry": "Both train and validation need>=100 valid burned rows and>=4 of8 angular sectors each containing>=10rows. Validation needs>=3 nonoverlapping2s groups with>=25valid rows each. Group boundaries are fixed by validation start, do not span acquisition boundaries; incomplete groups are not admitted. Directional validation counts and pooled losses use only the rows in retained groups.",
+    "quality": "Coordinate-mean squared error (zero prediction approximately.5). Candidate must beat both zero and training-label-mean predictors in pooled validation by policy margin, and beat both in>=2/3 eligible2s groups. Choose smallest pooled validation MSE among passing six, fixed candidate-order tie. Return a full-requested-prefix refit. At240s without passing candidate abstain with zero output; never force a history fallback.",
+    "shortages": "Keep requested and actually available elapsed label seconds separately, valid labeled rows, coverage and every stage failure. A stage not fully observed cannot pass. Short sessions and no-go windows remain in policy cost inventory; never substitute fresh cases. If a requested checkpoint is unavailable, abstain at the end of the observed recording and retain the full requested budget as cost."
+  },
+  "policies": {
+    "history_mean_coordinate_mse_ceiling": [
+      0.4,
+      0.45
+    ],
+    "validation_margin": [
+      0.025,
+      0.05
+    ],
+    "zero_label_gate": "At least2 eligible chronological prior0 probes, mean error<=configured ceiling and worst<=.50; valid30s warmup and usable current prior required. Pick qualifying prior family with lowest mean error, fixed family-order tie. No current target labels consumed.",
+    "limitations": "Feature-only/history-based routing cannot identify arbitrary new target-map changes. Its negative-transfer rate and accepted coverage are measured, not assumed safe."
+  },
+  "source_selection": {
+    "cases": "All104 development sessions, strict per-query chronology; unavailable common-window outcomes kept with null scores and all requested calibration cost retained.",
+    "policy_grid_size": 4,
+    "outer_exclusion": "For each target person, exclude that entire person from policy ranking. Equal eligible-session accuracy within source person then equal source people. Cost averages all requested cases within each source person. Policies are fixed threshold rules, not learned risk models.",
+    "ranking": "Among policies whose equal-person mean R2 is at least daily120 mean minus.03, select lowest mean requested label seconds, then highest R2, then grid order. If none qualifies, maximize R2 minus.05*(mean requested label seconds/240), grid-order ties.",
+    "assessment_lock": "Commit all selected policy configurations and independently verified source evidence before assessment; no post-assessment retuning."
+  },
+  "assessment": {
+    "methods": [
+      "zero",
+      "history0",
+      "history30",
+      "daily120",
+      "daily240",
+      "adaptive"
+    ],
+    "history_controls": "Fixed tx45_sbp,tau.2,no baseline,first30 normalizer,history ridge1 and prior-centered gamma10. history30 uses prospective labels[30,60); history0 uses none.",
+    "daily_controls": "Fixed tx45_sbp,tau.2,no baseline,daily ridge1 free intercept,labels[30,150)/[30,270),normalization first150/270. Fewer50 labels yields zero with explicit fallback.",
+    "new_sessions": "Identical[272,600) score window for every method and stopping time;>=50valid rows required. All24 requested archive ranks retained; no replacement.",
+    "t3_blocks": "Separate negative-control domain: all validgo rows from nexttwo unusedwholeblocks afterV4 selections. Eight requested sessions, seven available by metadata, one no-block disposition. Only original known[30,270)prefix labels may calibrate; noV4tail labels or intermediate continuation labels enter fits, reliability or decisions.",
+    "aggregation": "Equal-session mean within each of8 new-session people, equal-person cohort mean. T3 separately equal-session; no pooling. Abstention produces zero predictions and stays in all-case accuracy; accepted-only coverage and negative-accepted counts separately reported.",
+    "metrics": "Variance-weightedR2, coordinateR2, MSE, angular error with zero assigned90degrees, labelcost, rowcounts, action/coverage, paired contrasts with identical masks."
+  },
+  "uncertainty": {
+    "draws": 10000,
+    "seed": 20261024,
+    "new_sessions_unit": "participant after equal-session averaging",
+    "T3_and_T2_unit": "session; descriptive small-sample within-person intervals, not independent-person inference"
+  },
+  "gates": {
+    "adaptive_useful": "Exactly8 eligible people;meanR2>=.1;bootstrap lower>0;>=6positive means;gainoverzero>=.05;meanangular<=80degrees.",
+    "reduced_calibration_noninferiority": "Requiresadaptive_useful;pairedadaptive-daily120R2 lower>-0.05;equal-person mean requested label seconds<=90. Descriptive engineering gate, not powered clinical inference.",
+    "T2_recovered": "All3 requested sessions scored;adaptive meanR2>=.05;>=2positive accepted sessions;gainoverzero>=.05;pairedgainoverhistory0 bootstrap lower>0. Abstention alone cannot pass recovery."
+  },
+  "execution": "Pin source hashes and data identities. Export/reload exact numeric model before feature-only replay. Policy receives only history diagnostics and lazy requested-prefix evidence; scorer targets and counterfactual controls cannot enter decisions. Retain failed attempts/exposure state; independently reconstruct fits, decisions, chronology, scores, costs and intervals. Publish aggregate allowlist only; raw arrays/models/sample traces remain local.",
+  "runtime": "Measure exact adaptive export from first new-session participant/rank (T2 rank13), even if abstained. Three fast and two60s paced20ms feature-ready streaming replays, plus observed calibration-decision fit cost. Same frozenV4numeric streamingcore; report filter response separately. No localRust builds."
+}
