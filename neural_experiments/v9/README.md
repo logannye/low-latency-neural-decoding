@@ -6,13 +6,13 @@ Use Python 3.12 with the repository's prebuilt scientific dependencies. No Rust 
 
 ## Exposed source data and frozen code
 
-The exact V8 development and assessment indexes are required. Their 200 previously exposed prefixes are reused without extensions; the four V9 participants supply 96 model-development sessions.
+Exact replay requires the retained local V9 index and its authenticated V8 development and assessment parents. These private indexes and sample artifacts are not bundled in the public repository. Their 200 previously exposed prefixes are reused without extensions; the four V9 participants supply 96 model-development sessions. The commands below validate the existing index. Original preparation used `prepare-development`; a new independent preparation creates a new index identity and needs its own plan, rather than silently replacing this study’s lock.
 
 ```sh
 source .venv/bin/activate
 export PYTHONPATH="$PWD/src:$PWD"
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
-python -m neural_experiments.v9.data prepare-development \
+python -m neural_experiments.v9.data validate-development \
   --cache data/neural_v9/development
 python -m neural_experiments.v9.audit_data \
   --index data/neural_v9/development/index.json \

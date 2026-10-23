@@ -48,7 +48,7 @@ def render(study_path, output):
     axes[0].axhline(0, color="#182C45", linewidth=0.7)
     axes[0].set_xticks(range(len(cases)), [r["post_implant_day"] for r in cases])
     axes[0].set(
-        xlabel="T2 post-implant day",
+        xlabel="Fresh T2 sessions (post-implant day)",
         ylabel="Held-out continuous R²",
         title="Every fresh T2 session",
     )
