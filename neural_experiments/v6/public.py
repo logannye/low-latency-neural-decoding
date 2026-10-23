@@ -65,6 +65,43 @@ METRIC_FIELDS = {
     "zero_prediction_count",
     "summed_mse",
 }
+WINDOW_FIELDS = {
+    "start_bin",
+    "stop_bin",
+    "n",
+    "direction_sector_counts",
+    "mse",
+    "r2",
+    "zero_mse",
+    "training_mean_mse",
+    "gain_vs_zero",
+    "gain_vs_training_mean",
+    "mask_sha256",
+}
+
+
+def public_stage(stage):
+    result = subset(
+        stage,
+        {
+            "training_seconds",
+            "requested_label_seconds",
+            "available_label_seconds",
+            "decision_time_seconds",
+            "candidate_id",
+            "model_sha256",
+            "fit_stop_bin",
+            "confirmation_start_bin",
+            "confirmation_stop_bin",
+            "unavailable",
+        },
+    )
+    if "confirmation" in stage:
+        result["confirmation"] = {
+            key: subset(stage["confirmation"][key], WINDOW_FIELDS)
+            for key in ("pooled", "first_half", "last_half")
+        }
+    return result
 
 
 def subset(value, keys):
@@ -136,6 +173,13 @@ def publish(artifact_path, audit_path, output):
         )
         result["calibration_compute"] = [
             subset(e, {"participant", "session_id", "timing"}) for e in artifact["evidence"]
+        ]
+        result["confirmation_diagnostics"] = [
+            {
+                **subset(e, {"participant", "session_id"}),
+                "stages": [public_stage(stage) for stage in e["stages"]],
+            }
+            for e in artifact["evidence"]
         ]
     safe_write(output, result)
 

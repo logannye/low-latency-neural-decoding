@@ -278,7 +278,7 @@ def test_global_budget_reserves_concurrent_reads_and_raw(tmp_path):
     assert b.state["raw_bytes_reserved_total"] == 20
 
 
-def test_resuming_keeps_failed_transfer_and_pending_reservations(tmp_path):
+def test_unclean_stop_refuses_resume_without_mutating_receipts(tmp_path):
     from neural_experiments.v6.acquire_parallel import SharedBudget
 
     b = SharedBudget(tmp_path, compressed_limit=100, raw_limit=20)
@@ -287,9 +287,53 @@ def test_resuming_keeps_failed_transfer_and_pending_reservations(tmp_path):
     b.finish_read("T2", 40, 25)
     b.reserve_read(30)
     b.save(True)
+    before = (tmp_path / "parallel-acquisition.json").read_bytes()
+    with pytest.raises(ValueError, match="Unclean acquisition stop"):
+        SharedBudget(tmp_path, compressed_limit=100, raw_limit=20)
+    assert (tmp_path / "parallel-acquisition.json").read_bytes() == before
+    assert not (tmp_path / "failures").exists()
+
+
+def test_clean_failed_attempt_keeps_consumed_transfer_on_resume(tmp_path):
+    from neural_experiments.v6.acquire_parallel import SharedBudget
+
+    b = SharedBudget(tmp_path, compressed_limit=100, raw_limit=20)
+    b.start("T2")
+    b.reserve_read(40)
+    b.finish_read("T2", 40, 25)
+    b.state["status"] = "failed"
+    b.save(True)
     later = SharedBudget(tmp_path, compressed_limit=100, raw_limit=20)
-    assert later.state["compressed_bytes_actual_total"] == 55
+    assert later.state["compressed_bytes_actual_total"] == 25
     assert len(list((tmp_path / "failures").glob("parallel-*.json"))) == 1
+
+
+def test_replacing_existing_member_reserves_duplicate_temporary_bytes(tmp_path):
+    from neural_experiments.v6.acquire_parallel import SharedBudget
+
+    target = tmp_path / "raw/T2/a.mat"
+    target.parent.mkdir(parents=True)
+    target.write_bytes(b"x" * 12)
+    b = SharedBudget(tmp_path, compressed_limit=100, raw_limit=20)
+    b.start("T2")
+    with pytest.raises(ValueError, match="raw-storage"):
+        b.reserve_member("T2", target, 12)
+    assert target.read_bytes() == b"x" * 12
+
+
+def test_existing_partial_bytes_are_already_in_raw_inventory(tmp_path):
+    from neural_experiments.v6.acquire_parallel import SharedBudget
+
+    target = tmp_path / "raw/T2/a.mat"
+    target.parent.mkdir(parents=True)
+    target.write_bytes(b"x" * 12)
+    target.with_suffix(".mat.part").write_bytes(b"y" * 8)
+    b = SharedBudget(tmp_path, compressed_limit=100, raw_limit=24)
+    b.start("T2")
+    b.reserve_member("T2", target, 12)
+    assert b.state["raw_bytes_reserved_total"] == 24
+    with pytest.raises(ValueError, match="raw-storage"):
+        b.reserve_member("T2", tmp_path / "raw/T2/b.mat", 1)
 
 
 def test_public_parallel_worker_cap_before_metadata(tmp_path):

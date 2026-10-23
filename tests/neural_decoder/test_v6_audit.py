@@ -239,11 +239,11 @@ def test_source_selection_independent_equal_person_reference():
     assert audit.selection_reference(changed, ["a", "b", "c"])[0] == expected[0]
 
 
-def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monkeypatch):
+def production_case(tmp_path, monkeypatch, *, n=23000, source=True):
     """Synthetic full producer fit/export/confirmation/V5 path, no real outcomes."""
     from neural_experiments.v6 import study
 
-    n, channels = 23000, 2
+    channels = 2
     rng = np.random.default_rng(662)
     features = {
         k: rng.poisson(1, (n, channels)).astype(np.float32) for k in ("x_tx3", "x_tx45", "x_sbp")
@@ -254,6 +254,9 @@ def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monk
         "y": np.column_stack((np.cos(angle), np.sin(angle))).astype(np.float32),
         "eval_mask": np.ones(n, bool),
     }
+    if not source:
+        # Guarantee escalation without outcome-dependent candidate manipulation.
+        labels["eval_mask"][:] = False
     target = tmp_path / "targets.npz"
     np.savez(target, **labels)
     item = {
@@ -262,7 +265,7 @@ def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monk
         "post_implant_day": 9,
         "n_channels": channels,
         "n_bins": n,
-        "segments": [{"start": 0, "end": 12000}, {"start": 12000, "end": n}],
+        "segments": [{"start": 0, "end": n // 2}, {"start": n // 2, "end": n}],
         "target_path": target.name,
         "target_sha256": audit.sha256(target),
     }
@@ -280,8 +283,13 @@ def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monk
     index_path = tmp_path / "index.json"
     layouts, stats = {"p9": tuple(features["channel_ids"])}, {f: {} for f in audit.FAMILIES}
     producer = study.CaseReplay(index_path, item, [], layouts, stats, {}, output)
-    for b in audit.BUDGETS:
-        producer.get_stage(b)
+    curves = {"current_session_id": "p9", "current_post_implant_day": 9, "past_learning_curves": []}
+    if source:
+        for b in audit.BUDGETS:
+            producer.get_stage(b)
+    else:
+        policy.decide(curves, producer.get_stage, policy.policy_grid()[0])
+    requests = list(producer.broker.requests)
     controls = producer.controls()
     old_selection = {
         "choices": [{"target_participant": "p", "policy_id": "p0"}],
@@ -312,9 +320,8 @@ def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monk
             )
         )
     lookup = {(r["session_id"], r["method"]): r for r in control_rows}
-    curves = {"current_session_id": "p9", "current_post_implant_day": 9, "past_learning_curves": []}
     confirmed = []
-    for cfg in policy.policy_grid():
+    for cfg in policy.policy_grid() if source else policy.policy_grid()[:1]:
         decision = policy.decide(curves, producer.get_stage, cfg)
         row = study.row_metadata(
             item,
@@ -326,9 +333,13 @@ def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monk
         row.update(
             decision=decision,
             policy_id=cfg["policy_id"],
-            zero_mse=lookup["p9", "zero"]["metrics"]["summed_mse"] / 2,
+            zero_mse=lookup["p9", "zero"]["metrics"]["summed_mse"] / 2
+            if lookup["p9", "zero"]["metrics"]["summed_mse"] is not None
+            else None,
             daily240_r2=lookup["p9", "daily240"]["metrics"]["r2"],
         )
+        if not source:
+            row["label_requests"] = requests
         confirmed.append(
             study.save_score(output, cfg["policy_id"], producer.decoder_for(decision), case, row)
         )
@@ -357,10 +368,37 @@ def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monk
         lookup,
         {},
         old_selection,
-        True,
+        source,
     )
-    assert verifier.traces_checked == 10
+    assert verifier.traces_checked == (10 if source else 7)
     assert verifier.fits_checked == len(producer.saved_fits) + len(old_evidence["fits"])
+    return confirmed[0], producer
+
+
+def test_production_source_case_all_artifacts_pass_separate_audit(tmp_path, monkeypatch):
+    production_case(tmp_path, monkeypatch)
+
+
+@pytest.mark.parametrize(
+    "n,requested,available,visited",
+    [
+        (1000, 60, 0, [0]),
+        (1500, 60, 0, [0]),
+        (3000, 60, 30, [0]),
+        (4499, 60, 59.98, [0]),
+        (21000, 420, 390, [0, 60, 120, 240, 360]),
+    ],
+)
+def test_short_fresh_producer_paths_pass_audit(
+    tmp_path, monkeypatch, n, requested, available, visited
+):
+    row, producer = production_case(tmp_path, monkeypatch, n=n, source=False)
+    assert list(producer.stages) == visited
+    assert row["decision"]["action"] == "abstain"
+    assert row["decision"]["reason"] == "incomplete_requested_confirmation"
+    assert row["label_seconds"] == requested
+    assert row["available_label_seconds"] == pytest.approx(available)
+    assert row["metrics"]["r2"] is None
 
 
 def aggregate_rows():

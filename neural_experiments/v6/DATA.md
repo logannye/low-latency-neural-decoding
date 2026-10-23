@@ -54,10 +54,46 @@ selected member storage under one shared lock. It retains attempted-transfer
 accounting and failure receipts in the ignored cache. The public sequential
 [importer](data.py) enforces the same locked aggregate ceilings.
 
-Acquisition currently runs under the committed selection rule. Fresh outcome
-preparation is blocked until the complete study plan is committed. A final
-metadata-only receipt will record actual selected identities, transfer, artifact
-hashes and all shortages after acquisition and preparation finish.
+Acquisition completed on 2026-10-23 at 00:04:44 UTC with all 24 requested
+members, no missing ranks, failures, restarts or substitutions. Actual transfer
+was 15,710,289,920 compressed bytes and retained raw storage was 2,382,738,443
+bytes. The [public cohort receipt](../results/v6-cohort.json) records all member,
+archive, index and artifact identities, accounting and dispositions. Its SHA256
+is `72ee895e63e8c4b91173dec099a21e423e5dca6747771ca9777b7f16f51fb603`.
+
+The fresh index passed full raw/prepared hash and schema validation. It contains
+683,147 bins, or 3.79526 recorded feature hours, with SHA256
+`dfe5ed95bf7f43b0bb51f3a11d163505e99641a4affc86daf38591fbdc5af534`.
+The minimum duration is 6,539 bins (130.78 seconds); no recording is below the
+30-second warmup requirement. T5 day 140 has 16,608 bins (332.16 seconds), and
+T6 day 1088 has 6,539 bins. Both have no geometry in the locked `[452,600)`
+scoring window. Their calibration costs and unavailable scores must remain in
+the assessment. The other 22 prefixes each contain 600 seconds, totaling 3,256
+seconds of scoring-window geometry before go masks and burn-in. These are
+metadata facts, not model scores or valid-label counts.
+
+All 152 exported entries match their participant's reference electrode ID,
+array ID and x/y layout. Archive order still differs from chronology: the fresh
+T5 ranks select days 140, 1519, 166, and T8 selects day 42 before days 449 and 450.
+Strict earlier-day history rules remain mandatory.
+
+The [full study plan](plan.json) was committed and pushed as `f7c81cb` before
+fresh preparation, with SHA256
+`f8c075f99c51b6da1bfe07a57861746fff158ec2fd518ec21ecf45f10b170b7a`.
+The scientific importer stayed unchanged at SHA256
+`695bd712765d0f2066eb9bcec4d70511b6ba2cc423805fb307b61375c85cdc4a`.
+
+The uninterrupted acquisition used downloader SHA256
+`74344a20698368213c86da6eba10f144d2ecac5a0cc69e827c047ce5033ce20c`,
+whose exact source is preserved in commit `f7c81cb` and a private snapshot. After
+acquisition completed, the public downloader was hardened to refuse automatic
+resume after an unclean stop, when unflushed transfer cannot be established, and
+to reserve temporary duplicate storage when replacing an existing member. The
+published hardened source is
+`407cc08d7c79131424b59bfe19a7edad31b5a5a226b6e90a41aa2990cbf6afd0`.
+It passed 29 focused synthetic ingestion/downloader tests and Ruff. This later
+hardening was not used to acquire this cohort and changed no scientific importer,
+prepared array, model or plan. The receipt distinguishes both versions.
 
 Streaming prefixes do not authenticate the provider's full-archive SHA256.
 Receipts distinguish the local compressed-prefix digest, fully retained member

@@ -40,6 +40,16 @@ class SharedBudget:
         previous = self.cache / "parallel-acquisition.json"
         if previous.exists():
             old = json.loads(previous.read_text())
+            if (
+                old.get("status") not in {"complete", "failed"}
+                or old.get("compressed_bytes_claimed_pending", 0) != 0
+            ):
+                # The 10s checkpoint can lag bytes consumed before a hard kill.
+                # Never guess the missing transfer or silently reset its budget.
+                raise ValueError(
+                    "Unclean acquisition stop: exact consumed transfer is unknown; "
+                    "automatic resume refused. Preserve receipts for explicit budget review."
+                )
             spent = max(
                 spent,
                 old["compressed_bytes_actual_total"]
@@ -108,10 +118,12 @@ class SharedBudget:
 
     def reserve_member(self, participant, target, size):
         with self.lock:
-            existing = target.stat().st_size if target.exists() else 0
-            # Existing completed files are authenticated and skipped. Partial files
-            # count in the initial inventory; conservative reservations are retained.
-            added = max(0, size - existing)
+            temporary = target.with_suffix(".mat.part")
+            partial = temporary.stat().st_size if temporary.exists() else 0
+            # The existing final file remains on disk while its replacement is
+            # written. Only already-counted .part bytes offset temporary growth.
+            # Reservations are retained conservatively after atomic replacement.
+            added = max(0, size - partial)
             if self.state["raw_bytes_reserved_total"] + added > self.raw_limit:
                 raise ValueError("Synchronized retained raw-storage budget exhausted")
             self.state["raw_bytes_reserved_total"] += added

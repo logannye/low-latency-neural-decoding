@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "scope": "V6 scientific execution, software checks, separate-code audits, publication and finite runtime; not external replication",
+  "created_at": "2026-10-23T00:14:07.298324+00:00",
+  "base_commit": "7459a365858c26ed4f269437fb8297898521621f",
+  "acquisition_plan_commit": "92cf69a403919e49890975809bf1a9e90e464802",
+  "scientific_plan_commit": "f7c81cb8938f1635c89f7b87ecec09ca33f7ef93",
+  "source_choices_commit": "745df220ed65e9819c6f8b2cf9c0271c97f843c9",
+  "local_validation": {
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "python": "3.12.13",
+    "command": "PYTHONPATH=.:src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python -m pytest -q",
+    "passed": 789,
+    "skipped": 22,
+    "elapsed_seconds": 23.72,
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS",
+    "rust_compilation": "none",
+    "tested_code_sha256": {
+      "neural_experiments/v6/__init__.py": "268044b12aa18873e633b6ad695de4cc6d0ded7d3232a828a215e51daf9d63fb",
+      "neural_experiments/v6/acquire_parallel.py": "407cc08d7c79131424b59bfe19a7edad31b5a5a226b6e90a41aa2990cbf6afd0",
+      "neural_experiments/v6/audit.py": "013893afe57d50b71e5f05fe5abd755aa18e89bceadfff73d7f77e2334d017a7",
+      "neural_experiments/v6/data.py": "695bd712765d0f2066eb9bcec4d70511b6ba2cc423805fb307b61375c85cdc4a",
+      "neural_experiments/v6/diagnosis.py": "8e3a8ed7b1bb74cae9ac679b46cf5bc6afdad8124aaa9b87b17a12397e4ddd0a",
+      "neural_experiments/v6/diagnosis_public.py": "ccc1657f9606551f83452277df8ee7dd4211950d65ec95ae0aec9837c38747a5",
+      "neural_experiments/v6/diagnosis_summary.py": "0afcdb0e8d31aedab3499c7e9540e01406bc267900a7b21d89956da72e4f54d1",
+      "neural_experiments/v6/metrics.py": "a15ad52b415e3f92bd6b78ed895d81b582435b9cedaffeb58be72354b72f3c65",
+      "neural_experiments/v6/model.py": "0aa0b46fdeb0cdf4af85dd6ad2eb916b6ed425ce8a9210646f418ac61b85bfff",
+      "neural_experiments/v6/policy.py": "3868ca3a0b7b63b9f3c75c8fed3e54c7641f6b18b1fd8caf01274c86422a697b",
+      "neural_experiments/v6/public.py": "e23590ac5a6366dcdd8ab09ef12e7652c4c9e58377302971fb3fba36c68387e2",
+      "neural_experiments/v6/runtime.py": "e5c2635a5bb02ebfbb00783ab2f87c7d6557533cfa77594e9a8cf08f32c40a0d",
+      "neural_experiments/v6/runtime_audit.py": "89d40adaa2e4ddab23203f630e1d26dcda8cbf0a7f3db631b22c8a85aaaa7508",
+      "neural_experiments/v6/runtime_public.py": "4cdcd1e6139cd261d361f714d47a6f75708ac4034e896416d458c5df6972189e",
+      "neural_experiments/v6/study.py": "0927d812803694d1a9903095812868535f64c6b0ccb279fa4ff50ca93260a1b7"
+    },
+    "tested_test_sha256": {
+      "tests/neural_decoder/test_v6_audit.py": "caaf2b0a178b80cbb21c4e60ce926edd9c1a631b260d7643c0eee27f45f798fb",
+      "tests/neural_decoder/test_v6_data.py": "9461b99811cc574e87ed7f8278a895e1a3c9cb8fcb19c322440fad7da30900c5",
+      "tests/neural_decoder/test_v6_diagnosis.py": "e05516ee42ca02362d29ca507d9da9d81244c9a30caa9a2f5e342eb011419c06",
+      "tests/neural_decoder/test_v6_model.py": "05c55b1c1600d2660f358c03c155e1eb7abd55813c536ec8eb6e050247e38fb8",
+      "tests/neural_decoder/test_v6_policy.py": "2d9743bc7f8869cbef5d24ceb2b2f294a58175faeef25811c3b7d7df9671a23e",
+      "tests/neural_decoder/test_v6_public.py": "2aa9b26d5f77e8ac196f612a9e286b42adfdf1fbb095062fc300fc089185b2cd",
+      "tests/neural_decoder/test_v6_reporting.py": "00665950731f06c32268054db56b05251021aaf5f4798e263f164901e047c35b",
+      "tests/neural_decoder/test_v6_runtime.py": "39ebd71d1f28cf44304012b843922ccf3e15e8a8b561da7a6d32c36fc320e066",
+      "tests/neural_decoder/test_v6_study.py": "66026dd7d765e2af566b9941c93fcdeecffeec6342679bc84cc7bea3ffb91fdd"
+    },
+    "figure_source_sha256": "34d7e50afc8f1f5267220802cf779459bd19cbb988e3226cede906093eb7d500",
+    "figure_validation": "Aggregate-only figures rendered and visually inspected. After full tests, display-only edits reordered participants numerically and clarified title, counts and label precision; final lint/format checks cover those edits."
+  },
+  "execution_source_sha256": {
+    "neural_experiments/v6/model.py": "0aa0b46fdeb0cdf4af85dd6ad2eb916b6ed425ce8a9210646f418ac61b85bfff",
+    "neural_experiments/v6/policy.py": "3868ca3a0b7b63b9f3c75c8fed3e54c7641f6b18b1fd8caf01274c86422a697b",
+    "neural_experiments/v6/study.py": "0927d812803694d1a9903095812868535f64c6b0ccb279fa4ff50ca93260a1b7",
+    "neural_experiments/v6/data.py": "695bd712765d0f2066eb9bcec4d70511b6ba2cc423805fb307b61375c85cdc4a",
+    "neural_experiments/v6/metrics.py": "a15ad52b415e3f92bd6b78ed895d81b582435b9cedaffeb58be72354b72f3c65",
+    "neural_experiments/v5/model.py": "54a28f2f2706c495257344b3a7073d2a14b711586d00472e9dd2dbafa17ccf58",
+    "neural_experiments/v5/policy.py": "c4361b6f6a211ab680c14c1da67d759a1cd41dc6430b19d3a435d4ace3559d1a",
+    "neural_experiments/v5/study.py": "e20790ad84f72f968774256c043a5a0293b9c63e91251bc5a1dfb1508779586b",
+    "neural_experiments/v5/data.py": "ef192fe13c973fc796aeb69d9711224ac6e5ce1ac366d99021e57b2a28d6744c",
+    "neural_experiments/v5/metrics.py": "3c53c7613385dae5b909be4ee10df3a9cc60266c14aeec66a9bb66465b827a30",
+    "neural_experiments/v4/model.py": "02ba0ef2f771bf20c49ff7d5ed2475776e56d59ff01970e6092f2b503c8dd30d",
+    "neural_experiments/v4/study.py": "0957c4c944c69c5267cfe04a38937a39421580897bce073195c63f18987abdb4",
+    "neural_experiments/v4/data.py": "102b4f6d74451cc3ce4444e6be58b35c7de8376dc2cb81300aff8b49ed94fa01",
+    "neural_experiments/v3/study.py": "8a193512fd5bc4d3b1447382de5ae9b56f5dc87c51bccdd393ad81f44e336d43",
+    "neural_experiments/v2/data.py": "e75e64c08a4e7041f086b52893dcd17212e4e211094b184abae6ea6d23998a11"
+  },
+  "fifteen_scientific_execution_sources_unchanged": true,
+  "earlier_v2_v3_v4_v5_sources_unchanged": true,
+  "audits": [
+    {
+      "attempt": "source_attempt1",
+      "status": "PASS",
+      "receipt_sha256": "b2725245f7d0420839d5c9c46c4858648220ac02c637413dddcf4f9419ca9285",
+      "auditor_source_sha256": "988b74d38f23b52446e02cd78af1791f98b8e144b498e84e65abcd7ffe767bb5"
+    },
+    {
+      "attempt": "assessment_attempt1",
+      "status": "PASS",
+      "receipt_sha256": "f0ca04651af2d86c9728bfa9dc3a56c0088902e9108f166f55d2ae8cb3ed853c",
+      "auditor_source_sha256": "013893afe57d50b71e5f05fe5abd755aa18e89bceadfff73d7f77e2334d017a7"
+    },
+    {
+      "attempt": "runtime_attempt1",
+      "status": "passed",
+      "receipt_sha256": "634b081a483f7ba77f02886d6a56a3713af56497c8275a6d0922e61472166467",
+      "auditor_source_sha256": "89d40adaa2e4ddab23203f630e1d26dcda8cbf0a7f3db631b22c8a85aaaa7508"
+    }
+  ],
+  "synthetic_auditor_correction": {
+    "scope": "Synthetic edge-case validation only; no fresh outcome values inspected before this correction",
+    "original_source_auditor_sha256": "988b74d38f23b52446e02cd78af1791f98b8e144b498e84e65abcd7ffe767bb5",
+    "assessment_auditor_sha256": "013893afe57d50b71e5f05fe5abd755aa18e89bceadfff73d7f77e2334d017a7",
+    "correction": "Honor frozen producer no-fit guards at <=30s, observed-prefix zero normalization below30s, and exact V5 unavailable-warmup wrapper receipt",
+    "synthetic_cases_seconds": [
+      20,
+      30,
+      60,
+      89.98,
+      420
+    ],
+    "tests_passed": 32,
+    "first_synthetic_failure": "Auditor expected daily fit exports for20s recording; no producer defect",
+    "intermediate_synthetic_failures": "Incorrect audit action guard branch placement corrected; float cost assertion changed to approximate comparison",
+    "real_audit_failures": 0,
+    "original_source_receipt_preserved": true
+  },
+  "acquisition": {
+    "executed_orchestrator_sha256": "74344a20698368213c86da6eba10f144d2ecac5a0cc69e827c047ce5033ce20c",
+    "published_orchestrator_sha256": "407cc08d7c79131424b59bfe19a7edad31b5a5a226b6e90a41aa2990cbf6afd0",
+    "note": "After uninterrupted acquisition finished, downloader-only resume/accounting hardening was tested. Executed version remains in scientific-plan commit and retained snapshot. Scientific importer and acquired arrays did not change."
+  },
+  "public_artifacts_sha256": {
+    "v6-cohort.json": "72ee895e63e8c4b91173dec099a21e423e5dca6747771ca9777b7f16f51fb603",
+    "v6-diagnosis.json": "a26938cf9ebed1ee1d06c38f5061a948461dd47a42dd31e48eed122841da320f",
+    "v6-environment.json": "f06655c19874a48936615c6c6c97535a8e1ea6ef446cb9456e589107319ff2d0",
+    "v6-runtime.json": "e22861025b2186e3805d65a858fb7d24582cb2d1d55cd2c61f4095ca2fe24193",
+    "v6-source-selection.json": "971a15480da8cca26f4d7bc8a1678122d92e9563050b1bc03957d35c8ddf5219",
+    "v6-study.json": "b0103d5e33ebc960ee2ac5bac7336684c5655faf46a732cb83f96fb8bc5d8cd9"
+  },
+  "scientific_outcome": "All four prespecified gates failed. No model or policy retuning after fresh outcomes. Candidate retained as failed experiment, not an improved replacement.",
+  "ci_scope": "GitHub records final PR-head and actual-main workflow outcomes. This receipt does not assert a future unrun revision passed."
+}

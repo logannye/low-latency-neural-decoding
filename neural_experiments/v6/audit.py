@@ -477,6 +477,23 @@ class Verifier(previous.Verifier):
 
 def check_v5(verifier, item, raw, prior, history, labels, evidence, probes, old_selection):
     """Rebuild the immutable V5 decision on the new, common historical pool."""
+    if item["n_bins"] < 1500:
+        # The frozen V6 wrapper explicitly abstains before constructing the V5
+        # replay, whose normalizer requires the complete30s warmup.
+        expected = {
+            "history_evidence": {"warmup_available": False},
+            "stages": [],
+            "fits": [],
+            "decision": {
+                "action": "abstain",
+                "budget_seconds": 0,
+                "reason": "unlabeled_warmup_unavailable",
+            },
+            "policy_id": None,
+            "label_requests": [],
+        }
+        compare_structure(evidence, expected, "V5 incomplete-warmup guard")
+        return expected["decision"], "tx45_sbp", np.zeros_like(prior["tx45_sbp"])
     candidates = previous.grids()[0]
     checked = {
         previous.fit_key(r): previous.Verifier.fit(verifier, r, item, raw, prior, history, labels)
@@ -646,7 +663,7 @@ def check_case(
         key: verifier.fit_v6(row, item, raw, prior, history, labels)
         for key, row in fit_rows.items()
     }
-    expected_keys = {("control", b) for b in (120, 240, 360)}
+    expected_keys = {("control", b) for b in (120, 240, 360)} if item["n_bins"] > 1500 else set()
     expected_prior_selection = prior_selection_reference(item, verifier, history, probes)
     stages = {}
     for stage in evidence["stages"]:
@@ -729,7 +746,11 @@ def check_case(
         b, action = decision["training_seconds"], decision["action"]
         row_identity(row, item, "confirmed", decision["requested_label_seconds"], action, b)
         if action == "abstain":
-            family, prefix, weights = "tx45_sbp", 1500, np.zeros_like(prior["tx45_sbp"])
+            family, prefix, weights = (
+                "tx45_sbp",
+                min(1500, item["n_bins"]),
+                np.zeros_like(prior["tx45_sbp"]),
+            )
         else:
             if row["model_sha256"] != decision["model_sha256"]:
                 raise ValueError("Deployment is not the exact confirmed model bytes")
@@ -765,7 +786,7 @@ def check_case(
             if name.startswith("daily")
             else 0
         )
-        prefix = min(1500 + 50 * budget, item["n_bins"]) if name.startswith("daily") else 1500
+        prefix = min(1500 + 50 * budget if name.startswith("daily") else 1500, item["n_bins"])
         action = (
             old_decision["action"]
             if name == "v5_adaptive"
@@ -779,6 +800,9 @@ def check_case(
             if name == "v5_adaptive"
             else np.zeros_like(prior[family])
             if name == "zero"
+            or item["n_bins"] < 1500
+            or name.startswith("daily")
+            and item["n_bins"] == 1500
             else prior[family]
             if name == "history0"
             else checked["control", budget]["weights"]

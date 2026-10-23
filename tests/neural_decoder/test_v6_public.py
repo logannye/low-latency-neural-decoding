@@ -3,7 +3,27 @@ import json
 import pytest
 
 from neural_experiments.v3.study import digest
-from neural_experiments.v6.public import public_row, publish
+from neural_experiments.v6.public import public_row, public_stage, publish
+
+
+def test_confirmation_export_retains_window_aggregates_only():
+    window = {"r2": 0.1, "n": 400, "prediction": [[1, 0]], "labels": [[0, 1]]}
+    result = public_stage(
+        {
+            "training_seconds": 120,
+            "model_path": "private.npz",
+            "confirmation": {
+                **{key: window for key in ("pooled", "first_half", "last_half")},
+                "groups": [window],
+            },
+        }
+    )
+    assert result == {
+        "training_seconds": 120,
+        "confirmation": {
+            key: {"r2": 0.1, "n": 400} for key in ("pooled", "first_half", "last_half")
+        },
+    }
 
 
 def test_nested_decision_export_excludes_samples_and_private_paths():
