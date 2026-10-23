@@ -418,3 +418,104 @@ def test_public_limits_are_bounded_and_roles_explicit(tmp_path):
     assert data.SELECTION["regular_session_ranks_one_based"] == [22, 23, 24]
     with pytest.raises(ValueError, match="role=fresh"):
         data.prepare(tmp_path, tmp_path / "a", tmp_path / "b", role="development")
+
+
+def test_context_pair_endpoints_and_exact_legacy_target_parity(monkeypatch):
+    from neural_experiments.v8 import data as exposed
+
+    r = raw()
+    r["cursor_position"] = np.arange(24, dtype=float).reshape(12, 2)
+    r["target_position"] = r["cursor_position"] + [3.0, 4.0]
+    _, targets, metadata = data.convert_session(r, "T2", 100, cap_bins=3)
+    monkeypatch.setattr(exposed, "MAX_BINS", 3)
+    context = exposed.make_context(r, metadata)
+    exposed.validate_context(context, 3)
+    exposed.validate_context_targets(context, targets)
+    np.testing.assert_array_equal(context["cursor_position"], r["cursor_position"][[1, 3, 8]])
+    np.testing.assert_array_equal(context["trial_id"], [0, 0, 1])
+    np.testing.assert_allclose(context["trial_age_seconds"], [0.01, 0.03, 0.01])
+    np.testing.assert_allclose(context["trial_onset_seconds"], [0, 0, 0.04])
+    np.testing.assert_array_equal(context["reference40_available"], [True, True, False])
+    np.testing.assert_array_equal(context["trial_right_censored"], [False, False, True])
+
+
+def test_context_never_uses_capped_raw_tail(monkeypatch):
+    from neural_experiments.v8 import data as exposed
+
+    r = raw()
+    _, _, metadata = data.convert_session(r, "T2", 100, cap_bins=2)
+    monkeypatch.setattr(exposed, "MAX_BINS", 2)
+    before = exposed.make_context(r, metadata)
+    r["cursor_position"][5:] = -1e300
+    r["target_position"][5:] = np.nan
+    after = exposed.make_context(r, metadata)
+    for k in exposed.CONTEXT_KEYS:
+        np.testing.assert_array_equal(before[k], after[k])
+
+
+def test_context_go_alignment_and_onset_before_boundary():
+    from neural_experiments.v8 import data as exposed
+
+    r = raw()
+    r["trials"]["trial_start_index"] = [1, 8]
+    r["trials"]["trial_end_index"] = [4, 12]
+    _, targets, metadata = data.convert_session(r, "T2", 100)
+    context = exposed.make_context(r, metadata)
+    exposed.validate_context_targets(context, targets)
+    np.testing.assert_array_equal(context["trial_id"], [-1, 0, -1, 1])
+    np.testing.assert_array_equal(context["trial_start_bin"], [-1, 1, -1, 3])
+    assert context["trial_onset_seconds"][1] == 0.01
+    assert context["trial_onset_seconds"][1] < context["trial_start_bin"][1] * 0.02
+    assert not context["reference40_available"].any()
+
+
+def test_context_zero_distance_and_nonfinite_preserve_legacy_mask():
+    from neural_experiments.v8 import data as exposed
+
+    r = raw()
+    r["target_position"][1] = 0
+    r["target_position"][3] = np.nan
+    _, targets, metadata = data.convert_session(r, "T2", 100)
+    context = exposed.make_context(r, metadata)
+    exposed.validate_context_targets(context, targets)
+    assert not targets["eval_mask"][:2].any()
+
+
+def test_feature_only_case_loading_does_not_open_context_or_targets(tmp_path):
+    from neural_experiments.v8 import data as exposed
+
+    features, _, metadata = data.convert_session(raw(), "T2", 100)
+    path = tmp_path / "features.npz"
+    np.savez(path, **features)
+    item = {**metadata, "feature_path": path.name, "feature_sha256": data.v2.sha256_file(path)}
+    case = exposed.load_case(tmp_path / "index.json", item)
+    assert set(case) == {"item", "features", "segments"}
+    assert set(case["features"]) == data.FEATURE_KEYS
+
+
+def test_context_overlap_and_schema_contamination_rejected():
+    from neural_experiments.v8 import data as exposed
+
+    r = raw()
+    _, _, metadata = data.convert_session(r, "T2", 100)
+    context = exposed.make_context(r, metadata)
+    with pytest.raises(ValueError, match="context fields"):
+        exposed.validate_context({**context, "x": np.zeros(4)}, 4)
+    r["trials"] = {"block_id": [1, 1], "trial_start_index": [0, 0], "trial_end_index": [4, 4]}
+    with pytest.raises(ValueError, match="Overlapping"):
+        exposed.make_context(r, metadata)
+
+
+def test_independent_context_rebuild_matches_odd_go_and_gap_cases(monkeypatch):
+    from neural_experiments.v8 import audit_data
+    from neural_experiments.v8 import data as exposed
+
+    r = raw()
+    r["trials"]["trial_start_index"] = [1, 7]
+    r["target_position"][4] = [1.0, -1.0]
+    _, _, metadata = data.convert_session(r, "T2", 100, cap_bins=3)
+    monkeypatch.setattr(exposed, "MAX_BINS", 3)
+    actual = exposed.make_context(r, metadata)
+    rebuilt = audit_data.independently_rebuild(r, metadata)
+    for key in exposed.CONTEXT_KEYS:
+        np.testing.assert_array_equal(actual[key], rebuilt[key])

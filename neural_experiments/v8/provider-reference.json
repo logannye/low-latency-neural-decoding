@@ -1,0 +1,29 @@
+{
+  "commit": "93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834",
+  "tree": "b29cf4eebfeb1423abf613550f0ec98324f2675d",
+  "files": [
+    {
+      "path": "array_paper/metrics/decoding_snr.py",
+      "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metrics/decoding_snr.py",
+      "sha256": "d64ad6f1355c36dd457323e15a98f8a2b6cd0697847034e2c8308bcffc2cdec3"
+    },
+    {
+      "path": "array_paper/metrics/utils.py",
+      "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metrics/utils.py",
+      "sha256": "297f6b0c055d82473425d1350d27195a7ca8a95e727434aee6d970f26fa95163"
+    },
+    {
+      "path": "array_paper/metadata.py",
+      "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metadata.py",
+      "sha256": "53bf68033f4adc939dd6f27abc63aba71faefe9434418dc0de89eda170c269a7"
+    },
+    {
+      "path": "array_paper/batch_summary/generate_decoding_summary.py",
+      "url": "https://raw.githubusercontent.com/nptl-stanford/array-paper/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/batch_summary/generate_decoding_summary.py",
+      "sha256": "81cce529e43a8694a6e6ca7cbc4187277c44d73f1cbae9182cbaf2650f543c4d"
+    }
+  ],
+  "role": "Reference endpoint design only; not an implementation equivalence claim",
+  "reference_endpoint": "Nested trial cross-validation chooses reaction offset and evaluates 300ms trial windows; this differs from chronological continuous direction R2.",
+  "normalization_limit": "Reference full-block normalization is not reused in the causal V8 pipeline."
+}
