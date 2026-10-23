@@ -59,7 +59,11 @@ def render(study_path, output):
         values = {
             u["participant"]: u["mean_r2"] for u in summary["methods"][method]["participants"]
         }
-        axes[1].bar(x + (j - 1) * 0.24, [values[p] for p in people], width=0.23, color=color)
+        heights = [values[p] if values[p] is not None else np.nan for p in people]
+        axes[1].bar(x + (j - 1) * 0.24, heights, width=0.23, color=color)
+        for i, p in enumerate(people):
+            if values[p] is None:
+                axes[1].text(i + (j - 1) * 0.24, 0, "N/A", ha="center", fontsize=7, rotation=90)
     axes[1].axhline(0, color="#182C45", linewidth=0.7)
     axes[1].set_xticks(x, people)
     axes[1].set(
@@ -99,7 +103,7 @@ def render(study_path, output):
     fig.text(
         0.06,
         0.025,
-        "24 fixed fresh sessions • same held-out suffix for every method • "
+        f"{summary['selected_sessions']} selected fresh sessions • same held-out suffix • "
         "geometric direction proxy • offline evidence",
         color="#52637B",
         fontsize=10,

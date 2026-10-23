@@ -9,6 +9,7 @@ Use Python 3.12 with the repository's prebuilt scientific dependencies. No Rust 
 The exact V8 development and assessment indexes are required. Their 200 previously exposed prefixes are reused without extensions; the four V9 participants supply 96 model-development sessions.
 
 ```sh
+source .venv/bin/activate
 export PYTHONPATH="$PWD/src:$PWD"
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 python -m neural_experiments.v9.data prepare-development \
@@ -18,7 +19,7 @@ python -m neural_experiments.v9.audit_data \
   --output neural_experiments/results/v9-development-data-audit.json
 ```
 
-The acquisition plan must be committed before downloads. The scientific plan and every producer dependency must be committed before source fits. Output directories are immutable: use a different directory for a reproduction and preserve original evidence. Reproducing already exposed outcomes does not create new held-out evidence.
+The acquisition plan must be committed before downloads. The scientific plan and every producer dependency must be committed before source fits. Run-output directories are immutable: use a different run directory for a reproduction and preserve original evidence. Reuse the exact authenticated indexes: regenerating a timestamped index changes its digest and will not satisfy the original protocol lock. A new end-to-end replication needs its own predeclared index identities. Reproducing already exposed outcomes does not create new held-out evidence.
 
 ## Source choice and independent seal
 
