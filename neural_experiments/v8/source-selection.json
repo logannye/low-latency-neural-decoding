@@ -1,0 +1,1014 @@
+{
+  "schema_version": 1,
+  "study": "V8",
+  "source_audit_status": "PASS",
+  "plan_sha256": "01fc7756fe3110630a98f78152a08f85b2119d76c211196da93beb23f405a392",
+  "index_sha256": "5c4b5ab0b0fa0ec28c2c5a1b746ca8e8ceee35b4797e2f7e2f66cc9d9dfdbf84",
+  "scientific_code_sha256": {
+    "neural_experiments/v2/data.py": "e75e64c08a4e7041f086b52893dcd17212e4e211094b184abae6ea6d23998a11",
+    "neural_experiments/v3/data.py": "260442fe492e1c01cf19e888edf18eb625c120cf865dde30c46ec85f3ccaa390",
+    "neural_experiments/v3/model.py": "56f2bfabf8383c65ec621407e9bccd026b295e27912011c4b9cf97173d4fe2c2",
+    "neural_experiments/v3/study.py": "8a193512fd5bc4d3b1447382de5ae9b56f5dc87c51bccdd393ad81f44e336d43",
+    "neural_experiments/v4/data.py": "102b4f6d74451cc3ce4444e6be58b35c7de8376dc2cb81300aff8b49ed94fa01",
+    "neural_experiments/v4/model.py": "02ba0ef2f771bf20c49ff7d5ed2475776e56d59ff01970e6092f2b503c8dd30d",
+    "neural_experiments/v5/data.py": "ef192fe13c973fc796aeb69d9711224ac6e5ce1ac366d99021e57b2a28d6744c",
+    "neural_experiments/v6/data.py": "695bd712765d0f2066eb9bcec4d70511b6ba2cc423805fb307b61375c85cdc4a",
+    "neural_experiments/v7/data.py": "d93a205624d4fd1ff5b49cdeb7b613f83b51bb5ff468049b7ad8d3819cd6d0d8",
+    "neural_experiments/v7/fresh_data.py": "031c8bd0e590945cebb78cac5a8e95197efae5a0de999cd9a665f3fea951a457",
+    "neural_experiments/v8/data.py": "bcfbb2b1c8cee16d1402e38d1676be5308168dd1a139e046daea6c86393bdbc8",
+    "neural_experiments/v8/fresh_data.py": "cc269adcd3c95a2e65745378d119ac96691b7dd281d7f0bdd60db7ab939766d8",
+    "neural_experiments/v8/model.py": "81628096d954868ac1442eb2789223ffce4a1ae8399c92e60a14d348663e5baa",
+    "neural_experiments/v8/development.py": "f4a2a36a625d3c45e3ba8cf4c820ec62f84c7d940bb9890e4bc0be7963eebe4e",
+    "neural_experiments/v8/assessment.py": "32dbe349b24934dca8b8abc687f1f0e5fb5fb43ab506b5e7a3377ad01d80e02b",
+    "neural_experiments/v8/metrics.py": "c1e215d9d0f6e80ddc93df2bd5527704f01da6decd081c4462b11a832f9c35e0",
+    "neural_experiments/v8/diagnostics.py": "2b64af0a6cadfe0992f0c631dcf90dd3df1b991ad6792be421ab2f482f78f483",
+    "neural_experiments/v8/errors.py": "304fd4beb40f9056ddf573a66e93c7f3207e8e3da95023dccb461ae736c18452"
+  },
+  "code_sha256": {
+    "neural_experiments/v2/data.py": "e75e64c08a4e7041f086b52893dcd17212e4e211094b184abae6ea6d23998a11",
+    "neural_experiments/v3/data.py": "260442fe492e1c01cf19e888edf18eb625c120cf865dde30c46ec85f3ccaa390",
+    "neural_experiments/v3/model.py": "56f2bfabf8383c65ec621407e9bccd026b295e27912011c4b9cf97173d4fe2c2",
+    "neural_experiments/v3/study.py": "8a193512fd5bc4d3b1447382de5ae9b56f5dc87c51bccdd393ad81f44e336d43",
+    "neural_experiments/v4/data.py": "102b4f6d74451cc3ce4444e6be58b35c7de8376dc2cb81300aff8b49ed94fa01",
+    "neural_experiments/v4/model.py": "02ba0ef2f771bf20c49ff7d5ed2475776e56d59ff01970e6092f2b503c8dd30d",
+    "neural_experiments/v5/data.py": "ef192fe13c973fc796aeb69d9711224ac6e5ce1ac366d99021e57b2a28d6744c",
+    "neural_experiments/v6/data.py": "695bd712765d0f2066eb9bcec4d70511b6ba2cc423805fb307b61375c85cdc4a",
+    "neural_experiments/v7/data.py": "d93a205624d4fd1ff5b49cdeb7b613f83b51bb5ff468049b7ad8d3819cd6d0d8",
+    "neural_experiments/v7/fresh_data.py": "031c8bd0e590945cebb78cac5a8e95197efae5a0de999cd9a665f3fea951a457",
+    "neural_experiments/v8/data.py": "bcfbb2b1c8cee16d1402e38d1676be5308168dd1a139e046daea6c86393bdbc8",
+    "neural_experiments/v8/fresh_data.py": "cc269adcd3c95a2e65745378d119ac96691b7dd281d7f0bdd60db7ab939766d8",
+    "neural_experiments/v8/model.py": "81628096d954868ac1442eb2789223ffce4a1ae8399c92e60a14d348663e5baa",
+    "neural_experiments/v8/development.py": "f4a2a36a625d3c45e3ba8cf4c820ec62f84c7d940bb9890e4bc0be7963eebe4e",
+    "neural_experiments/v8/assessment.py": "32dbe349b24934dca8b8abc687f1f0e5fb5fb43ab506b5e7a3377ad01d80e02b",
+    "neural_experiments/v8/metrics.py": "c1e215d9d0f6e80ddc93df2bd5527704f01da6decd081c4462b11a832f9c35e0",
+    "neural_experiments/v8/diagnostics.py": "2b64af0a6cadfe0992f0c631dcf90dd3df1b991ad6792be421ab2f482f78f483",
+    "neural_experiments/v8/errors.py": "304fd4beb40f9056ddf573a66e93c7f3207e8e3da95023dccb461ae736c18452"
+  },
+  "configurations": {
+    "baseline": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "baseline_all_equal_trial": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "equal_trial",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "baseline_clean_uniform": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "clean",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "baseline_clean_equal_trial": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "clean",
+      "weighting": "equal_trial",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "selected_all_uniform": {
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.5
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "selected_all_equal_trial": {
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.5
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "equal_trial",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "selected_clean_uniform": {
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.5
+      ],
+      "ridge": 1.0,
+      "phase": "clean",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "selected_clean_equal_trial": {
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.5
+      ],
+      "ridge": 1.0,
+      "phase": "clean",
+      "weighting": "equal_trial",
+      "target": "instantaneous",
+      "control": "neural"
+    },
+    "zero": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "zero"
+    },
+    "constant": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "intercept"
+    },
+    "trialshuffle": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "trial_permutation"
+    },
+    "primary_onset": {
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0,
+      "phase": "clean",
+      "weighting": "uniform",
+      "target": "onset",
+      "control": "neural"
+    }
+  },
+  "primary_method": "baseline",
+  "representation_choice": {
+    "method": "representation_05",
+    "candidate_id": "tx3_sbp_tau500ms_ridge1",
+    "config": {
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.5
+      ],
+      "ridge": 1.0,
+      "phase": "all",
+      "weighting": "uniform",
+      "target": "instantaneous",
+      "control": "neural"
+    }
+  },
+  "representation_selection": {
+    "selected_method": "representation_05",
+    "ranking": [
+      {
+        "method": "representation_00",
+        "mean_r2": 0.17163151387465234,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.2261049183462025
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.19700936881497344
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.35614026513993846
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.4026128409257037
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": 0.23344331794718065
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.2905619165111617
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.40955745104321906
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.26407205116680266
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.30951857756273216
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": 0.05530762830912139
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.06604764389455142
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.099567168521147
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": -0.021244213841589366
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": 0.040104477114255244
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": -0.02310107850421872
+          }
+        ]
+      },
+      {
+        "method": "representation_01",
+        "mean_r2": 0.10468383717939647,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.16975349224713332
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.15816404960752295
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.25204171010598864
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.29298538194286927
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": 0.10431668661371596
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.19336141899139425
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.31464990216540034
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.1942582130547721
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.20702852752814282
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": 0.0013741047631213865
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.11958408122928921
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.09702322711677969
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": -0.036067335598233496
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": -0.01602864910104973
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": -0.04897263628376192
+          }
+        ]
+      },
+      {
+        "method": "representation_02",
+        "mean_r2": 0.040564407673063484,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.05315172728457718
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.07012932644393899
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.15175984667640974
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.1335845434955325
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": -0.012499735248569621
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.07648733748049363
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.19256384166481566
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.0579929791512811
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.11891305420078091
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": -0.013072734568487565
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.14768038780721282
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.03320290173640905
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": 0.013215224003709225
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": -0.029591474872024737
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": -0.023284531072882864
+          }
+        ]
+      },
+      {
+        "method": "representation_03",
+        "mean_r2": 0.1548966018022205,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.20075771414398735
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.18244039501770237
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.3301492173087772
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.396440182882145
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": 0.2088918950819041
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.2724363776847687
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.38710223808966215
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.29026485372731536
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.2880259455562695
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": 0.05891735947486454
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.0901571619657433
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.12362351399529703
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": -0.04784876471986976
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": 0.02288155500077438
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": -0.053229266253952634
+          }
+        ]
+      },
+      {
+        "method": "representation_04",
+        "mean_r2": 0.10516927867983147,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.13212946416602256
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.12384483336714613
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.2395396278465025
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.2290093329365438
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": 0.07969647062375118
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.1685341107744518
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.28738608592643
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.18707061212553966
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.20424292931469223
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": 0.024867181232624658
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.10019280227484506
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.04187996673356764
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": 0.03492348088741637
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": 0.009105834894843512
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": -0.0007380148900792971
+          }
+        ]
+      },
+      {
+        "method": "representation_05",
+        "mean_r2": 0.1774179930571944,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.2240931189130354
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.16776363181318388
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.34820626559375256
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.3884118376595218
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": 0.26897203157775473
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.2874752540312012
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.40948855281686325
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.330503125029982
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.32182463642870607
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": 0.07956321391089849
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.08791769696363594
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.09827473559125588
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": -0.027618353564368592
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": 0.05791124140548387
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": -0.009132227203206167
+          }
+        ]
+      },
+      {
+        "method": "representation_06",
+        "mean_r2": 0.14094420062190052,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.1677774100202064
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.12790980202734292
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.28207012997374004
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.2665301144089398
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": 0.13505248353227983
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.2153172505442641
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.33039410074417697
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.2566581482112523
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.24935990617731685
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": 0.0674026230213075
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.08133635340165113
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.030024219566744392
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": 0.054964717215230996
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": 0.04508927244777616
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": 0.02699762397306893
+          }
+        ]
+      },
+      {
+        "method": "representation_07",
+        "mean_r2": 0.1107181632511787,
+        "scored_sessions": 15,
+        "selected_sessions": 15,
+        "session_r2": [
+          {
+            "session_id": "T2_day_103_decoding",
+            "r2": 0.13694235987294456
+          },
+          {
+            "session_id": "T2_day_110_decoding",
+            "r2": 0.11534643456961258
+          },
+          {
+            "session_id": "T2_day_118_decoding",
+            "r2": 0.24514226310911824
+          },
+          {
+            "session_id": "T2_day_124_decoding",
+            "r2": 0.22658299171555152
+          },
+          {
+            "session_id": "T2_day_130_decoding",
+            "r2": 0.0833736870666516
+          },
+          {
+            "session_id": "T2_day_131_decoding",
+            "r2": 0.1729876850796953
+          },
+          {
+            "session_id": "T2_day_137_decoding",
+            "r2": 0.2946451901468694
+          },
+          {
+            "session_id": "T2_day_146_decoding",
+            "r2": 0.19665354285740533
+          },
+          {
+            "session_id": "T2_day_172_decoding",
+            "r2": 0.2098206974326341
+          },
+          {
+            "session_id": "T2_day_187_decoding",
+            "r2": 0.03631732261460119
+          },
+          {
+            "session_id": "T2_day_194_decoding",
+            "r2": -0.10260377962694833
+          },
+          {
+            "session_id": "T2_day_209_decoding",
+            "r2": -0.029995612817846462
+          },
+          {
+            "session_id": "T2_day_214_decoding",
+            "r2": 0.044512202153726865
+          },
+          {
+            "session_id": "T2_day_228_decoding",
+            "r2": 0.019534515787045348
+          },
+          {
+            "session_id": "T2_day_236_decoding",
+            "r2": 0.011512948806619794
+          }
+        ]
+      }
+    ],
+    "no_scorable_sessions_fallback": false,
+    "tie_break": "declared_order"
+  },
+  "factorial_selection": {
+    "selected_method": "baseline",
+    "ranking": [
+      {
+        "method": "baseline",
+        "mean_r2": -0.039997465806444844,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": 0.03321184747368189
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.022626201107663446
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": 0.023590429571499594
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.07546644085070842
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.13790725428412998
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.06078717564134872
+          }
+        ]
+      },
+      {
+        "method": "baseline_all_equal_trial",
+        "mean_r2": -0.057324413873640546,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": 0.038150114596895546
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.020479193047493682
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": 0.010268156736744083
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.09946856579460395
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.15763071394453632
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.11478628178884898
+          }
+        ]
+      },
+      {
+        "method": "baseline_clean_uniform",
+        "mean_r2": -0.16406175347455207,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": -0.1636425960874337
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.21757914226535613
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": -0.10921530587122819
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.1750438607691882
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.13970081785318733
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.1791887980009188
+          }
+        ]
+      },
+      {
+        "method": "baseline_clean_equal_trial",
+        "mean_r2": -0.1640617534745521,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": -0.1636425960874337
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.21757914226535613
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": -0.10921530587122819
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.1750438607691882
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.13970081785318755
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.1791887980009188
+          }
+        ]
+      },
+      {
+        "method": "selected_all_uniform",
+        "mean_r2": -0.04262616307075436,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": 0.035122330140123004
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.02963202592521652
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": 0.06287975252658906
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.07489452921850415
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.1088486314411905
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.14038387450632706
+          }
+        ]
+      },
+      {
+        "method": "selected_all_equal_trial",
+        "mean_r2": -0.048026599636408186,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": 0.04018509063230724
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.023620985184594323
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": 0.05165822914263862
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.07964899093901101
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.10716246747209901
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.16957047399769065
+          }
+        ]
+      },
+      {
+        "method": "selected_clean_uniform",
+        "mean_r2": -0.12358106515387406,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": -0.12299686060630921
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.19595220978031258
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": -0.05409605698924258
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.12192778947663352
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.06915135690495022
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.1773621171657962
+          }
+        ]
+      },
+      {
+        "method": "selected_clean_equal_trial",
+        "mean_r2": -0.12358106515387406,
+        "scored_sessions": 6,
+        "selected_sessions": 6,
+        "session_r2": [
+          {
+            "session_id": "T2_day_237_decoding",
+            "r2": -0.12299686060630921
+          },
+          {
+            "session_id": "T2_day_242_decoding",
+            "r2": -0.19595220978031258
+          },
+          {
+            "session_id": "T2_day_250_decoding",
+            "r2": -0.05409605698924258
+          },
+          {
+            "session_id": "T2_day_257_decoding",
+            "r2": -0.12192778947663352
+          },
+          {
+            "session_id": "T2_day_298_decoding",
+            "r2": -0.06915135690495022
+          },
+          {
+            "session_id": "T2_day_313_decoding",
+            "r2": -0.1773621171657962
+          }
+        ]
+      }
+    ],
+    "no_scorable_sessions_fallback": false,
+    "tie_break": "declared_order"
+  },
+  "onset_matched_instantaneous_method": "baseline_clean_uniform",
+  "source_manifest_sha256": "d930e295d93a51e242efaa477c996ba6e83d16632f394674cc1f301c1fc98f29",
+  "source_audit_sha256": "a43dce342fff124d5aca683f7a9102a77bce101d1060c9dff34ff9ae3d775fbc"
+}

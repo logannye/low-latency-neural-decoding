@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "evidence_role": "source numerical and compute replay; no accuracy evidence",
+  "manifest_sha256": "a44763b0c86bf9972bddc20995c2af5d26bb6a9445bb90b7fa192cc2ba0e1244",
+  "audit_sha256": "576c4edaf89b7aa5bc058dfc224a01082c0ad3cb1813113e933c42ab4cc2d484",
+  "source_manifest_sha256": "d930e295d93a51e242efaa477c996ba6e83d16632f394674cc1f301c1fc98f29",
+  "source_audit_sha256": "a43dce342fff124d5aca683f7a9102a77bce101d1060c9dff34ff9ae3d775fbc",
+  "plan_sha256": "fc18ce69922721c7388477175f9236562d323fc25c50a0460758a5db6fe6bb78",
+  "model_sha256": "6fa33b34c3619c8d447434f63aed88dc267e0f50814468524fe52dde63528546",
+  "feature_sha256": "9949ee1dc77783a7685fb16028cbdb3ad3c4b8fd6d6606d28cdb961cd45f12b6",
+  "representative": {
+    "participant": "T2",
+    "archive_rank": 16,
+    "post_implant_day": 237,
+    "config": {
+      "control": "neural",
+      "family": "tx45_sbp",
+      "phase": "all",
+      "ridge": 1.0,
+      "target": "instantaneous",
+      "taus_seconds": [
+        0.2
+      ],
+      "weighting": "uniform"
+    }
+  },
+  "protocol": {
+    "repeats": 2,
+    "steps_each": 3000,
+    "period_ms": 20.0,
+    "warmup_steps": 500,
+    "threadpool_limit": 1
+  },
+  "environment": {
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "platform": "macOS-26.2-arm64-arm-64bit"
+  },
+  "memory": {
+    "model_numeric_bytes": 6160,
+    "model_artifact_bytes": 6268,
+    "feature_channels": 96,
+    "filtered_dimensions": 192,
+    "workload_rows": 3000
+  },
+  "blocks": [
+    {
+      "repeat": 0,
+      "n": 3000,
+      "deadline_misses": 0,
+      "block_wall_seconds": 60.00135,
+      "process_cpu_seconds": 0.89541,
+      "numeric_filter_state_bytes": 1544,
+      "prediction_max_absolute_error": 9.076073226310655e-15,
+      "service_p50_ms": 0.281729,
+      "service_p95_ms": 0.6087152499999999,
+      "service_p99_ms": 0.925082829999996,
+      "service_max_ms": 2.925375,
+      "queue_p50_ms": 3.342792,
+      "queue_p95_ms": 4.650277099999999,
+      "queue_p99_ms": 4.93200167,
+      "queue_max_ms": 7.592959,
+      "release_to_completion_p50_ms": 3.620042,
+      "release_to_completion_p95_ms": 4.9339274,
+      "release_to_completion_p99_ms": 5.376666579999991,
+      "release_to_completion_max_ms": 9.181542
+    },
+    {
+      "repeat": 1,
+      "n": 3000,
+      "deadline_misses": 0,
+      "block_wall_seconds": 60.004142375,
+      "process_cpu_seconds": 0.830824,
+      "numeric_filter_state_bytes": 1544,
+      "prediction_max_absolute_error": 9.076073226310655e-15,
+      "service_p50_ms": 0.2603955,
+      "service_p95_ms": 0.600167,
+      "service_p99_ms": 0.9414549999999922,
+      "service_max_ms": 4.706875,
+      "queue_p50_ms": 3.680416,
+      "queue_p95_ms": 4.66473475,
+      "queue_p99_ms": 4.89021383,
+      "queue_max_ms": 5.643875,
+      "release_to_completion_p50_ms": 3.9117914999999996,
+      "release_to_completion_p95_ms": 4.930590999999999,
+      "release_to_completion_p99_ms": 5.2904905,
+      "release_to_completion_max_ms": 8.506083
+    }
+  ],
+  "limitations": "Model fitted through150s replayed onfirst60s; no causal accuracy. Feature-ready steps only; excludes acquisition, upstream extraction, transport, loading and fitting. Two finite runs on one source session; no hard realtime guarantee. Numeric component sizes exclude Python overhead, scratch arrays and input cache."
+}

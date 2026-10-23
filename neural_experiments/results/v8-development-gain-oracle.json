@@ -1,0 +1,1546 @@
+{
+  "study": "V8",
+  "phase": "development",
+  "error_report_sha256": "7c47ec88b05a5ba9a60ab6d7830112f1fe05093b5fe997461f9559e4f4a8d8ec",
+  "code_sha256": "c319335244396e55273e44a741e72538b40d511e6d33f62ac0b0fd2753f1b6b2",
+  "evidence_role": "Post-development diagnostic; per-session held-out-target oracle, not deployable accuracy",
+  "scope": "Upper bound only for scalar multiplication of each existing output in [0,1]; not a neural-information bound",
+  "rows": [
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.8240910304811719,
+      "oracle_summed_mse": 0.73630687543003,
+      "oracle_r2": 0.23853053746759845
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.7676828776688204,
+      "oracle_summed_mse": 0.7829322185563639,
+      "oracle_r2": 0.19031181758933746
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.6775743670292824,
+      "oracle_summed_mse": 0.8908427755571644,
+      "oracle_r2": 0.07871351994614206
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.7745587389900235,
+      "oracle_summed_mse": 0.7518058438850483,
+      "oracle_r2": 0.22250190650804558
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.8001538275100303,
+      "oracle_summed_mse": 0.828493383017578,
+      "oracle_r2": 0.14319364366984377
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.8108338899809778,
+      "oracle_summed_mse": 0.7358923445042534,
+      "oracle_r2": 0.23895923459346702
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_06",
+      "oracle_gain": 0.8481920102531124,
+      "oracle_summed_mse": 0.7982595819036751,
+      "oracle_r2": 0.174460656178819
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_103_decoding",
+      "method": "representation_07",
+      "oracle_gain": 0.820047043496656,
+      "oracle_summed_mse": 0.8261671940482158,
+      "oracle_r2": 0.14559932793459351
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.792831158998263,
+      "oracle_summed_mse": 0.735570192727753,
+      "oracle_r2": 0.2162470588169535
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.7479974970340998,
+      "oracle_summed_mse": 0.7632054101350079,
+      "oracle_r2": 0.18680162568588943
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.7060592558023507,
+      "oracle_summed_mse": 0.8460175059820547,
+      "oracle_r2": 0.09856501097891279
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.767039268559589,
+      "oracle_summed_mse": 0.7436524294410721,
+      "oracle_r2": 0.20763540372539657
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.7619986417352099,
+      "oracle_summed_mse": 0.8030813717552093,
+      "oracle_r2": 0.14431363132271602
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.7637987199461899,
+      "oracle_summed_mse": 0.7579224659169163,
+      "oracle_r2": 0.1924306235843507
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_06",
+      "oracle_gain": 0.7643649463310586,
+      "oracle_summed_mse": 0.7994143160317824,
+      "oracle_r2": 0.14822089365761293
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_110_decoding",
+      "method": "representation_07",
+      "oracle_gain": 0.757352462796149,
+      "oracle_summed_mse": 0.8108518406274962,
+      "oracle_r2": 0.1360341660952824
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_00",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6362855097618575,
+      "oracle_r2": 0.3561402651399417
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.995369062481086,
+      "oracle_summed_mse": 0.7391538259912942,
+      "oracle_r2": 0.25204742348812614
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_02",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8382616416839336,
+      "oracle_r2": 0.15175984667641307
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_03",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6619708045910033,
+      "oracle_r2": 0.3301492173087789
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_04",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7515144826606494,
+      "oracle_r2": 0.23953962784650318
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_05",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6441261754726811,
+      "oracle_r2": 0.34820626559375256
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7094843000583217,
+      "oracle_r2": 0.2820701299737366
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_118_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7459777555738749,
+      "oracle_r2": 0.24514226310911869
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_00",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5906460477076534,
+      "oracle_r2": 0.40261284092570226
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_01",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6990364347202913,
+      "oracle_r2": 0.2929853819428688
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_02",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8566385421644811,
+      "oracle_r2": 0.13358454349553017
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_03",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5967490514664356,
+      "oracle_r2": 0.3964401828821438
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_04",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7622905571424952,
+      "oracle_r2": 0.2290093329365419
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_05",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.604686802225465,
+      "oracle_r2": 0.38841183765951826
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7251931723946972,
+      "oracle_r2": 0.2665301144089378
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_124_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7646895187385092,
+      "oracle_r2": 0.2265829917155463
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_00",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7159096424487399,
+      "oracle_r2": 0.23344331794717632
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.9862442621414063,
+      "oracle_summed_mse": 0.8364729576955171,
+      "oracle_r2": 0.10435074895097729
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_02",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9456030329030525,
+      "oracle_r2": -0.012499735248574728
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_03",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7388389323194082,
+      "oracle_r2": 0.2088918950819012
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_04",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8594983072819478,
+      "oracle_r2": 0.07969647062374485
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_05",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6827283405731721,
+      "oracle_r2": 0.26897203157775096
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8077997123357676,
+      "oracle_r2": 0.13505248353227928
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_130_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8560640475977241,
+      "oracle_r2": 0.08337368706664916
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.970470575998335,
+      "oracle_summed_mse": 0.7083609377178743,
+      "oracle_r2": 0.2908322409307821
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.9088081418577014,
+      "oracle_summed_mse": 0.8037448586799729,
+      "oracle_r2": 0.19533967791925733
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.9645893177797432,
+      "oracle_summed_mse": 0.9223573439008521,
+      "oracle_r2": 0.07659209337186745
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.9238751601172295,
+      "oracle_summed_mse": 0.7248679124969266,
+      "oracle_r2": 0.27430646474839326
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_04",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8305199290859889,
+      "oracle_r2": 0.16853411077445035
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.9196283359796437,
+      "oracle_summed_mse": 0.7094952218108714,
+      "oracle_r2": 0.289696664891016
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7837900145729171,
+      "oracle_r2": 0.21531725054426354
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_131_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8260714216197171,
+      "oracle_r2": 0.1729876850796941
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_00",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5759099842614661,
+      "oracle_r2": 0.40955745104321906
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_01",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6684815732790473,
+      "oracle_r2": 0.3146499021653981
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_02",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7875627291098137,
+      "oracle_r2": 0.19256384166481133
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_03",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5978125069734922,
+      "oracle_r2": 0.3871022380896594
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_04",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6950743451055966,
+      "oracle_r2": 0.2873860859264262
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_05",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5759771866955189,
+      "oracle_r2": 0.4094885528168598
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6531248867195643,
+      "oracle_r2": 0.33039410074417275
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_137_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6879939092448465,
+      "oracle_r2": 0.29464519014686685
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.8807232159039786,
+      "oracle_summed_mse": 0.728013310869268,
+      "oracle_r2": 0.26908058695198944
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.8425205406444664,
+      "oracle_summed_mse": 0.7953897043621481,
+      "oracle_r2": 0.20143523864605561
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.7822483726866709,
+      "oracle_summed_mse": 0.9330758359321881,
+      "oracle_r2": 0.06319948804987363
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.9011697465948546,
+      "oracle_summed_mse": 0.7033453296456901,
+      "oracle_r2": 0.29384703845476245
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_04",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8096972177841715,
+      "oracle_r2": 0.18707061212553888
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.9348608520103113,
+      "oracle_summed_mse": 0.66520957486599,
+      "oracle_r2": 0.33213502451704846
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7403863585613593,
+      "oracle_r2": 0.2566581482112472
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_146_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8001523883469004,
+      "oracle_r2": 0.19665354285740066
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.9967624823158953,
+      "oracle_summed_mse": 0.6873327704393257,
+      "oracle_r2": 0.3095218912091199
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.9809032276387257,
+      "oracle_summed_mse": 0.7892793772531022,
+      "oracle_r2": 0.2071087613572854
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_02",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.877073326067622,
+      "oracle_r2": 0.1189130542007848
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.976775758142864,
+      "oracle_summed_mse": 0.7085660424406992,
+      "oracle_r2": 0.28819145255481315
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_04",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7921321545567825,
+      "oracle_r2": 0.204242929314696
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_05",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6750860679760198,
+      "oracle_r2": 0.3218246364287072
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.747220699282499,
+      "oracle_r2": 0.24935990617731874
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_172_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7865797948735997,
+      "oracle_r2": 0.20982069743263443
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.7459137418415668,
+      "oracle_summed_mse": 0.7732583892775593,
+      "oracle_r2": 0.08639265941549545
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.7392603007878312,
+      "oracle_summed_mse": 0.8232256515412388,
+      "oracle_r2": 0.027356174036191505
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.7404183028518362,
+      "oracle_summed_mse": 0.8374665544951714,
+      "oracle_r2": 0.010530500166141654
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.7586638199377661,
+      "oracle_summed_mse": 0.7736033934806301,
+      "oracle_r2": 0.08598503581020556
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.7963644639086344,
+      "oracle_summed_mse": 0.81311249610283,
+      "oracle_r2": 0.03930490058493896
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.697617384870669,
+      "oracle_summed_mse": 0.7279205880088883,
+      "oracle_r2": 0.13995942134059802
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_06",
+      "oracle_gain": 0.8314250024573063,
+      "oracle_summed_mse": 0.7802994254564044,
+      "oracle_r2": 0.07807365191746629
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_187_decoding",
+      "method": "representation_07",
+      "oracle_gain": 0.8042603338131235,
+      "oracle_summed_mse": 0.8040334140329952,
+      "oracle_r2": 0.05003186603373255
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.4812619244793229,
+      "oracle_summed_mse": 0.9519061679784433,
+      "oracle_r2": -0.006941486734729274
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.28433335217709793,
+      "oracle_summed_mse": 0.9890554657675154,
+      "oracle_r2": -0.04623860488064979
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000002469738,
+      "oracle_r2": -0.05781590755090105
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.4349784441962519,
+      "oracle_summed_mse": 0.955516916584813,
+      "oracle_r2": -0.010760994047771089
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.18023743591671398,
+      "oracle_summed_mse": 0.9979650611151297,
+      "oracle_r2": -0.05566331656687007
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.44877388401654666,
+      "oracle_summed_mse": 0.944060839462837,
+      "oracle_r2": 0.0013574265669921148
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_06",
+      "oracle_gain": 0.36119834370414317,
+      "oracle_summed_mse": 0.9895503365796718,
+      "oracle_r2": -0.046762087097802274
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_194_decoding",
+      "method": "representation_07",
+      "oracle_gain": 0.15380921600782207,
+      "oracle_summed_mse": 0.9985533299835055,
+      "oracle_r2": -0.05628559673360134
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.3261244095978659,
+      "oracle_summed_mse": 0.9772465243525593,
+      "oracle_r2": -0.00014163083409823862
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.2514637520392216,
+      "oracle_summed_mse": 0.9908520814033682,
+      "oracle_r2": -0.014065941310635877
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.3378563969714109,
+      "oracle_summed_mse": 0.9966381245686344,
+      "oracle_r2": -0.019987540930772374
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.26832462164816984,
+      "oracle_summed_mse": 0.9847874745582686,
+      "oracle_r2": -0.007859251770917286
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.3177461876800927,
+      "oracle_summed_mse": 0.9950061533804203,
+      "oracle_r2": -0.018317335629468356
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.3336822928205172,
+      "oracle_summed_mse": 0.9755199500358605,
+      "oracle_r2": 0.0016253939747169488
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_06",
+      "oracle_gain": 0.4427258091480492,
+      "oracle_summed_mse": 0.9889717472896268,
+      "oracle_r2": -0.01214155439273279
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_209_decoding",
+      "method": "representation_07",
+      "oracle_gain": 0.42331165550264593,
+      "oracle_summed_mse": 0.9925027934626678,
+      "oracle_r2": -0.015755326547507664
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.5066255250039213,
+      "oracle_summed_mse": 0.937288020408937,
+      "oracle_r2": 0.03969091112338674
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.46297092633141335,
+      "oracle_summed_mse": 0.9674972538748923,
+      "oracle_r2": 0.00873969779976469
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.9161972936924424,
+      "oracle_summed_mse": 0.9628179378810817,
+      "oracle_r2": 0.01353394415812681
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.4565305459131995,
+      "oracle_summed_mse": 0.945511028501046,
+      "oracle_r2": 0.031265934769466375
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.9861130529971787,
+      "oracle_summed_mse": 0.9419296467879691,
+      "oracle_r2": 0.034935280087998954
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.4948666495936638,
+      "oracle_summed_mse": 0.9288291788928359,
+      "oracle_r2": 0.04835751329091964
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9223803665693993,
+      "oracle_r2": 0.054964717215230774
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_214_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9325823080732055,
+      "oracle_r2": 0.044512202153725644
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.6736578625977669,
+      "oracle_summed_mse": 0.9398784515844267,
+      "oracle_r2": 0.05430090170040858
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.446602034023907,
+      "oracle_summed_mse": 0.981743841339611,
+      "oracle_r2": 0.012176240501191482
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.14072618170100024,
+      "oracle_summed_mse": 0.9993590841526622,
+      "oracle_r2": -0.005548093125723685
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.5997738260463352,
+      "oracle_summed_mse": 0.9479093395975257,
+      "oracle_r2": 0.046220278573312124
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.734390389799842,
+      "oracle_summed_mse": 0.9825071477492958,
+      "oracle_r2": 0.011408206951589062
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.6928903210193262,
+      "oracle_summed_mse": 0.9207144774794607,
+      "oracle_r2": 0.07358355787829107
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9490333845373087,
+      "oracle_r2": 0.045089272447776496
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_228_decoding",
+      "method": "representation_07",
+      "oracle_gain": 0.9482178196529907,
+      "oracle_summed_mse": 0.9743543734784731,
+      "oracle_r2": 0.019611471175340234
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_00",
+      "oracle_gain": 0.46554304910800937,
+      "oracle_summed_mse": 0.9697649816160213,
+      "oracle_r2": 0.01728012386383282
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_01",
+      "oracle_gain": 0.2761688171446008,
+      "oracle_summed_mse": 0.9940123800141494,
+      "oracle_r2": -0.0072911906321031505
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_02",
+      "oracle_gain": 0.1665735341912368,
+      "oracle_summed_mse": 0.9995924496921295,
+      "oracle_r2": -0.012945803333871186
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_03",
+      "oracle_gain": 0.37379483445916367,
+      "oracle_summed_mse": 0.9782205174959557,
+      "oracle_r2": 0.008711632187893725
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_04",
+      "oracle_gain": 0.7473217329211471,
+      "oracle_summed_mse": 0.9859380350890877,
+      "oracle_r2": 0.0008910178359885501
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_05",
+      "oracle_gain": 0.51109081469828,
+      "oracle_summed_mse": 0.9508834764622436,
+      "oracle_r2": 0.036413863231348764
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_06",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.960175584328323,
+      "oracle_r2": 0.026997623973069262
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_236_decoding",
+      "method": "representation_07",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9754561297744633,
+      "oracle_r2": 0.011512948806617573
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.7553171123831722,
+      "oracle_summed_mse": 0.9234857361452469,
+      "oracle_r2": 0.04154544046752373
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.7673818622808061,
+      "oracle_summed_mse": 0.9193459558578069,
+      "oracle_r2": 0.045841978179650855
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.07799211601022224,
+      "oracle_summed_mse": 0.9991266085406727,
+      "oracle_r2": -0.03695965841687032
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.07799211601022224,
+      "oracle_summed_mse": 0.9991266085406727,
+      "oracle_r2": -0.03695965841687032
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.6756529358340693,
+      "oracle_summed_mse": 0.9086150361148657,
+      "oracle_r2": 0.05697923623685741
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.6852360585183399,
+      "oracle_summed_mse": 0.9046845708631357,
+      "oracle_r2": 0.06105853296463293
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.0874045370021986,
+      "oracle_summed_mse": 0.9992406209848268,
+      "oracle_r2": -0.03707798807012419
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.0874045370021986,
+      "oracle_summed_mse": 0.9992406209848268,
+      "oracle_r2": -0.03707798807012419
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.500350628683537,
+      "oracle_summed_mse": 0.9481815072787513,
+      "oracle_r2": 0.030223985211919158
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.5052267732588624,
+      "oracle_summed_mse": 0.945197633943554,
+      "oracle_r2": 0.03327581523541834
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.07413861487298853,
+      "oracle_summed_mse": 0.9987708361766205,
+      "oracle_r2": -0.021517498241159894
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.07413861487298853,
+      "oracle_summed_mse": 0.9987708361766205,
+      "oracle_r2": -0.021517498241159894
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.48675098212461554,
+      "oracle_summed_mse": 0.940051593878428,
+      "oracle_r2": 0.038539054592005684
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.4983687458506199,
+      "oracle_summed_mse": 0.9370044964174834,
+      "oracle_r2": 0.041655548648957264
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.008055468588963945,
+      "oracle_summed_mse": 0.9999888324598725,
+      "oracle_r2": -0.02276323397058655
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.008055468588963945,
+      "oracle_summed_mse": 0.9999888324598725,
+      "oracle_r2": -0.02276323397058655
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.6315518399827335,
+      "oracle_summed_mse": 0.9486660246837992,
+      "oracle_r2": 0.0412480662292084
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.5705002590873159,
+      "oracle_summed_mse": 0.9522645666261912,
+      "oracle_r2": 0.03761126575754237
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.28553998524832136,
+      "oracle_summed_mse": 0.9814574505236446,
+      "oracle_r2": 0.008108012599131076
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.28553998524832136,
+      "oracle_summed_mse": 0.9814574505236446,
+      "oracle_r2": 0.008108012599131076
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.7066872198348177,
+      "oracle_summed_mse": 0.9121234886533327,
+      "oracle_r2": 0.07817911063524818
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.6620355577999322,
+      "oracle_summed_mse": 0.9166420422885991,
+      "oracle_r2": 0.0736125172051707
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.36651778240899846,
+      "oracle_summed_mse": 0.9783590013221848,
+      "oracle_r2": 0.011239403506252854
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.36651778240899846,
+      "oracle_summed_mse": 0.9783590013221848,
+      "oracle_r2": 0.011239403506252854
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.3174822074614925,
+      "oracle_summed_mse": 0.9807151321502436,
+      "oracle_r2": 0.014128458214520356
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.31608297347312536,
+      "oracle_summed_mse": 0.9745449863570693,
+      "oracle_r2": 0.020331045435562745
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.0376103039754942,
+      "oracle_summed_mse": 0.9997416545706683,
+      "oracle_r2": -0.004998101964390322
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.0376103039754942,
+      "oracle_summed_mse": 0.9997416545706683,
+      "oracle_r2": -0.004998101964390322
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.32186746791793663,
+      "oracle_summed_mse": 0.9798561807466468,
+      "oracle_r2": 0.014991925817723462
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.34154948084871545,
+      "oracle_summed_mse": 0.9727587125000638,
+      "oracle_r2": 0.022126711173477864
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999995990759,
+      "oracle_r2": -0.005257805320767028
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999995990759,
+      "oracle_r2": -0.005257805320767028
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.2014644380049874,
+      "oracle_summed_mse": 0.9908920012719009,
+      "oracle_r2": 0.00567962772922459
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.1602960264450038,
+      "oracle_summed_mse": 0.9941894533474038,
+      "oracle_r2": 0.002370766853316275
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.04492397330525376,
+      "oracle_summed_mse": 0.9996989433722068,
+      "oracle_r2": -0.003157785365747401
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.0449239733052537,
+      "oracle_summed_mse": 0.9996989433722068,
+      "oracle_r2": -0.003157785365747401
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.2961014688487167,
+      "oracle_summed_mse": 0.9774196207655126,
+      "oracle_r2": 0.019198621104174474
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.2899686087755805,
+      "oracle_summed_mse": 0.9793139630255014,
+      "oracle_r2": 0.017297724640440104
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.1637356673713756,
+      "oracle_summed_mse": 0.9973903361869573,
+      "oracle_r2": -0.0008411906683254422
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.16373566737137513,
+      "oracle_summed_mse": 0.9973903361869573,
+      "oracle_r2": -0.0008411906683254422
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.49232883613594364,
+      "oracle_summed_mse": 0.9751712380500768,
+      "oracle_r2": -0.03282597713897961
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.20711773504341446,
+      "oracle_summed_mse": 0.9961511011800713,
+      "oracle_r2": -0.055046226047064994
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.17376927271950293,
+      "oracle_summed_mse": 0.9947535531515402,
+      "oracle_r2": -0.0535660512307401
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.17376927271950293,
+      "oracle_summed_mse": 0.9947535531515402,
+      "oracle_r2": -0.0535660512307401
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.29959102902924634,
+      "oracle_summed_mse": 0.9828190422619837,
+      "oracle_r2": -0.04092594004798067
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.19333849262558991,
+      "oracle_summed_mse": 0.9936443767507677,
+      "oracle_r2": -0.05239129734624459
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000002564566,
+      "oracle_r2": -0.059122682359933565
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000002564566,
+      "oracle_r2": -0.059122682359933565
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.999999999972886,
+      "oracle_r2": -0.037866121795455676
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "constant",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9671738545042122,
+      "oracle_r2": -0.0037969775034658593
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.999999999972886,
+      "oracle_r2": -0.037866121795455676
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_237_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.06546250126068115,
+      "oracle_summed_mse": 0.9993857096346573,
+      "oracle_r2": -0.037228570664444405
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999997327442,
+      "oracle_r2": -0.022774655574254732
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "constant",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.987677544912477,
+      "oracle_r2": -0.010171561086258274
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.00927635702232014,
+      "oracle_summed_mse": 0.9999845434142645,
+      "oracle_r2": -0.022758847243441016
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_242_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.06454376836414427,
+      "oracle_summed_mse": 0.9990862418697989,
+      "oracle_r2": -0.021840087190452717
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999997953973,
+      "oracle_r2": -0.010631675034626697
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "constant",
+      "oracle_gain": 0.4323744695531607,
+      "oracle_summed_mse": 0.995871148347885,
+      "oracle_r2": -0.006458926979404422
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999997953973,
+      "oracle_r2": -0.010631675034626697
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_250_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.28315115300640625,
+      "oracle_summed_mse": 0.9820167366663711,
+      "oracle_r2": 0.0075427803077681155
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999995990759,
+      "oracle_r2": -0.005257805320767028
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "constant",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999995990759,
+      "oracle_r2": -0.005257805320767028
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999995990759,
+      "oracle_r2": -0.005257805320767028
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_257_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.04394778804875166,
+      "oracle_summed_mse": 0.9996502275992503,
+      "oracle_r2": -0.004906194287718657
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.000000001226485,
+      "oracle_r2": -0.0034598848451625752
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "constant",
+      "oracle_gain": 0.1463642144491996,
+      "oracle_summed_mse": 0.9968495578987866,
+      "oracle_r2": -0.00029854135021656347
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.04531953056450868,
+      "oracle_summed_mse": 0.9992359496448256,
+      "oracle_r2": -0.00269318973395527
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_298_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.049866117238676545,
+      "oracle_summed_mse": 0.9996349933578925,
+      "oracle_r2": -0.003093614091826513
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000002564566,
+      "oracle_r2": -0.059122682359933565
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "constant",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9484936423470607,
+      "oracle_r2": -0.004571130426333392
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000002564566,
+      "oracle_r2": -0.059122682359933565
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_313_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.170587890577725,
+      "oracle_summed_mse": 0.9949382917776185,
+      "oracle_r2": -0.053761712099877235
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "schema_version": 1,
+  "study": "V8 T2 endpoint, trial weighting and neural representation",
+  "status": "prespecified_for_source_lock_before_V8_fitting_and_fresh_outcomes",
+  "evidence_scope": "Offline known-participant session holdout. T2 and all development outcomes through archive rank21 informed the hypothesis; neither the development split nor T2 is untouched.",
+  "previous_evidence": {
+    "V7B_assessment_manifest_sha256": "7cb36ddfb0d255ba2d02068fe369046d51232ad8fc800b969c3f041b21465267",
+    "V7B_assessment_audit_sha256": "7893dc853f6f2c12fa2d55124d40879dd36acd75e7aca1a5ea167150b4a3fd30",
+    "T2_frozen120_mean_r2": -0.08604329247148446,
+    "T2_zero_mean_r2": -0.021465313390781615,
+    "interpretation": "Prior numerical audits passed; all three V7 fresh T2 sessions had negative learned R2. Directional alignment near80degrees with worse-than-zero squared error motivates target/scale/coverage diagnostics, not a claim of absent neural information."
+  },
+  "acquisition_plan_sha256": "64ae9b11167d402fdc7e629cdd9b8c98df52c3fbf708e53111dfc3588fc383ac",
+  "fresh_selection": {
+    "provider": "Dryad version462702",
+    "participants": [
+      "T2",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11"
+    ],
+    "regular_archive_ranks": [
+      22,
+      23,
+      24
+    ],
+    "requested_sessions": 24,
+    "selection_rule": "Authenticate previous21 regular members, retain next three in archive order, no quality or outcome selection and no replacement. Rank is not chronological day. Retain shortages and short recordings.",
+    "prepared_cap_seconds": 600,
+    "T3_fresh": false
+  },
+  "development": {
+    "scope": "Existing exposed first-min(600s,duration) prefixes only; no unused tails or T3 continuation arrays.",
+    "expected_prefixes": 176,
+    "representation_selection": {
+      "participant": "T2",
+      "archive_ranks": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "objective": "Equal-session mean primary R2 from daily calibration on the same purchased interval and primary mask; all candidates share score availability.",
+      "tie_break": "representation_grid order"
+    },
+    "factorial_selection": {
+      "participant": "T2",
+      "archive_ranks": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "objective": "Equal-session mean primary R2 among the eight frozen factorial cells.",
+      "tie_break": "factorial_order"
+    },
+    "limits": "These partitions limit additional selection reuse; they are not retrospectively pristine validation because their V2-V7 outcomes were exposed. All settings and both selected identities are published with a passed source audit before any fresh scoring. No fresh best-arm substitution."
+  },
+  "time": {
+    "bin_seconds": 0.02,
+    "meaning": "Recorded observation time; gaps between acquisition blocks are not real-world elapsed time.",
+    "normalization_seconds": [
+      0,
+      30
+    ],
+    "purchased_label_seconds": [
+      30,
+      150
+    ],
+    "deployment_seconds": 152,
+    "primary_score_seconds": [
+      152,
+      600
+    ],
+    "block_burn_bins": 62,
+    "minimum_training_rows": 50,
+    "minimum_scoring_rows": 50,
+    "shortages": "Requested cost remains120seconds; report actual available interval, eligible rows, trial counts and fallback. Incomplete recordings are retained with zero fallback or unavailable scores as appropriate."
+  },
+  "targets": {
+    "primary": "Unchanged instantaneous unit(target_position-cursor_position) at second10ms sample of each within-block20ms pair; finite nonzero direction and both raw samples in one provider go interval.",
+    "primary_boundary": "Score common original valid-go mask after152s and62-bin block burn, but exclude every provider trial intersecting purchased[30,150). Calibration may use partial trials inside[30,150). Final right-censored scoring trial is retained; no end<=600 requirement.",
+    "reference40": "Position-error direction and distance at raw trial_start_index+4 (40ms at10ms resolution), only when that sample is observed and remains inside its trial.",
+    "far_distance_by_participant": {
+      "T2": 0.2,
+      "T3": 0.2,
+      "T5": 160.0,
+      "T6": 160.0,
+      "T7": 0.2,
+      "T8": 5.6,
+      "T9": 0.2,
+      "T10": 0.2,
+      "T11": 0.2
+    },
+    "far_distance_session_overrides": {
+      "T5_day_2107_decoding": 0.4,
+      "T5_day_2126_decoding": 0.4,
+      "T5_day_2133_decoding": 0.4,
+      "T5_day_2149_decoding": 0.4,
+      "T5_day_2595_decoding": 0.4,
+      "T5_day_2609_decoding": 0.4,
+      "T5_day_2637_decoding": 0.4,
+      "T5_day_2667_decoding": 0.4
+    },
+    "phase": "0.2 <= raw-pair endpoint age since trial onset <1.0 seconds, reference40_available and reference40_distance strictly greater than fixed provider threshold. No extra current-distance exclusion.",
+    "phase_training_boundary": "Require trial onset>=30s so the reference40 behavior lies inside requested labels; use only phase rows before150s.",
+    "secondary": "Stable reference40 unit direction, scored on far-phase rows of the common primary mask. Different target and eligible rows; never satisfies the primary gate. Report trial-averaged and bin-pooled errors separately.",
+    "provider_source_commit": "93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834",
+    "provider_source_urls": [
+      "https://github.com/nptl-stanford/array-paper/blob/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metrics/decoding_snr.py",
+      "https://github.com/nptl-stanford/array-paper/blob/93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834/array_paper/metrics/utils.py"
+    ],
+    "provider_method_limit": "The fixed40ms target with0.2-1s evaluation is a prespecified diagnostic, not reproduction of provider nested-reaction-time300ms trial dSNR. Provider whole-block/session normalizers are not copied.",
+    "secondary_availability": {
+      "bin_metrics_minimum_rows": 50,
+      "trial_mean_metrics_minimum_trials": 2,
+      "trial_aggregation": "Mean predictions and stable labels within each eligible far-phase trial, then score across equal-weight trial vectors. Report counts and independent availability; do not replace primary scores."
+    }
+  },
+  "baseline": {
+    "family": "tx45_sbp",
+    "taus_seconds": [
+      0.2
+    ],
+    "ridge": 1.0,
+    "phase": "all",
+    "weighting": "uniform"
+  },
+  "representation_grid": [
+    {
+      "candidate_id": "baseline_fallback",
+      "family": "tx45_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0
+    },
+    {
+      "candidate_id": "tx3_sbp_tau050ms_ridge1",
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.05
+      ],
+      "ridge": 1.0
+    },
+    {
+      "candidate_id": "tx3_sbp_tau050ms_ridge10",
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.05
+      ],
+      "ridge": 10.0
+    },
+    {
+      "candidate_id": "tx3_sbp_tau200ms_ridge1",
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 1.0
+    },
+    {
+      "candidate_id": "tx3_sbp_tau200ms_ridge10",
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.2
+      ],
+      "ridge": 10.0
+    },
+    {
+      "candidate_id": "tx3_sbp_tau500ms_ridge1",
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.5
+      ],
+      "ridge": 1.0
+    },
+    {
+      "candidate_id": "tx3_sbp_tau500ms_ridge10",
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.5
+      ],
+      "ridge": 10.0
+    },
+    {
+      "candidate_id": "tx3_sbp_multiscale_ridge10",
+      "family": "tx3_sbp",
+      "taus_seconds": [
+        0.05,
+        0.5
+      ],
+      "ridge": 10.0
+    }
+  ],
+  "representation": {
+    "transform": "sqrt paired threshold counts; log1p paired spike-band power; causal EWMA per scale reset at acquisition blocks.",
+    "normalization": "Each scale uses mean and populationSD of first30 observed seconds, TXfloor0.1/SBPfloor0.01, zclip[-8,8]. Concatenate scales and divide by sqrt(number_of_scales). No labels or full-session feature moments.",
+    "fit": "Weighted mean squared loss plus ridge on feature coefficients, unpenalized intercept. Output projected to unit disk. Below50 selected labels gives explicit zero fallback; no replacement model."
+  },
+  "factorial_axes": {
+    "representation": [
+      "baseline",
+      "source_selected"
+    ],
+    "phase": [
+      "all",
+      "far_early"
+    ],
+    "weighting": [
+      "uniform",
+      "equal_trial"
+    ]
+  },
+  "factorial_order": "representation then phase then weighting, each in listed order; retain duplicate semantic cells when source_selected equals baseline. baseline is baseline/all/uniform.",
+  "weighting": "Uniform assigns equal weight per retained row. Equal_trial assigns each eligible provider go trial equal total mass, each retained row inside that trial equal mass; scale weights to mean1 (sum equals selected-row count), then divide the loss by their sum. It reduces duration dominance, not equal directional sectors. Weights depend only on purchased selected rows.",
+  "fresh_methods": {
+    "factorial_count": 8,
+    "controls": [
+      "zero",
+      "constant",
+      "trialshuffle",
+      "primary_onset"
+    ],
+    "primary": "Single factorial method selected on T2 archive16-21 before fresh scoring. All other fresh arms are predeclared diagnostic comparisons.",
+    "constant": "Uniform mean of eligible purchased instantaneous targets, same baseline calibration mask; unit-disk output.",
+    "trialshuffle": "Use selected primary configuration. Sort eligible purchased trial chunks by first selected bin; map each recipient to next donor cyclically. For recipient lengthnr and donornd use donor indices floor(arange(nr)*nd/nr). Only purchased labels enter mapping. Fewer2trials gives zero fallback. One deterministic diagnostic, not a permutation p-value.",
+    "primary_onset": "Separate stable-reference40 target head, using selected representation/weighting and far_early training rows. Score on unchanged primary and stable-phase secondary, but never substitute for locked primary after fresh outcomes."
+  },
+  "diagnostics": {
+    "primary_error_decomposition": [
+      "summedMSE",
+      "angular error with zero prediction90degrees",
+      "prediction squared norm",
+      "target-prediction dot product",
+      "mean residual squared norm",
+      "centered residual error",
+      "target mean norm and total variance",
+      "centered prediction-target correlation"
+    ],
+    "coverage": [
+      "eligible calibration and score rows",
+      "unique provider go trials",
+      "private pertrial row counts with public count-distribution aggregates only",
+      "eight fixed equal-angle sector counts",
+      "phase and distance strata",
+      "weight effective sample size",
+      "right-censor and purchased-overlap exclusions",
+      "eight-octant entropy and calibration-test total variation",
+      "trial-fraction effectiveN=1/sum(trialfractions**2)",
+      "TX3/TX4.5 nonzero-entry fractions and active-channel counts",
+      "instantaneous versus reference40 angular disagreement distribution"
+    ],
+    "factorial": "Paired phase and weighting differences within each matching representation cell; representation differences within each matching phase/weighting cell. Publish all cells and interaction contrasts; no postfresh arm selection.",
+    "task_control_limit": "Constant captures target prevalence, trialshuffle checks neural/label alignment. Provider has no verified task-name/success/assist fields. Current target plus cursor would define primary target algebraically and is an oracle, not a useful neural-decoding baseline. Coverage and phase association do not identify causal task mechanisms.",
+    "trial_limit": "Go intervals are provider trials, not guaranteed independent attempts or movements. Boundary exclusion prevents direct same-trial training/test reuse, not behavioral dependence."
+  },
+  "evaluation": {
+    "metrics": "Float64 variance-weighted R2 using total SSE/SST, per-axisR2, summedMSE, angular error; null R2 if undefined or <50shared rows. All methods use identical primary score masks.",
+    "aggregation": "Equal scorable-session mean per participant, then equal participant mean. Keep every requested case and unavailable reason; costs include all selected cases.",
+    "uncertainty": {
+      "bootstrap_draws": 10000,
+      "seed": 20261023,
+      "T2": "Paired session resampling of three requested fresh sessions; descriptive, very smallN.",
+      "cohort": "Paired participant resampling after equal-session means; report all8 and seven nonT2 separately."
+    }
+  },
+  "fresh_gate": {
+    "name": "useful_T2_primary_recovery",
+    "requirements": [
+      "All3 requested T2sessions scorable on commonprimarymask",
+      "Locked primary meanT2R2>=0.05",
+      "At least2of3T2sessionR2>0",
+      "Meanpairedgainoverbaseline>0 and paired95%sessionbootstraplower>0",
+      "Meanpairedgainoverzero>0 and paired95%sessionbootstraplower>0"
+    ],
+    "limits": "Only the preselected primary can pass. No alternate endpoint, best fresh cell or discarded shortage can rescue failure. Three sessions are not a powered cross-person generalization claim. Cohort effects and harms must be disclosed even if T2gate passes."
+  },
+  "audit": {
+    "scope": [
+      "Pinned source/index/raw-member lineage and exact role inventory",
+      "Reference40/sample/trial geometry and primary target parity",
+      "Purchased labels only, shared trial-disjoint masks and no future-dependent normalization",
+      "Independent weighted normal equations and full causal prediction replay for every model",
+      "Permutation donor mapping and all control artifacts",
+      "Exact two-stage exposed selection and no fresh substitution",
+      "Independent allscores/contrasts/bootstrap/gate reconstruction"
+    ],
+    "required_tests": [
+      "Futurefeature/target perturbation leaves prefixfitsunchanged",
+      "Labelsoutsidepurchasedprefixcannotchangefits or weights",
+      "Trialcrossing150/152excludedfromallprimarymasks",
+      "Rightcensored finaltrialretained",
+      "Nearzero direction and float32/64zero-predictionneutrality",
+      "Multiscalebatch/stream parity and segmentreset consistency",
+      "Hash/mask/selection tampering rejected"
+    ],
+    "publication": "Allowlisted aggregate metadata, identities, hashes and all candidate results only. Raw neural/behavior arrays, labels, prediction traces and model coefficients stay local. Pertrial rows/identities remain local; publish only trial-count distributions and effective sample sizes."
+  },
+  "limits": [
+    "No fresh participant or closed-loop/clinical efficacy claim",
+    "Raw cursor and target are historical closed-loop task variables; alternative target success is not measured intention ground truth",
+    "Phase filtering changes training information and coverage; equaltrial weighting does not isolate directioncoverage",
+    "No guarantee that lack of success proves absent neural information or biological remapping",
+    "Acquisition time and upstream feature-extraction causality remain unverified"
+  ]
+}

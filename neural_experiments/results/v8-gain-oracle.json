@@ -1,0 +1,2218 @@
+{
+  "study": "V8",
+  "phase": "assessment",
+  "error_report_sha256": "c211071d8d016691b371551e3b8bc50bfe040aedbbf65d434b60b6ad076b1cee",
+  "code_sha256": "c319335244396e55273e44a741e72538b40d511e6d33f62ac0b0fd2753f1b6b2",
+  "evidence_role": "Post-development diagnostic; per-session held-out-target oracle, not deployable accuracy",
+  "scope": "Upper bound only for scalar multiplication of each existing output in [0,1]; not a neural-information bound",
+  "rows": [
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.7974878196375915,
+      "oracle_summed_mse": 0.8783125119017706,
+      "oracle_r2": 0.004853296587543743
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.800296046875,
+      "oracle_summed_mse": 0.8574660409830913,
+      "oracle_r2": 0.02847279025453986
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.18862677752644594,
+      "oracle_summed_mse": 0.9928324736431704,
+      "oracle_r2": -0.12490024882775863
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.18862677752644602,
+      "oracle_summed_mse": 0.9928324736431704,
+      "oracle_r2": -0.12490024882775863
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.704397113577132,
+      "oracle_summed_mse": 0.8823012215544297,
+      "oracle_r2": 0.00033400395772742453
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.7520382703666454,
+      "oracle_summed_mse": 0.8588434531753666,
+      "oracle_r2": 0.026912153028258223
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.26361388973769323,
+      "oracle_summed_mse": 0.9931400054518983,
+      "oracle_r2": -0.12524868888924345
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.26361388973769145,
+      "oracle_summed_mse": 0.9931400054518985,
+      "oracle_r2": -0.12524868888924368
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999997272749,
+      "oracle_r2": -0.1330212078913784
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "constant",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8848727757701648,
+      "oracle_r2": -0.0025796215067375172
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.49543513980368464,
+      "oracle_summed_mse": 0.9146763144469261,
+      "oracle_r2": -0.03634766290692837
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_333_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.203590787656552,
+      "oracle_summed_mse": 0.9917368894344355,
+      "oracle_r2": -0.1236589286838925
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.47081917949637864,
+      "oracle_summed_mse": 0.972144448080124,
+      "oracle_r2": -0.05998303227493551
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.4123055366878926,
+      "oracle_summed_mse": 0.9833902953407228,
+      "oracle_r2": -0.07224500353170882
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.24984476403032563,
+      "oracle_summed_mse": 0.9907342376660027,
+      "oracle_r2": -0.08025251133589961
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.2498447640303257,
+      "oracle_summed_mse": 0.9907342376660027,
+      "oracle_r2": -0.08025251133589961
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.304415256440441,
+      "oracle_summed_mse": 0.9845547545434895,
+      "oracle_r2": -0.07351467801181988
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.2861452070240733,
+      "oracle_summed_mse": 0.9874836836541804,
+      "oracle_r2": -0.0767082519361475
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.34368162621720627,
+      "oracle_summed_mse": 0.9883162856288835,
+      "oracle_r2": -0.07761608406702769
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.343681626217206,
+      "oracle_summed_mse": 0.9883162856288836,
+      "oracle_r2": -0.07761608406702791
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.999999999660665,
+      "oracle_r2": -0.090355485759954
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "constant",
+      "oracle_gain": 0.5720207264487116,
+      "oracle_summed_mse": 0.9719433953509515,
+      "oracle_r2": -0.05976381332868086
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.999999999660665,
+      "oracle_r2": -0.090355485759954
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_347_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.15429342107750338,
+      "oracle_summed_mse": 0.9968738122408555,
+      "oracle_r2": -0.08694683015609428
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.7560213610835989,
+      "oracle_summed_mse": 0.8816948583468154,
+      "oracle_r2": 0.09128931779138261
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.7394010744116971,
+      "oracle_summed_mse": 0.8848629079830854,
+      "oracle_r2": 0.08802419662276928
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.0106813809114013,
+      "oracle_summed_mse": 0.999981839166201,
+      "oracle_r2": -0.03062206914618404
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.0106813809114013,
+      "oracle_summed_mse": 0.999981839166201,
+      "oracle_r2": -0.03062206914618404
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.6535652642079555,
+      "oracle_summed_mse": 0.889730924662334,
+      "oracle_r2": 0.0830070200840547
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.6511645872146001,
+      "oracle_summed_mse": 0.891086748373231,
+      "oracle_r2": 0.08160965286837885
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999071955,
+      "oracle_r2": -0.030640786346564974
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999071955,
+      "oracle_r2": -0.030640786346564974
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999071955,
+      "oracle_r2": -0.030640786346564974
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "constant",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9732407636522143,
+      "oracle_r2": -0.0030616260481381996
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999071955,
+      "oracle_r2": -0.030640786346564974
+    },
+    {
+      "participant": "T2",
+      "session_id": "T2_day_361_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999071955,
+      "oracle_r2": -0.030640786346564974
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4309363178531114,
+      "oracle_r2": 0.5616758394459391
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.42954717282882515,
+      "oracle_r2": 0.5630887995549676
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.48108511184383895,
+      "oracle_r2": 0.5106673096049319
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4810851118438392,
+      "oracle_r2": 0.5106673096049317
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.9925321030826845,
+      "oracle_summed_mse": 0.5343203417107736,
+      "oracle_r2": 0.45651943095878744
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.9992403160723532,
+      "oracle_summed_mse": 0.5330035072378125,
+      "oracle_r2": 0.45785884084613426
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.528532188803988,
+      "oracle_r2": 0.46240681421918406
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5285321888039879,
+      "oracle_r2": 0.46240681421918417
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999998044075,
+      "oracle_r2": -0.01714369921760639
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "constant",
+      "oracle_gain": 0.7883168879404435,
+      "oracle_summed_mse": 0.9835540011715438,
+      "oracle_r2": -0.00041575532757587297
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999998044075,
+      "oracle_r2": -0.01714369921760639
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_182_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5133631778971341,
+      "oracle_r2": 0.47783587808947137
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.3995064244699713,
+      "oracle_r2": 0.5618616972498527
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.3994224498800176,
+      "oracle_r2": 0.561953792100055
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4949306630098196,
+      "oracle_r2": 0.4572100287052411
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4949306630098196,
+      "oracle_r2": 0.4572100287052411
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4737112285252594,
+      "oracle_r2": 0.48048136163240895
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.47452240634746334,
+      "oracle_r2": 0.47959174371269586
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5837233254192743,
+      "oracle_r2": 0.3598312031798222
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5837233254192742,
+      "oracle_r2": 0.3598312031798223
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000000502753,
+      "oracle_r2": -0.09669901642622358
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "constant",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9253556685156629,
+      "oracle_r2": -0.014836651454536831
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000000502753,
+      "oracle_r2": -0.09669901642622358
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1862_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5096455688540932,
+      "oracle_r2": 0.4410722059398331
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5033404863447349,
+      "oracle_r2": 0.4491142052845949
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5093220683953007,
+      "oracle_r2": 0.4425676057739716
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5368893963644947,
+      "oracle_r2": 0.41239628081902135
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5361255339515196,
+      "oracle_r2": 0.4132322973204574
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5868646203717699,
+      "oracle_r2": 0.35770042038217076
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5910984134299989,
+      "oracle_r2": 0.35306670519966965
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6246781198777318,
+      "oracle_r2": 0.3163150752898519
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6237636166397759,
+      "oracle_r2": 0.3173159620785736
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999015324,
+      "oracle_r2": -0.09445953505886329
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "constant",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.9552590219152444,
+      "oracle_r2": -0.04549234508909006
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999015324,
+      "oracle_r2": -0.09445953505886329
+    },
+    {
+      "participant": "T5",
+      "session_id": "T5_day_1895_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6653546507835935,
+      "oracle_r2": 0.27179625818243147
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.9870774359060779,
+      "oracle_summed_mse": 0.7517189136428305,
+      "oracle_r2": 0.24133890968479788
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.9205221246960774,
+      "oracle_summed_mse": 0.7710342724286098,
+      "oracle_r2": 0.22184517221152322
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.8850296247343649,
+      "oracle_summed_mse": 0.7763239175452477,
+      "oracle_r2": 0.21650667685277036
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.8818702363321682,
+      "oracle_summed_mse": 0.7764581981732246,
+      "oracle_r2": 0.21637115613381497
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.7342516122700552,
+      "oracle_summed_mse": 0.8568538705268931,
+      "oracle_r2": 0.1352330241306099
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.6617919293293043,
+      "oracle_summed_mse": 0.8714284068292896,
+      "oracle_r2": 0.1205238909674815
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.6359707395128089,
+      "oracle_summed_mse": 0.8810897324483999,
+      "oracle_r2": 0.11077334233146963
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.6300339498181793,
+      "oracle_summed_mse": 0.8819444690616924,
+      "oracle_r2": 0.10991071216585302
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999998675771,
+      "oracle_r2": -0.009235069712780986
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "constant",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999998675771,
+      "oracle_r2": -0.009235069712780986
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999998675771,
+      "oracle_r2": -0.009235069712780986
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1167_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.8745660903380053,
+      "oracle_summed_mse": 0.7942386230249439,
+      "oracle_r2": 0.198426527816691
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7257560983320474,
+      "oracle_r2": 0.27299230428215293
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.720782885057066,
+      "oracle_r2": 0.27797409407581364
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.707139347952391,
+      "oracle_r2": 0.2916411600428882
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7017686270244101,
+      "oracle_r2": 0.29702114300847204
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.6661782735702493,
+      "oracle_summed_mse": 0.8556693870682159,
+      "oracle_r2": 0.14285497453146656
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.673329004329813,
+      "oracle_summed_mse": 0.8501962024007139,
+      "oracle_r2": 0.14833759793966617
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.718786841893853,
+      "oracle_summed_mse": 0.8064799587915934,
+      "oracle_r2": 0.19212923207784172
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.7172100728438172,
+      "oracle_summed_mse": 0.8008955480763847,
+      "oracle_r2": 0.19772327334781725
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.000000000632244,
+      "oracle_r2": -0.001724543339453044
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "constant",
+      "oracle_gain": 0.37089574722010404,
+      "oracle_summed_mse": 0.9982826012015518,
+      "oracle_r2": -4.182180099121524e-06
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.000000000632244,
+      "oracle_r2": -0.001724543339453044
+    },
+    {
+      "participant": "T6",
+      "session_id": "T6_day_1174_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6489099391174582,
+      "oracle_r2": 0.34997098798010884
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.9095534018968047,
+      "oracle_summed_mse": 0.7345593919912127,
+      "oracle_r2": 0.25350315840328164
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.9160236033246987,
+      "oracle_summed_mse": 0.733052946948999,
+      "oracle_r2": 0.25503408494007684
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.6475435974096391,
+      "oracle_summed_mse": 0.8609363182714704,
+      "oracle_r2": 0.12507245920116417
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.6475435974096391,
+      "oracle_summed_mse": 0.8609363182714704,
+      "oracle_r2": 0.12507245920116417
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.8719201927221071,
+      "oracle_summed_mse": 0.7559291534096335,
+      "oracle_r2": 0.23178611335770227
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.8675032987679014,
+      "oracle_summed_mse": 0.7551696512301159,
+      "oracle_r2": 0.23255795833630744
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.6286147065663679,
+      "oracle_summed_mse": 0.880570534475716,
+      "oracle_r2": 0.10511916401019916
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.6286147065663679,
+      "oracle_summed_mse": 0.880570534475716,
+      "oracle_r2": 0.10511916401019916
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000001928084,
+      "oracle_r2": -0.016251170265588755
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "constant",
+      "oracle_gain": 0.6206300620515527,
+      "oracle_summed_mse": 0.9927098928306712,
+      "oracle_r2": -0.008842590128883554
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000001928084,
+      "oracle_r2": -0.016251170265588755
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_401_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.6625312596934364,
+      "oracle_summed_mse": 0.8562710126327682,
+      "oracle_r2": 0.12981358151522782
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.646899384015411,
+      "oracle_r2": 0.2818961966504513
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.9548641831562743,
+      "oracle_summed_mse": 0.6709808989547001,
+      "oracle_r2": 0.2551640217626321
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.9357921210473712,
+      "oracle_summed_mse": 0.7389043272759103,
+      "oracle_r2": 0.17976424025219018
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.9790602568434854,
+      "oracle_summed_mse": 0.7180341606773851,
+      "oracle_r2": 0.2029315926740045
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.9606709940008296,
+      "oracle_summed_mse": 0.684870940548077,
+      "oracle_r2": 0.23974509890793094
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.9265592130879912,
+      "oracle_summed_mse": 0.6884187721074253,
+      "oracle_r2": 0.23580675640929138
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.8609520637187482,
+      "oracle_summed_mse": 0.8091257923220522,
+      "oracle_r2": 0.1018134763893348
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.8974682260034111,
+      "oracle_summed_mse": 0.7881567714728954,
+      "oracle_r2": 0.12509056398034213
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999997330362,
+      "oracle_r2": -0.11007031526363864
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "constant",
+      "oracle_gain": 0.8628806141109925,
+      "oracle_summed_mse": 0.9152335414149749,
+      "oracle_r2": -0.015973586129605977
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999997330362,
+      "oracle_r2": -0.11007031526363864
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_406_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.931946660003878,
+      "oracle_summed_mse": 0.743027718543444,
+      "oracle_r2": 0.17518698600666172
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5514116148899542,
+      "oracle_r2": 0.4265022913205444
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5496096235786426,
+      "oracle_r2": 0.42837645911134026
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6091774860659159,
+      "oracle_r2": 0.3664226813437067
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6092824280866342,
+      "oracle_r2": 0.3663135360032732
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5584290848138025,
+      "oracle_r2": 0.4192037455275669
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5587773771324827,
+      "oracle_r2": 0.4188415028012261
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.632615557980388,
+      "oracle_r2": 0.34204582714650844
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6329465095825731,
+      "oracle_r2": 0.34170161969709734
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999996959507,
+      "oracle_r2": -0.04005373303487181
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "constant",
+      "oracle_gain": 0.9613136199617858,
+      "oracle_summed_mse": 0.9824715804826357,
+      "oracle_r2": -0.021823235192320656
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999996959507,
+      "oracle_r2": -0.04005373303487181
+    },
+    {
+      "participant": "T7",
+      "session_id": "T7_day_426_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.611889375592167,
+      "oracle_r2": 0.36360217051749344
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.9837607645986922,
+      "oracle_summed_mse": 0.73289463082174,
+      "oracle_r2": 0.24676229903177171
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7136958269513599,
+      "oracle_r2": 0.266494007084334
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.6254348430456111,
+      "oracle_summed_mse": 0.9379048023185812,
+      "oracle_r2": 0.03606162834976423
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.6254348430456128,
+      "oracle_summed_mse": 0.9379048023185808,
+      "oracle_r2": 0.036061628349764674
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.7819254718314654,
+      "oracle_summed_mse": 0.8057401914791825,
+      "oracle_r2": 0.17189475282825817
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.8502715055153148,
+      "oracle_summed_mse": 0.7830727186801323,
+      "oracle_r2": 0.1951914101919131
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.8030467855499109,
+      "oracle_summed_mse": 0.9181421529985886,
+      "oracle_r2": 0.056372832597695544
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.8030467855499093,
+      "oracle_summed_mse": 0.9181421529985888,
+      "oracle_r2": 0.05637283259769532
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000001531026,
+      "oracle_r2": -0.027757155539537504
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "constant",
+      "oracle_gain": 0.7561366449780971,
+      "oracle_summed_mse": 0.9901847032510203,
+      "oracle_r2": -0.017669413916221677
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000001531026,
+      "oracle_r2": -0.027757155539537504
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_46_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.6140092871403077,
+      "oracle_summed_mse": 0.9387290260198504,
+      "oracle_r2": 0.03521452654314927
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6318651922639084,
+      "oracle_r2": 0.36143631089747597
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.9363982248529179,
+      "oracle_summed_mse": 0.667070280616375,
+      "oracle_r2": 0.3258580081696656
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.9989939943762222,
+      "oracle_summed_mse": 0.7802156804806102,
+      "oracle_r2": 0.2115131371008543
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.9874240945045201,
+      "oracle_summed_mse": 0.7802367818150295,
+      "oracle_r2": 0.2114918120680518
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6924054940617642,
+      "oracle_r2": 0.30025421236011496
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.9820614503984291,
+      "oracle_summed_mse": 0.7068058156378656,
+      "oracle_r2": 0.28570123083418
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8503195187499872,
+      "oracle_r2": 0.14066611762008663
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8489048398954337,
+      "oracle_r2": 0.14209579369548875
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999006035,
+      "oracle_r2": -0.010601148563263552
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "constant",
+      "oracle_gain": 0.3828773391932964,
+      "oracle_summed_mse": 0.9960707950133385,
+      "oracle_r2": -0.006630289590858318
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999999006035,
+      "oracle_r2": -0.010601148563263552
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_466_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.9750162404789339,
+      "oracle_summed_mse": 0.789372007180873,
+      "oracle_r2": 0.20225974282002857
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6871428757571372,
+      "oracle_r2": 0.3115954395688888
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6836034321390354,
+      "oracle_r2": 0.3151413820708835
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.9081067839331908,
+      "oracle_summed_mse": 0.7954316449455218,
+      "oracle_r2": 0.20310783796112142
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.9081067839331906,
+      "oracle_summed_mse": 0.7954316449455219,
+      "oracle_r2": 0.2031078379611213
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7425886494362104,
+      "oracle_r2": 0.25604786015864156
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.7452771458708067,
+      "oracle_r2": 0.2533544272910744
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.7887079882198192,
+      "oracle_summed_mse": 0.895295017328388,
+      "oracle_r2": 0.10306110329528306
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.7887079882198189,
+      "oracle_summed_mse": 0.8952950173283882,
+      "oracle_r2": 0.10306110329528284
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.99999999965655,
+      "oracle_r2": -0.0018361311483454656
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "constant",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.99999999965655,
+      "oracle_r2": -0.0018361311483454656
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.99999999965655,
+      "oracle_r2": -0.0018361311483454656
+    },
+    {
+      "participant": "T8",
+      "session_id": "T8_day_469_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.8675702705143044,
+      "oracle_summed_mse": 0.8038868410172775,
+      "oracle_r2": 0.19463711703758368
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.8406038073045614,
+      "oracle_summed_mse": 0.6253611736468098,
+      "oracle_r2": 0.19593434235904172
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.8279675393390425,
+      "oracle_summed_mse": 0.6329219773287568,
+      "oracle_r2": 0.1862129480016549
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.4695322360627701,
+      "oracle_summed_mse": 0.9182976921393874,
+      "oracle_r2": -0.18071231290935064
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.4695322360627701,
+      "oracle_summed_mse": 0.9182976921393874,
+      "oracle_r2": -0.18071231290935064
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.759851879924647,
+      "oracle_summed_mse": 0.6591326920843726,
+      "oracle_r2": 0.15251220595795933
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.7464847639204397,
+      "oracle_summed_mse": 0.6669572344078625,
+      "oracle_r2": 0.14245170646710092
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.4393766196762163,
+      "oracle_summed_mse": 0.9282265058000602,
+      "oracle_r2": -0.1934784046049829
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.4393766196762163,
+      "oracle_summed_mse": 0.9282265058000602,
+      "oracle_r2": -0.1934784046049829
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000000752924,
+      "oracle_r2": -0.2857620389391442
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "constant",
+      "oracle_gain": 0.7616139521657382,
+      "oracle_summed_mse": 0.779000680641158,
+      "oracle_r2": -0.00160950340074284
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.6572935659724211,
+      "oracle_summed_mse": 0.8264737717410342,
+      "oracle_r2": -0.06264860180346754
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_279_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.419269366774011,
+      "oracle_summed_mse": 0.9367539364529469,
+      "oracle_r2": -0.2044426512273252
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6373111777779393,
+      "oracle_r2": 0.2403377105882385
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6598233572523162,
+      "oracle_r2": 0.21350363895186686
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.1710576890049111,
+      "oracle_summed_mse": 0.9904434607786536,
+      "oracle_r2": -0.18058897000890606
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.1710576890049098,
+      "oracle_summed_mse": 0.9904434607786536,
+      "oracle_r2": -0.18058897000890606
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.7779020033403943,
+      "oracle_summed_mse": 0.6952153775243592,
+      "oracle_r2": 0.17131705242358908
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.8187325687903991,
+      "oracle_summed_mse": 0.6971159929192774,
+      "oracle_r2": 0.16905155655196658
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.2205287008379977,
+      "oracle_summed_mse": 0.9872630710762174,
+      "oracle_r2": -0.17679800853385697
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.22052870083799844,
+      "oracle_summed_mse": 0.9872630710762172,
+      "oracle_r2": -0.17679800853385697
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999997810443,
+      "oracle_r2": -0.19198017504428733
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "constant",
+      "oracle_gain": 0.8671001523672318,
+      "oracle_summed_mse": 0.8391307555602617,
+      "oracle_r2": -0.00022722511677142343
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.4509191383853783,
+      "oracle_summed_mse": 0.9369291170312358,
+      "oracle_r2": -0.11680093316751217
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_282_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.10701361879388202,
+      "oracle_summed_mse": 0.9959608473975735,
+      "oracle_r2": -0.1871655854781531
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.9886632738310533,
+      "oracle_summed_mse": 0.7352278815865629,
+      "oracle_r2": 0.2576036258495371
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.9805022994044225,
+      "oracle_summed_mse": 0.7408076326925671,
+      "oracle_r2": 0.25196947201301423
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.903446344307163,
+      "oracle_summed_mse": 0.7773545652102003,
+      "oracle_r2": 0.21506620587345604
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.903446344307163,
+      "oracle_summed_mse": 0.7773545652102003,
+      "oracle_r2": 0.21506620587345604
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.9449284238008068,
+      "oracle_summed_mse": 0.773841436669257,
+      "oracle_r2": 0.21861358751667215
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.8988820339566347,
+      "oracle_summed_mse": 0.784330131934938,
+      "oracle_r2": 0.20802262717658349
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.9060221754652158,
+      "oracle_summed_mse": 0.8100415152560942,
+      "oracle_r2": 0.18206055714350922
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.9060221754652158,
+      "oracle_summed_mse": 0.8100415152560942,
+      "oracle_r2": 0.18206055714350922
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000003946428,
+      "oracle_r2": -0.009750028578095149
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "constant",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000003946428,
+      "oracle_r2": -0.009750028578095149
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000003946428,
+      "oracle_r2": -0.009750028578095149
+    },
+    {
+      "participant": "T9",
+      "session_id": "T9_day_287_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.8923425431215228,
+      "oracle_summed_mse": 0.7842287667418997,
+      "oracle_r2": 0.20812498068311025
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.9386284210401152,
+      "oracle_summed_mse": 0.7053490395632632,
+      "oracle_r2": 0.2902433556180919
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6704326952570044,
+      "oracle_r2": 0.32537788615383645
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.8651533378054419,
+      "oracle_summed_mse": 0.7748425835026047,
+      "oracle_r2": 0.22031555847650397
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.8651533378054422,
+      "oracle_summed_mse": 0.7748425835026046,
+      "oracle_r2": 0.22031555847650408
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.8588020483093841,
+      "oracle_summed_mse": 0.7910771076804914,
+      "oracle_r2": 0.20397958754958767
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.9269536034541914,
+      "oracle_summed_mse": 0.7768482220549995,
+      "oracle_r2": 0.2182973870337923
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.6280858728576596,
+      "oracle_summed_mse": 0.8721373239630623,
+      "oracle_r2": 0.12241283991892182
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.6280858728576599,
+      "oracle_summed_mse": 0.872137323963062,
+      "oracle_r2": 0.12241283991892216
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000001244653,
+      "oracle_r2": -0.006248828111702132
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "constant",
+      "oracle_gain": 0.3516850506676444,
+      "oracle_summed_mse": 0.9948972555981491,
+      "oracle_r2": -0.0011141974125821186
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.11913875517449185,
+      "oracle_summed_mse": 0.998430089889394,
+      "oracle_r2": -0.004669107777617532
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_194_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.9201651918288769,
+      "oracle_summed_mse": 0.7459371409719497,
+      "oracle_r2": 0.2494016261454055
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4978167317652157,
+      "oracle_r2": 0.4885167549007313
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5046456070661716,
+      "oracle_r2": 0.4815004071638327
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6626667362523766,
+      "oracle_r2": 0.319141139600021
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6626667362523766,
+      "oracle_r2": 0.319141139600021
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5395436275791303,
+      "oracle_r2": 0.4456443347569947
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5411984705501485,
+      "oracle_r2": 0.4439440615461191
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6990602256132987,
+      "oracle_r2": 0.28174854338734623
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6990602256132987,
+      "oracle_r2": 0.28174854338734623
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.000000000021344,
+      "oracle_r2": -0.027452900782402034
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "constant",
+      "oracle_gain": 0.9955665899754372,
+      "oracle_summed_mse": 0.9814705209741786,
+      "oracle_r2": -0.00841473378581159
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.000000000021344,
+      "oracle_r2": -0.027452900782402034
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_195_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6742951842529916,
+      "oracle_r2": 0.30719345697044687
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "baseline",
+      "oracle_gain": 0.9734123919272348,
+      "oracle_summed_mse": 0.48123349235871093,
+      "oracle_r2": 0.5131619727332072
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 0.9597692088469634,
+      "oracle_summed_mse": 0.4856782615458357,
+      "oracle_r2": 0.5086654389360477
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.46907268394784096,
+      "oracle_r2": 0.5254644081844462
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.469590762885326,
+      "oracle_r2": 0.5249402956031347
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.9459965607608909,
+      "oracle_summed_mse": 0.5079325912971542,
+      "oracle_r2": 0.4861519311143586
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.9311795771790583,
+      "oracle_summed_mse": 0.5133822018730556,
+      "oracle_r2": 0.48063885335840206
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.9906142126477552,
+      "oracle_summed_mse": 0.5139958958687249,
+      "oracle_r2": 0.4800180121681251
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.9840314516418122,
+      "oracle_summed_mse": 0.5159634039713736,
+      "oracle_r2": 0.47802759009955686
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999991714198,
+      "oracle_r2": -0.011646185466492653
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "constant",
+      "oracle_gain": 0.6498339419141936,
+      "oracle_summed_mse": 0.9923048109153623,
+      "oracle_r2": -0.0038613776143552325
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999991714198,
+      "oracle_r2": -0.011646185466492653
+    },
+    {
+      "participant": "T10",
+      "session_id": "T10_day_203_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.46997027250162304,
+      "oracle_r2": 0.5245563661471417
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5509588993980895,
+      "oracle_r2": 0.4468796162646883
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.563064532084935,
+      "oracle_r2": 0.4347264915862017
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6124000562014076,
+      "oracle_r2": 0.3851974177099142
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6124000562014074,
+      "oracle_r2": 0.38519741770991445
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5355715791059182,
+      "oracle_r2": 0.4623273030412556
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5400086427223612,
+      "oracle_r2": 0.4578728322397746
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5743011402556583,
+      "oracle_r2": 0.4234458007214861
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5743011402556583,
+      "oracle_r2": 0.4234458007214861
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000001386642,
+      "oracle_r2": -0.003923131863885931
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "constant",
+      "oracle_gain": 0.14017957481989987,
+      "oracle_summed_mse": 0.9989928066110259,
+      "oracle_r2": -0.002911986983366477
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.0000000001386642,
+      "oracle_r2": -0.003923131863885931
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1303_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.6188698867280402,
+      "oracle_r2": 0.37870220518588926
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8347130758905745,
+      "oracle_r2": 0.1617135934113172
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.8314807783324756,
+      "oracle_r2": 0.16495972814104232
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 0.9517608291957481,
+      "oracle_summed_mse": 0.816766686449456,
+      "oracle_r2": 0.17973680971206252
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 0.9517608291957481,
+      "oracle_summed_mse": 0.816766686449456,
+      "oracle_r2": 0.17973680971206252
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 0.9578276640798161,
+      "oracle_summed_mse": 0.8480661662898729,
+      "oracle_r2": 0.14830333964748488
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 0.9728924029549806,
+      "oracle_summed_mse": 0.8453613744249797,
+      "oracle_r2": 0.15101971048014784
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 0.8399209630813251,
+      "oracle_summed_mse": 0.8657905399884835,
+      "oracle_r2": 0.13050308951843193
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 0.8399209630813251,
+      "oracle_summed_mse": 0.8657905399884835,
+      "oracle_r2": 0.13050308951843193
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.000000000008911,
+      "oracle_r2": -0.004280908983923526
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "constant",
+      "oracle_gain": 0.05459527833498268,
+      "oracle_summed_mse": 0.9999778775297978,
+      "oracle_r2": -0.004258691800490766
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 1.000000000008911,
+      "oracle_r2": -0.004280908983923526
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1307_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 0.9511674349531346,
+      "oracle_summed_mse": 0.8171041340622904,
+      "oracle_r2": 0.17939791751671375
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "baseline",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4924379911850695,
+      "oracle_r2": 0.5057251360487793
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "baseline_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.483128823047144,
+      "oracle_r2": 0.5150690288784106
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "baseline_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5683281421670476,
+      "oracle_r2": 0.4295519026197657
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "baseline_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5683281421670476,
+      "oracle_r2": 0.4295519026197657
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "selected_all_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4634458082164983,
+      "oracle_r2": 0.5348254645144072
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "selected_all_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.4566437068933191,
+      "oracle_r2": 0.541652938767573
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "selected_clean_uniform",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5184768641016374,
+      "oracle_r2": 0.4795891339557915
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "selected_clean_equal_trial",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5184768641016374,
+      "oracle_r2": 0.4795891339557915
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "zero",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999998470012,
+      "oracle_r2": -0.0037301603925952165
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "constant",
+      "oracle_gain": 0.4786205621711039,
+      "oracle_summed_mse": 0.9976796983202776,
+      "oracle_r2": -0.0014012037686612633
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "trialshuffle",
+      "oracle_gain": 0.0,
+      "oracle_summed_mse": 0.9999999998470012,
+      "oracle_r2": -0.0037301603925952165
+    },
+    {
+      "participant": "T11",
+      "session_id": "T11_day_1324_decoding",
+      "method": "primary_onset",
+      "oracle_gain": 1.0,
+      "oracle_summed_mse": 0.5673989269622209,
+      "oracle_r2": 0.43048458394648836
+    }
+  ]
+}
