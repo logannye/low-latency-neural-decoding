@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "study": "V9",
+  "objective": "Test completed direction-balanced calibration and provider-informed trial targets for useful T2 recovery",
+  "development": {
+    "index_sha256": "6a05df90628c606c381cf5c733632aca466b09113ea4f3aebfef7a50c2c4d2cf",
+    "exposed_sessions": 200,
+    "study_participants": [
+      "T2",
+      "T7",
+      "T9",
+      "T10"
+    ],
+    "study_sessions_per_participant": 24,
+    "model_sessions": 96,
+    "maximum_bins": 30000,
+    "source_selection_participant": "T2",
+    "source_selection_regular_ranks": [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "fresh_v8_now_development": true,
+    "unexposed_tails_used": false
+  },
+  "fresh": {
+    "acquisition_plan_sha256": "56e697e30821105ef5689a29b92e63c4f214f113583028798f2d366501ec9271",
+    "participants": [
+      "T2",
+      "T7",
+      "T9",
+      "T10"
+    ],
+    "regular_archive_ranks": [
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "requested_sessions": 24,
+    "T2_requested_sessions": 6,
+    "maximum_bins": 30000,
+    "replacement_permitted": false,
+    "other_fresh_sessions_in_training": false
+  },
+  "clock": {
+    "bin_seconds": 0.02,
+    "normalization_seconds": [
+      0,
+      30
+    ],
+    "startup_labels_seconds": [
+      30,
+      150
+    ],
+    "maximum_labels_seconds": [
+      30,
+      390
+    ],
+    "common_primary_seconds": [
+      392,
+      600
+    ],
+    "recorded_time_not_wall_time": true,
+    "block_burn_bins": 62,
+    "purge": "Every go interval intersecting purchased maximum interval [30,390) is removed from all primary and secondary scoring, regardless of arm actual stop"
+  },
+  "quota": {
+    "policy": "Recruit eligible completed trials in observed chronological completion order; stop at first observed satisfaction or deadline390",
+    "trials_minimum": 24,
+    "sectors": 4,
+    "sector_centers_degrees": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "sector_assignment": "floor((atan2(reference40_y,reference40_x)+pi/4)/(pi/2)) modulo4",
+    "minimum_trials_per_sector": 4,
+    "completion_recognition": "(trial_stop_bin+1)*.02, requiring observed recognition bin and right_censored=false",
+    "timeout": "Fit all eligible trials observed by390; preserve timeout and deficits in primary evaluation",
+    "short_recording": "Retain unavailable outcome and observed cost; no replacement",
+    "never_peek_at_future_directions": true
+  },
+  "task_target_contract": {
+    "provider_commit": "93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834",
+    "provider_target": "unit(mean(target_position-cursor_position)) over selected RT+300ms window",
+    "provider40ms_role": "far-distance eligibility, not the trial target",
+    "v9_sampling": "Existing20ms paired data; geometric positions are second raw10ms sample of each pair, not exact raw10ms reproduction",
+    "window_seconds": 0.3,
+    "window_bins": 15,
+    "window_anchor": "First complete pair with round(second-sample trial age*100)-1 >= round(RT*100); physical startshift0or.01seconds",
+    "common_geometry_span": "From first RT.2 window start through last RT.8 window end;45contiguous paired bins",
+    "eligibility": [
+      "observed go onset at or after30s for training",
+      "reference40 available and distance greater than provider participant threshold",
+      "all common-span bins have finite valid target, same go, same block and passed62bin burn",
+      "target stationarity max norm(target-target_at_common_start) <=.01*reference40_distance",
+      "directional coherence norm(mean(unit(displacements))) >=.95",
+      "nonzero finite mean displacement for both candidate windows",
+      "whole go completed and completion recognition within purchased deadline for training"
+    ],
+    "target_choices": {
+      "window_mean": "normalize arithmetic mean of15 second-10ms-sample displacement vectors before normalization",
+      "endpoint": "original instantaneous unit direction at last bin of same15binwindow"
+    },
+    "missing_metadata": [
+      "task name per session",
+      "assistance level",
+      "actual intended movement",
+      "trial success"
+    ],
+    "interpretation": "Provider-informed geometric endpoint, stricter within-go validity; no exact provider dSNR reproduction or verified intention claim"
+  },
+  "representation": {
+    "continuous_controls": "V8 TX4.5+SBP transform, causal EWMA200ms, ridge1, first30s normalization",
+    "trial_readouts": "TX4.5+SBP sqrt-count/log1p-power transform followed by causal trailing15bin mean, reset per block; first30s normalization, scale floors.1/.01, zclip\u00b18, unitdisk output; first1..14 bins of each block average available prefix, then15bins",
+    "inference_inputs": "neural features and sequence boundaries only; no behavioral context, target, trial phase, or labels",
+    "trial_training": "One representation vector at window end per selected trial; one matched target vector",
+    "weighting": {
+      "uniform": "Equal weight per selected trial",
+      "sector": "Equal total weight for each occupied cardinal-centered sector, then equal weight per trial within sector; absent sectors remain absent"
+    }
+  },
+  "source_grid": [
+    {
+      "rt_seconds": 0.2,
+      "ridge": 0.1
+    },
+    {
+      "rt_seconds": 0.2,
+      "ridge": 1.0
+    },
+    {
+      "rt_seconds": 0.8,
+      "ridge": 0.1
+    },
+    {
+      "rt_seconds": 0.8,
+      "ridge": 1.0
+    }
+  ],
+  "selection": {
+    "primary_method": "quota_sector_mean",
+    "vary": "Only RT and ridge for fixed trial-sector-window-mean policy",
+    "criterion": "Largest equal-session mean unchanged continuous primary R2 on exposed T2 ranks16..24 using identical common mask",
+    "tie_break": "Declared grid order, first exact maximum",
+    "all_unscorable_fallback": "First declared configuration, explicitly reported",
+    "fit_outcomes_retained": "Every grid and final model case, including unavailable cases; no repeated attempts discarded"
+  },
+  "methods": [
+    "baseline",
+    "duration",
+    "quota_continuous",
+    "trial_startup_sector_mean",
+    "trial_duration_sector_mean",
+    "quota_uniform_endpoint",
+    "quota_sector_endpoint",
+    "quota_uniform_mean",
+    "quota_sector_mean",
+    "zero",
+    "constant",
+    "trialshuffle"
+  ],
+  "controls": {
+    "baseline": "Original continuous decoder calibrated30:150",
+    "duration": "Same continuous decoder calibrated30:390",
+    "quota_continuous": "Same continuous decoder calibrated30:quota_stop",
+    "zero": "Zero vector, zero purchased label seconds; common evaluation purge unchanged",
+    "constant": "Uniform mean original instantaneous purchased labels30:390",
+    "trialshuffle": "One fixed cyclic rotation of primary selected trial target vectors; not a permutation null test"
+  },
+  "primary_endpoint": {
+    "target": "Unchanged original continuous instantaneous unit cursor-to-target direction",
+    "metric": "Variance-weighted two-outputR2 using float64 SSE/SST",
+    "minimum_bins": 50,
+    "mask": "validgo+blockburn+common392:600+uniontrialpurge; no geometry eligibility or quota attainment filtering"
+  },
+  "secondary_endpoint": {
+    "unit": "Completed eligible heldouttrial, one predictedvector at selectedRTwindowend",
+    "targets": [
+      "unitmeanwindowdisplacement",
+      "originalendpointdirection"
+    ],
+    "common_eligibility_across_methods_and_RT_choices": true,
+    "minimum_trials": 2,
+    "cannot_rescue_primary_gate": true,
+    "require_completed_go_and_full_common_span_inside_primary_mask": true
+  },
+  "gates": {
+    "useful_T2_recovery": {
+      "all_requested_T2_sessions_scorable": 6,
+      "mean_R2_at_least": 0.05,
+      "positive_sessions_at_least": 4,
+      "paired_gain_over": [
+        "baseline",
+        "zero"
+      ],
+      "each_gain_mean_and_session_bootstrap_lower_strictly_positive": true
+    },
+    "incremental_benefit_over_more_labels": {
+      "requires_useful_T2_recovery": true,
+      "paired_gain_over": "duration",
+      "gain_mean_and_session_bootstrap_lower_strictly_positive": true
+    },
+    "quota_attainment": "Report separately for all selected cases; never condition scoring on success"
+  },
+  "uncertainty": {
+    "aggregation": "Equal sessions within each participant, then equal participants",
+    "bootstrap_replicates": 10000,
+    "seed": 20261023,
+    "interval": [
+      0.025,
+      0.975
+    ],
+    "T2_units": "Six sessions from one known person, descriptive and not independent participant replication",
+    "multiplicity": "One fixed primary recovery test; target, weighting, duration and participant contrasts descriptive without multiplicity-adjusted significance claims"
+  },
+  "mechanistic_contrasts": {
+    "duration_minus_baseline": "additional recorded calibration for unchanged continuous decoder",
+    "primary_minus_quota_continuous": "trial-target representation bundle at same stop",
+    "quota_sector_mean_minus_quota_uniform_mean": "sector weighting with exact same trials,target and representation",
+    "quota_sector_mean_minus_quota_sector_endpoint": "window-mean versus endpoint target with same trials,weights and representation",
+    "trial_duration_sector_mean_minus_primary": "fixed full budget versus quota stop under same selected recipe"
+  },
+  "access_order": [
+    "commit fixed acquisition plan before downloading raw archives",
+    "complete synthetic tests and commit study plan+scientific producers before source fits",
+    "independently audit source model reconstruction and source choice",
+    "commit audited source selection and hashes before fresh signal conversion",
+    "run fresh assessment once, independently reconstruct it, then publish allowlisted aggregates"
+  ],
+  "publication": {
+    "private": [
+      "raw samples",
+      "behavioral sample traces",
+      "predictions",
+      "model coefficients",
+      "trial identities and per-trial selection maps",
+      "transport URLs"
+    ],
+    "public": [
+      "aggregate counts, cost, deficits, scores, uncertainty, failures",
+      "code, protocols, immutable hashes, audits, cohort dispositions",
+      "README and figures"
+    ],
+    "runtime": "Fresh accuracy is separate from any source engineering replay; no closed-loop or hard-realtime claim"
+  },
+  "fallback": {
+    "continuous_minimum_rows": 50,
+    "trial_minimum_vectors": 1,
+    "below_minimum": "Zero output, retain all scores and disclose count",
+    "one_trial": "Free-intercept ridge can only fit a constant; not evidence of direction coverage",
+    "incomplete_calibration": "No deployment before requested policy stop; short recording retains unavailable score"
+  }
+}

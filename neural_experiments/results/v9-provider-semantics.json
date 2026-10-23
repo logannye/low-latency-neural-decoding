@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "study": "V9 provider semantics and metadata-only feasibility",
+  "scope": "Previously exposed recording metadata and pinned public documentation/reference code. No new fresh samples or summary outcome values used.",
+  "provider": {
+    "doi": "10.5061/dryad.x0k6djj1h",
+    "version_id": 462702,
+    "license": "CC0-1.0",
+    "documentation_url": "https://datadryad.org/dataset/doi:10.5061/dryad.x0k6djj1h",
+    "readme_sha256": "87da1e5db466a37960255ee5224925ec0a6499a8e2209294f89827db016d3d6e"
+  },
+  "reference": {
+    "repository": "https://github.com/nptl-stanford/array-paper",
+    "commit": "93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834",
+    "tree_git_sha1": "93beb76b4329f0e3d5b3fd5ffba9be1c7cfa2834",
+    "files": [
+      {
+        "repository_path": "array_paper/metrics/decoding_snr.py",
+        "git_blob_sha1": "dd05251026e922379d1f195485a774a1ce41a7a0",
+        "sha256": "d64ad6f1355c36dd457323e15a98f8a2b6cd0697847034e2c8308bcffc2cdec3"
+      },
+      {
+        "repository_path": "array_paper/metadata.py",
+        "git_blob_sha1": "34166acf4d74450f22f5dd11b450a69af2f3ffbb",
+        "sha256": "53bf68033f4adc939dd6f27abc63aba71faefe9434418dc0de89eda170c269a7"
+      },
+      {
+        "repository_path": "array_paper/batch_summary/generate_decoding_summary.py",
+        "git_blob_sha1": "b97bd2af87b1a65dcb87a68fadda876acf0f07e6",
+        "sha256": "81cce529e43a8694a6e6ca7cbc4187277c44d73f1cbae9182cbaf2650f543c4d"
+      }
+    ]
+  },
+  "public_session_summary_metadata": {
+    "repository_path": "data/decoding_summary.csv",
+    "git_blob_sha1": "b11566aa0cfe590f81f203a0d378d332e7c05970",
+    "sha256": "2f1dbab5ec17b736322d38016127347410f1d942479c579d93c9bef90e696b62",
+    "fields_used": [
+      "session_id"
+    ],
+    "unique_sessions_by_requested_participant": {
+      "T2": 42,
+      "T7": 35,
+      "T9": 117,
+      "T10": 57
+    },
+    "outcome_fields_numerically_analyzed": false,
+    "csv_copied_to_public_artifacts": false,
+    "verification": "Downloaded pinned public file, verified Git blob against pinned tree, counted unique session_id values only; no decoding-result values extracted."
+  },
+  "semantic_findings": {
+    "position_coordinates": "column0 x and column1 y in task-specific coordinates; physical units and screen-axis orientation are not established",
+    "go_interval": "zero-based start inclusive, end exclusive; movement-attempt/go periods from target changes and/or task-state signals",
+    "provider_trial_target": "unit(mean(target_position - cursor_position)) over 300ms after reaction time",
+    "provider_feature_window": "mean neural features over the same RT+300ms window",
+    "provider_far_eligibility": "norm(target_position - cursor_position) at go onset+40ms",
+    "provider_reference40_is_not_trial_target": true,
+    "provider_window_go_end_enforced": false,
+    "v9_required_stricter_window_rule": "window must be inside observed go and, for calibration, paid label interval",
+    "provider_reaction_time_grid_seconds": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "provider_nested_cv": {
+      "outer_trial_folds": 10,
+      "inner_trial_folds": 5,
+      "shuffled_trials": true
+    },
+    "missing_exported_fields": [
+      "task_name",
+      "trial_success",
+      "assistance_level",
+      "intended_limb_velocity"
+    ],
+    "not_established": [
+      "task identity of a selected session",
+      "screen axis physical orientation",
+      "cursor trajectory as independent intention ground truth",
+      "sufficient duration or trial counts for as-yet unopened fresh sessions"
+    ]
+  },
+  "exposed_metadata_spot_check": {
+    "sessions": [
+      "T2_day_333_decoding",
+      "T2_day_347_decoding",
+      "T2_day_361_decoding"
+    ],
+    "method": "MATLAB variable inventory and struct field names only; no signal sample analysis or unexposed tail statistics",
+    "top_level_keys": [
+      "participant_id",
+      "post_implant_day",
+      "bin_size",
+      "electrodes",
+      "cursor_position",
+      "target_position",
+      "blocks",
+      "trials",
+      "neural"
+    ],
+    "trial_struct_keys": [
+      "block_id",
+      "trial_start_index",
+      "trial_end_index"
+    ],
+    "block_struct_keys": [
+      "block_id",
+      "sample_start_index",
+      "sample_end_index"
+    ],
+    "coordinate_columns": 2
+  },
+  "fresh_selection": {
+    "participants": [
+      "T2",
+      "T7",
+      "T9",
+      "T10"
+    ],
+    "regular_archive_ranks": [
+      25,
+      26,
+      27,
+      28,
+      29,
+      30
+    ],
+    "selection_uses_outcomes": false,
+    "archive_stream_establishes_actual_inventory": true
+  },
+  "evidence_limits": [
+    "Documentation and code define geometric targets, not independently measured intention.",
+    "Public total-session counts do not guarantee trial quotas within an unopened first600s prefix.",
+    "V9 paired20ms target windows differ from provider10ms sampling and must report their endpoint offset.",
+    "No prospective closed-loop efficacy or untouched-person transfer follows from this offline study."
+  ],
+  "sample_level_values_published": false
+}

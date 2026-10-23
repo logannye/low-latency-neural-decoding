@@ -443,3 +443,98 @@ def test_unselected_participant_rejected_before_payload_access(tmp_path):
         data.extract_next_sessions(
             Unreadable(), cache=tmp_path, participant="T5", prior_members=[{}] * 24, archive={}
         )
+
+
+@pytest.fixture
+def development_parent_pair(tmp_path, monkeypatch):
+    from neural_experiments.v9 import data as development
+
+    features, targets, metadata = data.convert_session(raw(), "T2", 100)
+    context = development.make_context(raw(), metadata)
+    monkeypatch.setattr(development, "ALL_PARTICIPANTS", ("T2",))
+    monkeypatch.setattr(development, "PARENT_COUNTS", {"development": 1, "fresh": 1})
+    monkeypatch.setattr(development, "EXPECTED_COUNTS", {"T2": 2})
+    monkeypatch.setattr(development, "EXPOSURE", {**development.EXPOSURE, "sessions": 2})
+    paths = []
+    for role, day in (("development", 100), ("fresh", 101)):
+        folder = tmp_path / role
+        folder.mkdir()
+        item = {
+            **metadata,
+            "role": role,
+            "participant_id": "T2",
+            "session_id": f"T2_day_{day}_decoding",
+            "post_implant_day": day,
+            "source": {"raw_path": "MUST_NOT_READ.mat"},
+            "raw_source_root": str(folder),
+        }
+        for kind, arrays in (("feature", features), ("target", targets), ("context", context)):
+            target = folder / f"{kind}.npz"
+            np.savez(target, **arrays)
+            item[kind + "_path"] = target.name
+            item[kind + "_sha256"] = data.v2.sha256_file(target)
+        parent = {
+            "schema_version": 1,
+            "role": role,
+            "provider": {"doi": data.v2.DOI, "version_id": data.v2.VERSION_ID},
+            "feature_definition": development.FEATURE_DEFINITION,
+            "context_definition": development.CONTEXT_DEFINITION,
+            "sessions": [item],
+        }
+        path = folder / "index.json"
+        path.write_text(json.dumps(parent))
+        monkeypatch.setattr(
+            development, f"V8_{role.upper()}_INDEX_SHA256", data.v2.sha256_file(path)
+        )
+        paths.append(path)
+    return development, paths
+
+
+def test_development_reuses_all_three_sidecars_without_raw_access(
+    tmp_path, development_parent_pair
+):
+    development, paths = development_parent_pair
+    cache = tmp_path / "output"
+    index = development.prepare_development(cache, *paths)
+    assert development.load_index(cache / "index.json", expected_role="development") == index
+    for item in index["sessions"]:
+        for kind in ("feature", "target", "context"):
+            origin = item["reused_parent_artifacts"][kind]["path"]
+            assert (cache / item[kind + "_path"]).samefile(origin)
+    with pytest.raises(ValueError, match="immutable"):
+        development.prepare_development(cache, *paths)
+
+
+def test_development_parent_identity_checked_before_any_sidecars(tmp_path, development_parent_pair):
+    development, paths = development_parent_pair
+    paths[0].write_text(paths[0].read_text() + " ")
+    with pytest.raises(ValueError, match="locked exposed cohort"):
+        development.prepare_development(tmp_path / "output", *paths)
+
+
+def test_development_context_contamination_and_hash_change_rejected(
+    tmp_path, development_parent_pair
+):
+    development, paths = development_parent_pair
+    cache = tmp_path / "output"
+    index = development.prepare_development(cache, *paths)
+    item = index["sessions"][0]
+    case = development.load_case(cache / "index.json", item)
+    assert set(case) == {"item", "features", "segments"}
+    np.savez(cache / item["context_path"], forbidden=np.zeros(1))
+    with pytest.raises(ValueError, match="hash mismatch"):
+        development.load_index(cache / "index.json")
+
+
+def test_independent_fresh_context_rebuild_preserves_odd_go_geometry():
+    from neural_experiments.v9 import audit_data
+    from neural_experiments.v9 import data as development
+
+    source = raw()
+    source["trials"]["trial_start_index"] = [1, 7]
+    _, targets, metadata = data.convert_session(source, "T2", 100)
+    actual = development.make_context(source, metadata)
+    rebuilt = audit_data.independently_rebuild(source, metadata)
+    for key in development.CONTEXT_KEYS:
+        np.testing.assert_array_equal(actual[key], rebuilt[key])
+    development.validate_context_targets(rebuilt, targets)
