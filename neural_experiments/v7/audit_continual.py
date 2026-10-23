@@ -9,13 +9,16 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from datetime import UTC, datetime
 from pathlib import Path
 
 import numpy as np
 
+from neural_experiments.v4.audit import Inputs as ArrayInputs
 from neural_experiments.v7.audit import (
     CONFIG,
+    PARENT_PINS,
     ROOT,
     Inputs,
     average,
@@ -28,6 +31,7 @@ from neural_experiments.v7.audit import (
     reference_representation,
     replay,
     score_reference,
+    segment_ranges,
     sha256,
     unique,
     validate_normalization,
@@ -35,6 +39,7 @@ from neural_experiments.v7.audit import (
 )
 
 PLAN_SHA = "4f88a6cf98dd7147691f4eaf64143784736863e1cfa4fd5fbd7b3fadd1eaea23"
+ACQUISITION_SHA = "7adf21be09f35036ae8eaa287afedc7a58c031a78cf5429b34325f319cddd696"
 THRESHOLDS = (0.1, 0.25, 0.5, 1.0)
 METHODS = ("zero", "frozen120", "fixed240", "periodic240", "triggered240")
 SLOTS = (10500, 13500, 16500, 19500, 22500, 25500)
@@ -564,7 +569,191 @@ def summary_reference(rows):
     }
 
 
-def audit_run(path, root=ROOT):
+class FreshInputs(ArrayInputs):
+    """Metadata walk binding fixed ranks19--21 and all authenticated prior18."""
+
+    def __init__(self, path, development):
+        self.path, self.index, self.checked = Path(path).resolve(), read(path), set()
+        index = self.index
+        people = [p for p in development.index["participants"] if p != "T3"]
+        if (
+            index["schema_version"] != 1
+            or index["role"] != "fresh"
+            or index["participants"] != people
+            or index["provider"] != development.index["provider"]
+            or index["feature_definition"] != development.index["feature_definition"]
+            or index["acquisition_plan_sha256"] != ACQUISITION_SHA
+            or index["acquisition_lock"]["sha256"] != ACQUISITION_SHA
+            or index["study_lock"]["sha256"] != PLAN_SHA
+        ):
+            raise ValueError("Fresh cohort does not bind locked role/provider/plans")
+        for name, pin in (
+            ("v6_development", PARENT_PINS["development"]),
+            ("v6_new", PARENT_PINS["new_sessions"]),
+        ):
+            if index[name + "_index_sha256"] != pin:
+                raise ValueError("Wrong fresh ancestry")
+            verify(Path(index[name + "_index_path"]), pin)
+        verify(Path(index["study_lock"]["path"]), PLAN_SHA)
+        verify(Path(index["acquisition_lock"]["path"]), ACQUISITION_SHA)
+        refs = unique(index["acquisition_sources"], lambda r: r["path"])
+        if set(refs) != {f"acquisition/{p}.json" for p in people}:
+            raise ValueError("Missing/extra acquisition receipt")
+        expected, dispositions = {}, []
+        for person in people:
+            ref = refs[f"acquisition/{person}.json"]
+            path = contained(self.path.parent, ref["path"])
+            verify(path, ref["sha256"])
+            receipt = read(path)
+            prior = sorted(
+                [r["source"] for r in development.items.values() if r["participant_id"] == person],
+                key=lambda r: r["archive_ordinal"],
+            )
+            if (
+                receipt["status"] != "complete"
+                or receipt["participant_id"] != person
+                or receipt["plan_sha256"] != ACQUISITION_SHA
+                or len(prior) != 18
+                or receipt["selection"]["regular_session_ranks_one_based"] != [19, 20, 21]
+                or receipt["selection"]["scores_or_duration_used_for_selection"] is not False
+                or receipt["v6_development_index_sha256"] != PARENT_PINS["development"]
+                or receipt["v6_new_index_sha256"] != PARENT_PINS["new_sessions"]
+            ):
+                raise ValueError("Wrong archive selection or authenticated ancestors")
+            archive = receipt["archive"]
+            if (
+                archive["file_id"] != prior[0]["archive_file_id"]
+                or archive["provider_sha256"] != prior[0]["archive_sha256_published"]
+                or receipt["full_archive_sha256_verified"] is not False
+            ):
+                raise ValueError("Archive identity/full-download claim changed")
+            pattern = rf"(?:\./)?decoding/{person}/{person}_day_(\d+)_decoding\.mat"
+            seen = [
+                s
+                for s in receipt["seen_members"]
+                if s["regular_file"] and re.fullmatch(pattern, s["name"])
+            ]
+            old, selected = receipt["verified_prior_members"], receipt["selected"]
+            if (
+                len(old) != 18
+                or len(selected) > 3
+                or len(seen) != 18 + len(selected)
+                or len(selected) < 3
+                and not receipt["tar_end_observed"]
+                or receipt["missing_requested_ranks"] != list(range(19 + len(selected), 22))
+            ):
+                raise ValueError("Archive walk/shortage inventory changed")
+            for rank, (member, observed) in enumerate(zip(old + selected, seen, strict=True), 1):
+                match = re.fullmatch(pattern, member["member_name"])
+                if (
+                    match is None
+                    or member["regular_session_rank"] != rank
+                    or member["participant_id"] != person
+                    or member["post_implant_day"] != int(match.group(1))
+                    or member["session_id"] != Path(member["member_name"]).stem
+                    or member["member_name"] != observed["name"]
+                    or member["member_size"] != observed["size"]
+                    or member["archive_ordinal"] != observed["ordinal"]
+                    or not re.fullmatch("[0-9a-f]{64}", member["member_sha256"])
+                ):
+                    raise ValueError("Unbound member/rank identity")
+                if rank <= 18:
+                    for field in (
+                        "member_name",
+                        "member_size",
+                        "member_sha256",
+                        "archive_ordinal",
+                        "session_id",
+                    ):
+                        if member[field] != prior[rank - 1][field]:
+                            raise ValueError("Prior eighteen authentication changed")
+                else:
+                    if (
+                        member["session_id"] in expected
+                        or member["raw_path"] != f"raw/{person}/{member['session_id']}.mat"
+                    ):
+                        raise ValueError("Duplicate or unsafe new member")
+                    expected[member["session_id"]] = {
+                        **member,
+                        "archive_file_id": archive["file_id"],
+                        "archive_sha256_published": archive["provider_sha256"],
+                        "full_archive_sha256_verified": False,
+                    }
+            dispositions.append(
+                {
+                    "participant_id": person,
+                    "selected_sessions": len(selected),
+                    "missing_requested_ranks": receipt["missing_requested_ranks"],
+                }
+            )
+        compare_structure(
+            index["participant_dispositions"], dispositions, "requested people/shortages"
+        )
+        self.items = unique(index["sessions"], lambda r: r["session_id"])
+        if set(self.items) != set(expected):
+            raise ValueError("Prepared fresh inventory differs from selected members")
+        for sid, item in self.items.items():
+            compare_structure(item["source"], expected[sid], "exact fresh member binding")
+            if (
+                item["role"] != "fresh"
+                or item["participant_id"] != expected[sid]["participant_id"]
+                or item["post_implant_day"] != expected[sid]["post_implant_day"]
+                or type(item["n_bins"]) is not int
+                or item["n_bins"] != min(item["full_prepared_n_bins"], 30000)
+                or not 0 <= item["n_bins"] <= 30000
+                or item["bin_seconds"] != 0.02
+                or Path(item["raw_source_root"]).resolve() != self.path.parent
+            ):
+                raise ValueError("Wrong fresh geometry/source root")
+            segment_ranges(item["segments"], item["n_bins"])
+            verify(
+                contained(self.path.parent, item["source"]["raw_path"]),
+                item["source"]["member_sha256"],
+            )
+
+
+def source_binding(manifest, root, source_run, source_audit):
+    if source_run is None or source_audit is None:
+        raise ValueError("Assessment requires explicit retained source run and audit")
+    source_path = Path(source_run)
+    source_path = source_path / "manifest.json" if source_path.is_dir() else source_path
+    original, passed = read(source_path), read(source_audit)
+    ref = manifest["source_selection"]
+    published_path = contained(root, ref["path"])
+    verify(published_path, ref["sha256"])
+    published = read(published_path)
+    if (
+        passed["status"] != "PASS"
+        or passed["stage"] != "source"
+        or passed["manifest_sha256"] != sha256(source_path)
+        or passed["plan_sha256"] != PLAN_SHA
+        or passed["index_sha256"] != original["index"]["sha256"]
+        or original["status"] != "complete"
+        or original["phase"] != "source"
+        or original["code_sha256"] != manifest["code_sha256"]
+        or passed["code_sha256"] != original["code_sha256"]
+    ):
+        raise ValueError("Source audit/run does not bind this frozen assessment")
+    selection = selection_reference(original["rows"])
+    compare_structure(passed["selection"], selection, "audited source choice")
+    compare_structure(original["selection"], selection, "retained source choice")
+    compare_structure(
+        published,
+        {
+            "schema_version": 1,
+            "plan_sha256": PLAN_SHA,
+            "source_manifest_sha256": sha256(source_path),
+            "source_audit_sha256": sha256(source_audit),
+            "source_audit_status": "PASS",
+            "scientific_code_sha256": original["code_sha256"],
+            "selection": selection,
+        },
+        "published pre-assessment source choices",
+    )
+    return selection, original
+
+
+def audit_run(path, root=ROOT, source_run=None, source_audit=None):
     root, path = Path(root).resolve(), Path(path).resolve()
     manifest = read(path)
     if (
@@ -608,16 +797,39 @@ def audit_run(path, root=ROOT):
         verify(contained(path.parent / "source_snapshot", name), digest)
     index_path = contained(root, manifest["index"]["path"])
     verify(index_path, manifest["index"]["sha256"])
-    if manifest["phase"] != "source":
-        raise ValueError("Assessment binding requires completed source publication")
-    if (
-        manifest["index"]["sha256"] != plan["development_index_sha256"]
-        or manifest["source_selection"] is not None
-    ):
-        raise ValueError("Source role/index mismatch")
-    inputs = Inputs(index_path)
+    if manifest["phase"] == "source":
+        if (
+            manifest["index"]["sha256"] != plan["development_index_sha256"]
+            or manifest["source_selection"] is not None
+        ):
+            raise ValueError("Source role/index mismatch")
+        inputs, selection = Inputs(index_path), None
+    else:
+        selection, original = source_binding(manifest, root, source_run, source_audit)
+        development_path = contained(root, original["index"]["path"])
+        verify(development_path, plan["development_index_sha256"])
+        inputs = FreshInputs(index_path, Inputs(development_path))
+        expected_preparer = {
+            "v7_fresh_sha256": manifest["code_sha256"]["neural_experiments/v7/fresh_data.py"],
+            "v6_dependency_sha256": manifest["code_sha256"]["neural_experiments/v6/data.py"],
+            "v7_development_dependency_sha256": manifest["code_sha256"][
+                "neural_experiments/v7/data.py"
+            ],
+        }
+        compare_structure(inputs.index["preparer"], expected_preparer, "fresh exporter provenance")
+    choices = (
+        None
+        if selection is None
+        else {r["participant"]: r["threshold"] for r in selection["choices"]}
+    )
+
+    def thresholds(item):
+        return THRESHOLDS if choices is None else (choices[item["participant_id"]],)
+
     rows = unique(manifest["rows"], lambda r: (r["session_id"], r["threshold"], r["method"]))
-    expected_keys = {(s, t, m) for s in inputs.items for t in THRESHOLDS for m in METHODS}
+    expected_keys = {
+        (s, t, m) for s, item in inputs.items.items() for t in thresholds(item) for m in METHODS
+    }
     if set(rows) != expected_keys:
         raise ValueError("Incomplete continual case grid")
     grouped = {key: [] for key in expected_keys}
@@ -627,7 +839,7 @@ def audit_run(path, root=ROOT):
     for sid, item in inputs.items.items():
         features, labels = inputs.arrays(item)
         raw = reference_representation(features, item["segments"], CONFIG)
-        for threshold in THRESHOLDS:
+        for threshold in thresholds(item):
             for method in METHODS:
                 key = sid, threshold, method
                 row, error, fitted = check_case(
@@ -637,13 +849,14 @@ def audit_run(path, root=ROOT):
                 errors.append(error)
                 residuals.extend(fitted)
         print(f"independently checked continual {sid}", flush=True)
-    selection = selection_reference(checked)
-    compare_structure(manifest["selection"], selection, "whole-person source choice")
+    if selection is None:
+        selection = selection_reference(checked)
+        compare_structure(manifest["selection"], selection, "whole-person source choice")
     choices = {r["participant"]: r["threshold"] for r in selection["choices"]}
     selected = [r for r in checked if r["threshold"] == choices[r["participant"]]]
     summary = summary_reference(selected)
     compare_structure(manifest["summary"], summary, "independent full-interval summaries")
-    return {
+    result = {
         "status": "PASS",
         "stage": manifest["phase"],
         "created_at": datetime.now(UTC).isoformat(),
@@ -668,17 +881,23 @@ def audit_run(path, root=ROOT):
             "and no external replication claim."
         ),
     }
+    if manifest["phase"] == "assessment":
+        result["source_audit_sha256"] = sha256(source_audit)
+        result["source_selection_sha256"] = manifest["source_selection"]["sha256"]
+    return result
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--source-run", type=Path)
+    parser.add_argument("--source-audit", type=Path)
     args = parser.parse_args()
     if args.output.exists():
         raise ValueError("Audit receipts cannot be overwritten")
     path = args.run / "manifest.json" if args.run.is_dir() else args.run
-    result = audit_run(path)
+    result = audit_run(path, source_run=args.source_run, source_audit=args.source_audit)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, allow_nan=False) + "\n")
     print(

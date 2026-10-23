@@ -55,7 +55,35 @@ delay. Trial identifiers are not present in the prepared export; neither the
 embargo nor window separation is claimed to make trials independent. Statistics
 resample sessions or participants, never individual neural bins.
 
-Untouched raw tails and later archive ranks remain reserved unless the recovery
-gate passes and a separate acquisition/policy protocol is committed first.
-Sample traces, model coefficients, complete local indexes and source snapshots
-remain ignored. Public outputs contain aggregate metrics and artifact hashes.
+The original protocol reserved raw tails and later ranks unless the gate passed.
+That gate failed. The separate [V7B amendment](CONTINUAL_PROTOCOL.md) explicitly
+changes the continuation rule after exposed results, with an acquisition and
+policy plan committed before new outcomes. It opens only fixed archive ranks
+19–21 in the eight non-T3 participants. Raw continuation tails and the remaining
+T3 data stay reserved. Sample traces, model coefficients, complete local indexes
+and source snapshots remain ignored. Public outputs contain aggregate metrics
+and artifact hashes.
+
+## V7B fresh acquisition
+
+The fresh acquisition authenticates all 18 prior archive members for each of
+T2, T5, T6, T7, T8, T9, T10 and T11 against the exact V6 parents. Only regular
+ranks 19–21 are retained, regardless of duration or task difficulty. Archive
+rank fixes selection; numeric post-implant day determines reporting order.
+Preparation retains at most the first 600 recorded seconds, separates features
+from targets, and applies the unchanged target/feature conversion. Whole-person
+threshold exclusion concerns source selection; fresh sessions are still from
+known participants and do not establish transfer to untouched people.
+
+The acquisition plan bounds total compressed transfer at 28 GB, retained raw
+files at 12 GB and concurrency at three workers. The initial public-API attempt
+was blocked by the provider and transferred zero archive bytes. An existing,
+still-valid provider-issued public redirect map from the earlier study resumed
+acquisition through the same frozen downloader. Its digest matches the earlier
+transport lineage; signed URLs remain private. All attempts and budget charges
+are preserved. No browser challenge was circumvented.
+
+The continual plan was committed before preparation; audited source choices
+are published before assessment. The importer and execution source are checked
+against their frozen hashes. Fresh scoring includes every selected recording,
+with unavailable scores explicitly retained for insufficient observations.
