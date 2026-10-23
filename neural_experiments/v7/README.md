@@ -140,5 +140,22 @@ and `runtime_continual --help` as Python modules for the descriptive and separat
 source-model runtime measurements. Timing a fixed exported model over a prefix
 is an engineering check, not an accuracy evaluation of that model on its past.
 
+The separate [streaming calibration implementation](incremental.py) accumulates
+centered sufficient statistics with fixed normalization. Its engineering replay
+checks all five periodic fits against the original source artifacts. This path
+does not change the frozen fresh-study implementation or tune its predictions.
+
+```sh
+.venv/bin/python -m neural_experiments.v7.incremental_runtime \
+  --source results/neural_v7/continual-source/manifest.json \
+  --index data/neural_v7/development/index.json \
+  --source-audit results/neural_v7/continual-source-audit.json \
+  --output results/neural_v7/continual-incremental
+```
+
+Read [engineering evidence](ENGINEERING.md) for timing scope, memory accounting,
+independent audits and the difference between recorded compute observations and
+a real-time guarantee.
+
 Every run directory is an immutable attempt. Do not overwrite failed runs or
 relabel exposed outcomes as fresh. Public synthetic tests need no data cache.

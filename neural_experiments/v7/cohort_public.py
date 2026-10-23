@@ -43,7 +43,9 @@ def main():
                 "selected_ranks": [s["regular_session_rank"] for s in r["selected"]],
                 "missing_requested_ranks": r["missing_requested_ranks"],
                 "tar_end_observed": r["tar_end_observed"],
-                "transport_map_sha256": r["archive"]["transport"]["private_url_file_sha256"],
+                "transport_map_sha256": r["archive"]
+                .get("transport", {})
+                .get("private_url_file_sha256"),
             }
         )
     sessions = []
@@ -139,6 +141,8 @@ def main():
         r["compressed_prefix_bytes"] for r in archives
     ) + sum(r["compressed_prefix_bytes"] for r in failures):
         raise ValueError("Archive attempt accounting requires investigation")
+    observation_path = CACHE / "transport-observations.json"
+    observations = json.loads(observation_path.read_text()) if observation_path.exists() else None
     result = {
         "schema_version": 1,
         "study": "V7B accumulating continual recalibration",
@@ -184,14 +188,19 @@ def main():
         "orchestration_attempts": orchestrations,
         "failed_archive_attempts": failures,
         "separate_public_link_resolution_attempts": {
-            "count": 8,
-            "http_status": 403,
-            "archive_body_bytes": 0,
-            "ordinary_browser_validation": (
-                "remained_pending; no challenge interaction or bypass; "
-                "existing previously granted URLs were reused"
-            ),
-        },
+            **{
+                key: observations[key]
+                for key in (
+                    "count",
+                    "http_status",
+                    "archive_body_bytes",
+                    "ordinary_browser_validation",
+                )
+            },
+            "receipt_sha256": sha256_file(observation_path),
+        }
+        if observations is not None
+        else {"disposition": "not_recorded"},
         "archives": archives,
         "participant_dispositions": index["participant_dispositions"],
         "selected_session_count": len(sessions),

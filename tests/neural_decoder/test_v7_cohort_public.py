@@ -212,3 +212,33 @@ def test_private_string_in_allowlisted_field_rejected(cohort):
     _json(path, receipt)
     with pytest.raises(ValueError, match="Forbidden"):
         public.main()
+
+
+def test_transport_observations_are_receipt_bound_and_private_extras_omitted(cohort):
+    cache, _, _ = cohort
+    path = cache / "transport-observations.json"
+    _json(
+        path,
+        {
+            "count": 8,
+            "http_status": 403,
+            "archive_body_bytes": 0,
+            "ordinary_browser_validation": "automatic validation pending",
+            "private_url": "https://private.invalid/?Signature=secret",
+        },
+    )
+    result = public.main()
+    record = result["separate_public_link_resolution_attempts"]
+    assert record["count"] == 8 and record["receipt_sha256"] == sha256_file(path)
+    assert "Signature=" not in public.DEST.read_text()
+
+
+def test_successful_direct_transport_does_not_invent_browser_failures(cohort):
+    cache, _, _ = cohort
+    path = cache / "acquisition/T2.json"
+    receipt = json.loads(path.read_text())
+    del receipt["archive"]["transport"]
+    _json(path, receipt)
+    result = public.main()
+    assert result["archives"][0]["transport_map_sha256"] is None
+    assert result["separate_public_link_resolution_attempts"] == {"disposition": "not_recorded"}
