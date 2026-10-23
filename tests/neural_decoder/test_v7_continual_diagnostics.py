@@ -81,6 +81,21 @@ def test_false_alarm_is_past_active_error_proxy_and_never_uses_suffix():
     assert poor["proxy_false_alarm"] is None
 
 
+def test_float32_targets_with_exact_zero_output_have_zero_error_difference():
+    angles = np.linspace(-np.pi, np.pi, 12000)
+    targets = np.column_stack((np.cos(angles), np.sin(angles))).astype(np.float32)
+    prediction = np.zeros((12000, 2), dtype=np.float64)
+    active = np.ones(12000, dtype=bool)
+    interrupted = np.zeros(12000, dtype=bool)
+    result = diagnostics.pre_decision(event(), prediction, targets, active, interrupted)
+    assert result["pre_decision_mse_minus_zero"] == 0.0
+    assert result["proxy_false_alarm"] is True
+    skipped = diagnostics.pre_decision(
+        event("below_threshold"), prediction, targets, active, interrupted
+    )
+    assert skipped["below_threshold_after_poor_output"] is False
+
+
 def test_forced_requests_and_sparse_active_rows_are_not_classified_false_alarms():
     y = pred = np.ones((12000, 2))
     use = np.ones(12000, dtype=bool)

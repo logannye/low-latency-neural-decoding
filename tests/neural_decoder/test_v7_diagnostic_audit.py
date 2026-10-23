@@ -44,6 +44,31 @@ def test_neutral_missing_and_bad_windows_do_not_fake_recovery():
     assert producer.recovery_episodes(observed, zero, 16600) == expected
 
 
+def test_zero_output_is_neutral_for_float32_unit_circle_targets():
+    n = 14000
+    angle = np.arange(n) * 0.03
+    y = np.c_[np.cos(angle), np.sin(angle)].astype(np.float32)
+    trace = {
+        "prediction": np.zeros((n, 2)),
+        "eval_mask": np.ones(n, bool),
+        "interruption_mask": np.zeros(n, bool),
+    }
+    event = {
+        "event_bin": 13500,
+        "participant": "T2",
+        "session_id": "synthetic",
+        "reason": "neural_drift_threshold",
+        "request_probe": True,
+    }
+    expected = audit.decision_reference(event, trace, y)
+    assert expected["pre_decision_mse_minus_zero"] == 0.0
+    assert expected["proxy_false_alarm"] is True
+    actual = producer.pre_decision(
+        event, trace["prediction"], y, trace["eval_mask"], trace["interruption_mask"]
+    )
+    audit.compare_structure(actual, expected)
+
+
 @pytest.mark.parametrize(
     "reason", ["neural_drift_threshold", "below_threshold", "scheduled_maximum_gap"]
 )

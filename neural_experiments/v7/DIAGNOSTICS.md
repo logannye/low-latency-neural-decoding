@@ -30,3 +30,14 @@ poor predictions may not repair them. No window-level independence claim is made
 
 All session-method outcomes and decision dispositions are exported as aggregate
 numbers. Sample predictions and targets remain in ignored local artifacts.
+
+## Pre-assessment numerical correction
+
+Before fresh scoring, a synthetic unit-circle test found that float32 targets
+and float64 predictions could give a nonzero error difference for exact zero
+output: the residual and baseline terms were squared at different precisions.
+Both selected arrays are now promoted to float64 before either calculation in
+the producer and independent verifier. Regression tests require exact zero
+difference and the corresponding neutral classification. The diagnostic
+definition, tolerance, policy, primary scoring and gates are unchanged. Original
+auditor snapshots remain retained alongside the corrected version.

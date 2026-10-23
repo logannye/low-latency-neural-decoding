@@ -73,7 +73,8 @@ def pre_decision(event, prediction, targets, score_mask, interrupted):
     }
     if use.sum() < 50:
         return record
-    y, pred = targets[start:stop][use], prediction[start:stop][use]
+    y = np.asarray(targets[start:stop][use], dtype=np.float64)
+    pred = np.asarray(prediction[start:stop][use], dtype=np.float64)
     delta = float((np.square(y - pred).sum(1) - np.square(y).sum(1)).mean())
     record["pre_decision_mse_minus_zero"] = delta
     if event["reason"] == "neural_drift_threshold":

@@ -86,7 +86,8 @@ def decision_reference(event, trace, y):
         "below_threshold_after_poor_output": None,
     }
     if len(indices) >= 50:
-        prediction, target = trace["prediction"][indices], y[indices]
+        prediction = np.asarray(trace["prediction"][indices], np.float64)
+        target = np.asarray(y[indices], np.float64)
         difference = float(np.sum((prediction - target) ** 2 - target**2) / len(indices))
         result["pre_decision_mse_minus_zero"] = difference
         if event["reason"] == "neural_drift_threshold":

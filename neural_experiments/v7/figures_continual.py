@@ -73,7 +73,7 @@ def render(source, output):
         )
     left.set_yticks(range(4), LABELS)
     left.invert_yaxis()
-    left.set_title("Whole-session accuracy and cost", pad=17)
+    left.set_title("Full deployment interval: accuracy and cost", pad=17)
     left.set_xlabel("Equal-participant mean R²\nParticipant-bootstrap 95% interval")
     left.axvline(0, color="#99A2A9", linewidth=0.8)
     right.set_xticks(range(len(people)), people)
