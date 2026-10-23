@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "private_audit_sha256": "7893dc853f6f2c12fa2d55124d40879dd36acd75e7aca1a5ea167150b4a3fd30",
+  "study_aggregate_sha256": "3649461e87c056beb0ce4d7a271d1ed5c6e2ac7ae0ede9d2d18e871fbb187a31",
+  "status": "PASS",
+  "stage": "assessment",
+  "created_at": "2026-10-23T04:58:15.045543+00:00",
+  "auditor_source_sha256": "c045d592f35bbd574444709c54fa08b6a548720246de3f059ca323a8f83999cb",
+  "manifest_sha256": "7cb36ddfb0d255ba2d02068fe369046d51232ad8fc800b969c3f041b21465267",
+  "plan_sha256": "4f88a6cf98dd7147691f4eaf64143784736863e1cfa4fd5fbd7b3fadd1eaea23",
+  "index_sha256": "34f51825b1f1b4b7f8144fcfe93822f61295a2a013f0cd564fff610228d20e47",
+  "source_audit_sha256": "f7744991125e5ae55a37d099414777aaf44885d5b86acb53d09dbd100b289796",
+  "source_selection_sha256": "25a046b567b4f89f9940a9971b231e89d3a9cf1e26f09dcf4ad33bfa4f0bb157",
+  "sessions_checked": 24,
+  "cases_checked": 120,
+  "models_checked": 230,
+  "full_traces_checked": 120,
+  "events_checked": 708,
+  "max_prediction_absolute_error": 1.2156942119645464e-14,
+  "max_normal_equation_relative_residual": 6.328545127444972e-15,
+  "scope": "Separate-code neural-only KL decisions, cumulative paid-label ridge, full deployment replay including zero interruptions, sklearn scoring, equal-person source selection and bootstrap. Reuses independent V7A/V2-V4 audit primitives; no producer imports and no external replication claim."
+}

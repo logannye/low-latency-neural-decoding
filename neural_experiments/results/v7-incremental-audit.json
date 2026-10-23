@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "auditor_source_sha256": "ea14c62d6c13b6a0c5b3cdf947bd42f923a3719ed5b1fedd3c3d0307c030f756",
+  "manifest_sha256": "6e5318c5d249baf669b8be7ccfb1733d148fba1964a16b2c170889ffeabe9bf4",
+  "source_manifest_sha256": "956b455f3a2f6b971cddd72dd32b7a352c94f158573c1475b3f29c2f07665639",
+  "source_audit_sha256": "f7744991125e5ae55a37d099414777aaf44885d5b86acb53d09dbd100b289796",
+  "fits_checked": 5,
+  "update_chunks_checked": 400,
+  "max_moment_absolute_error": 1.0913936421275139e-10,
+  "max_coefficient_absolute_error": 1.4710455076283324e-15,
+  "max_normal_equation_relative_residual": 3.0336020883743472e-15,
+  "memory": {
+    "moment_bytes": 299552,
+    "normalizer_bytes": 3072,
+    "persistent_calibration_bytes": 302624,
+    "raw_and_target_chunk_buffers_bytes": 99328,
+    "normalization_startup_buffer_bytes": 2304000,
+    "causal_filter_state_bytes": 3072,
+    "batch_full_prefix_representation_bytes": 46080000,
+    "feature_dimension": 192,
+    "scope": "numeric calibration state and explicit buffers only; validation loaded source inputs, masks and references are excluded; arithmetic scratch and Python overhead excluded"
+  },
+  "timing": {
+    "update_wall": {
+      "n": 400,
+      "p50_ms": 0.0154795,
+      "p99_ms": 0.13596583999999992,
+      "max_ms": 0.344916,
+      "total_ms": 21.598084
+    },
+    "update_cpu": {
+      "n": 400,
+      "p50_ms": 0.015,
+      "p99_ms": 0.21214999999999987,
+      "max_ms": 0.344,
+      "total_ms": 21.901
+    },
+    "solve_wall": {
+      "n": 5,
+      "p50_ms": 0.178458,
+      "p99_ms": 0.20379564,
+      "max_ms": 0.204334,
+      "total_ms": 0.918667
+    },
+    "solve_cpu": {
+      "n": 5,
+      "p50_ms": 0.179,
+      "p99_ms": 0.20348,
+      "max_ms": 0.204,
+      "total_ms": 0.917
+    },
+    "solve_export_reload_wall": {
+      "n": 5,
+      "p50_ms": 1.004833,
+      "p99_ms": 1.30413168,
+      "max_ms": 1.311625,
+      "total_ms": 5.192
+    },
+    "solve_export_reload_cpu": {
+      "n": 5,
+      "p50_ms": 0.915,
+      "p99_ms": 1.06244,
+      "max_ms": 1.064,
+      "total_ms": 4.664
+    }
+  },
+  "label_bearing_update_timing": {
+    "chunks_adding_labels": 163,
+    "wall": {
+      "n": 163,
+      "p50_ms": 0.109,
+      "p99_ms": 0.15637104,
+      "max_ms": 0.344916,
+      "total_ms": 18.293958
+    },
+    "cpu": {
+      "n": 163,
+      "p50_ms": 0.108,
+      "p99_ms": 0.2509599999999998,
+      "max_ms": 0.344,
+      "total_ms": 18.725
+    }
+  },
+  "scope": "Independent batch centered-moment reconstruction, paid-label coverage, five original-export/ridge optimum checks, numeric memory and raw-clock arithmetic. Source-only engineering evidence; no efficacy or fixed realtime guarantee."
+}

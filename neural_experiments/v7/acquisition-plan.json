@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "study": "V7B accumulating continual recalibration",
+  "provider": {"doi": "10.5061/dryad.x0k6djj1h", "version_id": 462702, "license": "CC0-1.0"},
+  "participants": ["T2", "T5", "T6", "T7", "T8", "T9", "T10", "T11"],
+  "regular_session_ranks_one_based": [19, 20, 21],
+  "authenticate_prior_regular_members": 18,
+  "v6_development_index_sha256": "357f8b917abec17f6354dac3cd93b4d87d24df0db4bf60afeee8bdbefbf84678",
+  "v6_new_index_sha256": "dfe5ed95bf7f43b0bb51f3a11d163505e99641a4affc86daf38591fbdc5af534",
+  "maximum_compressed_response_bytes_all_attempts": 28000000000,
+  "maximum_retained_raw_bytes": 12000000000,
+  "maximum_parallel_workers": 3,
+  "maximum_export_bins_per_session": 30000,
+  "bin_seconds": 0.02,
+  "scores_durations_or_quality_used_for_selection": false,
+  "missing_short_or_failed_cases": "retain explicit disposition, no substitution or extending ranks",
+  "no_t3_continuation_access": true,
+  "fresh_assessment_sessions_enter_each_others_training": false,
+  "outcome_access": "prepare and score only after continual execution source is frozen; publish audited source selections before fresh assessment",
+  "public_artifacts": "aggregate metrics and provenance only, no raw samples or coefficients"
+}

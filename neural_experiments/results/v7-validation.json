@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "study": "V7",
+  "created_at": "2026-10-23T05:05:36.829684+00:00",
+  "local_validation": {
+    "created_at": "2026-10-23T04:52:04.214658+00:00",
+    "tested_revision": "51b2f7e975221c98469a35a231c25293bd236123",
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "python": "3.12.13",
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "command": "PYTHONPATH=.:src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1 .venv/bin/python -m pytest -q",
+    "passed": 1049,
+    "skipped": 22,
+    "elapsed_seconds": 25.99,
+    "test_log_sha256": "4ab5fca6cdb37a378a2506f0d12e5b2517328233c8d7b6f7e1d99aadc3bdee1f",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "formatted_files_checked": 333,
+    "git_diff_check": "PASS",
+    "rust_compilation": "none",
+    "tested_code_sha256": {
+      "neural_experiments/v7/__init__.py": "ba8a726cc0fc0e88be1b3c149176d62557d83e3a880d8b7c16938ad5ba579579",
+      "neural_experiments/v7/acquire_parallel.py": "3b070f97c203071978cce1dc5d37a7f8aa986ac03ce335d378d864906d99a2cf",
+      "neural_experiments/v7/audit.py": "e55cd6328d6ba2424bf7dd55b994fe11add593831b2a56b79dac4baaf16a6e54",
+      "neural_experiments/v7/audit_continual.py": "c045d592f35bbd574444709c54fa08b6a548720246de3f059ca323a8f83999cb",
+      "neural_experiments/v7/audit_diagnostics_continual.py": "5176cb219fe58c5d54dc6758f9eb1390f530469c0c2e14ad3dada54bb35929ba",
+      "neural_experiments/v7/audit_incremental.py": "ea14c62d6c13b6a0c5b3cdf947bd42f923a3719ed5b1fedd3c3d0307c030f756",
+      "neural_experiments/v7/audit_runtime_continual.py": "52141f461a3d3b126f6f496ec76cd07371eb64296f561126414b8f2b2974ef0e",
+      "neural_experiments/v7/cohort_public.py": "02377d7a28f93cf2a4e2c9899b875d14487a36b8281c0c510b63980c4a8c92ea",
+      "neural_experiments/v7/continual.py": "0c9e241ae41fccff0a12368f6ab39747093282ca4050529a4e87e7716a0ee924",
+      "neural_experiments/v7/continual_metrics.py": "05b264ebbcd9f055ede2021292ab6b5df1698eae71e1a0d7c99981823f1bc485",
+      "neural_experiments/v7/data.py": "d93a205624d4fd1ff5b49cdeb7b613f83b51bb5ff468049b7ad8d3819cd6d0d8",
+      "neural_experiments/v7/diagnostics_continual.py": "35e064d1ff3b6a3d9f3588cd2e44440b4536a74c578a609c966cef21ff9cf782",
+      "neural_experiments/v7/figures.py": "b4c41e515d6dd17d6973ce7abcb06cf895d14529947bca3eac51352eacacde70",
+      "neural_experiments/v7/figures_continual.py": "415628e8eed3be894abb9d9babd6ed67e6ad91aa374ccd2196cfa0b326864403",
+      "neural_experiments/v7/fresh_data.py": "031c8bd0e590945cebb78cac5a8e95197efae5a0de999cd9a665f3fea951a457",
+      "neural_experiments/v7/incremental.py": "36ed3271d495f421b80a9175a024b235d1c1134575fff8e8668b2be527bf1f04",
+      "neural_experiments/v7/incremental_runtime.py": "67d0e54f23172690579793fe2e18f887c50ef600d25f7451e3624481550f8512",
+      "neural_experiments/v7/metrics.py": "43840d436d35e310e381687a2058b2a359a42732030f2a6665f84d906c14a18b",
+      "neural_experiments/v7/model.py": "83fc1493e565a400ce0ce7fa8e12a89b9009b6039a0cdab9e692bf6604d6d2f9",
+      "neural_experiments/v7/public.py": "4a86d34ab0737398c38571094367fa20974548e7d8b3609999046f11170c687a",
+      "neural_experiments/v7/public_continual.py": "c7cf7faae669f0109a9ab055d98fce2a00bc5704341a5d5e06bed067239b7084",
+      "neural_experiments/v7/recoverability.py": "f7e23a5a487314e244219f85ff3291b1709dadcf856ffc8f18256b15238f199c",
+      "neural_experiments/v7/runtime_continual.py": "cf2dd6a70cbf17e786ccbf2951a2170b652153ad549c3f1788752433d5311c92",
+      "neural_experiments/v7/runtime_public.py": "70b80a3e052d8c0ed6c260a5b10b9d53353ad4e76d5e056015e37e3c272ec41a",
+      "neural_experiments/v7/study_continual.py": "9a84b276a0ea7c7bc1d98343fa9961b4840e4b1b0cd044a90041845218508fa1"
+    },
+    "tested_test_sha256": {
+      "tests/neural_decoder/test_v7_audit.py": "d83e8eb09744053226c28812d1f45cf3f2731a0c260cc656435ab104ff9fc3b7",
+      "tests/neural_decoder/test_v7_cohort_public.py": "cf38481f6fa14103d5669cf39157c660b66d2e62c6195638da36311b490c0a36",
+      "tests/neural_decoder/test_v7_continual.py": "2570ccbea95a75ca00b3b4d5784cbd05fae9f5bda047270fcc0c9a3ea1f0d54c",
+      "tests/neural_decoder/test_v7_continual_audit.py": "d3f956e4aa74186372c7f23eb5cdb1beffb08ca76588d4e8393d23e9bc3bbdf3",
+      "tests/neural_decoder/test_v7_continual_diagnostics.py": "b6f9aff50b4a83db8298fc40fcb6813f2e00e88e14a5ce408d4703ea359ebe8c",
+      "tests/neural_decoder/test_v7_continual_metrics.py": "bcbd258d5218ba255c809b8a6cdd9f5c327102fab1d4aa8280cbfc4d949d105a",
+      "tests/neural_decoder/test_v7_continual_public.py": "1c52b8d9080da522dbb7da04b4d7eefaa18b6627b7683fcb93000e1577eab62b",
+      "tests/neural_decoder/test_v7_continual_study.py": "2bb7e0aa00366fac58a3561fe6ea01697a106896b654deb94c68eb0ab254800a",
+      "tests/neural_decoder/test_v7_data.py": "2794bdec6c9ff483b1c28fd4583258701ef16286421713c14a966a1b46adf07e",
+      "tests/neural_decoder/test_v7_diagnostic_audit.py": "e200b08c43b9860be7272d5b9f84f918340cc42a4dfc59790d5c0c3a118a3176",
+      "tests/neural_decoder/test_v7_fresh_data.py": "c7964dddea731f8337b4b2d2b26b3469a1fdf1c89f396007a2e0b16d187c9c68",
+      "tests/neural_decoder/test_v7_incremental.py": "91e3736d0774cc1c69cf9d0702213120b173bad75f3e039e040f84361480e919",
+      "tests/neural_decoder/test_v7_incremental_audit.py": "4d626b741f282134f0a14ac9331865830962874ebc9da3d03269c28e44f5b42c",
+      "tests/neural_decoder/test_v7_incremental_runtime.py": "5888586addb9b107011c417392bcc1461fa45a14b93afd7e20e25a3cfe814d4e",
+      "tests/neural_decoder/test_v7_metrics.py": "409fc5eefe3908fa10d77152ed98916da5727ecf712e28ebc826ce811f228b04",
+      "tests/neural_decoder/test_v7_model.py": "7db4ed48f3a6eec15858cb7317258da148ec10719883aea8c0c1091e36e87db4",
+      "tests/neural_decoder/test_v7_public.py": "270af7c3bd45a0ace94078f80cad87bdf5b65c94c5943b987db7ac21143cf960",
+      "tests/neural_decoder/test_v7_recoverability.py": "d82b68d189ab7567fffa0f554c2f677eabd18d56f0cf81c4adfbb5ece495f380",
+      "tests/neural_decoder/test_v7_runtime_audit.py": "ee1734482b8d5e8b6d102d21ec08026a81536f414313ec2bb7d5a97c0b3b2281",
+      "tests/neural_decoder/test_v7_runtime_continual.py": "c183825291263f5f174da75944d0d00b2d6ec862954de8fc75e33c4069996088",
+      "tests/neural_decoder/test_v7_runtime_public.py": "f4666fc415a360ef3ba84cf619b408a3f7b214c58d6c218f5f2a32c7a916987e"
+    },
+    "revalidation_reason": "Synthetic float32 zero-output regression found a descriptive diagnostic precision bug before fresh scoring. Primary policy, scoring, and frozen scientific source were unchanged."
+  },
+  "nonpresentation_code_unchanged_since_local_validation": true,
+  "post_validation_presentation_changes": {
+    "neural_experiments/v7/figures_continual.py": {
+      "validated_base_sha256": "415628e8eed3be894abb9d9babd6ed67e6ad91aa374ccd2196cfa0b326864403",
+      "publication_sha256": "8573f035322ddfc4c79b821633668aed5e1e6ef4e5b72dfc4d3437149396ebbd",
+      "scope": "Plot annotation spacing and SVG whitespace adjusted after rendering; no calculation changed. Fresh figures rendered and visually inspected before publication."
+    }
+  },
+  "frozen_scientific_code_unchanged_between_source_and_assessment": true,
+  "locked_revisions": {
+    "original_recovery_plan": "9a261d6966cf2be26e9ed08ebc8f1a5e64a3c02d",
+    "frozen_recovery_producer": "e0c5ee91a07fcc72f138b766d0d41767ea35cc78",
+    "frozen_continual_producer": "dd57f3bc5617ebc0ccc41a3132b37abf562a7003",
+    "published_audited_source_choices": "53f088f6d2ae02e38bc0b3d9a2d0c759a9293a92"
+  },
+  "hosted_ci_at_locally_tested_revision": {
+    "revision": "51b2f7e975221c98469a35a231c25293bd236123",
+    "Neural decoding Python": {
+      "run_id": 39902500757,
+      "conclusion": "success"
+    },
+    "Tests": {
+      "run_id": 39902500752,
+      "conclusion": "success"
+    }
+  },
+  "audits": {
+    "recoverability": {
+      "status": "PASS",
+      "private_receipt_sha256": "03c1cefdb315b00061cb1a254340e96c4707f013a3c842941357f1e8251f42f7"
+    },
+    "continual_source": {
+      "status": "PASS",
+      "private_receipt_sha256": "f7744991125e5ae55a37d099414777aaf44885d5b86acb53d09dbd100b289796"
+    },
+    "continual_assessment": {
+      "status": "PASS",
+      "private_receipt_sha256": "7893dc853f6f2c12fa2d55124d40879dd36acd75e7aca1a5ea167150b4a3fd30"
+    },
+    "continual_diagnostics": {
+      "status": "PASS",
+      "private_receipt_sha256": "4ebf79ab9cd202dc440b558bffb92261eb7d781fcb2e83f2dd7f0ed22d438c8d"
+    },
+    "runtime": {
+      "status": "PASS",
+      "private_receipt_sha256": "6bc32b2ed21ff54f216da60c96b231107626c75e9f4b2b1f8325b28354758b62"
+    },
+    "incremental": {
+      "status": "PASS",
+      "private_receipt_sha256": "ed659f8c4066e5842a4ff0e52336a05c135927704899bd4f43f69d4af70d5900"
+    }
+  },
+  "fresh_scientific_gates": {
+    "periodic_T2_recovery": false,
+    "periodic_cohort_gain": false,
+    "triggered_timing_value": false
+  },
+  "scope": "Independent numerical implementations within this project; no external replication or clinical validation. Scientific gates are distinct from audit passes.",
+  "public_evidence_sha256": {
+    "neural_experiments/results/v7-cohort.json": "f39c446b8c28d3df44944caf5114635ec1eac4fdde8f98a5389f7f66c136405f",
+    "neural_experiments/results/v7-continual-assessment-audit.json": "3a1f0aed80affbeca5a0dbda5ad654c97878daee03ce7179a0d50f604a79085c",
+    "neural_experiments/results/v7-continual-diagnostics-audit.json": "1cdcc48a5c40ddeadb9e39f083fe200c6f7e3ea1af1d03c64b6e276f01338c03",
+    "neural_experiments/results/v7-continual-diagnostics.json": "b06312eeb44d5d88b4a8cde8e66bcd5a6efb82028dbda489de61ad5595100d18",
+    "neural_experiments/results/v7-continual-selection.json": "25a046b567b4f89f9940a9971b231e89d3a9cf1e26f09dcf4ad33bfa4f0bb157",
+    "neural_experiments/results/v7-continual-source-audit.json": "93ca09ba8da638304fc02b05d4ed8acd99ab38ada5267dc66d53173fe6b61bfb",
+    "neural_experiments/results/v7-continual-source.json": "07d8cdc4bc4785a9e1e983c587fcf80bd7442e791420b84d0718ea8b0f10f171",
+    "neural_experiments/results/v7-continual-study.json": "3649461e87c056beb0ce4d7a271d1ed5c6e2ac7ae0ede9d2d18e871fbb187a31",
+    "neural_experiments/results/v7-incremental-audit.json": "ed659f8c4066e5842a4ff0e52336a05c135927704899bd4f43f69d4af70d5900",
+    "neural_experiments/results/v7-recovery-audit.json": "f1ff6ae4ed33ad39fa827b13ff7d0b335a662f23622205177d07b25c440bb3b1",
+    "neural_experiments/results/v7-recovery.json": "7ec83f528ee771ce3d82e44309de22d9b27d0e84460791895dbab161e8a237cf",
+    "neural_experiments/results/v7-runtime.json": "e81b1c1435b165dacbc0bdc1ddf329fa0361be98ca52ad1c281c74892305739c"
+  }
+}
