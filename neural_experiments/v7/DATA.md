@@ -44,6 +44,12 @@ counts and spike-band power in 20 ms bins, transformed and filtered causally
 with resets at acquisition-block boundaries. Upstream feature extraction
 causality and acquisition latency remain unverified, as in V6.
 
+The experiment's time axis counts observed 20 ms bins. The prepared timestamp
+definition states that between-block wall time is unknown. Calibration budgets,
+interruptions and recovery delays therefore measure recorded observation time,
+not elapsed time across acquisition gaps. The separate paced runtime benchmark
+uses actual monotonic clocks and has a different timing scope.
+
 The runner loads the exposed session locally, but fitting receives only the
 target prefix ending two seconds before its next forecast. The first 30 seconds
 or the explicitly declared past training interval supplies normalization. No
@@ -87,3 +93,31 @@ The continual plan was committed before preparation; audited source choices
 are published before assessment. The importer and execution source are checked
 against their frozen hashes. Fresh scoring includes every selected recording,
 with unavailable scores explicitly retained for insufficient observations.
+
+Acquisition completed on 2026-10-23 at 04:56:00 UTC, with all 24 requested
+sessions and no substitutions. Total compressed transfer across all attempts
+was 17,985,568,768 bytes; retained raw members totaled 2,280,533,215 bytes.
+Preparation produced 605,019 bins at 04:56:39 UTC. The fresh index SHA256 is
+`34f51825b1f1b4b7f8144fcfe93822f61295a2a013f0cd564fff610228d20e47`.
+The [public cohort inventory](../results/v7-cohort.json) binds each selected
+member, prior-member authentication, failed transport attempts, importer and
+prepared artifact identities. Only archive prefixes were streamed: full-archive
+provider digests were not verified, and the inventory explicitly records this.
+
+Seventeen prefixes contain the full 600 recorded seconds. The seven shorter
+cases are retained:
+
+| Participant | Post-implant day | Recorded seconds |
+|---|---:|---:|
+| T5 | 1671 | 328.66 |
+| T5 | 1743 | 307.66 |
+| T5 | 1804 | 317.40 |
+| T6 | 1151 | 194.38 |
+| T6 | 1153 | 141.96 |
+| T6 | 1158 | 128.48 |
+| T9 | 259 | 481.84 |
+
+T6 days 1153 and 1158 end before the common scoring interval starts at second
+152. They remain in label-cost accounting. Temporal eligibility alone does not
+establish sufficient valid-go observations; the independent assessment audit
+determines actual score availability for every case.

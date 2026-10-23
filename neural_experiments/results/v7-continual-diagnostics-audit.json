@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "private_audit_sha256": "4ebf79ab9cd202dc440b558bffb92261eb7d781fcb2e83f2dd7f0ed22d438c8d",
+  "status": "PASS",
+  "auditor_source_sha256": "5176cb219fe58c5d54dc6758f9eb1390f530469c0c2e14ad3dada54bb35929ba",
+  "manifest_sha256": "7cb36ddfb0d255ba2d02068fe369046d51232ad8fc800b969c3f041b21465267",
+  "quality_audit_sha256": "7893dc853f6f2c12fa2d55124d40879dd36acd75e7aca1a5ea167150b4a3fd30",
+  "diagnostics_sha256": "b06312eeb44d5d88b4a8cde8e66bcd5a6efb82028dbda489de61ad5595100d18",
+  "session_method_rows_checked": 120,
+  "decisions_checked": 113,
+  "scope": "Separate-code episode/censoring and past active-output error reconstruction; binds passed numeric quality audit; descriptive only."
+}

@@ -40,7 +40,7 @@ def render(source, output):
         values = summary[method]
         mean = values["mean_r2"]
         low, high = values["participant_bootstrap_95"]
-        left.barh(i, mean, color=color, height=0.55)
+        left.barh(i, mean, color=color, height=0.45)
         left.errorbar(
             mean,
             i,
@@ -57,7 +57,7 @@ def render(source, output):
             f"  ·  interruption {values['mean_interruption_seconds']:.1f} s",
             transform=left.get_yaxis_transform(),
             ha="right",
-            va="center",
+            va="top",
             fontsize=8.3,
             color="#44515D",
         )
@@ -72,7 +72,7 @@ def render(source, output):
             label=label,
         )
     left.set_yticks(range(4), LABELS)
-    left.invert_yaxis()
+    left.set_ylim(3.62, -0.45)
     left.set_title("Full deployment interval: accuracy and cost", pad=17)
     left.set_xlabel("Equal-participant mean R²\nParticipant-bootstrap 95% interval")
     left.axvline(0, color="#99A2A9", linewidth=0.8)
@@ -112,7 +112,12 @@ def render(source, output):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
     for suffix in ("png", "svg"):
-        fig.savefig(output / f"v7-continual.{suffix}", dpi=180, bbox_inches="tight")
+        path = output / f"v7-continual.{suffix}"
+        fig.savefig(path, dpi=180, bbox_inches="tight")
+        if suffix == "svg":
+            path.write_text(
+                "\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n"
+            )
     plt.close(fig)
 
     t2 = [r for r in data["rows"] if r["participant"] == "T2"]
@@ -161,7 +166,12 @@ def render(source, output):
     )
     fig.tight_layout(rect=(0, 0.065, 1, 0.92), w_pad=2)
     for suffix in ("png", "svg"):
-        fig.savefig(output / f"v7-t2-continual.{suffix}", dpi=180, bbox_inches="tight")
+        path = output / f"v7-t2-continual.{suffix}"
+        fig.savefig(path, dpi=180, bbox_inches="tight")
+        if suffix == "svg":
+            path.write_text(
+                "\n".join(line.rstrip() for line in path.read_text().splitlines()) + "\n"
+            )
     plt.close(fig)
 
 
