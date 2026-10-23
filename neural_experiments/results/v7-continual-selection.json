@@ -1,0 +1,1747 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "4f88a6cf98dd7147691f4eaf64143784736863e1cfa4fd5fbd7b3fadd1eaea23",
+  "source_manifest_sha256": "956b455f3a2f6b971cddd72dd32b7a352c94f158573c1475b3f29c2f07665639",
+  "source_audit_sha256": "f7744991125e5ae55a37d099414777aaf44885d5b86acb53d09dbd100b289796",
+  "source_audit_status": "PASS",
+  "scientific_code_sha256": {
+    "neural_experiments/v7/continual.py": "0c9e241ae41fccff0a12368f6ab39747093282ca4050529a4e87e7716a0ee924",
+    "neural_experiments/v7/continual_metrics.py": "05b264ebbcd9f055ede2021292ab6b5df1698eae71e1a0d7c99981823f1bc485",
+    "neural_experiments/v7/study_continual.py": "9a84b276a0ea7c7bc1d98343fa9961b4840e4b1b0cd044a90041845218508fa1",
+    "neural_experiments/v7/model.py": "83fc1493e565a400ce0ce7fa8e12a89b9009b6039a0cdab9e692bf6604d6d2f9",
+    "neural_experiments/v7/data.py": "d93a205624d4fd1ff5b49cdeb7b613f83b51bb5ff468049b7ad8d3819cd6d0d8",
+    "neural_experiments/v7/fresh_data.py": "031c8bd0e590945cebb78cac5a8e95197efae5a0de999cd9a665f3fea951a457",
+    "neural_experiments/v6/data.py": "695bd712765d0f2066eb9bcec4d70511b6ba2cc423805fb307b61375c85cdc4a",
+    "neural_experiments/v5/data.py": "ef192fe13c973fc796aeb69d9711224ac6e5ce1ac366d99021e57b2a28d6744c",
+    "neural_experiments/v4/model.py": "02ba0ef2f771bf20c49ff7d5ed2475776e56d59ff01970e6092f2b503c8dd30d",
+    "neural_experiments/v4/data.py": "102b4f6d74451cc3ce4444e6be58b35c7de8376dc2cb81300aff8b49ed94fa01",
+    "neural_experiments/v3/study.py": "8a193512fd5bc4d3b1447382de5ae9b56f5dc87c51bccdd393ad81f44e336d43",
+    "neural_experiments/v3/model.py": "56f2bfabf8383c65ec621407e9bccd026b295e27912011c4b9cf97173d4fe2c2",
+    "neural_experiments/v3/data.py": "260442fe492e1c01cf19e888edf18eb625c120cf865dde30c46ec85f3ccaa390",
+    "neural_experiments/v2/data.py": "e75e64c08a4e7041f086b52893dcd17212e4e211094b184abae6ea6d23998a11"
+  },
+  "selection": {
+    "choices": [
+      {
+        "participant": "T2",
+        "threshold": 0.5,
+        "source_mean_r2": 0.22167057903770215,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.2178818031077673
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.2202341762442161
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.22167057903770215
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.22133113709965807
+          }
+        ]
+      },
+      {
+        "participant": "T3",
+        "threshold": 0.5,
+        "source_mean_r2": 0.26289860085996647,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.257337348911707
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.2614621980664804
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.26289860085996647
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.26255915892192233
+          }
+        ]
+      },
+      {
+        "participant": "T5",
+        "threshold": 0.25,
+        "source_mean_r2": 0.18726471588748136,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.18710710163196553
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.18726471588748136
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.1860597210006264
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.1841467712668558
+          }
+        ]
+      },
+      {
+        "participant": "T6",
+        "threshold": 0.5,
+        "source_mean_r2": 0.2077062167684347,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20387894882901766
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20607895141474902
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.2077062167684347
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20736677483039057
+          }
+        ]
+      },
+      {
+        "participant": "T7",
+        "threshold": 1.0,
+        "source_mean_r2": 0.20794946082683988,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20290384459826016
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20508543819305775
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.2076604171762109
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20794946082683988
+          }
+        ]
+      },
+      {
+        "participant": "T8",
+        "threshold": 0.5,
+        "source_mean_r2": 0.19809977187970512,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.1963187874654324
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.19681285799543147
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.19809977187970512
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.19776032994166104
+          }
+        ]
+      },
+      {
+        "participant": "T9",
+        "threshold": 0.5,
+        "source_mean_r2": 0.21106503161355256,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20710673800802076
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20973408974628283
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.21106503161355256
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.21072558967550845
+          }
+        ]
+      },
+      {
+        "participant": "T10",
+        "threshold": 0.5,
+        "source_mean_r2": 0.21106893899834253,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3133988697602718,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20717968689858943
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.3143916085335002,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.20963253620485645
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.31334756075416365,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.21106893899834253
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T11",
+                "mean_r2": 0.303071847593384,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.2107294970602984
+          }
+        ]
+      },
+      {
+        "participant": "T11",
+        "threshold": 1.0,
+        "source_mean_r2": 0.19992812457567866,
+        "candidates": [
+          {
+            "threshold": 0.1,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.1837966190299687,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.37804535920796306,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24387058163154596,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.25167141547760585,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.30435187254022783,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21804826819952094,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.2174646770749717,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.1951879128129269
+          },
+          {
+            "threshold": 0.25,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.39560343025542655,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24508954603728542,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.2530376518108156,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.3192182933918259,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21584843938501475,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.19741619360272217
+          },
+          {
+            "threshold": 0.5,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.41673461169815496,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.24392904229347895,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.19898310236862532
+          },
+          {
+            "threshold": 1.0,
+            "source_units": [
+              {
+                "participant": "T2",
+                "mean_r2": 0.13184774740154875,
+                "n": 18
+              },
+              {
+                "participant": "T3",
+                "mean_r2": -0.19797642717656563,
+                "n": 8
+              },
+              {
+                "participant": "T5",
+                "mean_r2": 0.4293226740639666,
+                "n": 18
+              },
+              {
+                "participant": "T6",
+                "mean_r2": 0.24356264555568846,
+                "n": 16
+              },
+              {
+                "participant": "T7",
+                "mean_r2": 0.23890115758409416,
+                "n": 18
+              },
+              {
+                "participant": "T8",
+                "mean_r2": 0.32041420466552517,
+                "n": 18
+              },
+              {
+                "participant": "T9",
+                "mean_r2": 0.21669212679474575,
+                "n": 18
+              },
+              {
+                "participant": "T10",
+                "mean_r2": 0.216660867716426,
+                "n": 18
+              }
+            ],
+            "mean_r2": 0.19992812457567866
+          }
+        ]
+      }
+    ],
+    "evidence_role": "exposed whole-person-excluded threshold ranking"
+  }
+}
