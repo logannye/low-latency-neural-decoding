@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "study": "V7 causal local recoverability before continual recalibration",
+  "role": "exposed_development_gate_not_fresh_validation",
+  "base_commit": "8901b8c246ccb4c3d5058e777a0fcd5a5dca9522",
+  "parents": {
+    "v6_development_sha256": "357f8b917abec17f6354dac3cd93b4d87d24df0db4bf60afeee8bdbefbf84678",
+    "v6_new_sessions_sha256": "dfe5ed95bf7f43b0bb51f3a11d163505e99641a4affc86daf38591fbdc5af534"
+  },
+  "scope": {
+    "sessions": 152,
+    "maximum_observed_seconds_per_session": 600,
+    "fresh_raw_tails_or_new_members_allowed": false,
+    "primary_participant": "T2",
+    "primary_selection": "six greatest numeric post_implant_day values among exposed T2 sessions; no replacement",
+    "secondary": "all exposed sessions including T3, with separate participant summaries"
+  },
+  "features": {
+    "family": "tx45_sbp",
+    "tau_seconds": 0.2,
+    "baseline_tau_seconds": null,
+    "adapt_gamma": 10.0,
+    "bin_seconds": 0.02,
+    "block_burn_bins": 62,
+    "normalizer": "first 30 seconds, fixed for all primary coefficient-update comparisons",
+    "local_normalizer_ablation": "same past 120-second training window, independent of labels",
+    "scale_floors": {"sqrt_counts": 0.1, "log1p_power": 0.01},
+    "normalized_clip": [-8, 8]
+  },
+  "models": {
+    "ridge_feature_penalty": 1.0,
+    "intercept": "free",
+    "loss": "mean summed two-coordinate squared error; weighted mean for exponential variant",
+    "minimum_valid_training_rows": 50,
+    "insufficient_training_fallback": "zero coefficients and zero prediction",
+    "output_projection": "unit disk",
+    "methods": ["zero", "frozen120", "expanding", "rolling60", "rolling120", "rolling240", "exponential60", "rolling120_local"],
+    "frozen120_training_seconds": [30, 150],
+    "expanding_training_start_seconds": 30,
+    "exponential_half_life_seconds": 60,
+    "exponential_start_seconds": 30,
+    "exponential_weight": "2 ** (-(fit_stop_bin - 1 - row_bin) * 0.02 / 60), normalized across selected valid training rows"
+  },
+  "evaluation": {
+    "update_seconds": [272, 332, 392, 452, 512, 572],
+    "label_delay_embargo_seconds": 2,
+    "window_seconds": 60,
+    "end_seconds": 600,
+    "fit_stop": "update minus 2 seconds; interval stop exclusive",
+    "score": "[update, min(update + 60, observed duration, 600)); identical valid-go mask and acquisition-block burn for every method",
+    "minimum_valid_scoring_rows": 50,
+    "session_metric": "pooled future predictions across eligible scoring windows, not average window R2",
+    "primary_metric": "mean session R2 across six most recent exposed T2 sessions",
+    "other_metrics": ["summed_mse", "angular_error_degrees", "gain_over_zero", "fraction_valid_time_in_windows_worse_than_zero", "unique_requested_label_seconds"],
+    "short_recordings": "retain with explicit unavailable windows and session score; no replacement",
+    "bootstrap": {"unit": "session within T2; participant for cross-person summaries", "draws": 10000, "seed": 20261026},
+    "dependence": "no trial identifiers available; temporal embargo does not establish independent or disjoint trials",
+    "label_reuse": "earlier scored labels may train a subsequent update after the fixed delay; no future label access"
+  },
+  "gate": {
+    "eligible_methods": ["rolling60", "rolling120", "rolling240", "exponential60", "rolling120_local"],
+    "required_scorable_primary_sessions": 6,
+    "minimum_mean_r2": 0.05,
+    "minimum_mean_paired_gain_over_frozen120": 0.05,
+    "minimum_positive_primary_sessions": 4,
+    "paired_session_bootstrap_95_lower_bound_strictly_greater_than": 0,
+    "pass_rule": "at least one declared eligible method satisfies every criterion",
+    "selection_among_passes": "highest mean T2 R2, ties resolved by listed eligible-method order",
+    "multiplicity": "bounded exploratory development gate; intervals are descriptive, not multiplicity-adjusted confirmatory evidence",
+    "if_fail": "stop before acquiring fresh data or building a continual controller; publish all results and diagnose limits of this representation/window family",
+    "if_pass": "freeze a separate continual-policy plan and complete source policy selection before opening fresh assessment outcomes"
+  },
+  "conditional_next_stage": {
+    "fresh_selection_proposal": "fixed next regular archive ranks 19 through 21 for T2,T5,T6,T7,T8,T9,T10,T11; separate acquisition lock before access",
+    "comparisons": ["fixed startup calibration", "periodic sparse recalibration", "drift-triggered sparse recalibration with scheduled probes"],
+    "requirements": ["matched total label budgets", "all labels including monitoring and rejected updates charged", "full shared deployment interval including pre-detection failures", "no evaluation-time oracle access", "independent reconstruction of model and policy", "report interruptions separately from prediction metrics", "offline results do not establish closed-loop utility"]
+  },
+  "publication": "code, plans, aggregate results and independent audits only; no raw samples, model coefficients or sample predictions"
+}
