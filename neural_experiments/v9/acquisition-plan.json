@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "study": "V9 trial-balanced calibration and provider-aligned target validation",
+  "provider": {
+    "doi": "10.5061/dryad.x0k6djj1h",
+    "version_id": 462702,
+    "license": "CC0-1.0"
+  },
+  "participants": [
+    "T2",
+    "T7",
+    "T9",
+    "T10"
+  ],
+  "regular_session_ranks_one_based": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+  ],
+  "authenticate_prior_regular_members": 24,
+  "maximum_compressed_response_bytes_all_attempts": 32000000000,
+  "maximum_retained_raw_bytes": 12000000000,
+  "maximum_parallel_workers": 3,
+  "maximum_export_bins_per_session": 30000,
+  "bin_seconds": 0.02,
+  "scores_durations_or_quality_used_for_selection": false,
+  "missing_short_or_failed_cases": "retain explicit disposition, no substitution or extending ranks",
+  "no_t3_continuation_access": true,
+  "fresh_assessment_sessions_enter_each_others_training": false,
+  "outcome_access": "raw acquisition only after committed acquisition plan; fresh conversion only after scientific plan, producer, and audited development choices are committed; no tail analysis",
+  "raw_container_exposure": "MAT decompression may materialize complete compressed variables; numerical analysis and all exports slice to selected first at most 600 recorded seconds; no tail statistics or target inspection",
+  "public_artifacts": "aggregate metrics and provenance only, no raw samples or coefficients",
+  "v8_development_index_sha256": "5c4b5ab0b0fa0ec28c2c5a1b746ca8e8ceee35b4797e2f7e2f66cc9d9dfdbf84",
+  "v8_fresh_index_sha256": "0ea2078c184e58014c9fc68d5fd5efa3855e93a12a82db6f2627174ae894c4b8"
+}
