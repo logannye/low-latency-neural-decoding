@@ -79,6 +79,7 @@ def generate(study_path, output):
     ax.invert_yaxis()
     ax.axvline(0, color="#626C77", lw=0.8)
     ax.axvline(0.05, color="#626C77", lw=0.8, ls="--")
+    ax.text(0.055, 4.8, "Recovery\nfloor", fontsize=9, color="#626C77")
     ax.set_xlabel("Mean session R² · unchanged full deployment target")
     ax.set_title("A  T2: fixed comparisons at the same label budget", loc="left", fontweight="bold")
     for i, v in enumerate(values):
@@ -88,7 +89,7 @@ def generate(study_path, output):
                 (v, i),
                 xytext=(4 if v >= 0 else -4, 0),
                 textcoords="offset points",
-                ha="left" if v < 0 else "left",
+                ha="right" if v < 0 else "left",
                 va="center",
                 fontsize=10,
             )
@@ -173,6 +174,8 @@ def generate(study_path, output):
     ax.axhline(0, color="#626C77", lw=0.8)
     ax.set_xticks(x, people)
     ax.set_ylabel("Mean session R²")
+    low, high = ax.get_ylim()
+    ax.set_ylim(low, high + 0.13)
     ax.legend(frameon=False, loc="upper right")
     ax.set_title(
         "C  Portability across known participants · dots show every scorable session",
@@ -185,6 +188,8 @@ def generate(study_path, output):
     output.parent.mkdir(parents=True, exist_ok=True)
     for ext in ("png", "svg"):
         fig.savefig(output.with_suffix("." + ext), dpi=180)
+    svg = output.with_suffix(".svg")
+    svg.write_text("\n".join(line.rstrip() for line in svg.read_text().splitlines()) + "\n")
     plt.close(fig)
     write_json(
         output.with_suffix(".json"),

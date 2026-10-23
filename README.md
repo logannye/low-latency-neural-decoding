@@ -3,135 +3,75 @@
 [![Neural decoding](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/neural.yml/badge.svg)](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/neural.yml)
 [![Python tests](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/test.yml/badge.svg)](https://github.com/logannye/low-latency-neural-decoding/actions/workflows/test.yml)
 
-**A brain-computer interface decoding testbed that treats accuracy, calibration effort, and streaming
-performance as one engineering problem.** Built on public human intracortical
-recordings, with frozen evaluation protocols, explicit failure criteria, and
-reproducible evidence.
+**A brain-computer interface ML testbed for accurate decoding, low calibration burden, and dependable streaming performance.** Built on public human intracortical recordings, with causal streaming prediction, frozen experiments, explicit failure criteria, and reproducible evidence.
 
 ## Why this matters
 
-Fast inference alone does not solve decoder drift. As recordings change, a
-useful neural interface must decide whether yesterday's model still works,
-whether collecting more labels will help, and when the evidence is too weak to
-continue. This project develops and tests those decisions. The longer-term
-motivation is dependable interfaces with less supervised setup; the evidence
-here comes from offline replay.
+A useful neural interface must keep working as recordings and behavior change. Fast inference is one requirement; equally important are knowing whether a model remains informative, whether more labels will help, and when an update should be rejected. This project builds and tests those decisions together. Its long-term motivation is reliable interfaces that require less supervised setup. Its current evidence comes from offline recordings and replay.
 
 ## How it works
 
-Spike counts and spike-band power feed a causal filter and a small regularized
-direction decoder. The latest experiment starts with two minutes of labeled
-calibration, then collects short feedback bursts throughout the session. It
-compares a fixed schedule with requests triggered by changes in neural activity,
-giving both the same label budget on complete recordings. Calibration pauses
-and update delays count toward the final score.
+Spike counts and spike-band power feed a causal temporal filter and a small regularized direction decoder. Readouts are calibrated separately for each person and session. The broader experiment series tests historical model reuse, daily calibration, confirmation before deployment, and continual recalibration under a label budget.
+
+The latest study investigates a persistently difficult participant, T2. It separates three proposed explanations: the target used for supervision, how calibration trials are weighted, and which neural features are retained. All variants use the same two-minute calibration interval and the same primary held-out scoring mask. A separate stable-target analysis tests whether changing the endpoint changes the conclusion.
 
 ```mermaid
 flowchart LR
-    A[Neural features] --> B[Causal filter]
-    B --> C[Direction decoder]
+    A[Neural observations] --> B[Causal filtering]
+    B --> C[Calibrated readout]
     C --> D[Predicted direction]
-    B --> E[Neural shift monitor]
-    E --> F[Request calibration burst]
-    F --> G[Accumulate labeled evidence]
-    G --> C
+    E[Purchased training labels] --> C
+    D --> F[Held-out accuracy and failure checks]
+    G[Exported streaming decoder] --> H[Latency and deadline checks]
+    C --> G
 ```
 
-The trigger sees only past neural observations. Target directions are available
-to fitting only during purchased calibration intervals. Updates retain all
-acquired evidence; a separate streaming implementation stores sufficient
-statistics instead of an ever-growing sample history. It reproduces the
-reference fits with memory independent of the number of labels.
-
-Each person's readout uses their own recordings and electrode layout. The
-calibration procedure is tested across people. Earlier experiments cover daily
-calibration, historical model reuse, and confirmation before deployment; their
-failures motivate this focus on sustained performance.
+Behavioral context and labels remain separate from the feature-only prediction interface. Trials overlapping calibration are excluded from evaluation. Source choices are committed before fresh outcomes are opened; an independent numerical implementation reconstructs exported models, predictions, scoring, uncertainty intervals, and acceptance decisions.
 
 ## Latest results
 
-**Continual recalibration did not resolve T2 or improve the cohort average over
-two-minute startup calibration.** On 22 scorable fresh sessions across eight
-known participants, the startup-only baseline reached **mean R² 0.225**, with
-positive participant means for seven of eight people. All three predeclared
-continual-recalibration success criteria failed.
+**Positive held-out accuracy across seven comparison participants; no validated T2 recovery.** We evaluated 12 fixed methods on 24 new sessions from eight known participants. Twenty-three sessions were scorable; the remaining recording ends before evaluation and is retained as unavailable. Each session receives a two-minute calibration budget.
 
-| Procedure | Mean available labels | Mean held-out R² [95% interval] |
-| --- | ---: | --- |
-| Two-minute startup, frozen model | 118.8 s | 0.225 [0.101, 0.343] |
-| Four-minute startup, frozen model | 225.6 s | 0.162 [0.050, 0.266] |
-| Periodic recalibration | 211.3 s | 0.201 [0.093, 0.286] |
-| Neural-shift-triggered recalibration | 207.5 s | 0.213 [0.108, 0.301] |
+The preselected baseline reaches **mean R² 0.303** across all eight participants (participant-bootstrap 95% interval **0.194–0.398**) and **0.348** across the other seven. T2 averages **−0.008**, with session scores **−0.004, −0.098, and 0.079**. It fails the predeclared recovery criterion.
 
-Scores cover the same deployment interval and include zero output during
-calibration. Accuracy averages sessions within participant, then people equally;
-intervals resample participants. Costs include all 24 selected recordings,
-including two too short to score. Complete recordings give both continual
-policies 240 label seconds; shorter recordings can yield different actual costs.
-Seconds here count recorded observations. R² measures direction variance
-explained, with higher values indicating better prediction.
+| Fixed T2 comparison | Mean held-out R² | Finding |
+|---|---:|---|
+| Baseline | −0.008 | Some directional signal, unreliable recovery |
+| Equal weight per calibration trial | −0.006 | Little change |
+| Lower spike threshold + longer temporal filter | −0.045 | Worse than baseline |
+| Train only on early, far-from-target observations | −0.213 | Worse, with far fewer usable labels |
+| Train on a stable reference direction | −0.219 | Does not recover the original endpoint |
+| Zero-output control | −0.085 | Baseline improves the mean, but not consistently |
 
-![Fresh-session accuracy, calibration cost and every participant](neural_experiments/figures/v7-continual.png)
+Higher R² means better direction prediction; negative values indicate more error than predicting the held-out mean direction. Calibration seconds count recorded observations, rather than elapsed time across recording gaps.
 
-**T2 remained negative on all three fresh sessions under every tested decoder.**
-Its mean R² was −0.086 with startup-only calibration, −0.107 with periodic
-updates and −0.078 with triggered updates. Across the cohort, triggering gained
-0.012 over periodic updates, but its paired 95% interval [−0.002, 0.027] included
-zero. More labels and neural-distribution changes did not reliably translate
-into useful sustained decoding in this experiment.
+The experiment narrows the failure without assigning a unique cause. Changing to a stable target on the **same early/far evaluation bins** gives R² **−0.085**, versus **−0.094** for the matched original-target model. Thus this target revision is not enough. The combined lower-threshold, longer-filter recipe produces denser observations but worsens accuracy; more activity is not automatically more useful information.
 
-The trigger also behaved mostly like a schedule: **70 of 71 requests came from
-mandatory timing rules**, with only one caused by the neural-shift threshold.
-This limits the evidence for adaptive detection itself.
+**Trial coverage remains a concrete limitation.** T2's two-minute calibration contains only **7–10 distinct trials**. Reweighting those trials cannot add missing examples, and restricting training to the early/far phase leaves just **4.8–7.2 seconds** of usable observations. These results argue for testing calibration budgets based on diverse trials, alongside a better task/target contract, before assuming that more sophisticated adaptation will solve the problem. They do not establish that T2 has no decodable neural signal.
 
-An earlier exposed-data screen found that retaining accumulated labels helped
-T2, while its recency-weighted candidates failed the original recovery gate.
-That motivated this separately locked follow-up through an explicit
-[protocol amendment](neural_experiments/v7/CONTINUAL_PROTOCOL.md). The original
-failure remains in the [recoverability report](neural_experiments/v7/RECOVERY_REPORT.md).
+![Fresh-session T2 diagnosis and known-participant portability](neural_experiments/figures/v8-diagnosis.png)
+
+All seven comparison participants have positive baseline means, ranging from **0.226 to 0.524**. The same decoding recipe is fitted separately in each session; this demonstrates portability across known participants with calibration. It does not establish zero-shot transfer to a new person. The changed cohort and stricter trial exclusions also prevent treating these numbers as a matched improvement over earlier studies.
+
+The source screen selected the existing baseline among neural recipes because the proposed fixes did not consistently improve the exposed development sessions. All eight fixed comparisons and four controls were still evaluated on fresh data. The predeclared recovery decision uses only the preselected recipe; the best-looking fresh result cannot replace it.
+
+Read the **[complete V8 report](neural_experiments/v8/REPORT.md)**, [mechanism diagnosis](neural_experiments/v8/DIAGNOSIS.md), [frozen protocol](neural_experiments/v8/PROTOCOL.md), and [aggregate results](neural_experiments/results/v8-study.json).
 
 ## Engineering evidence
 
-An audited T2 source model completed two 60-second replays at 50 Hz with
-**zero missed 20 ms deadlines across 6,000 updates**. Processing p99 was
-**1.29–1.45 ms** and release-to-completion p99 was **5.55–5.56 ms** on macOS ARM64.
-These are finite measurements beginning when features are ready.
+The exported source decoder completed **6,000 updates at 50 Hz with zero missed 20 ms deadlines**. Processing p99 was **0.925–0.941 ms**, and release-to-completion p99 was **5.29–5.38 ms**, on macOS ARM64. Its numeric model occupies **6,160 bytes**, with **1,544 bytes** of filter state. Streaming predictions agree with the independent implementation within **7.8 × 10⁻¹⁶**.
 
-The streaming calibration path reproduced all five reference fits within
-**1.5 × 10⁻¹⁵ coefficient error**. Its persistent numeric calibration state is
-**303 KB**, plus a **99 KB** bounded input buffer. State size depends on channel
-count, not accumulated label count. The largest measured solve, export and reload
-took **1.31 ms**. These component measurements exclude transient solver memory;
-they are separate from fresh accuracy and do not establish a hard real-time bound.
+These are finite measurements beginning when precomputed neural features are available. They exclude acquisition latency and are not hard real-time guarantees. The selected filter's 200 ms time constant introduces response lag separately from CPU processing time. The source replay is an engineering check; its accuracy is not counted as fresh evidence.
 
-The repository passes **1,049 local tests** (22 optional tests skipped), with
-hosted CI and [engineering evidence](neural_experiments/v7/ENGINEERING.md).
+Earlier continual-calibration work also implemented bounded sufficient statistics: **303 KB** of persistent numeric calibration state, plus a **99 KB** input buffer, reproducing reference fits within **1.5 × 10⁻¹⁵** coefficient error. Its [fresh experiment](neural_experiments/v7/REPORT.md) found that more labels and neural-shift triggers did not reliably outperform startup-only calibration. Those failures motivate the present diagnosis.
 
-Protocols and source choices are committed before held-out assessment. A
-separate numerical implementation checks fitting, chronological information
-access, exported predictions, decisions, uncertainty intervals, and reported
-gates. Public evidence includes every selected case and failed acceptance;
-raw samples and model coefficients remain in ignored local caches. This is
-verification within the project, not external replication.
-
-Read the **[V7 results report](neural_experiments/v7/REPORT.md)**,
-[protocol](neural_experiments/v7/CONTINUAL_PROTOCOL.md),
-[data provenance](neural_experiments/v7/DATA.md), and
-[aggregate results](neural_experiments/results/v7-continual-study.json).
+The repository includes automated leakage, state-reset, export parity, numerical reconstruction, and mutation checks. Raw samples, behavioral traces, prediction arrays, and fitted coefficients remain in ignored local caches. Public evidence includes every selected case and failed criterion. See [runtime evidence](neural_experiments/v8/RUNTIME.md) and [data provenance](neural_experiments/v8/DATA.md).
 
 ## Where the evidence ends
 
-The held-out sessions come from known people; transfer to an untouched
-participant is not established. The target is cursor-to-target direction, an
-offline intention proxy. Closed-loop utility and clinical benefit remain
-untested, and short confirmation cannot guarantee reliability under future
-drift. T3 remains an unresolved failure from earlier studies.
+The target is cursor-to-target direction, an offline proxy for intention. The recordings do not identify actual intended movement, assistance level, or a unique biological cause of decoder failure. The finite set of unsuccessful fixes cannot establish that T2 is undecodable. T3 remains unresolved from earlier studies.
 
-Continual recalibration is evaluated through recorded-data replay. Zero output
-during calibration does not simulate how a person would change their behavior.
-Upstream feature-extraction causality and acquisition latency remain unverified.
-The latest decoder's 200 ms causal smoothing time constant introduces response
-lag distinct from CPU latency.
+Fresh sessions come from known participants; transfer to an untouched person is not established. The experiments do not demonstrate closed-loop control, clinical benefit, or how a person would adapt to calibration pauses. Upstream feature-extraction causality and acquisition latency remain unverified. These boundaries apply to every performance claim here.
 
 ## Run and explore
 
@@ -146,15 +86,6 @@ neural-decode --help
 python neural_experiments/replay_demo.py --smoke --output work/replay-smoke.html
 ```
 
-Synthetic tests and the smoke replay need no neural-data download or Rust build.
-The [reproduction guide](neural_experiments/v7/README.md) covers recoverability,
-source selection, fresh assessment, independent audits, and runtime measurement.
+Synthetic tests and the smoke replay require no neural-data download or Rust build. The [V8 reproduction guide](neural_experiments/v8/README.md) covers source selection, fresh acquisition, assessment, audits, and runtime measurement. The public dataset is [Dryad version 462702](https://doi.org/10.5061/dryad.x0k6djj1h).
 
-Earlier [V3](neural_experiments/v3/REPORT.md),
-[V4](neural_experiments/v4/REPORT.md),
-[V5](neural_experiments/v5/REPORT.md), and
-[V6](neural_experiments/v6/REPORT.md) reports retain the progression from daily
-calibration to history reuse and adaptive policies, including negative results.
-Their cohorts and scoring windows differ, so headline means are not matched
-improvement comparisons. The original image-classification work is preserved in
-[CNN_EXPERIMENT.md](CNN_EXPERIMENT.md).
+Earlier [V3](neural_experiments/v3/REPORT.md), [V4](neural_experiments/v4/REPORT.md), [V5](neural_experiments/v5/REPORT.md), [V6](neural_experiments/v6/REPORT.md), and [V7](neural_experiments/v7/REPORT.md) reports preserve the progression and negative results. Cohorts and scoring windows differ, so their headline means are not matched improvement comparisons. The original image-classification experiment remains available in [CNN_EXPERIMENT.md](CNN_EXPERIMENT.md).
