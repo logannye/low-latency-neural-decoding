@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "study": "V8 source-only portable decoder runtime",
+  "representative_rule": "First T2 factorial-stage session in archive order (rank16), using the development-selected primary exported model. No timing or accuracy outcome chooses the session.",
+  "required_source_evidence": "Complete V8 development manifest and independent PASS receipt bound to that manifest and index; current scientific source hashes unchanged.",
+  "workload": "Exactly the first3000 paired20ms feature rows of the representative's already exposed prefix, with acquisition-block resets preserved.",
+  "count": 3000,
+  "repeats": 2,
+  "period_ns": 20000000,
+  "warmup_steps": 500,
+  "threadpool_limit": 1,
+  "parity_atol": 1e-10,
+  "parity_rtol": 1e-10,
+  "timed_boundary": "Feature-row dictionary indexing, required block reset, input validation, transform, all causal filters, normalization, linear head, unit-disk projection and return of one prediction.",
+  "scheduler": "Ordinary sleep until fixed nominal monotonic release, recheck remaining time to avoid early release; no busy wait and no dropped updates.",
+  "quantiles": [0.5, 0.95, 0.99],
+  "raw_evidence": "Per-step int64 release/start/completion/deadline clocks, float64 predictions, per-block process CPU and monotonic wall clocks remain local.",
+  "memory": "Numeric decoder coefficients/normalizers, persistent filter states/decays, and compressed model artifact bytes. These exclude Python overhead, scratch arrays, input cache and process RSS.",
+  "limitations": "The fixed exported model uses labels through150s and is replayed on the first60s. This is numerical and compute testing only, not causal efficacy. Feature acquisition, upstream extraction, transport, file loading, and model fitting are excluded. Two finite runs on one source session do not establish hard realtime or general runtime guarantees.",
+  "attempt_rule": "Preserve the first attempt and its raw evidence. Report ambient load; do not select a favorable rerun. Any technical correction requires a separate retained attempt and explicit explanation.",
+  "publication": "Only allowlisted aggregate timing, memory, geometry, environment and identity hashes after independent audit; no raw clocks, paths, labels, neural samples, predictions or weights."
+}
