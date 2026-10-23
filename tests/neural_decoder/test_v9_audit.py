@@ -430,3 +430,12 @@ def test_fit_future_target_and_feature_changes_cannot_affect_quota_artifact():
     raw = audit.representations_reference(other)[config["representation"]]
     ref = audit.fit_reference(other, config, raw)
     np.testing.assert_allclose(ref["gram"] @ after.weights, ref["rhs"], atol=1e-12)
+
+
+def test_selection_binding_hashes_exact_retained_floats_after_independent_validation():
+    expected = {"method": "grid_00", "mean_r2": 0.2}
+    retained = {"method": "grid_00", "mean_r2": 0.2 + 1e-14}
+    assert audit.canonical_sha256(retained) != audit.canonical_sha256(expected)
+    assert audit.selection_payload_binding(retained, expected) == audit.canonical_sha256(retained)
+    with pytest.raises(ValueError):
+        audit.selection_payload_binding({"method": "grid_01", "mean_r2": 0.2}, expected)

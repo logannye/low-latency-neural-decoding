@@ -1205,6 +1205,12 @@ def canonical_sha256(value):
     ).hexdigest()
 
 
+def selection_payload_binding(actual, expected):
+    """Verify independently, then bind the exact retained serialized payload."""
+    compare_structure(actual, expected, "complete source selection payload")
+    return canonical_sha256(actual)
+
+
 def grid_reference():
     return {
         f"grid_{i:02d}": configurations_reference(rt, ridge)[PRIMARY]
@@ -1400,8 +1406,7 @@ def audit_run(run, output, *, data_audit, source_run=None, source_audit=None):
             "recipe_choice": {"method": choice["selected_method"], "config": chosen},
             "grid_selection": choice,
         }
-        compare_structure(m["selection"], selection, "complete source selection payload")
-        binding["selection_sha256"] = canonical_sha256(selection)
+        binding["selection_sha256"] = selection_payload_binding(m["selection"], selection)
         summary = summary_reference(final_rows)
     else:
         binding = source_binding_reference(m, source_run, source_audit)
