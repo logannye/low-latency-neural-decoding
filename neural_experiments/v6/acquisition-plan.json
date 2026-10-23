@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "study": "calibration-validation-and-T2-v6",
+  "status": "locked_before_new_acquisition_and_fresh_outcome_preparation",
+  "prior_exposure": "All V2 through V5 first-min(600s,duration) prefixes informed follow-up design:128 distinct sessions. V4 and V5 T3 continuation outcomes are exposed but excluded from V6 development. No archive ranks16-18 or subsequent untouched bins informed V6 selection.",
+  "provider": {
+    "doi": "10.5061/dryad.x0k6djj1h",
+    "version_id": 462702,
+    "license": "CC0-1.0"
+  },
+  "parent_v5_acquisition_plan_sha256": "43a55022369f44d76659d453e20880009692bfa80591aa49d0b54677cb8c1f47",
+  "parent_v5_development_index_sha256": "1fb2d9b3167e2c671e279dd89fe05ebb6f38633d4f3e6f3b56078a0c61621fb1",
+  "parent_v5_new_index_sha256": "6ac718377da28dcb43ca127c8da6e6a78b40703ffc4b81358b06bb56ada4c5a4",
+  "new_session_domain": {
+    "participants": [
+      "T2",
+      "T5",
+      "T6",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "T11"
+    ],
+    "regular_session_ranks": [
+      16,
+      17,
+      18
+    ],
+    "selection": "Fixed regular MAT session archive ranks, independent of duration, signals and outcomes. Authenticate all15 previously acquired members against pinned V5 parents while streaming. No substitution for missing or unusable cases. Archive rank is not chronological day order.",
+    "maximum_compressed_bytes_total": 22000000000,
+    "maximum_retained_raw_bytes_total": 12000000000,
+    "maximum_parallel_workers": 3,
+    "export_cap_seconds": 600,
+    "known_availability": "Prior receipts reached rank15 in all eight archives without observing archive end. Beyond15 member identities, duration and availability are unknown before this locked acquisition. Exhaustion, budgets and failures retain explicit dispositions; no replacement or expansion."
+  },
+  "T3_continuation_domain": {
+    "included": false,
+    "reason": "T2-focused follow-up; preserve remaining T3 continuation blocks unexposed."
+  },
+  "development": {
+    "sessions": 128,
+    "recorded_bins": 3581828,
+    "selection": "Exactly104 V5 development plus24 V5 new-session prefixes, deduplicated; first-min(600s,duration) only. Eight original T3 prefixes remain; all continuation tails are excluded.",
+    "preparation": "Reuse exact existing feature and target bytes by immutable hard links, with parent-index and per-artifact hashes bound in a new role manifest."
+  },
+  "history": "Same participant and matching electrode layout only, with numeric post-implant day strictly smaller than the target day. No fresh assessment case enters any other assessment history. Same-day or future-day records are excluded regardless of archive rank.",
+  "features": [
+    "tx_3",
+    "tx_4_5",
+    "sbp"
+  ],
+  "feature_preparation": "Unchanged V4/V5 within-block adjacent10ms pair preparation: sum counts, average power, separate pure feature files and scorer targets, preserve unit cursor-to-target direction and valid-go-pair semantics. No export normalization; upstream feature causality remains unverified.",
+  "evaluation_lock": "Commit full algorithm, source-only policy selection, calibration intervals, shared evaluation windows, controls and gates before preparing fresh outcomes. Commit independently verified source selections and exact source snapshot before assessment. Acquisition alone does not authorize sample inspection, scoring or outcome-dependent selection.",
+  "transport_accounting": "Count all response bytes including unsuccessful attempts under the shared compressed cap. Reserve selected member bytes before writing under a synchronized raw cap. Retain failed attempts and shortage receipts. Never claim full provider archive SHA verified from prefix reads. Signed redirect query strings remain private."
+}

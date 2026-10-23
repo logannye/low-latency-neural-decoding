@@ -1,0 +1,22 @@
+{
+  "python": "3.12.13 (main, Mar 25 2026, 03:16:06) [Clang 22.1.1 ]",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "packages": {
+    "numpy": "2.5.2",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1",
+    "matplotlib": "3.11.2",
+    "threadpoolctl": "3.7.0",
+    "h5py": "3.16.0",
+    "pytest": "9.1.1",
+    "ruff": "0.16.10"
+  },
+  "numeric_thread_settings": {
+    "OPENBLAS_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1"
+  },
+  "native_compilation": "none; reused installed scientific Python libraries",
+  "scope": "Scientific replay and local verification environment; runtime artifact contains its own machine/timing receipt."
+}
