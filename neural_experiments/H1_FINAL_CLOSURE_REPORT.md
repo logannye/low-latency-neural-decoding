@@ -1,6 +1,6 @@
 # Final H1 deployment evidence
 
-**Status: all prescribed measurements completed and independently verified. The overall provisional 2 ms service-p99 goal failed; both 30-minute soaks retained deadline misses. Local software checks passed; new hosted checks remain pending publication authorization.** See the [frozen protocol](H1_FINAL_CLOSURE_PROTOCOL.md), [historical H1 report](FINAL_REPORT.md), and [reviewer guide](REVIEWER_GUIDE.md).
+**Status: all prescribed measurements completed and independently verified. The overall provisional 2 ms service-p99 goal failed; both 30-minute soaks retained deadline misses. Local software checks passed. Code and aggregate evidence are published in draft PR #11; hosted status is linked below.** See the [frozen protocol](H1_FINAL_CLOSURE_PROTOCOL.md), [historical H1 report](FINAL_REPORT.md), and [reviewer guide](REVIEWER_GUIDE.md).
 
 The exact final 23,367-parameter H1 models reproduced their historical later-day results, and all four float32 execution paths passed full-file numerical and day-score equivalence. The fixed int8 conversion passed the prespecified approximation budget in all 21 seed/day cells: its worst variance-weighted R² change was −0.001715406, within the −0.005 limit. The predetermined seed-0 exported graph shrank from 102,884 to 39,641 bytes, a 61.47% reduction.
 
@@ -266,15 +266,23 @@ measurements; implementation at `94d5457` preceded quality, recovery and timing.
 Task-owned private evidence occupies approximately 319 MiB on disk, below the
 frozen 2 GiB output cap; useful failures and raw evidence were retained. No
 final-model training, dependency installation, native compilation or private
-artifact upload was performed. Hosted validation of this branch has not run.
+artifact upload was performed. Hosted software checks are tracked in
+[draft PR #11](https://github.com/logannye/low-latency-neural-decoding/pull/11/checks).
+The first published head, `d4bb8a897aeee9a210d2d7d76880dc1d25670d54`, passed
+[Neural decoding Python](https://github.com/logannye/low-latency-neural-decoding/actions/runs/40170440802)
+and [Tests](https://github.com/logannye/low-latency-neural-decoding/actions/runs/40170440817).
+These validate Linux software contracts and synthetic workflows; private H1
+quality and macOS timing evidence are not rerun in CI. Later documentation-only
+revisions have their own check records on the PR.
 Final local validation on the execution code at `94d5457` passed **1,361 tests with no skips** in 35.11 seconds. The 52 warnings are legacy Torch ONNX-export deprecations. Lint passed and all 332 scoped Python files passed formatting. `git diff --check` passed; the complete diff from the starting revision contains no change under `src/neural_decoder/`. The local test log is retained at `results/neural-h1/h1-final-closure-validation-v1/pytest.log`.
 
 The starting revision `d8085cc4c46ddaa1661eb507ae8e6fdd5a650927` has successful
 [Tests](https://github.com/logannye/low-latency-neural-decoding/actions/runs/40006323051)
 and [Neural decoding Python](https://github.com/logannye/low-latency-neural-decoding/actions/runs/40006323163)
 workflows, refreshed during this study. Those receipts cover the starting revision,
-not the new implementation. This branch remains local pending authorization to
-publish code and aggregates and run hosted synthetic checks.
+not the new implementation. The authorized publication includes code, protocols,
+aggregates and audit receipts; recordings, weights and per-bin traces remain local.
+The PR check list identifies hosted outcomes for each published revision.
 
 Final local validation commands (with the environment above):
 
