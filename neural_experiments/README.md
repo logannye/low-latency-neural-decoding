@@ -1,8 +1,11 @@
 # Reproducing the neural decoding study
 
-The [V3 study](v3/README.md) diagnoses failed transfer and evaluates causal daily
-recalibration on 26 held-out sessions across nine previously studied people. Its
-[results report](v3/REPORT.md) contains the latest accuracy and evidence boundaries.
+The [reviewer guide](REVIEWER_GUIDE.md) connects the positive H1 and V3/V4 results
+to their exact experiments and retained failures. The [V9 study](v9/README.md) is
+the latest calibration experiment; its trial-balanced policy did not recover T2.
+The [final H1 deployment report](H1_FINAL_CLOSURE_REPORT.md) and its
+[frozen protocol](H1_FINAL_CLOSURE_PROTOCOL.md) cover separate conversion and
+runtime validation of the exact final H1 models, including reproduction commands.
 
 The [V2 study](v2/README.md) adds controlled H1 accuracy experiments and a
 separate nine-participant calibration and transfer evaluation. This page
@@ -19,7 +22,7 @@ negative results, and limits.
 
 These are local evaluations on public recordings from one H1 participant, not
 official FALCON scores, cross-participant validation, or live neural control.
-Runtime uses separately pinned development weights on one M4 Max; timing does not
+The original runtime study uses separately pinned development weights on one M4 Max; timing does not
 include neural acquisition or wireless transport and does not establish implant
 power savings. New machines, library versions, training artifacts, and freezes
 produce new evidence rather than inheriting the original run's acceptance.

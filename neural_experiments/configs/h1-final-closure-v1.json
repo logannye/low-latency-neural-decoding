@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "study": "h1-final-closure-v1",
+  "date": "2026-10-24",
+  "baseline_revision": "d8085cc4c46ddaa1661eb507ae8e6fdd5a650927",
+  "cache": "data/neural_h1",
+  "inputs": {
+    "freeze": {
+      "path": "neural_experiments/results/later-freeze.json",
+      "sha256": "fd458c649b2af3c78e90ab2298821b2e28a1dc38011c7cc5ee3b29ef19dcea1c"
+    },
+    "parent_freeze": {
+      "path": "neural_experiments/results/early-freeze.json",
+      "sha256": "471c01b3fdc030c432b61c8188641c110b56f97aeb25ea64f5455312849a1fff"
+    },
+    "assessment_index": {
+      "path": "data/neural_h1/prepared_assessment/later-fd458c649b2af3c7/index.json",
+      "sha256": "dd27945ae0f2b9aaab9e2ae6d6f35e77ae811f2cc0b95e19286c75eb7f2dc717"
+    },
+    "development_index": {
+      "path": "data/neural_h1/prepared/index.json",
+      "sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2"
+    },
+    "historical_manifest": {
+      "path": "results/neural-h1/final-later-evaluation-v1/manifest.json",
+      "sha256": "00eabebd9c456c8a5378f8cf0f9e261bfb8472c83159c1b7510491a22b0b4b86"
+    },
+    "historical_summary": {
+      "path": "results/neural-h1/final-later-evaluation-v1/summary.json",
+      "sha256": "c5657c2753dae25972ad50872bb55067a9cfe4650c2faeb8eb2d65239e5968de"
+    },
+    "public_final": {
+      "path": "neural_experiments/results/final-later.json",
+      "sha256": "c5657c2753dae25972ad50872bb55067a9cfe4650c2faeb8eb2d65239e5968de"
+    }
+  },
+  "models": [
+    {
+      "seed": 0,
+      "name": "tcn-seed-0",
+      "path": "results/neural-h1/final-later-models-v1/tcn-seed-0.npz",
+      "sha256": "95f6a0b3131e1971f146298e23c95a42f7da28467d8acc24f37f916d9dc049ec"
+    },
+    {
+      "seed": 1,
+      "name": "tcn-seed-1",
+      "path": "results/neural-h1/final-later-models-v1/tcn-seed-1.npz",
+      "sha256": "b33b6ed1b38bad2d82a3605f6be4ae0707faae77361596245f1dd484f621579b"
+    },
+    {
+      "seed": 2,
+      "name": "tcn-seed-2",
+      "path": "results/neural-h1/final-later-models-v1/tcn-seed-2.npz",
+      "sha256": "12aed331e7bac3c9f42f67d75ff56dac32f7dcbffde0c942d96215dac8263627"
+    }
+  ],
+  "assessment": {
+    "days": [
+      "S6",
+      "S7",
+      "S8",
+      "S9",
+      "S10",
+      "S11",
+      "S12"
+    ],
+    "file_count": 14,
+    "total_bins": 34490,
+    "scored_bins": 33613,
+    "exposure": "previously assessed; conversion validation, not fresh generalization",
+    "early_secondary": false
+  },
+  "arms": {
+    "A": "torch_window",
+    "B": "numpy_incremental",
+    "C": "onnx_original_float32",
+    "D": "onnx_rewritten_float32",
+    "E": "onnx_rewritten_dynamic_int8"
+  },
+  "quality": {
+    "parity_rtol": 3e-05,
+    "parity_atol": 1e-07,
+    "score_atol": 1e-05,
+    "max_int8_r2_loss": 0.005
+  },
+  "conversion": {
+    "onnx": "1.19.1",
+    "onnxruntime": "1.23.2",
+    "opset": 17,
+    "dynamo": false,
+    "weight_type": "QInt8",
+    "per_channel": true,
+    "reduce_range": false,
+    "operators": [
+      "MatMul"
+    ],
+    "expected_matmul_integer": 4,
+    "state_precision": "float32"
+  },
+  "runtime": {
+    "timing_seed": 0,
+    "workload_index": {
+      "path": "data/neural_h1/prepared/index.json",
+      "sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2"
+    },
+    "fast_file_ids": [
+      "S0_set_1",
+      "S0_set_2",
+      "S1_set_1",
+      "S1_set_2",
+      "S1_set_3",
+      "S2_set_1",
+      "S2_set_2",
+      "S3_set_1",
+      "S3_set_2",
+      "S4_set_1",
+      "S4_set_2"
+    ],
+    "fast_bins": 112488,
+    "paced_file_id": "S0_set_1",
+    "paced_bins": 3001,
+    "paced_seconds": 60,
+    "warmup_bins": 500,
+    "period_ns": 20000000,
+    "threads": 1,
+    "logger_buffer_records": 4096,
+    "rss_sample_interval_ns": 1000000000,
+    "soak_bins": 90000,
+    "eligible_order": "ABCDE",
+    "orders": [
+      [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      [
+        "B",
+        "C",
+        "D",
+        "E",
+        "A"
+      ],
+      [
+        "C",
+        "D",
+        "E",
+        "A",
+        "B"
+      ],
+      [
+        "D",
+        "E",
+        "A",
+        "B",
+        "C"
+      ],
+      [
+        "E",
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    ],
+    "fallback": "remove only unsupported/quality-ineligible; all cyclic rotations in alphabetical order",
+    "isolation": "fresh subprocess for each arm/block; one measurement process",
+    "reset": "each provider file and repeated cycle; never trials",
+    "soak_arms": [
+      "B",
+      "E"
+    ],
+    "soak_e_requires": "quality and lifecycle pass",
+    "service_goal_p99_ms": 2,
+    "percentile": "numpy percentile method=linear",
+    "provider": "CPUExecutionProvider",
+    "execution_mode": "ORT_SEQUENTIAL",
+    "optimization": "ORT_ENABLE_ALL",
+    "spinning": false,
+    "source_dependencies": [
+      "src/neural_decoder/*.py",
+      "neural_experiments/h1_final_closure*.py",
+      "neural_experiments/audit_h1_final_closure*.py",
+      "neural_experiments/compression.py",
+      "neural_experiments/audit_compression.py",
+      "neural_experiments/audit_assessment.py",
+      "neural_experiments/configs/h1-final-closure-v1.json",
+      "neural_experiments/H1_FINAL_CLOSURE_PROTOCOL.md",
+      "pyproject.toml"
+    ]
+  },
+  "recovery": {
+    "checkpoint_arms": [
+      "C",
+      "E"
+    ],
+    "numpy_checks": [
+      "reset",
+      "chunk",
+      "state_boundary"
+    ],
+    "timestamp_origin_ns": 0,
+    "timestamp_convention": "sequence_id * 20000000 within file; host clock separate",
+    "channel_order": "exact channel_ids from authenticated input feature manifest",
+    "gap_policy": "mark unusable until explicit reset or validated restore",
+    "snapshot_publication": "create-new; preserve prior complete; truncated rejection; no atomic durability claim",
+    "overhead_bins": 3001,
+    "stall_after_bin": 10,
+    "stall_ns": 60000000,
+    "fault_bins": 31
+  },
+  "resources": {
+    "max_new_output_bytes": 2147483648,
+    "no_native_builds": true,
+    "no_downloads": true
+  },
+  "publication_allowlist": [
+    "aggregate_scores",
+    "aggregate_timing",
+    "aggregate_resources",
+    "protocol",
+    "code",
+    "synthetic_tests",
+    "hash_bindings",
+    "audit_receipts"
+  ],
+  "claim_limits": [
+    "one participant",
+    "nonofficial FALCON",
+    "offline counts-ready replay",
+    "no new biology from repeated recordings",
+    "no acquisition or implant power claim",
+    "float32 default",
+    "no T2 recovery"
+  ],
+  "tolerances": {
+    "rtol": 3e-05,
+    "atol": 1e-07,
+    "day_r2_atol": 1e-05,
+    "int8_day_r2_min_delta": -0.005
+  },
+  "runtime_versions": {
+    "onnx": "1.19.1",
+    "onnxruntime": "1.23.2"
+  },
+  "timing_seed": 0,
+  "execution_paths": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ]
+}

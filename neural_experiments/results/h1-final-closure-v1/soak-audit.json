@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "kind": "h1_final_closure_runtime_audit",
+  "status": "passed",
+  "audited_utc": "2026-10-25T02:32:08.664959+00:00",
+  "run": "/Users/logannye/Documents/ChatGPT/Neuro-ML/results/neural-h1/h1-final-closure-soak-v1",
+  "manifest_sha256": "58180852c937e800fb226de86385149c4bfeb74bdbb87df804525d98dcbc6ca3",
+  "summary_sha256": "c44db4dda0519a8e3c52d39df55efcc87f9cdb4d2c54a28baccbb3e06aa4694b",
+  "auditor_source": {
+    "neural_experiments/audit_h1_final_closure_runtime.py": "4cb5ab2399f8a360f45b2bf174c855bcdb891639660a26fa275585ff0231163b",
+    "neural_experiments/audit_runtime.py": "ae5a12a144460f18fbc9293c9ed54f3a75fd8ac4a47627d3dc8d79ac62927a27"
+  },
+  "quality_audit_sha256": "e84eecfab2c26e0fd04dfb011dfa2156618463350945478f241cd4e901d2c269",
+  "runs": [
+    {
+      "mode": "soak",
+      "repeat": 0,
+      "position": 0,
+      "arm": "B",
+      "metrics": {
+        "bins": 90000,
+        "step_service": {
+          "p50_ms": 0.08875,
+          "p95_ms": 0.34933305000000003,
+          "p99_ms": 0.4504174099999998,
+          "max_ms": 4.01775
+        },
+        "prediction_service": {
+          "p50_ms": 0.08875,
+          "p95_ms": 0.34933305000000003,
+          "p99_ms": 0.4504174099999998,
+          "max_ms": 4.01775
+        },
+        "queue_delay": {
+          "p50_ms": 4.505916,
+          "p95_ms": 7.88350205,
+          "p99_ms": 9.467420169999999,
+          "max_ms": 29.727166
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.624416500000001,
+          "p95_ms": 8.1116702,
+          "p99_ms": 9.61033425,
+          "max_ms": 29.867375
+        },
+        "release_to_completion": {
+          "p50_ms": 4.624416500000001,
+          "p95_ms": 8.1116702,
+          "p99_ms": 9.61033425,
+          "max_ms": 29.867375
+        },
+        "missed_deadlines": 1,
+        "max_backlog_bins": 1,
+        "nominal_neural_seconds": 1800.0,
+        "first_start_to_last_completion_seconds": 1799.9806025
+      },
+      "measured_prediction_parity": "passed"
+    },
+    {
+      "mode": "soak",
+      "repeat": 0,
+      "position": 1,
+      "arm": "E",
+      "metrics": {
+        "bins": 90000,
+        "step_service": {
+          "p50_ms": 0.283458,
+          "p95_ms": 0.5615,
+          "p99_ms": 0.7313352399999994,
+          "max_ms": 22.356917
+        },
+        "prediction_service": {
+          "p50_ms": 0.283458,
+          "p95_ms": 0.5615,
+          "p99_ms": 0.7313352399999994,
+          "max_ms": 22.356917
+        },
+        "queue_delay": {
+          "p50_ms": 3.979416,
+          "p95_ms": 7.393101750000001,
+          "p99_ms": 9.09710299999999,
+          "max_ms": 46.2975
+        },
+        "release_to_prediction": {
+          "p50_ms": 4.141666,
+          "p95_ms": 7.72055145,
+          "p99_ms": 9.449299749999996,
+          "max_ms": 46.621916
+        },
+        "release_to_completion": {
+          "p50_ms": 4.141666,
+          "p95_ms": 7.72055145,
+          "p99_ms": 9.449299749999996,
+          "max_ms": 46.621916
+        },
+        "missed_deadlines": 5,
+        "max_backlog_bins": 2,
+        "nominal_neural_seconds": 1800.0,
+        "first_start_to_last_completion_seconds": 1799.987232083
+      },
+      "measured_prediction_parity": "passed"
+    }
+  ],
+  "max_prediction_absolute_difference": {
+    "B": 1.862645149230957e-08,
+    "E": 0
+  },
+  "scope": "identities, admission, raw clocks, order, resets, every measured prediction",
+  "limitations": "constructor/CPU/RSS are retained observations, not reconstructible from bin timestamps",
+  "started_utc": "2026-10-25T02:32:03.090662+00:00"
+}
