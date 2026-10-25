@@ -1,0 +1,293 @@
+{
+  "runs": [
+    {
+      "bins": 90000,
+      "step_service": {
+        "p50_ms": 0.08875,
+        "p95_ms": 0.34933305000000003,
+        "p99_ms": 0.4504174099999998,
+        "max_ms": 4.01775
+      },
+      "prediction_service": {
+        "p50_ms": 0.08875,
+        "p95_ms": 0.34933305000000003,
+        "p99_ms": 0.4504174099999998,
+        "max_ms": 4.01775
+      },
+      "queue_delay": {
+        "p50_ms": 4.505916,
+        "p95_ms": 7.88350205,
+        "p99_ms": 9.467420169999999,
+        "max_ms": 29.727166
+      },
+      "release_to_prediction": {
+        "p50_ms": 4.624416500000001,
+        "p95_ms": 8.1116702,
+        "p99_ms": 9.61033425,
+        "max_ms": 29.867375
+      },
+      "release_to_completion": {
+        "p50_ms": 4.624416500000001,
+        "p95_ms": 8.1116702,
+        "p99_ms": 9.61033425,
+        "max_ms": 29.867375
+      },
+      "missed_deadlines": 1,
+      "max_backlog_bins": 1,
+      "nominal_neural_seconds": 1800.0,
+      "first_start_to_last_completion_seconds": 1799.9806025,
+      "deadline_miss_rate": 1.1111111111111112e-05,
+      "service_goal_passed": true,
+      "arm": "B",
+      "mode": "soak",
+      "repeat": 0,
+      "position": 0,
+      "constructor_ns": 674792,
+      "file_reset_ns": [
+        6542,
+        9583,
+        4958,
+        7167,
+        4584,
+        8959,
+        3708,
+        12167,
+        14125,
+        16542
+      ],
+      "warmup_bins": 500,
+      "warmup_complete_ns": 3266217484524708,
+      "numeric_state_bytes": 14464,
+      "model_bytes": 98266,
+      "graph_bytes": null,
+      "rss_post_warmup_bytes": 351567872,
+      "rss_after_replay_bytes": 360611840,
+      "process_peak_rss_bytes": 360611840,
+      "input_cache_bytes": 80091456,
+      "cpu_ns": 13655844000,
+      "wall_ns": 1799983814959,
+      "logger": {
+        "capacity_records": 4096,
+        "buffer_nbytes": 409600,
+        "allocated_records": 90000,
+        "written_records": 90000,
+        "high_water_records": 4096,
+        "flushes": 22,
+        "flush_ns": 47150003,
+        "dropped_records": 0,
+        "durable_bytes": 9000000,
+        "writer_queue": "synchronous; no queue"
+      },
+      "environment": {
+        "started_utc": "2026-10-25T02:01:56.922879+00:00",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "machine": "arm64",
+        "python": "3.12.13",
+        "dependencies": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.1",
+          "torch": "2.14.1",
+          "h5py": "3.16.0",
+          "pynwb": "3.1.3",
+          "threadpoolctl": "3.7.0",
+          "onnx": "1.19.1",
+          "onnxruntime": "1.23.2",
+          "psutil": "7.2.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "threadpools": [
+        {
+          "user_api": "openmp",
+          "internal_api": "openmp",
+          "num_threads": 1,
+          "prefix": "libomp",
+          "filepath": "/Users/logannye/Documents/Codex/2026-10-02/what/outputs/simple-cnn/.venv/lib/python3.12/site-packages/torch/lib/libomp.dylib",
+          "version": null
+        }
+      ],
+      "load_average_end": [
+        2.45068359375,
+        2.7529296875,
+        3.17529296875
+      ],
+      "replay": {
+        "release_origin_ns": 3266217492480375,
+        "records": 90000,
+        "sampled_max_rss_bytes": 360218624
+      },
+      "file_ids": [
+        "S0_set_1",
+        "S0_set_2",
+        "S1_set_1",
+        "S1_set_2",
+        "S1_set_3",
+        "S2_set_1",
+        "S2_set_2",
+        "S3_set_1",
+        "S3_set_2",
+        "S4_set_1",
+        "S4_set_2"
+      ],
+      "source_index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "model_sha256": "95f6a0b3131e1971f146298e23c95a42f7da28467d8acc24f37f916d9dc049ec",
+      "graph_sha256": null,
+      "raw_sha256": {
+        "records.npy": "32ae4f2748a1d72f2562b1a66417bc3bba0f846070bd426b2a4f792388a5a3bd",
+        "resets.jsonl": "a43a8215b070d0bc2a2d1226bdaea8f4f280f9cc3f93cbe276f7bc01a1557558",
+        "rss.jsonl": "4a06ddb274918b5c618ff572f601439357901e22c1c7491088699be6267c0b12"
+      }
+    },
+    {
+      "bins": 90000,
+      "step_service": {
+        "p50_ms": 0.283458,
+        "p95_ms": 0.5615,
+        "p99_ms": 0.7313352399999994,
+        "max_ms": 22.356917
+      },
+      "prediction_service": {
+        "p50_ms": 0.283458,
+        "p95_ms": 0.5615,
+        "p99_ms": 0.7313352399999994,
+        "max_ms": 22.356917
+      },
+      "queue_delay": {
+        "p50_ms": 3.979416,
+        "p95_ms": 7.393101750000001,
+        "p99_ms": 9.09710299999999,
+        "max_ms": 46.2975
+      },
+      "release_to_prediction": {
+        "p50_ms": 4.141666,
+        "p95_ms": 7.72055145,
+        "p99_ms": 9.449299749999996,
+        "max_ms": 46.621916
+      },
+      "release_to_completion": {
+        "p50_ms": 4.141666,
+        "p95_ms": 7.72055145,
+        "p99_ms": 9.449299749999996,
+        "max_ms": 46.621916
+      },
+      "missed_deadlines": 5,
+      "max_backlog_bins": 2,
+      "nominal_neural_seconds": 1800.0,
+      "first_start_to_last_completion_seconds": 1799.987232083,
+      "deadline_miss_rate": 5.555555555555556e-05,
+      "service_goal_passed": true,
+      "arm": "E",
+      "mode": "soak",
+      "repeat": 0,
+      "position": 1,
+      "constructor_ns": 15501917,
+      "file_reset_ns": [
+        9042,
+        15750,
+        23000,
+        5417,
+        7500,
+        9083,
+        35000,
+        9334,
+        10875,
+        21000
+      ],
+      "warmup_bins": 500,
+      "warmup_complete_ns": 3268018776639416,
+      "numeric_state_bytes": 2944,
+      "model_bytes": 98266,
+      "graph_bytes": 39641,
+      "rss_post_warmup_bytes": 370081792,
+      "rss_after_replay_bytes": 379273216,
+      "process_peak_rss_bytes": 379273216,
+      "input_cache_bytes": 80091456,
+      "cpu_ns": 29590335000,
+      "wall_ns": 1799990564375,
+      "logger": {
+        "capacity_records": 4096,
+        "buffer_nbytes": 409600,
+        "allocated_records": 90000,
+        "written_records": 90000,
+        "high_water_records": 4096,
+        "flushes": 22,
+        "flush_ns": 50837293,
+        "dropped_records": 0,
+        "durable_bytes": 9000000,
+        "writer_queue": "synchronous; no queue"
+      },
+      "environment": {
+        "started_utc": "2026-10-25T02:31:58.229637+00:00",
+        "platform": "macOS-26.2-arm64-arm-64bit",
+        "machine": "arm64",
+        "python": "3.12.13",
+        "dependencies": {
+          "numpy": "2.5.2",
+          "scipy": "1.18.1",
+          "scikit-learn": "1.9.1",
+          "torch": "2.14.1",
+          "h5py": "3.16.0",
+          "pynwb": "3.1.3",
+          "threadpoolctl": "3.7.0",
+          "onnx": "1.19.1",
+          "onnxruntime": "1.23.2",
+          "psutil": "7.2.2"
+        },
+        "thread_environment": {
+          "OMP_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "VECLIB_MAXIMUM_THREADS": "1"
+        }
+      },
+      "threadpools": [
+        {
+          "user_api": "openmp",
+          "internal_api": "openmp",
+          "num_threads": 1,
+          "prefix": "libomp",
+          "filepath": "/Users/logannye/Documents/Codex/2026-10-02/what/outputs/simple-cnn/.venv/lib/python3.12/site-packages/torch/lib/libomp.dylib",
+          "version": null
+        }
+      ],
+      "load_average_end": [
+        2.46044921875,
+        2.27587890625,
+        2.35791015625
+      ],
+      "replay": {
+        "release_origin_ns": 3268018784949750,
+        "records": 90000,
+        "sampled_max_rss_bytes": 378880000
+      },
+      "file_ids": [
+        "S0_set_1",
+        "S0_set_2",
+        "S1_set_1",
+        "S1_set_2",
+        "S1_set_3",
+        "S2_set_1",
+        "S2_set_2",
+        "S3_set_1",
+        "S3_set_2",
+        "S4_set_1",
+        "S4_set_2"
+      ],
+      "source_index_sha256": "a87f1e638114ec41c5938366876c1789ceea2150b1c3a144e88f023b05d562c2",
+      "model_sha256": "95f6a0b3131e1971f146298e23c95a42f7da28467d8acc24f37f916d9dc049ec",
+      "graph_sha256": "7dbedc6cbf3dc853079eec9e4b1fb89d19ed4de942439ea26c0ee467fc8f4ea2",
+      "raw_sha256": {
+        "records.npy": "eb418d288071f3efdf893cf6a3be0a2c599a8e81bf2e530a242a5ce193cee9c0",
+        "resets.jsonl": "a58f8745ba2673840ab6acdd7af4125f0c03e48373371048723a446b1a2ad683",
+        "rss.jsonl": "97c9a919098744afad7b15ee053a62a1bdab7a0e8db9daca038a4024f135edce"
+      }
+    }
+  ],
+  "exclusions": {}
+}

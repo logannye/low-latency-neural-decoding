@@ -5,7 +5,7 @@
 
 **A brain-computer interface ML testbed for accurate decoding, low calibration burden, and dependable streaming performance.** Built on public human intracortical recordings, with causal streaming prediction, frozen experiments, explicit failure criteria, and reproducible evidence.
 
-For a concise evidence map, start with the **[reviewer guide](neural_experiments/REVIEWER_GUIDE.md)**. It separates the compact H1 later-day result, the positive V3/V4 calibration results, and the later adaptation failures. The **[final H1 deployment protocol](neural_experiments/H1_FINAL_CLOSURE_PROTOCOL.md)** binds the new conversion and runtime study to the exact final weights.
+For a concise evidence map, start with the **[reviewer guide](neural_experiments/REVIEWER_GUIDE.md)**. It connects the compact H1 later-day result, the positive V3/V4 calibration results, and the later adaptation failures. The **[final H1 deployment report](neural_experiments/H1_FINAL_CLOSURE_REPORT.md)** binds conversion, runtime and recovery evidence to the exact final weights under a [frozen protocol](neural_experiments/H1_FINAL_CLOSURE_PROTOCOL.md).
 
 ## Why this matters
 
@@ -15,7 +15,7 @@ A useful neural interface must keep working as recordings and behavior change. F
 
 Spike counts and spike-band power feed a causal temporal filter and a small regularized direction decoder. Readouts are calibrated separately for each person and session. The broader experiment series tests historical model reuse, daily calibration, confirmation before deployment, and continual recalibration under a label budget.
 
-The latest study asks whether a difficult participant, T2, needs more diverse calibration trials or a better training target. A policy collects at least 24 completed trials with coverage of four direction sectors, subject to a six-minute label budget. A separate trial decoder learns a provider-informed direction averaged over a short movement window. Matched controls isolate direction weighting, target definition and additional calibration time. All methods face the same untouched continuous-decoding interval.
+The latest calibration study asks whether a difficult participant, T2, needs more diverse calibration trials or a better training target. A policy collects at least 24 completed trials with coverage of four direction sectors, subject to a six-minute label budget. A separate trial decoder learns a provider-informed direction averaged over a short movement window. Matched controls isolate direction weighting, target definition and additional calibration time. All methods face the same untouched continuous-decoding interval.
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
 
 Behavioral context and labels remain separate from the feature-only prediction interface. Trials overlapping calibration are excluded from evaluation. Source choices are committed before fresh outcomes are opened; an independent numerical implementation reconstructs exported models, predictions, scoring, uncertainty intervals, and acceptance decisions.
 
-## Latest results
+## Latest calibration results
 
 **Trial-balanced calibration did not rescue T2. More continuous calibration helped, but T2 remains unresolved.** The frozen experiment evaluated 12 methods on **24 previously unopened sessions from four known participants**. Every session was scored, including the calibration timeout; no cases were substituted or removed.
 
@@ -56,6 +56,8 @@ The source recipe was selected on previously exposed data and committed before f
 This is portability of a recipe across known participants with session calibration. It does not demonstrate zero-shot decoding of an untouched person. Archive order fixed the fresh cohort and is not chronological day order; these results should not be presented as a pure future-day forecast or a matched gain over earlier cohorts.
 
 ## Engineering evidence
+
+The final H1 causal TCN reached mean later-day R² **0.177583 versus 0.034146** for selected ridge across seven days from one participant. Its fixed final-model conversion passed all 21 seed/day quality cells, reducing the ONNX graph from **102,884 to 39,641 bytes** with worst variance-weighted R² change **−0.001715**. The five-path [deployment comparison](neural_experiments/H1_FINAL_CLOSURE_REPORT.md) shows that the float32 layout rewrite accounts for most of the fast-replay improvement; compression did not establish a scheduled-delivery advantage. The report retains two failed paced service-p99 goals and all isolated outliers. Both 90,000-update soaks passed trace/timing audits, with **1 missed deadline for NumPy and 5 for int8**. No hard real-time or live-control guarantee is claimed.
 
 The earlier **V8** exported source decoder completed **6,000 updates at 50 Hz with zero missed 20 ms deadlines**. Processing p99 was **0.925–0.941 ms**, and release-to-completion p99 was **5.29–5.38 ms**, on macOS ARM64. Its numeric model occupies **6,160 bytes**, with **1,544 bytes** of filter state. Streaming predictions agree with the independent implementation within **7.8 × 10⁻¹⁶**.
 

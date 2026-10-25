@@ -1,0 +1,192 @@
+{
+  "status": "complete",
+  "lifecycle": {
+    "B": {
+      "status": "passed",
+      "chunk_exact": true,
+      "state_exact": true,
+      "reset_startup_exact": true,
+      "bins": 512,
+      "numeric_state_bytes": 14464
+    },
+    "C": {
+      "status": "passed",
+      "checks": {
+        "same_file_resume_exact": true,
+        "state_resume_exact": true,
+        "channel_count": true,
+        "nonfinite": true,
+        "negative": true,
+        "channel_order": true,
+        "duplicate": true,
+        "missing_input": true,
+        "timestamp_gap": true,
+        "explicit_discontinuity_reset": true,
+        "reject_model_identity": true,
+        "reject_graph_sha256": true,
+        "reject_precision": true,
+        "reject_stream_id": true,
+        "truncated_rejected_prior_complete_retained": true,
+        "wrong_next_sequence": true,
+        "arithmetic_failure_poisoned_until_reset": true
+      },
+      "bins": 128,
+      "split": 47,
+      "numeric_state_bytes": 2944,
+      "checkpoint_bytes": 5971,
+      "guarantee": "deterministic numeric resume only; no exactly-once delivery or atomic write"
+    },
+    "E": {
+      "status": "passed",
+      "checks": {
+        "same_file_resume_exact": true,
+        "state_resume_exact": true,
+        "channel_count": true,
+        "nonfinite": true,
+        "negative": true,
+        "channel_order": true,
+        "duplicate": true,
+        "missing_input": true,
+        "timestamp_gap": true,
+        "explicit_discontinuity_reset": true,
+        "reject_model_identity": true,
+        "reject_graph_sha256": true,
+        "reject_precision": true,
+        "reject_stream_id": true,
+        "truncated_rejected_prior_complete_retained": true,
+        "wrong_next_sequence": true,
+        "arithmetic_failure_poisoned_until_reset": true
+      },
+      "bins": 128,
+      "split": 47,
+      "numeric_state_bytes": 2944,
+      "checkpoint_bytes": 5976,
+      "guarantee": "deterministic numeric resume only; no exactly-once delivery or atomic write"
+    }
+  },
+  "overhead": {
+    "C": [
+      {
+        "repeat": 0,
+        "path": "overhead-0-bare.npz",
+        "arm": "bare",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.038875,
+          "p95": 0.04375,
+          "p99": 0.050292,
+          "max": 0.070584
+        }
+      },
+      {
+        "repeat": 0,
+        "path": "overhead-0-adapter.npz",
+        "arm": "adapter",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.045417,
+          "p95": 0.050708,
+          "p99": 0.058291,
+          "max": 0.111833
+        }
+      },
+      {
+        "repeat": 1,
+        "path": "overhead-1-adapter.npz",
+        "arm": "adapter",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.045958,
+          "p95": 0.051292,
+          "p99": 0.059584,
+          "max": 0.082875
+        }
+      },
+      {
+        "repeat": 1,
+        "path": "overhead-1-bare.npz",
+        "arm": "bare",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.039084,
+          "p95": 0.046208,
+          "p99": 0.0525,
+          "max": 0.057667
+        }
+      }
+    ],
+    "E": [
+      {
+        "repeat": 0,
+        "path": "overhead-0-bare.npz",
+        "arm": "bare",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.019125,
+          "p95": 0.021917,
+          "p99": 0.024125,
+          "max": 0.048833
+        }
+      },
+      {
+        "repeat": 0,
+        "path": "overhead-0-adapter.npz",
+        "arm": "adapter",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.026833,
+          "p95": 0.027416,
+          "p99": 0.032291,
+          "max": 0.034625
+        }
+      },
+      {
+        "repeat": 1,
+        "path": "overhead-1-adapter.npz",
+        "arm": "adapter",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.026333,
+          "p95": 0.028292,
+          "p99": 0.033208,
+          "max": 0.035417
+        }
+      },
+      {
+        "repeat": 1,
+        "path": "overhead-1-bare.npz",
+        "arm": "bare",
+        "bins": 3001,
+        "service_ms": {
+          "p50": 0.018709,
+          "p95": 0.019208,
+          "p99": 0.023709,
+          "max": 0.045791
+        }
+      }
+    ]
+  },
+  "faults": {
+    "C": {
+      "bins": 31,
+      "injected_before_sequence": 10,
+      "requested_stall_ns": 60000000,
+      "deadline_misses": 3,
+      "maximum_backlog_bins": 3,
+      "policy": "retain every observation and drain backlog; no input discontinuity"
+    },
+    "E": {
+      "bins": 31,
+      "injected_before_sequence": 10,
+      "requested_stall_ns": 60000000,
+      "deadline_misses": 3,
+      "maximum_backlog_bins": 3,
+      "policy": "retain every observation and drain backlog; no input discontinuity"
+    }
+  },
+  "qualified_arms": {
+    "B": true,
+    "C": true,
+    "E": true
+  }
+}

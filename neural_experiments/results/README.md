@@ -18,7 +18,10 @@ to the underlying data or a scientific validation by itself.
 | Separate prefix calibration | [Aggregate, offsets removed](calibration.json) | [224-trace audit](later-assessment-calibration-audit.json) |
 | Same-weight runtime | [All 15 blocks](runtime.json) | [Timing/parity audit](runtime-audit.json) |
 | Dynamic-int8 conversion | [Nine-model quality](compression-quality.json), [eight runtime blocks](compression-runtime.json) | [Quality](compression-quality-audit.json), [runtime](compression-runtime-audit.json) |
+| Exact final H1 deployment | [Report](../H1_FINAL_CLOSURE_REPORT.md), [all-seed quality](h1-final-closure-v1/quality.json), [50 runtime blocks](h1-final-closure-v1/runtime.json), [two 90,000-bin soaks](h1-final-closure-v1/soak.json) | [Quality](h1-final-closure-v1/quality-audit.json), [runtime](h1-final-closure-v1/runtime-audit.json), [soaks](h1-final-closure-v1/soak-audit.json), [lifecycle](h1-final-closure-lifecycle-audit-v1.json) |
 | Sparse M2 transfer | [Aggregate](m2-transfer.json) | [Independent preparation, refit and scoring](m2-audit.json) |
+
+The final H1 deployment study has separate [source/artifact bindings](h1-final-closure-v1/bindings.json), an [export manifest](h1-final-closure-v1/manifest.json), and [aggregate tables](h1-final-closure-v1/tables.md). Its quality and trace audits passed; its overall provisional 2 ms service-p99 goal failed, and the NumPy/int8 soaks retained 1/5 missed deadlines respectively. Local validation passed 1,361 tests; hosted checks for this new branch remain pending authorization.
 
 [run-provenance.json](run-provenance.json) records the original run-manifest hashes,
 source snapshots and diffs, configuration identities, dependency versions and
@@ -33,7 +36,7 @@ new freeze receipts, rather than reusing the published artifact identities.
 
 The [original adaptation receipt](adaptation-audit.json) is retained alongside the
 portable auditor's independently recomputed v2 receipt. Every reported audit passed. Public receipts are byte-identical to the retained
-receipts; the calibration aggregate deliberately omits fitted offsets. The final
+receipts; the calibration aggregate deliberately omits fitted offsets. The original
 release's hosted validation is available in the repository's GitHub Actions and
 pull request history. Linux CI checks packaging and synthetic contracts; the
 M4 Max measurements above are local performance observations.
