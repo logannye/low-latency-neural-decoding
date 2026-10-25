@@ -1,8 +1,10 @@
 # Reproducing the neural decoding study
 
-The [V3 study](v3/README.md) diagnoses failed transfer and evaluates causal daily
-recalibration on 26 held-out sessions across nine previously studied people. Its
-[results report](v3/REPORT.md) contains the latest accuracy and evidence boundaries.
+The [reviewer guide](REVIEWER_GUIDE.md) connects the positive H1 and V3/V4 results
+to their exact experiments and retained failures. The [V9 study](v9/README.md) is
+the latest calibration experiment; its trial-balanced policy did not recover T2.
+The [final H1 deployment protocol](H1_FINAL_CLOSURE_PROTOCOL.md) specifies the
+separate conversion and runtime validation of the existing final H1 models.
 
 The [V2 study](v2/README.md) adds controlled H1 accuracy experiments and a
 separate nine-participant calibration and transfer evaluation. This page

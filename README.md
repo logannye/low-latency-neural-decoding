@@ -5,6 +5,8 @@
 
 **A brain-computer interface ML testbed for accurate decoding, low calibration burden, and dependable streaming performance.** Built on public human intracortical recordings, with causal streaming prediction, frozen experiments, explicit failure criteria, and reproducible evidence.
 
+For a concise evidence map, start with the **[reviewer guide](neural_experiments/REVIEWER_GUIDE.md)**. It separates the compact H1 later-day result, the positive V3/V4 calibration results, and the later adaptation failures. The **[final H1 deployment protocol](neural_experiments/H1_FINAL_CLOSURE_PROTOCOL.md)** binds the new conversion and runtime study to the exact final weights.
+
 ## Why this matters
 
 A useful neural interface must keep working as recordings and behavior change. Fast inference is one requirement; equally important are knowing whether a model remains informative, whether more labels will help, and when an update should be rejected. This project builds and tests those decisions together. Its long-term motivation is reliable interfaces that require less supervised setup. Its current evidence comes from offline recordings and replay.
